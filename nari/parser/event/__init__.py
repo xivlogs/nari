@@ -19,7 +19,7 @@ from nari.parser.event.networkbegincast import NetworkBeginCast
 from nari.parser.event.ability import Ability
 from nari.parser.event.networknametoggle import NameToggle
 from nari.parser.event.limitbreak import LimitBreak
-from nari.parser.event.actorcontrol import ActorControl
+from nari.parser.event.directorupdate import DirectorUpdate
 from nari.parser.event.partylist import PartyList
 from nari.parser.event.networkeffectresult import NetworkEffectResult
 from nari.parser.event.networktargetmarker import NetworkTargetMarker
@@ -50,7 +50,7 @@ IdEventMapping = {
     Type.networkability.value: Ability,
     Type.networknametoggle.value: NameToggle,
     Type.limitbreak.value: LimitBreak,
-    Type.actorcontrol.value: ActorControl,
+    Type.directorupdate.value: DirectorUpdate,
     Type.partylist.value: PartyList,
     Type.networkeffectresult.value: NetworkEffectResult,
     Type.networktargetmarker.value: NetworkTargetMarker,

@@ -21,7 +21,7 @@ class Type(IntEnum):
     networkability = 21
     networknametoggle = 34
     limitbreak = 36
-    actorcontrol = 33
+    directorupdate = 33
     partylist = 11
     networkeffectresult = 37
     networktargetmarker = 29
