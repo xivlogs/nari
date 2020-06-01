@@ -1,5 +1,5 @@
-from nari.parser.event.base import Event
-from nari.parser.event import IdEventMapping
+from nari.types.event.base import Event
+from nari.types.event import IdEventMapping
 from nari.util import timestamp_from_datestr
 from nari.util.exceptions import EventNotFound
 
