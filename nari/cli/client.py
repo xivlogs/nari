@@ -5,6 +5,7 @@ from logging import basicConfig, getLogger, Logger, CRITICAL, INFO
 from typing import TextIO
 
 from nari.io import log_reader
+from nari.io.reader import ActLogReader
 
 DEFAULT_LOG_FORMAT='[%(levelname)s] %(message)s'
 logger: Logger = getLogger('nari')
@@ -25,7 +26,9 @@ def handle_args(log=None, verbose=False, error=False) -> None:
     else:
         basicConfig(format=DEFAULT_LOG_FORMAT, level=CRITICAL)
 
-    for event in log_reader(log, raise_on_unknown=error):
+    # We only really do ACT Network logs for now, so no need to do fancy file detection or anything like that
+    reader = ActLogReader(log, raise_on_invalid_id=error)
+    for event in reader.read():
         print(event)
 
 
