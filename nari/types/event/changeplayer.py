@@ -1,3 +1,5 @@
+"""ChangePlayer events always occur after a zone transition"""
+
 from nari.types.event.base import Event
 from nari.types.event import Type
 

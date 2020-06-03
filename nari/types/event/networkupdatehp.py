@@ -1,3 +1,5 @@
+"""Represents an update to an actor's HP"""
+
 from nari.types.event.base import Event
 from nari.types.event import Type
 

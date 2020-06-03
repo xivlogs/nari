@@ -1,3 +1,5 @@
+"""This event fires when the party list changes"""
+
 from nari.types.event.base import Event
 from nari.types.event import Type
 

@@ -1,3 +1,5 @@
+"""ACT has it's own special type to represent it's configuration"""
+
 from nari.types.event.base import Event
 from nari.types.event import Type
 
@@ -6,6 +8,6 @@ class Config(Event):
     __id__ = Type.config.value
     def handle_params(self):
         self.options = self.params[0].split(', ')
-    
+
     def __repr__(self):
         return f'<Config ({";".join(self.options)})>'

@@ -1,3 +1,5 @@
+"""Different from a regular damage event, this Event represents an ability that hits multiple targets."""
+
 from nari.types.event.base import Event
 from nari.types.event import Type
 

@@ -1,5 +1,7 @@
+"""Base for event-related object code"""
 from enum import IntEnum
 
+# this should be renamed and moved up a module – perhaps EventType?
 class Type(IntEnum):
     """List of Event types from the ACT network log"""
     version = 253
@@ -33,13 +35,17 @@ class Type(IntEnum):
     networkdeath = 25
 
     @classmethod
-    def has_id(cls, id: int) -> bool:
-        return id in cls.__members__.values()
+    def has_id(cls, id_: int) -> bool:
+        """Returns True if the id is in the enum"""
+        return id_ in cls.__members__.values()
 
     @classmethod
     def has_type(cls, name: str) -> bool:
+        """Returns true if the name is in the enum"""
         return name in cls.__members__.keys()
 
+# fix this too
+# pylint: disable=wrong-import-position
 from nari.types.event.version import Version
 from nari.types.event.config import Config
 from nari.types.event.debug import Debug
@@ -70,6 +76,8 @@ from nari.types.event.networktargetheadmarker import NetworkTargetHeadMarker
 from nari.types.event.networkcancelability import CancelAbility
 from nari.types.event.networkdeath import Death
 
+# pylint: disable=fixme
+# TODO: automatically generate, since the objects themselves already know their own ID
 IdEventMapping = {
     Type.version.value: Version,
     Type.config.value: Config,

@@ -1,3 +1,5 @@
+"""You'll see this every time an actor is targeted by a hostile action"""
+
 from nari.types.event.base import Event
 from nari.types.event import Type
 

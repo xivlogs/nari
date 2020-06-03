@@ -1,3 +1,5 @@
+"""RemoveCombatant fires when an actor is removed"""
+
 from nari.types.event.base import Event
 from nari.types.event import Type
 

@@ -1,5 +1,7 @@
+"""Nari-related exceptions"""
+
 class EventNotFound(Exception):
-    pass
+    """Thrown when events are not found"""
 
 class InvalidChecksum(Exception):
-    pass
+    """Thrown when the checksum of an event doesn't match"""

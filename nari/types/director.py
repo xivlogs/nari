@@ -1,25 +1,31 @@
+"""Types related to director codes in the DirectorUpdate event"""
+
 from enum import IntEnum
 
 class DirectorUpdateType(IntEnum):
-    BattleLeve = 0x8001,
-    GatheringLeve = 0x8002,
-    InstanceContent = 0x8003,
-    PublicContent = 0x8004,
-    QuestBattle = 0x8006,
-    CompanyLeve = 0x8007,
-    TreasureHunt = 0x8009,
-    GoldSaucer = 0x800A,
-    CompanyCraftDirector = 0x800B,
-    DpsChallange = 0x800D,
+    """These are related to the first param in the DirectorUpdate event"""
+    BattleLeve = 0x8001
+    GatheringLeve = 0x8002
+    InstanceContent = 0x8003
+    PublicContent = 0x8004
+    QuestBattle = 0x8006
+    CompanyLeve = 0x8007
+    TreasureHunt = 0x8009
+    GoldSaucer = 0x800A
+    CompanyCraftDirector = 0x800B
+    DpsChallange = 0x800D
     Fate = 0x801A
 
     @classmethod
     def name_for_value(cls, value):
+        """Helper class method to return the name of the enum when you already have the value"""
         if value in cls.__members__.values():
             return cls(value).name
         return 'Unknown'
 
+
 class DirectorUpdateCommand(IntEnum):
+    """These are the 'command' portion of a director update"""
     init = 0x40000001 # params: 3: duty length in seconds, eg 0xE10 is 3600 or 1 hour, 4-6: unused
     complete = 0x40000002 # params: 3 unused, 4: passed to director, 5-6: unused
     clear = 0x40000003 # params: 3: fadeout seq if 0x1, otherwise return immediately (ie first clear cutscene flag), 4-6: unused
@@ -36,6 +42,7 @@ class DirectorUpdateCommand(IntEnum):
 
     @classmethod
     def name_for_value(cls, value):
+        """Helper class to return the name of the enum when you already have the value"""
         if value in cls.__members__.values():
             return cls(value).name
         return 'Unknown'

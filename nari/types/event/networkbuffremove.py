@@ -1,3 +1,5 @@
+"""Represents a buff being removed"""
+
 from nari.types.event.base import Event
 from nari.types.event import Type
 

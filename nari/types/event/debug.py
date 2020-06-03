@@ -1,3 +1,5 @@
+"""ACT has a special ID (251) for representing debug data"""
+
 from nari.types.event.base import Event
 from nari.types.event import Type
 

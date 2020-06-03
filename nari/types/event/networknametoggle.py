@@ -1,3 +1,5 @@
+"This event fires when a nameplate 'toggles' (becomes visible or invisible)"
+
 from nari.types.event.base import Event
 from nari.types.event import Type
 

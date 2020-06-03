@@ -1,3 +1,5 @@
+"""This event generates at periodic intervals to represent the limit gauge 'growing'"""
+
 from nari.types.event.base import Event
 from nari.types.event import Type
 
@@ -10,4 +12,4 @@ class LimitBreak(Event):
     # Not sure what the second one is.
 
     def __repr__(self):
-        return f'<LimitBreak>'
+        return '<LimitBreak>'

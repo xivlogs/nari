@@ -1,3 +1,5 @@
+"""Status effects applied to actors"""
+
 from nari.types.event.base import Event
 from nari.types.event import Type
 

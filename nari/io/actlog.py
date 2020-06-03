@@ -1,3 +1,4 @@
+"""Classes and functions for handling network logs from ACT"""
 from typing import List
 
 from nari.io.reader import Reader
@@ -6,6 +7,7 @@ from nari.types.event.base import Event
 from nari.util.exceptions import InvalidChecksum, EventNotFound
 
 class ActLogReader(Reader):
+    """Implementation of the Reader class for parsing ACT network logs"""
     def __init__(self, actlog_path, *, raise_on_checksum_failure=False, raise_on_invalid_id=False):
         # might need a helper function, but eh. Also TODO: close file at some point to be nice
         self.handle = open(actlog_path, 'r')
@@ -20,27 +22,27 @@ class ActLogReader(Reader):
     def handle_line(self, line: str) -> Event:
         """Handles an act-specific line"""
         args = line.strip().split('|')
-        id = int(args[0])
+        id_ = int(args[0])
         datestr = args[1]
 
         event = None
 
-        if id in IdEventMapping:
-            if id in [EventType.config.value]:
+        if id_ in IdEventMapping:
+            if id_ in [EventType.config.value]:
                 # special handling - this one doesn't have a checksum
-                event = IdEventMapping[id](datestr, args[2:])
+                event = IdEventMapping[id_](datestr, params=args[2:])
             else:
-                event = IdEventMapping[id](datestr, args[2:-1], index=self.index, checksum=args[-1])
+                event = IdEventMapping[id_](datestr, params=args[2:-1], index=self.index, checksum=args[-1])
             if self.raise_on_checksum_failure and not event.valid_checksum():
                 raise InvalidChecksum(f'Checksum is invalid for event: {line} (index {self.index})')
         elif self.raise_on_invalid_id:
             raise EventNotFound(f'No event found for id {id}')
         else:
-            event = Event(datestr, args[2:-1], index=self.index, checksum=args[-1], id=id)
+            event = Event(datestr, params=args[2:-1], index=self.index, checksum=args[-1], id_=id_)
 
         self.index += 1
         return event
-        
+
 
     def read(self) -> List[Event]:
         """Returns an array of all the act log events from the file"""
