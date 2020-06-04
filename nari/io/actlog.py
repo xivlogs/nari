@@ -2,7 +2,8 @@
 from typing import List
 
 from nari.io.reader import Reader
-from nari.types.event import IdEventMapping, Type as EventType
+from nari.types.event import Type as EventType
+from nari.types.event.mappings import IdEventMapping
 from nari.types.event.base import Event
 from nari.util.exceptions import InvalidChecksum, EventNotFound
 

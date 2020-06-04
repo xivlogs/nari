@@ -2,6 +2,7 @@
 
 from nari.util.pair import IdNamePair
 
+# pylint: disable=too-few-public-methods
 class Actor(IdNamePair):
     """Represents an Actor"""
     def __repr__(self) -> str:
