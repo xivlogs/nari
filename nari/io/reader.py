@@ -11,6 +11,3 @@ class Reader(metaclass=ABCMeta):
     @abstractmethod
     def read(self) -> List[Event]:
         """Implementing classes must implement this method to return a list of events"""
-
-# pylint: disable=unused-import,wrong-import-position
-from .actlog import ActLogReader

@@ -4,7 +4,7 @@
 from argparse import ArgumentParser, Namespace
 from logging import basicConfig, getLogger, Logger, CRITICAL, INFO
 
-from nari.io.reader import ActLogReader
+from nari.io.actlog import ActLogReader
 
 DEFAULT_LOG_FORMAT: str = '[%(levelname)s] %(message)s'
 logger: Logger = getLogger('nari')
