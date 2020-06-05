@@ -8,7 +8,7 @@ dev_requirements = [
 ]
 
 docs_requirements = [
-    'pydoc3',
+    'pdoc3',
 ]
 
 setup(
