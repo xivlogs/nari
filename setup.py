@@ -3,6 +3,10 @@ from setuptools import setup
 with open('README.md', 'r') as f:
     long_description = f.read()
 
+dev_requirements = [
+    'pylint',
+]
+
 setup(
     name='nari',
     version='0.0.1',
@@ -16,5 +20,8 @@ setup(
         'console_scripts': [
             'nari=nari.cli.client:main'
         ]
-    }
+    },
+    extras_require={
+        'dev': dev_requirements,
+    },
 )
