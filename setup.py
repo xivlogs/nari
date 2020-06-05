@@ -7,6 +7,10 @@ dev_requirements = [
     'pylint',
 ]
 
+docs_requirements = [
+    'pydoc3',
+]
+
 setup(
     name='nari',
     version='0.0.1',
@@ -23,5 +27,6 @@ setup(
     },
     extras_require={
         'dev': dev_requirements,
+        'docs': docs_requirements,
     },
 )
