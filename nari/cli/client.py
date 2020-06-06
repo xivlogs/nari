@@ -29,7 +29,7 @@ def handle_args(log=None, verbose=False, error=False) -> None:
 
     # We only really do ACT Network logs for now, so no need to do fancy file detection or anything like that
     reader = ActLogReader(log, raise_on_invalid_id=error)
-    for event in reader.read():
+    for event in reader:
         print(event)
 
 
