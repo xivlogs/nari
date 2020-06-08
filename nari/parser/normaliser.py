@@ -6,7 +6,7 @@ from typing import Union, List, Iterable, Iterator
 from nari.types.event.base import Event
 
 
-class Normalizer(metaclass=ABCMeta):
+class Normaliser(metaclass=ABCMeta):
     """Normalizers take in interable events and spit out iterable events"""
     def __init__(self, stream: Iterator[Event]):
         self.stream = iter(stream)
@@ -63,19 +63,3 @@ class Normalizer(metaclass=ABCMeta):
         event that it recieves; conversely you could fabricate entirely new events to place
         in the resultant array.
         """
-
-
-class PassthroughNormalizer(Normalizer):
-    """Dumb way of passing through events to act like you're cool or something"""
-    def on_event(self, event):
-        return event
-
-class DoubleNormalizer(Normalizer):
-    """Even dumber thing to return a duplicate of every event like you're dumb or something"""
-    def on_event(self, event):
-        return [event, event]
-
-class BigotNormalizer(Normalizer):
-    """Bigoted normalizer - let's nothing through because it isn't as good as it"""
-    def on_event(self, event):
-        return None
