@@ -150,7 +150,15 @@ class DirectorUpdateCommand(IntEnum):
     """
     barrierup = 0x40000012
     """Puts an 'instance' barrier up"""
+    instancesynctime = 0x80000002
+    """A periodic packet sent to indicate the remaining time in an instance
 
+    Params that follow the command:
+    | Index | Description            |
+    | ----: | ---------------------: |
+    | 3     | Time left (in seconds) |
+    | 4-6   | Unused                 |
+    """
     @classmethod
     def name_for_value(cls, value):
         """Helper class method to return the name of the enum when you already have the value"""

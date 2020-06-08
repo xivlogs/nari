@@ -22,22 +22,32 @@ class Normalizer(metaclass=ABCMeta):
             return event
         raise StopIteration
 
-    def handle_next(self) -> Union[Event, None]:
-        """Handles the next event from the input stream, calling `on_event()` with each event"""
-        if not self.stream_finished:
-            # try to keep grabbing at least one event and process it into the buffer
+    def grab_next_event(self) -> Event:
+        """Keeps iterating down the stream until it either has nothing left or it gets an event we're happy with"""
+        while not self.stream_finished:
+            # try to grab a single event
             try:
                 new_event = next(self.stream)
                 handled_event = self.on_event(new_event)
-
-                if isinstance(handled_event, list):
-                    self.buffer.extend(handled_event)
-                elif isinstance(handled_event, Event):
-                    self.buffer.append(handled_event)
-                else: # not a list or an Event?
-                    raise Exception('yell at nono to come up with a name for this screwup')
+                if handled_event is None:
+                    continue
+                return handled_event
             except StopIteration:
                 self.stream_finished = True
+                return None
+
+    def handle_next(self) -> Union[Event, None]:
+        """Handles the next event from the input stream, calling `on_event()` with each event"""
+        if not self.stream_finished:
+            handled_event = self.grab_next_event()
+            if isinstance(handled_event, list):
+                self.buffer.extend(handled_event)
+            elif isinstance(handled_event, Event):
+                self.buffer.append(handled_event)
+            elif handled_event is None: # we might be done with the stream anyway
+                pass
+            else: # not a list or an Event?
+                raise Exception('yell at nono to come up with a name for this screwup')
 
         # keep dumping that buffer
         if len(self.buffer) > 0:
@@ -64,3 +74,8 @@ class DoubleNormalizer(Normalizer):
     """Even dumber thing to return a duplicate of every event like you're dumb or something"""
     def on_event(self, event):
         return [event, event]
+
+class BigotNormalizer(Normalizer):
+    """Bigoted normalizer - let's nothing through because it isn't as good as it"""
+    def on_event(self, event):
+        return None
