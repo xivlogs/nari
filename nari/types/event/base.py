@@ -2,13 +2,13 @@
 
 from datetime import datetime
 from hashlib import md5
-from typing import List
+from typing import List, Union
 
 class Event():
     """Represents a base event"""
     __id__: int = -1
 
-    def __init__(self, timestamp: datetime, *, params: List[str] = [], index: int = 0, checksum: str = '', id_: int = None): # pylint: disable=dangerous-default-value
+    def __init__(self, timestamp: Union[datetime, str], *, params: List[str] = [], index: int = 0, checksum: str = '', id_: int = None): # pylint: disable=dangerous-default-value
         self.id = id_ or self.__id__
         self.timestamp = timestamp
         self.params = params
