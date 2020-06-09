@@ -1,5 +1,5 @@
 """Classes and functions for handling network logs from ACT"""
-from typing import List
+from typing import Union
 
 from nari.io.reader import Reader
 from nari.types.event import Type as EventType
@@ -45,8 +45,9 @@ class ActLogReader(Reader):
         return event
 
 
-    def read(self) -> List[Event]:
+    def read_next(self) -> Union[Event, None]:
         """Returns an array of all the act log events from the file"""
-        for line in self.handle:
-            yield self.handle_line(line)
-        # return [self.handle_line(line) for line in self.handle]
+        line: str = self.handle.readline()
+        if len(line) == 0:
+            return None
+        return self.handle_line(line)
