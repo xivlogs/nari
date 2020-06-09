@@ -42,12 +42,12 @@ def parse_fights(reader: Reader) -> List[List[str]]:
                 fight_log.append(current_fight)
             current_fight = {
                 'date': event.timestamp,
-                'name': hex(event.instance_id),
+                'name': str(event.instance_id),
             }
         elif command in (DirectorUpdateCommand.fadeout, DirectorUpdateCommand.clear): # naive, but functional?
             current_fight['fights'] = current_fight.get('fights', 0) + 1
 
-    column_headers = ['date', 'instance id', 'fights']
+    column_headers = ['date', 'instance id', 'encounters']
     matrix = [column_headers]
 
     for fight in fight_log:
