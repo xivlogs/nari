@@ -48,7 +48,7 @@ class NetworkEffectResult(Event):
 <dl>
 <dt id="nari.types.event.networkeffectresult.NetworkEffectResult"><code class="flex name class">
 <span>class <span class="ident">NetworkEffectResult</span></span>
-<span>(</span><span>timestamp: datetime.datetime, *, params: List[str] = None, index: int = 0, checksum: str = '', id_: int = None)</span>
+<span>(</span><span>timestamp: Union[datetime.datetime, str], *, params: List[str] = [], index: int = 0, checksum: str = '', id_: int = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Apparently, this is any time an actor is targeted by a hostile action</p></div>

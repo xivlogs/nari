@@ -28,16 +28,29 @@
 <pre><code class="python">&#34;&#34;&#34;Collection of reading-related classes and utilities&#34;&#34;&#34;
 
 from abc import ABCMeta, abstractmethod
-from typing import List
+from typing import List, Iterable, Union
 
 from nari.types.event.base import Event
 
-# pylint: disable=too-few-public-methods
+
 class Reader(metaclass=ABCMeta):
     &#34;&#34;&#34;Represents an abstract base for reader objects&#34;&#34;&#34;
+    def __iter__(self) -&gt; Iterable[Event]:
+        return self
+
+    def __next__(self) -&gt; Event:
+        event: Event = self.read_next()
+        if event:
+            return event
+        raise StopIteration
+
     @abstractmethod
-    def read(self) -&gt; List[Event]:
-        &#34;&#34;&#34;Implementing classes must implement this method to return a list of events&#34;&#34;&#34;</code></pre>
+    def read_next(self) -&gt; Union[Event, None]:
+        &#34;&#34;&#34;Implementing classes must implement this method to return the next parsed event&#34;&#34;&#34;
+
+    def read_all(self) -&gt; List[Event]:
+        &#34;&#34;&#34;Iterates through all events and returns them as a list&#34;&#34;&#34;
+        return list(self)</code></pre>
 </details>
 </section>
 <section>
@@ -60,9 +73,22 @@ class Reader(metaclass=ABCMeta):
 </summary>
 <pre><code class="python">class Reader(metaclass=ABCMeta):
     &#34;&#34;&#34;Represents an abstract base for reader objects&#34;&#34;&#34;
+    def __iter__(self) -&gt; Iterable[Event]:
+        return self
+
+    def __next__(self) -&gt; Event:
+        event: Event = self.read_next()
+        if event:
+            return event
+        raise StopIteration
+
     @abstractmethod
-    def read(self) -&gt; List[Event]:
-        &#34;&#34;&#34;Implementing classes must implement this method to return a list of events&#34;&#34;&#34;</code></pre>
+    def read_next(self) -&gt; Union[Event, None]:
+        &#34;&#34;&#34;Implementing classes must implement this method to return the next parsed event&#34;&#34;&#34;
+
+    def read_all(self) -&gt; List[Event]:
+        &#34;&#34;&#34;Iterates through all events and returns them as a list&#34;&#34;&#34;
+        return list(self)</code></pre>
 </details>
 <h3>Subclasses</h3>
 <ul class="hlist">
@@ -70,18 +96,32 @@ class Reader(metaclass=ABCMeta):
 </ul>
 <h3>Methods</h3>
 <dl>
-<dt id="nari.io.reader.Reader.read"><code class="name flex">
-<span>def <span class="ident">read</span></span>(<span>self) -> List[<a title="nari.types.event.base.Event" href="../types/event/base.html#nari.types.event.base.Event">Event</a>]</span>
+<dt id="nari.io.reader.Reader.read_all"><code class="name flex">
+<span>def <span class="ident">read_all</span></span>(<span>self) -> List[<a title="nari.types.event.base.Event" href="../types/event/base.html#nari.types.event.base.Event">Event</a>]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Implementing classes must implement this method to return a list of events</p></div>
+<div class="desc"><p>Iterates through all events and returns them as a list</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_all(self) -&gt; List[Event]:
+    &#34;&#34;&#34;Iterates through all events and returns them as a list&#34;&#34;&#34;
+    return list(self)</code></pre>
+</details>
+</dd>
+<dt id="nari.io.reader.Reader.read_next"><code class="name flex">
+<span>def <span class="ident">read_next</span></span>(<span>self) -> Union[<a title="nari.types.event.base.Event" href="../types/event/base.html#nari.types.event.base.Event">Event</a>, NoneType]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Implementing classes must implement this method to return the next parsed event</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@abstractmethod
-def read(self) -&gt; List[Event]:
-    &#34;&#34;&#34;Implementing classes must implement this method to return a list of events&#34;&#34;&#34;</code></pre>
+def read_next(self) -&gt; Union[Event, None]:
+    &#34;&#34;&#34;Implementing classes must implement this method to return the next parsed event&#34;&#34;&#34;</code></pre>
 </details>
 </dd>
 </dl>
@@ -105,7 +145,8 @@ def read(self) -&gt; List[Event]:
 <li>
 <h4><code><a title="nari.io.reader.Reader" href="#nari.io.reader.Reader">Reader</a></code></h4>
 <ul class="">
-<li><code><a title="nari.io.reader.Reader.read" href="#nari.io.reader.Reader.read">read</a></code></li>
+<li><code><a title="nari.io.reader.Reader.read_all" href="#nari.io.reader.Reader.read_all">read_all</a></code></li>
+<li><code><a title="nari.io.reader.Reader.read_next" href="#nari.io.reader.Reader.read_next">read_next</a></code></li>
 </ul>
 </li>
 </ul>

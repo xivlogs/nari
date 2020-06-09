@@ -33,8 +33,11 @@ from nari.types.event import Type
 class ZoneChange(Event):
     &#34;&#34;&#34;ZoneChange&#34;&#34;&#34;
     __id__ = Type.zonechange.value
+    def handle_params(self):
+        self.zone_id = int(self.params[0], 16)
+        self.zone_name = self.params[1]
     def __repr__(self):
-        return f&#39;&lt;ZoneChange ({self.params[1]})&gt;&#39;</code></pre>
+        return f&#39;&lt;ZoneChange ({self.zone_name})&gt;&#39;</code></pre>
 </details>
 </section>
 <section>
@@ -48,7 +51,7 @@ class ZoneChange(Event):
 <dl>
 <dt id="nari.types.event.zonechange.ZoneChange"><code class="flex name class">
 <span>class <span class="ident">ZoneChange</span></span>
-<span>(</span><span>timestamp: datetime.datetime, *, params: List[str] = None, index: int = 0, checksum: str = '', id_: int = None)</span>
+<span>(</span><span>timestamp: Union[datetime.datetime, str], *, params: List[str] = [], index: int = 0, checksum: str = '', id_: int = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>ZoneChange</p></div>
@@ -59,8 +62,11 @@ class ZoneChange(Event):
 <pre><code class="python">class ZoneChange(Event):
     &#34;&#34;&#34;ZoneChange&#34;&#34;&#34;
     __id__ = Type.zonechange.value
+    def handle_params(self):
+        self.zone_id = int(self.params[0], 16)
+        self.zone_name = self.params[1]
     def __repr__(self):
-        return f&#39;&lt;ZoneChange ({self.params[1]})&gt;&#39;</code></pre>
+        return f&#39;&lt;ZoneChange ({self.zone_name})&gt;&#39;</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">

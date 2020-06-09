@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>nari.types.event.version API documentation</title>
-<meta name="description" content="The ACT version" />
+<title>nari.parser API documentation</title>
+<meta name="description" content="This sub-module deals with code that&#39;s transformative to the event array" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,66 +17,31 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>nari.types.event.version</code></h1>
+<h1 class="title">Module <code>nari.parser</code></h1>
 </header>
 <section id="section-intro">
-<p>The ACT version</p>
+<p>This sub-module deals with code that's transformative to the event array</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;The ACT version&#34;&#34;&#34;
-
-from nari.types.event.base import Event
-from nari.types.event import Type
-
-class Version(Event):
-    &#34;&#34;&#34;Represents the act version&#34;&#34;&#34;
-    __id__ = Type.version.value
-    def __repr__(self):
-        return f&#39;&lt;Version {self.params[0]}&gt;&#39;</code></pre>
+<pre><code class="python">&#34;&#34;&#34;This sub-module deals with code that&#39;s transformative to the event array&#34;&#34;&#34;</code></pre>
 </details>
 </section>
 <section>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
-<h2 class="section-title" id="header-classes">Classes</h2>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
-<dt id="nari.types.event.version.Version"><code class="flex name class">
-<span>class <span class="ident">Version</span></span>
-<span>(</span><span>timestamp: Union[datetime.datetime, str], *, params: List[str] = [], index: int = 0, checksum: str = '', id_: int = None)</span>
-</code></dt>
+<dt><code class="name"><a title="nari.parser.normaliser" href="normaliser.html">nari.parser.normaliser</a></code></dt>
 <dd>
-<div class="desc"><p>Represents the act version</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class Version(Event):
-    &#34;&#34;&#34;Represents the act version&#34;&#34;&#34;
-    __id__ = Type.version.value
-    def __repr__(self):
-        return f&#39;&lt;Version {self.params[0]}&gt;&#39;</code></pre>
-</details>
-<h3>Ancestors</h3>
-<ul class="hlist">
-<li><a title="nari.types.event.base.Event" href="base.html#nari.types.event.base.Event">Event</a></li>
-</ul>
-<h3>Inherited members</h3>
-<ul class="hlist">
-<li><code><b><a title="nari.types.event.base.Event" href="base.html#nari.types.event.base.Event">Event</a></b></code>:
-<ul class="hlist">
-<li><code><a title="nari.types.event.base.Event.handle_params" href="base.html#nari.types.event.base.Event.handle_params">handle_params</a></code></li>
-<li><code><a title="nari.types.event.base.Event.valid_checksum" href="base.html#nari.types.event.base.Event.valid_checksum">valid_checksum</a></code></li>
-</ul>
-</li>
-</ul>
+<div class="desc"><p>Provides the Normaliser abstract base class</p></div>
 </dd>
 </dl>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
 </section>
 </article>
 <nav id="sidebar">
@@ -87,14 +52,12 @@ class Version(Event):
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="nari.types.event" href="index.html">nari.types.event</a></code></li>
+<li><code><a title="nari" href="../index.html">nari</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-classes">Classes</a></h3>
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
-<li>
-<h4><code><a title="nari.types.event.version.Version" href="#nari.types.event.version.Version">Version</a></code></h4>
-</li>
+<li><code><a title="nari.parser.normaliser" href="normaliser.html">nari.parser.normaliser</a></code></li>
 </ul>
 </li>
 </ul>

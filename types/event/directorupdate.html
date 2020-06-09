@@ -180,7 +180,15 @@ class DirectorUpdateCommand(IntEnum):
     &#34;&#34;&#34;
     barrierup = 0x40000012
     &#34;&#34;&#34;Puts an &#39;instance&#39; barrier up&#34;&#34;&#34;
+    instancesynctime = 0x80000002
+    &#34;&#34;&#34;A periodic packet sent to indicate the remaining time in an instance
 
+    Params that follow the command:
+    | Index | Description            |
+    | ----: | ---------------------: |
+    | 3     | Time left (in seconds) |
+    | 4-6   | Unused                 |
+    &#34;&#34;&#34;
     @classmethod
     def name_for_value(cls, value):
         &#34;&#34;&#34;Helper class method to return the name of the enum when you already have the value&#34;&#34;&#34;
@@ -233,7 +241,7 @@ class DirectorUpdate(Event):
 <dl>
 <dt id="nari.types.event.directorupdate.DirectorUpdate"><code class="flex name class">
 <span>class <span class="ident">DirectorUpdate</span></span>
-<span>(</span><span>timestamp: datetime.datetime, *, params: List[str] = None, index: int = 0, checksum: str = '', id_: int = None)</span>
+<span>(</span><span>timestamp: Union[datetime.datetime, str], *, params: List[str] = [], index: int = 0, checksum: str = '', id_: int = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Director events control the flow in different types of content</p>
@@ -407,7 +415,15 @@ are the instance_id.</p></div>
     &#34;&#34;&#34;
     barrierup = 0x40000012
     &#34;&#34;&#34;Puts an &#39;instance&#39; barrier up&#34;&#34;&#34;
+    instancesynctime = 0x80000002
+    &#34;&#34;&#34;A periodic packet sent to indicate the remaining time in an instance
 
+    Params that follow the command:
+    | Index | Description            |
+    | ----: | ---------------------: |
+    | 3     | Time left (in seconds) |
+    | 4-6   | Unused                 |
+    &#34;&#34;&#34;
     @classmethod
     def name_for_value(cls, value):
         &#34;&#34;&#34;Helper class method to return the name of the enum when you already have the value&#34;&#34;&#34;
@@ -596,6 +612,19 @@ are the instance_id.</p></div>
 </tr>
 </tbody>
 </table></div>
+</dd>
+<dt id="nari.types.event.directorupdate.DirectorUpdateCommand.instancesynctime"><code class="name">var <span class="ident">instancesynctime</span></code></dt>
+<dd>
+<div class="desc"><p>A periodic packet sent to indicate the remaining time in an instance</p>
+<p>Params that follow the command:
+| Index | Description
+|
+| ----: | ---------------------: |
+| 3
+| Time left (in seconds) |
+| 4-6
+| Unused
+|</p></div>
 </dd>
 <dt id="nari.types.event.directorupdate.DirectorUpdateCommand.newtoduty"><code class="name">var <span class="ident">newtoduty</span></code></dt>
 <dd>
@@ -799,6 +828,7 @@ are the instance_id.</p></div>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.fadeout" href="#nari.types.event.directorupdate.DirectorUpdateCommand.fadeout">fadeout</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.init" href="#nari.types.event.directorupdate.DirectorUpdateCommand.init">init</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.initvote" href="#nari.types.event.directorupdate.DirectorUpdateCommand.initvote">initvote</a></code></li>
+<li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.instancesynctime" href="#nari.types.event.directorupdate.DirectorUpdateCommand.instancesynctime">instancesynctime</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.newtoduty" href="#nari.types.event.directorupdate.DirectorUpdateCommand.newtoduty">newtoduty</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.noclue" href="#nari.types.event.directorupdate.DirectorUpdateCommand.noclue">noclue</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.partyinvite" href="#nari.types.event.directorupdate.DirectorUpdateCommand.partyinvite">partyinvite</a></code></li>

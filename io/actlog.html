@@ -26,7 +26,7 @@
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">&#34;&#34;&#34;Classes and functions for handling network logs from ACT&#34;&#34;&#34;
-from typing import List
+from typing import Union
 
 from nari.io.reader import Reader
 from nari.types.event import Type as EventType
@@ -72,11 +72,12 @@ class ActLogReader(Reader):
         return event
 
 
-    def read(self) -&gt; List[Event]:
+    def read_next(self) -&gt; Union[Event, None]:
         &#34;&#34;&#34;Returns an array of all the act log events from the file&#34;&#34;&#34;
-        for line in self.handle:
-            yield self.handle_line(line)
-        # return [self.handle_line(line) for line in self.handle]</code></pre>
+        line: str = self.handle.readline()
+        if len(line) == 0:
+            return None
+        return self.handle_line(line)</code></pre>
 </details>
 </section>
 <section>
@@ -136,10 +137,12 @@ class ActLogReader(Reader):
         return event
 
 
-    def read(self) -&gt; List[Event]:
+    def read_next(self) -&gt; Union[Event, None]:
         &#34;&#34;&#34;Returns an array of all the act log events from the file&#34;&#34;&#34;
-        for line in self.handle:
-            yield self.handle_line(line)</code></pre>
+        line: str = self.handle.readline()
+        if len(line) == 0:
+            return None
+        return self.handle_line(line)</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -181,8 +184,8 @@ class ActLogReader(Reader):
     return event</code></pre>
 </details>
 </dd>
-<dt id="nari.io.actlog.ActLogReader.read"><code class="name flex">
-<span>def <span class="ident">read</span></span>(<span>self) -> List[<a title="nari.types.event.base.Event" href="../types/event/base.html#nari.types.event.base.Event">Event</a>]</span>
+<dt id="nari.io.actlog.ActLogReader.read_next"><code class="name flex">
+<span>def <span class="ident">read_next</span></span>(<span>self) -> Union[<a title="nari.types.event.base.Event" href="../types/event/base.html#nari.types.event.base.Event">Event</a>, NoneType]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Returns an array of all the act log events from the file</p></div>
@@ -190,13 +193,23 @@ class ActLogReader(Reader):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def read(self) -&gt; List[Event]:
+<pre><code class="python">def read_next(self) -&gt; Union[Event, None]:
     &#34;&#34;&#34;Returns an array of all the act log events from the file&#34;&#34;&#34;
-    for line in self.handle:
-        yield self.handle_line(line)</code></pre>
+    line: str = self.handle.readline()
+    if len(line) == 0:
+        return None
+    return self.handle_line(line)</code></pre>
 </details>
 </dd>
 </dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="nari.io.reader.Reader" href="reader.html#nari.io.reader.Reader">Reader</a></b></code>:
+<ul class="hlist">
+<li><code><a title="nari.io.reader.Reader.read_all" href="reader.html#nari.io.reader.Reader.read_all">read_all</a></code></li>
+</ul>
+</li>
+</ul>
 </dd>
 </dl>
 </section>
@@ -218,7 +231,7 @@ class ActLogReader(Reader):
 <h4><code><a title="nari.io.actlog.ActLogReader" href="#nari.io.actlog.ActLogReader">ActLogReader</a></code></h4>
 <ul class="">
 <li><code><a title="nari.io.actlog.ActLogReader.handle_line" href="#nari.io.actlog.ActLogReader.handle_line">handle_line</a></code></li>
-<li><code><a title="nari.io.actlog.ActLogReader.read" href="#nari.io.actlog.ActLogReader.read">read</a></code></li>
+<li><code><a title="nari.io.actlog.ActLogReader.read_next" href="#nari.io.actlog.ActLogReader.read_next">read_next</a></code></li>
 </ul>
 </li>
 </ul>

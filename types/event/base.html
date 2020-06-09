@@ -29,13 +29,13 @@
 
 from datetime import datetime
 from hashlib import md5
-from typing import List
+from typing import List, Union
 
 class Event():
     &#34;&#34;&#34;Represents a base event&#34;&#34;&#34;
     __id__: int = -1
 
-    def __init__(self, timestamp: datetime, *, params: List[str] = None, index: int = 0, checksum: str = &#39;&#39;, id_: int = None):
+    def __init__(self, timestamp: Union[datetime, str], *, params: List[str] = [], index: int = 0, checksum: str = &#39;&#39;, id_: int = None): # pylint: disable=dangerous-default-value
         self.id = id_ or self.__id__
         self.timestamp = timestamp
         self.params = params
@@ -69,7 +69,7 @@ class Event():
 <dl>
 <dt id="nari.types.event.base.Event"><code class="flex name class">
 <span>class <span class="ident">Event</span></span>
-<span>(</span><span>timestamp: datetime.datetime, *, params: List[str] = None, index: int = 0, checksum: str = '', id_: int = None)</span>
+<span>(</span><span>timestamp: Union[datetime.datetime, str], *, params: List[str] = [], index: int = 0, checksum: str = '', id_: int = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Represents a base event</p></div>
@@ -81,7 +81,7 @@ class Event():
     &#34;&#34;&#34;Represents a base event&#34;&#34;&#34;
     __id__: int = -1
 
-    def __init__(self, timestamp: datetime, *, params: List[str] = None, index: int = 0, checksum: str = &#39;&#39;, id_: int = None):
+    def __init__(self, timestamp: Union[datetime, str], *, params: List[str] = [], index: int = 0, checksum: str = &#39;&#39;, id_: int = None): # pylint: disable=dangerous-default-value
         self.id = id_ or self.__id__
         self.timestamp = timestamp
         self.params = params

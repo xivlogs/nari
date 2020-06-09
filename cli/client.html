@@ -30,11 +30,63 @@
 
 from argparse import ArgumentParser, Namespace
 from logging import basicConfig, getLogger, Logger, CRITICAL, INFO
+from typing import List
 
 from nari.io.actlog import ActLogReader
+from nari.io.reader import Reader
+from nari.parser.normaliser import Normaliser
+from nari.types.event import Type as EventType
+from nari.types.event.directorupdate import DirectorUpdateCommand
 
 DEFAULT_LOG_FORMAT: str = &#39;[%(levelname)s] %(message)s&#39;
 logger: Logger = getLogger(&#39;nari&#39;)
+
+
+def print_matrix(matrix: List[List[str]]):
+    &#34;&#34;&#34;Hacky function to print out an &#39;aligned&#39; set of data&#34;&#34;&#34;
+    col_width = max(len(word) for row in matrix for word in row) + 2
+    for row in matrix:
+        print(&#39;&#39;.join(word.ljust(col_width) for word in row))
+
+
+
+def parse_fights(reader: Reader) -&gt; List[List[str]]:
+    &#34;&#34;&#34;Takes in a reader object and parses the fight details out of it&#34;&#34;&#34;
+    class DirectorFilter(Normaliser):
+        &#34;&#34;&#34;Literally only filters out director updates&#34;&#34;&#34;
+        def on_event(self, event):
+            if event.id == EventType.directorupdate:
+                return event
+            return None
+
+    fight_log: List[dict] = []
+    current_fight: dict = {}
+
+    for event in DirectorFilter(reader):
+        command = event.director_command
+        if command == DirectorUpdateCommand.init:
+            if current_fight:
+                fight_log.append(current_fight)
+            current_fight = {
+                &#39;date&#39;: event.timestamp,
+                &#39;name&#39;: str(event.instance_id),
+            }
+        elif command in (DirectorUpdateCommand.fadeout, DirectorUpdateCommand.clear): # naive, but functional?
+            current_fight[&#39;fights&#39;] = current_fight.get(&#39;fights&#39;, 0) + 1
+
+    column_headers = [&#39;date&#39;, &#39;instance id&#39;, &#39;encounters&#39;]
+    matrix = [column_headers]
+
+    for fight in fight_log:
+        num_fights = fight.get(&#39;fights&#39;, 0)
+        amtstr = &#39;fight&#39; if num_fights == 1 else &#39;fights&#39;
+        matrix.append([
+            f&#39;[{fight[&#34;date&#34;]}]&#39;,
+            fight[&#39;name&#39;],
+            f&#39;{num_fights} {amtstr}&#39;,
+        ])
+
+    return matrix
 
 
 def create_parser() -&gt; ArgumentParser:
@@ -56,8 +108,8 @@ def handle_args(log=None, verbose=False, error=False) -&gt; None:
 
     # We only really do ACT Network logs for now, so no need to do fancy file detection or anything like that
     reader = ActLogReader(log, raise_on_invalid_id=error)
-    for event in reader.read():
-        print(event)
+    data = parse_fights(reader)
+    print_matrix(data)
 
 
 def main():
@@ -115,8 +167,8 @@ if __name__ == &#39;__main__&#39;:
 
     # We only really do ACT Network logs for now, so no need to do fancy file detection or anything like that
     reader = ActLogReader(log, raise_on_invalid_id=error)
-    for event in reader.read():
-        print(event)</code></pre>
+    data = parse_fights(reader)
+    print_matrix(data)</code></pre>
 </details>
 </dd>
 <dt id="nari.cli.client.main"><code class="name flex">
@@ -133,6 +185,70 @@ if __name__ == &#39;__main__&#39;:
     parser = create_parser()
     args: Namespace = parser.parse_args()
     handle_args(**vars(args))</code></pre>
+</details>
+</dd>
+<dt id="nari.cli.client.parse_fights"><code class="name flex">
+<span>def <span class="ident">parse_fights</span></span>(<span>reader: <a title="nari.io.reader.Reader" href="../io/reader.html#nari.io.reader.Reader">Reader</a>) -> List[List[str]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Takes in a reader object and parses the fight details out of it</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def parse_fights(reader: Reader) -&gt; List[List[str]]:
+    &#34;&#34;&#34;Takes in a reader object and parses the fight details out of it&#34;&#34;&#34;
+    class DirectorFilter(Normaliser):
+        &#34;&#34;&#34;Literally only filters out director updates&#34;&#34;&#34;
+        def on_event(self, event):
+            if event.id == EventType.directorupdate:
+                return event
+            return None
+
+    fight_log: List[dict] = []
+    current_fight: dict = {}
+
+    for event in DirectorFilter(reader):
+        command = event.director_command
+        if command == DirectorUpdateCommand.init:
+            if current_fight:
+                fight_log.append(current_fight)
+            current_fight = {
+                &#39;date&#39;: event.timestamp,
+                &#39;name&#39;: str(event.instance_id),
+            }
+        elif command in (DirectorUpdateCommand.fadeout, DirectorUpdateCommand.clear): # naive, but functional?
+            current_fight[&#39;fights&#39;] = current_fight.get(&#39;fights&#39;, 0) + 1
+
+    column_headers = [&#39;date&#39;, &#39;instance id&#39;, &#39;encounters&#39;]
+    matrix = [column_headers]
+
+    for fight in fight_log:
+        num_fights = fight.get(&#39;fights&#39;, 0)
+        amtstr = &#39;fight&#39; if num_fights == 1 else &#39;fights&#39;
+        matrix.append([
+            f&#39;[{fight[&#34;date&#34;]}]&#39;,
+            fight[&#39;name&#39;],
+            f&#39;{num_fights} {amtstr}&#39;,
+        ])
+
+    return matrix</code></pre>
+</details>
+</dd>
+<dt id="nari.cli.client.print_matrix"><code class="name flex">
+<span>def <span class="ident">print_matrix</span></span>(<span>matrix: List[List[str]])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Hacky function to print out an 'aligned' set of data</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_matrix(matrix: List[List[str]]):
+    &#34;&#34;&#34;Hacky function to print out an &#39;aligned&#39; set of data&#34;&#34;&#34;
+    col_width = max(len(word) for row in matrix for word in row) + 2
+    for row in matrix:
+        print(&#39;&#39;.join(word.ljust(col_width) for word in row))</code></pre>
 </details>
 </dd>
 </dl>
@@ -156,6 +272,8 @@ if __name__ == &#39;__main__&#39;:
 <li><code><a title="nari.cli.client.create_parser" href="#nari.cli.client.create_parser">create_parser</a></code></li>
 <li><code><a title="nari.cli.client.handle_args" href="#nari.cli.client.handle_args">handle_args</a></code></li>
 <li><code><a title="nari.cli.client.main" href="#nari.cli.client.main">main</a></code></li>
+<li><code><a title="nari.cli.client.parse_fights" href="#nari.cli.client.parse_fights">parse_fights</a></code></li>
+<li><code><a title="nari.cli.client.print_matrix" href="#nari.cli.client.print_matrix">print_matrix</a></code></li>
 </ul>
 </li>
 </ul>
