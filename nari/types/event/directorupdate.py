@@ -138,6 +138,18 @@ class DirectorUpdateCommand(IntEnum):
     """
     newtoduty = 0x4000000D
     """This command comes in when one or more members in the instance are new to the duty"""
+    levelup = 0x4000000E
+    """This command comes in when a player levels up in the duty
+
+    Params that follow the command:
+
+    | Index | Description |
+    | ----: | ----------: |
+    | 3     | Actor ID    |
+    | 4     | Old level   |
+    | 5     | New level   |
+    | 6     | *unused*    |
+    """
     fadein = 0x40000010
     """Causes a fade-in to happen
 
