@@ -65,7 +65,7 @@ class DirectorUpdateCommand(IntEnum):
     | 4     | passed to director |
     | 5-6   | *unused*           |
     """
-    complete = 0x40000002
+    complete = 0x40000002 # "Duty Complete" flying text
     """When a piece of content ends
 
     Params that follow the command:
@@ -101,19 +101,19 @@ class DirectorUpdateCommand(IntEnum):
     barrierdown = 0x40000006
     """Takes the 'instance' barrier down"""
     noclue = 0x40000007 # params: examples, no clue tho (0x6, 0x0, 0x0, 0x0, 0x0, 0x0), (0x6, 0x1, 0x0, 0x0, 0x0, 0x0)
-    initvote = 0x40000008 # init vote (ie abandon, kick, etc) – params: 3: vote type, 4: unused, 5-6: unknown
+    initvote = 0x40000008 # init vote (ie abandon, kick, etc) – params: 3: vote type, 4: vote initiator, 5-6: unknown
     """Promps a vote to be held
 
     Params that follow the command:
 
-    | Index | Description |
-    | ----: | ----------: |
-    | 3     | vote type   |
-    | 4     | *unused*    |
-    | 5     | *unknown*   |
-    | 6     | *unknown*   |
+    | Index | Description             |
+    | ----: | ----------------------: |
+    | 3     | vote type               |
+    | 4     | vote initiator actor ID |
+    | 5     | *unknown*               |
+    | 6     | *unknown*               |
     """
-    concludevote = 0x40000009 # conclude vote – params: 3: vote type, 4: 1 for succeed/0 for fail, 5-6: unknown
+    concludevote = 0x40000009 # conclude vote – params: 3: vote type, 4: 1 for succeed/0 for fail, 5: vote initiator, 6: unknown
     """Concludes the vote and shows the result
 
     Params that follow the command:
@@ -122,7 +122,7 @@ class DirectorUpdateCommand(IntEnum):
     | ----: | ---------------------------: |
     | 3     | vote type                    |
     | 4     | 1 for success; 0 for failure |
-    | 5     | unknown                      |
+    | 5     | vote initiator actor ID      |
     | 6     | unknown                      |
     """
     partyinvite = 0x4000000A # "you invite x to a party" – params: 3: log message id?, 4: log message param?, 5-6: unused
