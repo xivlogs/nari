@@ -164,6 +164,17 @@ class DirectorUpdateCommand(IntEnum):
     """
     barrierup = 0x40000012
     """Puts an 'instance' barrier up"""
+    partyloot = 0x40000013 # "x of 8 party members are eligible for duty rewards" – params: 3: eligible people, 4: log message param?, 5-6: unused
+    """This command lists how many party members are elible for duty rewards. The number of chests dropped in locked content
+    appears to be hardcoded into the client, and as such doesn't change this packet.
+
+    Params that follow the command:
+
+    | Index | Description       |
+    | ----: | ----------------: |
+    | 3     | Eligibility count |
+    | 4-6   | *unused*          |
+    """
     instancesynctime = 0x80000002
     """A periodic packet sent to indicate the remaining time in an instance
 
