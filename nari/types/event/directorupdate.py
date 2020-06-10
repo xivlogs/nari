@@ -166,6 +166,7 @@ class DirectorUpdateCommand(IntEnum):
     """A periodic packet sent to indicate the remaining time in an instance
 
     Params that follow the command:
+
     | Index | Description            |
     | ----: | ---------------------: |
     | 3     | Time left (in seconds) |
