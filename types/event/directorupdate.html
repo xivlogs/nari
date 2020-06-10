@@ -166,6 +166,8 @@ class DirectorUpdateCommand(IntEnum):
     | 4     | Log message param? |
     | 5-6   | *unused*           |
     &#34;&#34;&#34;
+    dutygate = 0x4000000C # no idea on params, looks like first one is used only, seems to be either 0x00 or 0x02
+    &#34;&#34;&#34;This command sets the state of artificial walls in duties, such as gates in Doma Castle or water walls in Neverreap&#34;&#34;&#34;
     newtoduty = 0x4000000D
     &#34;&#34;&#34;This command comes in when one or more members in the instance are new to the duty&#34;&#34;&#34;
     levelup = 0x4000000E
@@ -192,6 +194,17 @@ class DirectorUpdateCommand(IntEnum):
     &#34;&#34;&#34;
     barrierup = 0x40000012
     &#34;&#34;&#34;Puts an &#39;instance&#39; barrier up&#34;&#34;&#34;
+    partyloot = 0x40000013 # &#34;x of 8 party members are eligible for duty rewards&#34; – params: 3: eligible people, 4: log message param?, 5-6: unused
+    &#34;&#34;&#34;This command lists how many party members are elible for duty rewards. The number of chests dropped in locked content
+    appears to be hardcoded into the client, and as such doesn&#39;t change this packet.
+
+    Params that follow the command:
+
+    | Index | Description       |
+    | ----: | ----------------: |
+    | 3     | Eligibility count |
+    | 4-6   | *unused*          |
+    &#34;&#34;&#34;
     instancesynctime = 0x80000002
     &#34;&#34;&#34;A periodic packet sent to indicate the remaining time in an instance
 
@@ -414,6 +427,8 @@ are the instance_id.</p></div>
     | 4     | Log message param? |
     | 5-6   | *unused*           |
     &#34;&#34;&#34;
+    dutygate = 0x4000000C # no idea on params, looks like first one is used only, seems to be either 0x00 or 0x02
+    &#34;&#34;&#34;This command sets the state of artificial walls in duties, such as gates in Doma Castle or water walls in Neverreap&#34;&#34;&#34;
     newtoduty = 0x4000000D
     &#34;&#34;&#34;This command comes in when one or more members in the instance are new to the duty&#34;&#34;&#34;
     levelup = 0x4000000E
@@ -440,6 +455,17 @@ are the instance_id.</p></div>
     &#34;&#34;&#34;
     barrierup = 0x40000012
     &#34;&#34;&#34;Puts an &#39;instance&#39; barrier up&#34;&#34;&#34;
+    partyloot = 0x40000013 # &#34;x of 8 party members are eligible for duty rewards&#34; – params: 3: eligible people, 4: log message param?, 5-6: unused
+    &#34;&#34;&#34;This command lists how many party members are elible for duty rewards. The number of chests dropped in locked content
+    appears to be hardcoded into the client, and as such doesn&#39;t change this packet.
+
+    Params that follow the command:
+
+    | Index | Description       |
+    | ----: | ----------------: |
+    | 3     | Eligibility count |
+    | 4-6   | *unused*          |
+    &#34;&#34;&#34;
     instancesynctime = 0x80000002
     &#34;&#34;&#34;A periodic packet sent to indicate the remaining time in an instance
 
@@ -553,6 +579,10 @@ are the instance_id.</p></div>
 </tr>
 </tbody>
 </table></div>
+</dd>
+<dt id="nari.types.event.directorupdate.DirectorUpdateCommand.dutygate"><code class="name">var <span class="ident">dutygate</span></code></dt>
+<dd>
+<div class="desc"><p>This command sets the state of artificial walls in duties, such as gates in Doma Castle or water walls in Neverreap</p></div>
 </dd>
 <dt id="nari.types.event.directorupdate.DirectorUpdateCommand.fadein"><code class="name">var <span class="ident">fadein</span></code></dt>
 <dd>
@@ -728,6 +758,30 @@ are the instance_id.</p></div>
 </tbody>
 </table></div>
 </dd>
+<dt id="nari.types.event.directorupdate.DirectorUpdateCommand.partyloot"><code class="name">var <span class="ident">partyloot</span></code></dt>
+<dd>
+<div class="desc"><p>This command lists how many party members are elible for duty rewards. The number of chests dropped in locked content
+appears to be hardcoded into the client, and as such doesn't change this packet.</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right">Eligibility count</td>
+</tr>
+<tr>
+<td align="right">4-6</td>
+<td align="right"><em>unused</em></td>
+</tr>
+</tbody>
+</table></div>
+</dd>
 <dt id="nari.types.event.directorupdate.DirectorUpdateCommand.timer"><code class="name">var <span class="ident">timer</span></code></dt>
 <dd>
 <div class="desc"><p>The duty time in seconds</p>
@@ -891,6 +945,7 @@ are the instance_id.</p></div>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.clear" href="#nari.types.event.directorupdate.DirectorUpdateCommand.clear">clear</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.complete" href="#nari.types.event.directorupdate.DirectorUpdateCommand.complete">complete</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.concludevote" href="#nari.types.event.directorupdate.DirectorUpdateCommand.concludevote">concludevote</a></code></li>
+<li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.dutygate" href="#nari.types.event.directorupdate.DirectorUpdateCommand.dutygate">dutygate</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.fadein" href="#nari.types.event.directorupdate.DirectorUpdateCommand.fadein">fadein</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.fadeout" href="#nari.types.event.directorupdate.DirectorUpdateCommand.fadeout">fadeout</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.init" href="#nari.types.event.directorupdate.DirectorUpdateCommand.init">init</a></code></li>
@@ -900,6 +955,7 @@ are the instance_id.</p></div>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.newtoduty" href="#nari.types.event.directorupdate.DirectorUpdateCommand.newtoduty">newtoduty</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.noclue" href="#nari.types.event.directorupdate.DirectorUpdateCommand.noclue">noclue</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.partyinvite" href="#nari.types.event.directorupdate.DirectorUpdateCommand.partyinvite">partyinvite</a></code></li>
+<li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.partyloot" href="#nari.types.event.directorupdate.DirectorUpdateCommand.partyloot">partyloot</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.timer" href="#nari.types.event.directorupdate.DirectorUpdateCommand.timer">timer</a></code></li>
 </ul>
 </li>
