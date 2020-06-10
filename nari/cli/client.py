@@ -9,7 +9,7 @@ from nari.io.actlog import ActLogReader
 from nari.io.reader import Reader
 from nari.parser.normaliser import Normaliser
 from nari.types.event import Type as EventType
-from nari.types.event.directorupdate import DirectorUpdateCommand
+from nari.types.event.directorupdate import DirectorUpdateCommand, DirectorUpdate
 
 DEFAULT_LOG_FORMAT: str = '[%(levelname)s] %(message)s'
 logger: Logger = getLogger('nari')
@@ -36,13 +36,16 @@ def parse_fights(reader: Reader) -> List[List[str]]:
     current_fight: dict = {}
 
     for event in DirectorFilter(reader):
-        command = event.director_command # type: ignore
+        # safety check
+        if not isinstance(event, DirectorUpdate):
+            continue
+        command = event.director_command
         if command == DirectorUpdateCommand.init:
             if current_fight:
                 fight_log.append(current_fight)
             current_fight = {
                 'date': event.timestamp,
-                'name': str(event.instance_id), # type: ignore
+                'name': str(event.instance_id),
             }
         elif command in (DirectorUpdateCommand.fadeout, DirectorUpdateCommand.clear): # naive, but functional?
             current_fight['fights'] = current_fight.get('fights', 0) + 1
