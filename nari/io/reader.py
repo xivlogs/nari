@@ -1,24 +1,24 @@
 """Collection of reading-related classes and utilities"""
 
 from abc import ABCMeta, abstractmethod
-from typing import List, Iterable, Union
+from typing import List, Iterator, Optional
 
 from nari.types.event.base import Event
 
 
 class Reader(metaclass=ABCMeta):
     """Represents an abstract base for reader objects"""
-    def __iter__(self) -> Iterable[Event]:
+    def __iter__(self) -> Iterator[Event]:
         return self
 
     def __next__(self) -> Event:
-        event: Event = self.read_next()
+        event: Optional[Event] = self.read_next()
         if event:
             return event
         raise StopIteration
 
     @abstractmethod
-    def read_next(self) -> Union[Event, None]:
+    def read_next(self) -> Optional[Event]:
         """Implementing classes must implement this method to return the next parsed event"""
 
     def read_all(self) -> List[Event]:
