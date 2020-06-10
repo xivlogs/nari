@@ -62,10 +62,10 @@ class DirectorUpdateCommand(IntEnum):
     | Index | Description        |
     | ----: | -----------------: |
     | 3     | *unused*           |
-    | 4     | passed to director |
+    | 4     | Passed to director |
     | 5-6   | *unused*           |
     """
-    complete = 0x40000002
+    complete = 0x40000002 # "Duty Complete" flying text
     """When a piece of content ends
 
     Params that follow the command:
@@ -73,7 +73,7 @@ class DirectorUpdateCommand(IntEnum):
     | Index | Description        |
     | ----: | -----------------: |
     | 3     | *unused*           |
-    | 4     | passed to director |
+    | 4     | Passed to director |
     | 5-6   | *unused*           |
     """
     clear = 0x40000003
@@ -101,29 +101,29 @@ class DirectorUpdateCommand(IntEnum):
     barrierdown = 0x40000006
     """Takes the 'instance' barrier down"""
     noclue = 0x40000007 # params: examples, no clue tho (0x6, 0x0, 0x0, 0x0, 0x0, 0x0), (0x6, 0x1, 0x0, 0x0, 0x0, 0x0)
-    initvote = 0x40000008 # init vote (ie abandon, kick, etc) – params: 3: vote type, 4: unused, 5-6: unknown
+    initvote = 0x40000008 # init vote (ie abandon, kick, etc) – params: 3: vote type, 4: vote initiator, 5-6: unknown
     """Promps a vote to be held
 
     Params that follow the command:
 
-    | Index | Description |
-    | ----: | ----------: |
-    | 3     | vote type   |
-    | 4     | *unused*    |
-    | 5     | *unknown*   |
-    | 6     | *unknown*   |
+    | Index | Description             |
+    | ----: | ----------------------: |
+    | 3     | Vote type               |
+    | 4     | Vote initiator actor ID |
+    | 5     | *unknown*               |
+    | 6     | *unknown*               |
     """
-    concludevote = 0x40000009 # conclude vote – params: 3: vote type, 4: 1 for succeed/0 for fail, 5-6: unknown
+    concludevote = 0x40000009 # conclude vote – params: 3: vote type, 4: 1 for succeed/0 for fail, 5: vote initiator, 6: unknown
     """Concludes the vote and shows the result
 
     Params that follow the command:
 
     | Index | Description                  |
     | ----: | ---------------------------: |
-    | 3     | vote type                    |
+    | 3     | Vote type                    |
     | 4     | 1 for success; 0 for failure |
-    | 5     | unknown                      |
-    | 6     | unknown                      |
+    | 5     | Vote initiator actor ID      |
+    | 6     | *unknown*                    |
     """
     partyinvite = 0x4000000A # "you invite x to a party" – params: 3: log message id?, 4: log message param?, 5-6: unused
     """Sent when you invite someone to the party
@@ -132,12 +132,24 @@ class DirectorUpdateCommand(IntEnum):
 
     | Index | Description        |
     | ----: | -----------------: |
-    | 3     | log message id?    |
-    | 4     | log message param? |
-    | 5-6   | unusued            |
+    | 3     | Log message id?    |
+    | 4     | Log message param? |
+    | 5-6   | *unused*           |
     """
     newtoduty = 0x4000000D
     """This command comes in when one or more members in the instance are new to the duty"""
+    levelup = 0x4000000E
+    """This command comes in when a player levels up in the duty
+
+    Params that follow the command:
+
+    | Index | Description |
+    | ----: | ----------: |
+    | 3     | Actor ID    |
+    | 4     | Old level   |
+    | 5     | New level   |
+    | 6     | *unused*    |
+    """
     fadein = 0x40000010
     """Causes a fade-in to happen
 
@@ -146,7 +158,7 @@ class DirectorUpdateCommand(IntEnum):
     | Index | Description            |
     | ----: | ---------------------: |
     | 3     | Time left (in seconds) |
-    | 4-6   | Unused                 |
+    | 4-6   | *unused*               |
     """
     barrierup = 0x40000012
     """Puts an 'instance' barrier up"""
@@ -157,7 +169,7 @@ class DirectorUpdateCommand(IntEnum):
     | Index | Description            |
     | ----: | ---------------------: |
     | 3     | Time left (in seconds) |
-    | 4-6   | Unused                 |
+    | 4-6   | *unused*               |
     """
     @classmethod
     def name_for_value(cls, value):
