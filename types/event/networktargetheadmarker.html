@@ -32,17 +32,17 @@ from nari.types.actor import Actor
 from nari.types.event import Type
 
 class NetworkTargetHeadMarker(Event):
-    &#34;&#34;&#34;Looks like it identifies the type of marker over someone&#39;s head iunno&#34;&#34;&#34;
+    &#34;&#34;&#34;Sets the model to use for the marker over a player&#39;s head&#34;&#34;&#34;
     __id__ = Type.networktargetheadmarker.value
     def handle_params(self):
         self.target_actor = Actor(self.params[0], self.params[1])
         # there&#39;s 6 other bytes afterwards:
-        # params[2]: dunno
-        # params[3]: dunno
-        # params[4]: I think this is the type of marker
-        # params[5]: dunno
-        # params[6]: dunno
-        # params[7]: dunno
+        # params[2]: junk, literally padding from the Message IPC header
+        # params[3]: padding
+        # params[4]: model ID
+        # params[5]: unused
+        # params[6]: unused
+        # params[7]: unused
 
     def __repr__(self):
         return f&#39;&lt;HeadMarker ({self.target_actor})&gt;&#39;</code></pre>
@@ -62,23 +62,23 @@ class NetworkTargetHeadMarker(Event):
 <span>(</span><span>timestamp: Union[datetime.datetime, str], *, params: List[str] = [], index: int = 0, checksum: str = '', id_: int = None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Looks like it identifies the type of marker over someone's head iunno</p></div>
+<div class="desc"><p>Sets the model to use for the marker over a player's head</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class NetworkTargetHeadMarker(Event):
-    &#34;&#34;&#34;Looks like it identifies the type of marker over someone&#39;s head iunno&#34;&#34;&#34;
+    &#34;&#34;&#34;Sets the model to use for the marker over a player&#39;s head&#34;&#34;&#34;
     __id__ = Type.networktargetheadmarker.value
     def handle_params(self):
         self.target_actor = Actor(self.params[0], self.params[1])
         # there&#39;s 6 other bytes afterwards:
-        # params[2]: dunno
-        # params[3]: dunno
-        # params[4]: I think this is the type of marker
-        # params[5]: dunno
-        # params[6]: dunno
-        # params[7]: dunno
+        # params[2]: junk, literally padding from the Message IPC header
+        # params[3]: padding
+        # params[4]: model ID
+        # params[5]: unused
+        # params[6]: unused
+        # params[7]: unused
 
     def __repr__(self):
         return f&#39;&lt;HeadMarker ({self.target_actor})&gt;&#39;</code></pre>

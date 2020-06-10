@@ -196,6 +196,7 @@ class DirectorUpdateCommand(IntEnum):
     &#34;&#34;&#34;A periodic packet sent to indicate the remaining time in an instance
 
     Params that follow the command:
+
     | Index | Description            |
     | ----: | ---------------------: |
     | 3     | Time left (in seconds) |
@@ -443,6 +444,7 @@ are the instance_id.</p></div>
     &#34;&#34;&#34;A periodic packet sent to indicate the remaining time in an instance
 
     Params that follow the command:
+
     | Index | Description            |
     | ----: | ---------------------: |
     | 3     | Time left (in seconds) |
@@ -640,15 +642,25 @@ are the instance_id.</p></div>
 <dt id="nari.types.event.directorupdate.DirectorUpdateCommand.instancesynctime"><code class="name">var <span class="ident">instancesynctime</span></code></dt>
 <dd>
 <div class="desc"><p>A periodic packet sent to indicate the remaining time in an instance</p>
-<p>Params that follow the command:
-| Index | Description
-|
-| ----: | ---------------------: |
-| 3
-| Time left (in seconds) |
-| 4-6
-| <em>unused</em>
-|</p></div>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right">Time left (in seconds)</td>
+</tr>
+<tr>
+<td align="right">4-6</td>
+<td align="right"><em>unused</em></td>
+</tr>
+</tbody>
+</table></div>
 </dd>
 <dt id="nari.types.event.directorupdate.DirectorUpdateCommand.levelup"><code class="name">var <span class="ident">levelup</span></code></dt>
 <dd>
