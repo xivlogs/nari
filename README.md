@@ -2,17 +2,17 @@
 
 ![Test](https://github.com/nonowazu/nari/workflows/Test/badge.svg?branch=master) ![Docs](https://github.com/nonowazu/nari/workflows/Docs/badge.svg?branch=master)
 
-The Nonowazu ACT Reference Implementation (NARI) is a python library to parse Final Fantasy XIV game data from network logs in ACT in an abstract form more suited towards programatic processing. The goals of this project are threefold:
+The Nonowazu ACT Reference Implementation (NARI) is a Python library to parse Final Fantasy XIV game data from network logs in ACT in an abstract form more suited towards programmatic processing. The goals of this project are threefold:
 
 1. Provide a clean set of documentation around the parsed events from ACT logs.
 2. Provide an easy to use programmatic interface to interact with this data.
-3. Provide a clean 'reference implementation' to hopefully standardize processing pipelines
+3. Provide a clean 'reference implementation' to hopefully standardise processing pipelines
 
-To that end, nari operates on 'streams' of data – most of the core code operates on this concept either generating, transforming, or recieving events.
+To that end, nari operates on 'streams' of data – most of the core code operates on this concept either generating, transforming, or receiving events.
 
-## Installation and use
+## Installation and Use
 
-### Prereqs
+### Prerequisites
 
 * Python 3.8 (untested at current, but should work with python 3.7)
 * A newish version of setuptools
