@@ -136,6 +136,8 @@ class DirectorUpdateCommand(IntEnum):
     | 4     | Log message param? |
     | 5-6   | *unused*           |
     """
+    dutygate = 0x4000000C # no idea on params, looks like first one is used only, seems to be either 0x00 or 0x02
+    """This command sets the state of artificial walls in duties, such as gates in Doma Castle or water walls in Neverreap"""
     newtoduty = 0x4000000D
     """This command comes in when one or more members in the instance are new to the duty"""
     levelup = 0x4000000E
