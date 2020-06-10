@@ -92,10 +92,10 @@ class DirectorUpdateCommand(IntEnum):
     | Index | Description        |
     | ----: | -----------------: |
     | 3     | *unused*           |
-    | 4     | passed to director |
+    | 4     | Passed to director |
     | 5-6   | *unused*           |
     &#34;&#34;&#34;
-    complete = 0x40000002
+    complete = 0x40000002 # &#34;Duty Complete&#34; flying text
     &#34;&#34;&#34;When a piece of content ends
 
     Params that follow the command:
@@ -103,7 +103,7 @@ class DirectorUpdateCommand(IntEnum):
     | Index | Description        |
     | ----: | -----------------: |
     | 3     | *unused*           |
-    | 4     | passed to director |
+    | 4     | Passed to director |
     | 5-6   | *unused*           |
     &#34;&#34;&#34;
     clear = 0x40000003
@@ -131,29 +131,29 @@ class DirectorUpdateCommand(IntEnum):
     barrierdown = 0x40000006
     &#34;&#34;&#34;Takes the &#39;instance&#39; barrier down&#34;&#34;&#34;
     noclue = 0x40000007 # params: examples, no clue tho (0x6, 0x0, 0x0, 0x0, 0x0, 0x0), (0x6, 0x1, 0x0, 0x0, 0x0, 0x0)
-    initvote = 0x40000008 # init vote (ie abandon, kick, etc) – params: 3: vote type, 4: unused, 5-6: unknown
+    initvote = 0x40000008 # init vote (ie abandon, kick, etc) – params: 3: vote type, 4: vote initiator, 5-6: unknown
     &#34;&#34;&#34;Promps a vote to be held
 
     Params that follow the command:
 
-    | Index | Description |
-    | ----: | ----------: |
-    | 3     | vote type   |
-    | 4     | *unused*    |
-    | 5     | *unknown*   |
-    | 6     | *unknown*   |
+    | Index | Description             |
+    | ----: | ----------------------: |
+    | 3     | Vote type               |
+    | 4     | Vote initiator actor ID |
+    | 5     | *unknown*               |
+    | 6     | *unknown*               |
     &#34;&#34;&#34;
-    concludevote = 0x40000009 # conclude vote – params: 3: vote type, 4: 1 for succeed/0 for fail, 5-6: unknown
+    concludevote = 0x40000009 # conclude vote – params: 3: vote type, 4: 1 for succeed/0 for fail, 5: vote initiator, 6: unknown
     &#34;&#34;&#34;Concludes the vote and shows the result
 
     Params that follow the command:
 
     | Index | Description                  |
     | ----: | ---------------------------: |
-    | 3     | vote type                    |
+    | 3     | Vote type                    |
     | 4     | 1 for success; 0 for failure |
-    | 5     | unknown                      |
-    | 6     | unknown                      |
+    | 5     | Vote initiator actor ID      |
+    | 6     | *unknown*                    |
     &#34;&#34;&#34;
     partyinvite = 0x4000000A # &#34;you invite x to a party&#34; – params: 3: log message id?, 4: log message param?, 5-6: unused
     &#34;&#34;&#34;Sent when you invite someone to the party
@@ -162,12 +162,24 @@ class DirectorUpdateCommand(IntEnum):
 
     | Index | Description        |
     | ----: | -----------------: |
-    | 3     | log message id?    |
-    | 4     | log message param? |
-    | 5-6   | unusued            |
+    | 3     | Log message id?    |
+    | 4     | Log message param? |
+    | 5-6   | *unused*           |
     &#34;&#34;&#34;
     newtoduty = 0x4000000D
     &#34;&#34;&#34;This command comes in when one or more members in the instance are new to the duty&#34;&#34;&#34;
+    levelup = 0x4000000E
+    &#34;&#34;&#34;This command comes in when a player levels up in the duty
+
+    Params that follow the command:
+
+    | Index | Description |
+    | ----: | ----------: |
+    | 3     | Actor ID    |
+    | 4     | Old level   |
+    | 5     | New level   |
+    | 6     | *unused*    |
+    &#34;&#34;&#34;
     fadein = 0x40000010
     &#34;&#34;&#34;Causes a fade-in to happen
 
@@ -176,7 +188,7 @@ class DirectorUpdateCommand(IntEnum):
     | Index | Description            |
     | ----: | ---------------------: |
     | 3     | Time left (in seconds) |
-    | 4-6   | Unused                 |
+    | 4-6   | *unused*               |
     &#34;&#34;&#34;
     barrierup = 0x40000012
     &#34;&#34;&#34;Puts an &#39;instance&#39; barrier up&#34;&#34;&#34;
@@ -187,7 +199,7 @@ class DirectorUpdateCommand(IntEnum):
     | Index | Description            |
     | ----: | ---------------------: |
     | 3     | Time left (in seconds) |
-    | 4-6   | Unused                 |
+    | 4-6   | *unused*               |
     &#34;&#34;&#34;
     @classmethod
     def name_for_value(cls, value):
@@ -327,10 +339,10 @@ are the instance_id.</p></div>
     | Index | Description        |
     | ----: | -----------------: |
     | 3     | *unused*           |
-    | 4     | passed to director |
+    | 4     | Passed to director |
     | 5-6   | *unused*           |
     &#34;&#34;&#34;
-    complete = 0x40000002
+    complete = 0x40000002 # &#34;Duty Complete&#34; flying text
     &#34;&#34;&#34;When a piece of content ends
 
     Params that follow the command:
@@ -338,7 +350,7 @@ are the instance_id.</p></div>
     | Index | Description        |
     | ----: | -----------------: |
     | 3     | *unused*           |
-    | 4     | passed to director |
+    | 4     | Passed to director |
     | 5-6   | *unused*           |
     &#34;&#34;&#34;
     clear = 0x40000003
@@ -366,29 +378,29 @@ are the instance_id.</p></div>
     barrierdown = 0x40000006
     &#34;&#34;&#34;Takes the &#39;instance&#39; barrier down&#34;&#34;&#34;
     noclue = 0x40000007 # params: examples, no clue tho (0x6, 0x0, 0x0, 0x0, 0x0, 0x0), (0x6, 0x1, 0x0, 0x0, 0x0, 0x0)
-    initvote = 0x40000008 # init vote (ie abandon, kick, etc) – params: 3: vote type, 4: unused, 5-6: unknown
+    initvote = 0x40000008 # init vote (ie abandon, kick, etc) – params: 3: vote type, 4: vote initiator, 5-6: unknown
     &#34;&#34;&#34;Promps a vote to be held
 
     Params that follow the command:
 
-    | Index | Description |
-    | ----: | ----------: |
-    | 3     | vote type   |
-    | 4     | *unused*    |
-    | 5     | *unknown*   |
-    | 6     | *unknown*   |
+    | Index | Description             |
+    | ----: | ----------------------: |
+    | 3     | Vote type               |
+    | 4     | Vote initiator actor ID |
+    | 5     | *unknown*               |
+    | 6     | *unknown*               |
     &#34;&#34;&#34;
-    concludevote = 0x40000009 # conclude vote – params: 3: vote type, 4: 1 for succeed/0 for fail, 5-6: unknown
+    concludevote = 0x40000009 # conclude vote – params: 3: vote type, 4: 1 for succeed/0 for fail, 5: vote initiator, 6: unknown
     &#34;&#34;&#34;Concludes the vote and shows the result
 
     Params that follow the command:
 
     | Index | Description                  |
     | ----: | ---------------------------: |
-    | 3     | vote type                    |
+    | 3     | Vote type                    |
     | 4     | 1 for success; 0 for failure |
-    | 5     | unknown                      |
-    | 6     | unknown                      |
+    | 5     | Vote initiator actor ID      |
+    | 6     | *unknown*                    |
     &#34;&#34;&#34;
     partyinvite = 0x4000000A # &#34;you invite x to a party&#34; – params: 3: log message id?, 4: log message param?, 5-6: unused
     &#34;&#34;&#34;Sent when you invite someone to the party
@@ -397,12 +409,24 @@ are the instance_id.</p></div>
 
     | Index | Description        |
     | ----: | -----------------: |
-    | 3     | log message id?    |
-    | 4     | log message param? |
-    | 5-6   | unusued            |
+    | 3     | Log message id?    |
+    | 4     | Log message param? |
+    | 5-6   | *unused*           |
     &#34;&#34;&#34;
     newtoduty = 0x4000000D
     &#34;&#34;&#34;This command comes in when one or more members in the instance are new to the duty&#34;&#34;&#34;
+    levelup = 0x4000000E
+    &#34;&#34;&#34;This command comes in when a player levels up in the duty
+
+    Params that follow the command:
+
+    | Index | Description |
+    | ----: | ----------: |
+    | 3     | Actor ID    |
+    | 4     | Old level   |
+    | 5     | New level   |
+    | 6     | *unused*    |
+    &#34;&#34;&#34;
     fadein = 0x40000010
     &#34;&#34;&#34;Causes a fade-in to happen
 
@@ -411,7 +435,7 @@ are the instance_id.</p></div>
     | Index | Description            |
     | ----: | ---------------------: |
     | 3     | Time left (in seconds) |
-    | 4-6   | Unused                 |
+    | 4-6   | *unused*               |
     &#34;&#34;&#34;
     barrierup = 0x40000012
     &#34;&#34;&#34;Puts an &#39;instance&#39; barrier up&#34;&#34;&#34;
@@ -422,7 +446,7 @@ are the instance_id.</p></div>
     | Index | Description            |
     | ----: | ---------------------: |
     | 3     | Time left (in seconds) |
-    | 4-6   | Unused                 |
+    | 4-6   | *unused*               |
     &#34;&#34;&#34;
     @classmethod
     def name_for_value(cls, value):
@@ -488,7 +512,7 @@ are the instance_id.</p></div>
 </tr>
 <tr>
 <td align="right">4</td>
-<td align="right">passed to director</td>
+<td align="right">Passed to director</td>
 </tr>
 <tr>
 <td align="right">5-6</td>
@@ -511,7 +535,7 @@ are the instance_id.</p></div>
 <tbody>
 <tr>
 <td align="right">3</td>
-<td align="right">vote type</td>
+<td align="right">Vote type</td>
 </tr>
 <tr>
 <td align="right">4</td>
@@ -519,11 +543,11 @@ are the instance_id.</p></div>
 </tr>
 <tr>
 <td align="right">5</td>
-<td align="right">unknown</td>
+<td align="right">Vote initiator actor ID</td>
 </tr>
 <tr>
 <td align="right">6</td>
-<td align="right">unknown</td>
+<td align="right"><em>unknown</em></td>
 </tr>
 </tbody>
 </table></div>
@@ -546,7 +570,7 @@ are the instance_id.</p></div>
 </tr>
 <tr>
 <td align="right">4-6</td>
-<td align="right">Unused</td>
+<td align="right"><em>unused</em></td>
 </tr>
 </tbody>
 </table></div>
@@ -573,7 +597,7 @@ are the instance_id.</p></div>
 </tr>
 <tr>
 <td align="right">4</td>
-<td align="right">passed to director</td>
+<td align="right">Passed to director</td>
 </tr>
 <tr>
 <td align="right">5-6</td>
@@ -596,11 +620,11 @@ are the instance_id.</p></div>
 <tbody>
 <tr>
 <td align="right">3</td>
-<td align="right">vote type</td>
+<td align="right">Vote type</td>
 </tr>
 <tr>
 <td align="right">4</td>
-<td align="right"><em>unused</em></td>
+<td align="right">Vote initiator actor ID</td>
 </tr>
 <tr>
 <td align="right">5</td>
@@ -623,8 +647,39 @@ are the instance_id.</p></div>
 | 3
 | Time left (in seconds) |
 | 4-6
-| Unused
+| <em>unused</em>
 |</p></div>
+</dd>
+<dt id="nari.types.event.directorupdate.DirectorUpdateCommand.levelup"><code class="name">var <span class="ident">levelup</span></code></dt>
+<dd>
+<div class="desc"><p>This command comes in when a player levels up in the duty</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right">Actor ID</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">Old level</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td align="right">New level</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td align="right"><em>unused</em></td>
+</tr>
+</tbody>
+</table></div>
 </dd>
 <dt id="nari.types.event.directorupdate.DirectorUpdateCommand.newtoduty"><code class="name">var <span class="ident">newtoduty</span></code></dt>
 <dd>
@@ -648,15 +703,15 @@ are the instance_id.</p></div>
 <tbody>
 <tr>
 <td align="right">3</td>
-<td align="right">log message id?</td>
+<td align="right">Log message id?</td>
 </tr>
 <tr>
 <td align="right">4</td>
-<td align="right">log message param?</td>
+<td align="right">Log message param?</td>
 </tr>
 <tr>
 <td align="right">5-6</td>
-<td align="right">unusued</td>
+<td align="right"><em>unused</em></td>
 </tr>
 </tbody>
 </table></div>
@@ -829,6 +884,7 @@ are the instance_id.</p></div>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.init" href="#nari.types.event.directorupdate.DirectorUpdateCommand.init">init</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.initvote" href="#nari.types.event.directorupdate.DirectorUpdateCommand.initvote">initvote</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.instancesynctime" href="#nari.types.event.directorupdate.DirectorUpdateCommand.instancesynctime">instancesynctime</a></code></li>
+<li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.levelup" href="#nari.types.event.directorupdate.DirectorUpdateCommand.levelup">levelup</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.newtoduty" href="#nari.types.event.directorupdate.DirectorUpdateCommand.newtoduty">newtoduty</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.noclue" href="#nari.types.event.directorupdate.DirectorUpdateCommand.noclue">noclue</a></code></li>
 <li><code><a title="nari.types.event.directorupdate.DirectorUpdateCommand.partyinvite" href="#nari.types.event.directorupdate.DirectorUpdateCommand.partyinvite">partyinvite</a></code></li>
