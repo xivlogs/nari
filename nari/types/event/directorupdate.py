@@ -62,7 +62,7 @@ class DirectorUpdateCommand(IntEnum):
     | Index | Description        |
     | ----: | -----------------: |
     | 3     | *unused*           |
-    | 4     | passed to director |
+    | 4     | Passed to director |
     | 5-6   | *unused*           |
     """
     complete = 0x40000002 # "Duty Complete" flying text
@@ -73,7 +73,7 @@ class DirectorUpdateCommand(IntEnum):
     | Index | Description        |
     | ----: | -----------------: |
     | 3     | *unused*           |
-    | 4     | passed to director |
+    | 4     | Passed to director |
     | 5-6   | *unused*           |
     """
     clear = 0x40000003
@@ -108,8 +108,8 @@ class DirectorUpdateCommand(IntEnum):
 
     | Index | Description             |
     | ----: | ----------------------: |
-    | 3     | vote type               |
-    | 4     | vote initiator actor ID |
+    | 3     | Vote type               |
+    | 4     | Vote initiator actor ID |
     | 5     | *unknown*               |
     | 6     | *unknown*               |
     """
@@ -120,10 +120,10 @@ class DirectorUpdateCommand(IntEnum):
 
     | Index | Description                  |
     | ----: | ---------------------------: |
-    | 3     | vote type                    |
+    | 3     | Vote type                    |
     | 4     | 1 for success; 0 for failure |
-    | 5     | vote initiator actor ID      |
-    | 6     | unknown                      |
+    | 5     | Vote initiator actor ID      |
+    | 6     | *unknown*                    |
     """
     partyinvite = 0x4000000A # "you invite x to a party" – params: 3: log message id?, 4: log message param?, 5-6: unused
     """Sent when you invite someone to the party
@@ -132,9 +132,9 @@ class DirectorUpdateCommand(IntEnum):
 
     | Index | Description        |
     | ----: | -----------------: |
-    | 3     | log message id?    |
-    | 4     | log message param? |
-    | 5-6   | unusued            |
+    | 3     | Log message id?    |
+    | 4     | Log message param? |
+    | 5-6   | *unused*           |
     """
     newtoduty = 0x4000000D
     """This command comes in when one or more members in the instance are new to the duty"""
@@ -158,7 +158,7 @@ class DirectorUpdateCommand(IntEnum):
     | Index | Description            |
     | ----: | ---------------------: |
     | 3     | Time left (in seconds) |
-    | 4-6   | Unused                 |
+    | 4-6   | *unused*               |
     """
     barrierup = 0x40000012
     """Puts an 'instance' barrier up"""
@@ -169,7 +169,7 @@ class DirectorUpdateCommand(IntEnum):
     | Index | Description            |
     | ----: | ---------------------: |
     | 3     | Time left (in seconds) |
-    | 4-6   | Unused                 |
+    | 4-6   | *unused*               |
     """
     @classmethod
     def name_for_value(cls, value):
