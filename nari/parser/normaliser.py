@@ -37,7 +37,7 @@ class Normaliser(metaclass=ABCMeta):
                 return None
         return None
 
-    def handle_next(self) -> Union[Event, None]:
+    def handle_next(self) -> Optional[Event]:
         """Handles the next event from the input stream, calling `on_event()` with each event"""
         if not self.stream_finished:
             handled_event = self.grab_next_event()

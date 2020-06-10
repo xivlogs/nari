@@ -3,13 +3,13 @@
 
 from argparse import ArgumentParser, Namespace
 from logging import basicConfig, getLogger, Logger, CRITICAL, INFO
-from typing import List, cast
+from typing import List
 
 from nari.io.actlog import ActLogReader
 from nari.io.reader import Reader
 from nari.parser.normaliser import Normaliser
 from nari.types.event import Type as EventType
-from nari.types.event.directorupdate import DirectorUpdateCommand, DirectorUpdate
+from nari.types.event.directorupdate import DirectorUpdateCommand
 
 DEFAULT_LOG_FORMAT: str = '[%(levelname)s] %(message)s'
 logger: Logger = getLogger('nari')
