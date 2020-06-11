@@ -5,6 +5,7 @@ with open('README.md', 'r') as f:
 
 dev_requirements = [
     'pylint',
+    'mypy',
 ]
 
 docs_requirements = [
