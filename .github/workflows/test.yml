@@ -13,12 +13,24 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: pylint
+    - name: Install development dependencies
       run: |
         python -m pip install --upgrade pip
         pip install .[dev]
-        pylint nari
+
+    - name: Pip list
+      run: pip list -v
+
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: |
+          /opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages
+        key: ${{ hashFiles('setup.py') }}
+        restore-keys: setup.py
+
+    - name: pylint
+      run: pylint nari
 
     - name: mypy
-      run: |
-        mypy nari
+      run: mypy nari
