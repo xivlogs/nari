@@ -28,7 +28,7 @@
 <pre><code class="python">&#34;&#34;&#34;Provides the Normaliser abstract base class&#34;&#34;&#34;
 
 from abc import ABCMeta, abstractmethod
-from typing import Union, List, Iterable, Iterator
+from typing import Union, List, Iterator, Optional
 
 from nari.types.event.base import Event
 
@@ -40,16 +40,16 @@ class Normaliser(metaclass=ABCMeta):
         self.buffer: List[Event] = []
         self.stream_finished = False
 
-    def __iter__(self) -&gt; Iterable[Event]:
+    def __iter__(self) -&gt; Iterator[Event]:
         return self
 
     def __next__(self) -&gt; Event:
-        event: Event = self.handle_next()
+        event: Union[Event, None] = self.handle_next()
         if event:
             return event
         raise StopIteration
 
-    def grab_next_event(self) -&gt; Event:
+    def grab_next_event(self) -&gt; Union[List[Event], Event, None]:
         &#34;&#34;&#34;Keeps iterating down the stream until it either has nothing left or it gets an event we&#39;re happy with&#34;&#34;&#34;
         while not self.stream_finished:
             # try to grab a single event
@@ -62,8 +62,9 @@ class Normaliser(metaclass=ABCMeta):
             except StopIteration:
                 self.stream_finished = True
                 return None
+        return None
 
-    def handle_next(self) -&gt; Union[Event, None]:
+    def handle_next(self) -&gt; Optional[Event]:
         &#34;&#34;&#34;Handles the next event from the input stream, calling `on_event()` with each event&#34;&#34;&#34;
         if not self.stream_finished:
             handled_event = self.grab_next_event()
@@ -118,16 +119,16 @@ class Normaliser(metaclass=ABCMeta):
         self.buffer: List[Event] = []
         self.stream_finished = False
 
-    def __iter__(self) -&gt; Iterable[Event]:
+    def __iter__(self) -&gt; Iterator[Event]:
         return self
 
     def __next__(self) -&gt; Event:
-        event: Event = self.handle_next()
+        event: Union[Event, None] = self.handle_next()
         if event:
             return event
         raise StopIteration
 
-    def grab_next_event(self) -&gt; Event:
+    def grab_next_event(self) -&gt; Union[List[Event], Event, None]:
         &#34;&#34;&#34;Keeps iterating down the stream until it either has nothing left or it gets an event we&#39;re happy with&#34;&#34;&#34;
         while not self.stream_finished:
             # try to grab a single event
@@ -140,8 +141,9 @@ class Normaliser(metaclass=ABCMeta):
             except StopIteration:
                 self.stream_finished = True
                 return None
+        return None
 
-    def handle_next(self) -&gt; Union[Event, None]:
+    def handle_next(self) -&gt; Optional[Event]:
         &#34;&#34;&#34;Handles the next event from the input stream, calling `on_event()` with each event&#34;&#34;&#34;
         if not self.stream_finished:
             handled_event = self.grab_next_event()
@@ -172,7 +174,7 @@ class Normaliser(metaclass=ABCMeta):
 <h3>Methods</h3>
 <dl>
 <dt id="nari.parser.normaliser.Normaliser.grab_next_event"><code class="name flex">
-<span>def <span class="ident">grab_next_event</span></span>(<span>self) -> <a title="nari.types.event.base.Event" href="../types/event/base.html#nari.types.event.base.Event">Event</a></span>
+<span>def <span class="ident">grab_next_event</span></span>(<span>self) -> Union[List[<a title="nari.types.event.base.Event" href="../types/event/base.html#nari.types.event.base.Event">Event</a>], <a title="nari.types.event.base.Event" href="../types/event/base.html#nari.types.event.base.Event">Event</a>, NoneType]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Keeps iterating down the stream until it either has nothing left or it gets an event we're happy with</p></div>
@@ -180,7 +182,7 @@ class Normaliser(metaclass=ABCMeta):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def grab_next_event(self) -&gt; Event:
+<pre><code class="python">def grab_next_event(self) -&gt; Union[List[Event], Event, None]:
     &#34;&#34;&#34;Keeps iterating down the stream until it either has nothing left or it gets an event we&#39;re happy with&#34;&#34;&#34;
     while not self.stream_finished:
         # try to grab a single event
@@ -192,7 +194,8 @@ class Normaliser(metaclass=ABCMeta):
             return handled_event
         except StopIteration:
             self.stream_finished = True
-            return None</code></pre>
+            return None
+    return None</code></pre>
 </details>
 </dd>
 <dt id="nari.parser.normaliser.Normaliser.handle_next"><code class="name flex">
@@ -204,7 +207,7 @@ class Normaliser(metaclass=ABCMeta):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def handle_next(self) -&gt; Union[Event, None]:
+<pre><code class="python">def handle_next(self) -&gt; Optional[Event]:
     &#34;&#34;&#34;Handles the next event from the input stream, calling `on_event()` with each event&#34;&#34;&#34;
     if not self.stream_finished:
         handled_event = self.grab_next_event()
