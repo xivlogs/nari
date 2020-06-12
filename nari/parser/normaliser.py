@@ -1,7 +1,7 @@
 """Provides the Normaliser abstract base class"""
 
 from abc import ABCMeta, abstractmethod
-from typing import Union, List, Iterable, Iterator
+from typing import Union, List, Iterator, Optional
 
 from nari.types.event.base import Event
 
@@ -13,16 +13,16 @@ class Normaliser(metaclass=ABCMeta):
         self.buffer: List[Event] = []
         self.stream_finished = False
 
-    def __iter__(self) -> Iterable[Event]:
+    def __iter__(self) -> Iterator[Event]:
         return self
 
     def __next__(self) -> Event:
-        event: Event = self.handle_next()
+        event: Union[Event, None] = self.handle_next()
         if event:
             return event
         raise StopIteration
 
-    def grab_next_event(self) -> Event:
+    def grab_next_event(self) -> Union[List[Event], Event, None]:
         """Keeps iterating down the stream until it either has nothing left or it gets an event we're happy with"""
         while not self.stream_finished:
             # try to grab a single event
@@ -35,8 +35,9 @@ class Normaliser(metaclass=ABCMeta):
             except StopIteration:
                 self.stream_finished = True
                 return None
+        return None
 
-    def handle_next(self) -> Union[Event, None]:
+    def handle_next(self) -> Optional[Event]:
         """Handles the next event from the input stream, calling `on_event()` with each event"""
         if not self.stream_finished:
             handled_event = self.grab_next_event()
