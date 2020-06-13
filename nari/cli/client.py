@@ -7,9 +7,7 @@ from typing import List
 
 from nari.io.actlog import ActLogReader
 from nari.io.reader import Reader
-from nari.parser.normaliser import Normaliser
-from nari.types.event import Type as EventType
-from nari.types.event.directorupdate import DirectorUpdateCommand, DirectorUpdate
+from nari.cli.fightlist import FightList
 
 DEFAULT_LOG_FORMAT: str = '[%(levelname)s] %(message)s'
 logger: Logger = getLogger('nari')
@@ -25,44 +23,10 @@ def print_matrix(matrix: List[List[str]]):
 
 def parse_fights(reader: Reader) -> List[List[str]]:
     """Takes in a reader object and parses the fight details out of it"""
-    class DirectorFilter(Normaliser):
-        """Literally only filters out director updates"""
-        def on_event(self, event):
-            if event.id == EventType.directorupdate:
-                return event
-            return None
+    fight_list = FightList(reader)
+    fight_list.process_events()
 
-    fight_log: List[dict] = []
-    current_fight: dict = {}
-
-    for event in DirectorFilter(reader):
-        # safety check
-        if not isinstance(event, DirectorUpdate):
-            continue
-        command = event.director_command
-        if command == DirectorUpdateCommand.init:
-            if current_fight:
-                fight_log.append(current_fight)
-            current_fight = {
-                'date': event.timestamp,
-                'name': str(event.instance_id),
-            }
-        elif command in (DirectorUpdateCommand.fadeout, DirectorUpdateCommand.clear): # naive, but functional?
-            current_fight['fights'] = current_fight.get('fights', 0) + 1
-
-    column_headers = ['date', 'instance id', 'encounters']
-    matrix = [column_headers]
-
-    for fight in fight_log:
-        num_fights = fight.get('fights', 0)
-        amtstr = 'fight' if num_fights == 1 else 'fights'
-        matrix.append([
-            f'[{fight["date"]}]',
-            fight['name'],
-            f'{num_fights} {amtstr}',
-        ])
-
-    return matrix
+    return fight_list.results()
 
 
 def create_parser() -> ArgumentParser:
