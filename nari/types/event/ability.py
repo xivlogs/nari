@@ -32,6 +32,7 @@ class Ability(Event):
     7. effect_data1 (*4 bytes of data, unknown purpose*)
     8. effect_data1, part 2 (*4 bytes of data, unknown purpose*)
     9. effect_data2
+
         effect_data2 has 4 bytes with different characteristics:
 
         | byte | description                                                                                                   |
@@ -40,6 +41,7 @@ class Ability(Event):
         | 2    | Crit chance. For example, `0xAA` turns into 17% crit chance (value / 10)                                      |
         | 3    | Low byte of true damage. If this and byte 2 are non-zero, this is likely a dot of some kind                   |
         | 4    | Action type, see AbilityType for more information                                                             |
+
     10. effect_data2, part 2 (*4 bytes of data, unknown purpose*)
     11. effect_data3 (*4 bytes of data, unknown purpose*)
     12. effect_data3, part 2 (*4 bytes of data, unknown purpose*)
