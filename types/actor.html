@@ -26,12 +26,56 @@
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">&#34;&#34;&#34;Actor-related types and utilities&#34;&#34;&#34;
+from dataclasses import dataclass
 
 from nari.util.pair import IdNamePair
 
-# pylint: disable=too-few-public-methods
+
+@dataclass
+class Resources():
+    &#34;&#34;&#34;Holds resource values for an Actor&#34;&#34;&#34;
+    hp: int = 0
+    hp_max: int = 0
+    mp: int = 0
+    mp_max: int = 10000
+    sp: int = 0
+    sp_max: int = 0
+
+    # I&#39;m providing convenience here, leave me alone
+    # pylint: disable=too-many-arguments
+    def update(self, hp: int = None, hp_max: int = None, mp: int = None, mp_max: int = None, sp: int = None, sp_max: int = None):
+        &#34;&#34;&#34;Lets you batch update the resource values&#34;&#34;&#34;
+        self.hp = hp or self.hp
+        self.hp_max = hp_max or self.hp_max
+        self.mp = mp or self.mp
+        self.mp_max = mp_max or self.mp_max
+        self.sp = sp or self.sp_max
+        self.sp_max = sp_max or self.sp_max
+
+@dataclass
+class Position():
+    &#34;&#34;&#34;Holds position data for an Actor&#34;&#34;&#34;
+    x: float = 0
+    y: float = 0
+    z: float = 0
+    bearing: float = 0
+
+    def update(self, x: float = None, y: float = None, z: float = None, bearing: float = None):
+        &#34;&#34;&#34;Lets you batch update the position via position or arguments&#34;&#34;&#34;
+        self.x = x or self.x
+        self.y = y or self.y
+        self.z = z or self.z
+        self.bearing = bearing or self.bearing
+
+
 class Actor(IdNamePair):
     &#34;&#34;&#34;Represents an Actor&#34;&#34;&#34;
+    # pylint: disable=too-few-public-methods
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.resources = Resources()
+        self.position = Position()
+
     def __repr__(self) -&gt; str:
         return f&#39;&lt;Actor ({self.name}|{self.id})&gt;&#39;</code></pre>
 </details>
@@ -47,7 +91,7 @@ class Actor(IdNamePair):
 <dl>
 <dt id="nari.types.actor.Actor"><code class="flex name class">
 <span>class <span class="ident">Actor</span></span>
-<span>(</span><span>id: <function NewType.<locals>.new_type at 0x7fb220084670>, name: str)</span>
+<span>(</span><span>*args, **kwargs)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Represents an Actor</p></div>
@@ -57,6 +101,12 @@ class Actor(IdNamePair):
 </summary>
 <pre><code class="python">class Actor(IdNamePair):
     &#34;&#34;&#34;Represents an Actor&#34;&#34;&#34;
+    # pylint: disable=too-few-public-methods
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.resources = Resources()
+        self.position = Position()
+
     def __repr__(self) -&gt; str:
         return f&#39;&lt;Actor ({self.name}|{self.id})&gt;&#39;</code></pre>
 </details>
@@ -64,6 +114,150 @@ class Actor(IdNamePair):
 <ul class="hlist">
 <li><a title="nari.util.pair.IdNamePair" href="../util/pair.html#nari.util.pair.IdNamePair">IdNamePair</a></li>
 </ul>
+</dd>
+<dt id="nari.types.actor.Position"><code class="flex name class">
+<span>class <span class="ident">Position</span></span>
+<span>(</span><span>x: float = 0, y: float = 0, z: float = 0, bearing: float = 0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Holds position data for an Actor</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Position():
+    &#34;&#34;&#34;Holds position data for an Actor&#34;&#34;&#34;
+    x: float = 0
+    y: float = 0
+    z: float = 0
+    bearing: float = 0
+
+    def update(self, x: float = None, y: float = None, z: float = None, bearing: float = None):
+        &#34;&#34;&#34;Lets you batch update the position via position or arguments&#34;&#34;&#34;
+        self.x = x or self.x
+        self.y = y or self.y
+        self.z = z or self.z
+        self.bearing = bearing or self.bearing</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="nari.types.actor.Position.bearing"><code class="name">var <span class="ident">bearing</span> : float</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actor.Position.x"><code class="name">var <span class="ident">x</span> : float</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actor.Position.y"><code class="name">var <span class="ident">y</span> : float</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actor.Position.z"><code class="name">var <span class="ident">z</span> : float</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="nari.types.actor.Position.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self, x: float = None, y: float = None, z: float = None, bearing: float = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Lets you batch update the position via position or arguments</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update(self, x: float = None, y: float = None, z: float = None, bearing: float = None):
+    &#34;&#34;&#34;Lets you batch update the position via position or arguments&#34;&#34;&#34;
+    self.x = x or self.x
+    self.y = y or self.y
+    self.z = z or self.z
+    self.bearing = bearing or self.bearing</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="nari.types.actor.Resources"><code class="flex name class">
+<span>class <span class="ident">Resources</span></span>
+<span>(</span><span>hp: int = 0, hp_max: int = 0, mp: int = 0, mp_max: int = 10000, sp: int = 0, sp_max: int = 0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Holds resource values for an Actor</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Resources():
+    &#34;&#34;&#34;Holds resource values for an Actor&#34;&#34;&#34;
+    hp: int = 0
+    hp_max: int = 0
+    mp: int = 0
+    mp_max: int = 10000
+    sp: int = 0
+    sp_max: int = 0
+
+    # I&#39;m providing convenience here, leave me alone
+    # pylint: disable=too-many-arguments
+    def update(self, hp: int = None, hp_max: int = None, mp: int = None, mp_max: int = None, sp: int = None, sp_max: int = None):
+        &#34;&#34;&#34;Lets you batch update the resource values&#34;&#34;&#34;
+        self.hp = hp or self.hp
+        self.hp_max = hp_max or self.hp_max
+        self.mp = mp or self.mp
+        self.mp_max = mp_max or self.mp_max
+        self.sp = sp or self.sp_max
+        self.sp_max = sp_max or self.sp_max</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="nari.types.actor.Resources.hp"><code class="name">var <span class="ident">hp</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actor.Resources.hp_max"><code class="name">var <span class="ident">hp_max</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actor.Resources.mp"><code class="name">var <span class="ident">mp</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actor.Resources.mp_max"><code class="name">var <span class="ident">mp_max</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actor.Resources.sp"><code class="name">var <span class="ident">sp</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actor.Resources.sp_max"><code class="name">var <span class="ident">sp_max</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="nari.types.actor.Resources.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self, hp: int = None, hp_max: int = None, mp: int = None, mp_max: int = None, sp: int = None, sp_max: int = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Lets you batch update the resource values</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update(self, hp: int = None, hp_max: int = None, mp: int = None, mp_max: int = None, sp: int = None, sp_max: int = None):
+    &#34;&#34;&#34;Lets you batch update the resource values&#34;&#34;&#34;
+    self.hp = hp or self.hp
+    self.hp_max = hp_max or self.hp_max
+    self.mp = mp or self.mp
+    self.mp_max = mp_max or self.mp_max
+    self.sp = sp or self.sp_max
+    self.sp_max = sp_max or self.sp_max</code></pre>
+</details>
+</dd>
+</dl>
 </dd>
 </dl>
 </section>
@@ -83,6 +277,28 @@ class Actor(IdNamePair):
 <ul>
 <li>
 <h4><code><a title="nari.types.actor.Actor" href="#nari.types.actor.Actor">Actor</a></code></h4>
+</li>
+<li>
+<h4><code><a title="nari.types.actor.Position" href="#nari.types.actor.Position">Position</a></code></h4>
+<ul class="">
+<li><code><a title="nari.types.actor.Position.bearing" href="#nari.types.actor.Position.bearing">bearing</a></code></li>
+<li><code><a title="nari.types.actor.Position.update" href="#nari.types.actor.Position.update">update</a></code></li>
+<li><code><a title="nari.types.actor.Position.x" href="#nari.types.actor.Position.x">x</a></code></li>
+<li><code><a title="nari.types.actor.Position.y" href="#nari.types.actor.Position.y">y</a></code></li>
+<li><code><a title="nari.types.actor.Position.z" href="#nari.types.actor.Position.z">z</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nari.types.actor.Resources" href="#nari.types.actor.Resources">Resources</a></code></h4>
+<ul class="two-column">
+<li><code><a title="nari.types.actor.Resources.hp" href="#nari.types.actor.Resources.hp">hp</a></code></li>
+<li><code><a title="nari.types.actor.Resources.hp_max" href="#nari.types.actor.Resources.hp_max">hp_max</a></code></li>
+<li><code><a title="nari.types.actor.Resources.mp" href="#nari.types.actor.Resources.mp">mp</a></code></li>
+<li><code><a title="nari.types.actor.Resources.mp_max" href="#nari.types.actor.Resources.mp_max">mp_max</a></code></li>
+<li><code><a title="nari.types.actor.Resources.sp" href="#nari.types.actor.Resources.sp">sp</a></code></li>
+<li><code><a title="nari.types.actor.Resources.sp_max" href="#nari.types.actor.Resources.sp_max">sp_max</a></code></li>
+<li><code><a title="nari.types.actor.Resources.update" href="#nari.types.actor.Resources.update">update</a></code></li>
+</ul>
 </li>
 </ul>
 </li>
