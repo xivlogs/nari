@@ -10,20 +10,20 @@ class Resources():
     hp: int = 0
     hp_max: int = 0
     mp: int = 0
-    mp_max: int = 0
-    tp: int = 0
-    tp_max: int = 0
+    mp_max: int = 10000
+    sp: int = 0
+    sp_max: int = 0
 
-    # I'm providing convienince here, leave me alone
+    # I'm providing convenience here, leave me alone
     # pylint: disable=too-many-arguments
-    def update(self, hp: int = None, hp_max: int = None, mp: int = None, mp_max: int = None, tp: int = None, tp_max: int = None):
+    def update(self, hp: int = None, hp_max: int = None, mp: int = None, mp_max: int = None, sp: int = None, sp_max: int = None):
         """Lets you batch update the resource values"""
         self.hp = hp or self.hp
         self.hp_max = hp_max or self.hp_max
         self.mp = mp or self.mp
         self.mp_max = mp_max or self.mp_max
-        self.tp = tp or self.tp_max
-        self.tp_max = tp_max or self.tp_max
+        self.sp = sp or self.sp_max
+        self.sp_max = sp_max or self.sp_max
 
 @dataclass
 class Position():
@@ -31,14 +31,14 @@ class Position():
     x: float = 0
     y: float = 0
     z: float = 0
-    facing: float = 0
+    bearing: float = 0
 
-    def update(self, x: float = None, y: float = None, z: float = None, facing: float = None):
+    def update(self, x: float = None, y: float = None, z: float = None, bearing: float = None):
         """Lets you batch update the position via position or arguments"""
         self.x = x or self.x
         self.y = y or self.y
         self.z = z or self.z
-        self.facing = facing or self.facing
+        self.bearing = bearing or self.bearing
 
 
 class Actor(IdNamePair):

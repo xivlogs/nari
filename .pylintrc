@@ -435,6 +435,7 @@ good-names=i,
            hp,
            mp,
            tp,
+           sp,
            x,
            y,
            z

@@ -11,10 +11,10 @@ from nari.types.actor import Actor
 from nari.types.ability import Ability as AbilityObject
 
 class AbilityType(IntEnum):
-    """AbilityEffectTypes gives all the different effects that an ability can be marked with"""
+    """AbilityEffectTypes lists all the different effects that an ability can be marked with"""
     none = 0x0
     """Ability has no special effects"""
-    applieseffect = 0x0e
+    applieseffect = 0x0E
     """The ability applies a status effect"""
 
 
