@@ -24,13 +24,11 @@ def print_matrix(matrix: List[List[str]]):
 def parse_fights(reader: Reader) -> List[List[str]]:
     """Takes in a reader object and parses the fight details out of it"""
     fight_list = FightList(reader)
-    fight_list.process_events()
-
-    return fight_list.results()
+    return fight_list.process_events()
 
 
 def create_parser() -> ArgumentParser:
-    """Convienience function to create the argument parser"""
+    """Convenience function to create the argument parser"""
     parser: ArgumentParser = ArgumentParser()
     parser.add_argument('log', help='Path to an ACT .log file')
     parser.add_argument('-v', '--verbose', action='store_true')

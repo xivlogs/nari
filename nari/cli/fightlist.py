@@ -2,7 +2,7 @@
 
 from typing import List
 
-from nari.parser.analyser import Analyser
+from nari.parser.analyser import Analyser, AnalyserTopic
 from nari.types.event import Type as EventType
 from nari.types.event.base import Event
 from nari.types.event.directorupdate import DirectorUpdate, DirectorUpdateCommand
@@ -17,6 +17,7 @@ class FightList(Analyser):
         self.fight_log: List[dict] = []
         self.current_fight: dict = {}
         self.add_event_hook(filter_fn=lambda e: e.id == EventType.directorupdate, callback=self.fight_event)
+        self.add_topic_hook(AnalyserTopic.stream_end, callback=self.complete)
 
     def fight_event(self, event: Event):
         """For each fight event, figure out stuff"""
@@ -33,6 +34,11 @@ class FightList(Analyser):
             }
         elif command in (DirectorUpdateCommand.fadeout, DirectorUpdateCommand.clear): # naive, but functional?
             self.current_fight['fights'] = self.current_fight.get('fights', 0) + 1
+
+    def complete(self):
+        """Wrap up any lingering issues"""
+        if self.current_fight:
+            self.fight_log.append(self.current_fight)
 
     def results(self):
         for fight in self.fight_log:
