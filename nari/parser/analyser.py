@@ -29,10 +29,10 @@ class Analyser():
     def init(self):
         """Subclasses override this method to set up for their particular use case"""
 
-    def add_event_hook(self, filter_fn: FilterFunc, callback: CallbackFunc) -> int:
+    def add_event_hook(self, predicate: FilterFunc, callback: CallbackFunc) -> int:
         """Adds an event hook that watches for certain types of events and calls a callback function on them"""
-        filter_id = id(filter_fn)
-        self.hooks[filter_id] = (filter_fn, callback)
+        filter_id = id(predicate)
+        self.hooks[filter_id] = (predicate, callback)
         return filter_id
 
     def add_topic_hook(self, topic: AnalyserTopic, callback: TopicCallbackFunc):
@@ -60,4 +60,4 @@ class Analyser():
         return self.results()
 
     def results(self) -> Any:
-        """Override to provide results from your analyzer. It's up to you to return what you want"""
+        """Override to provide results from your analyser. It's up to you to return what you want"""
