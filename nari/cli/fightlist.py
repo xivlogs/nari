@@ -16,7 +16,7 @@ class FightList(Analyser):
         self.matrix = [column_headers]
         self.fight_log: List[dict] = []
         self.current_fight: dict = {}
-        self.add_event_hook(filter_fn=lambda e: e.id == EventType.directorupdate, callback=self.fight_event)
+        self.add_event_hook(predicate=lambda e: e.id == EventType.directorupdate, callback=self.fight_event)
         self.add_topic_hook(AnalyserTopic.stream_end, callback=self.complete)
 
     def fight_event(self, event: Event):
