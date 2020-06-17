@@ -34,9 +34,7 @@ from typing import List
 
 from nari.io.actlog import ActLogReader
 from nari.io.reader import Reader
-from nari.parser.normaliser import Normaliser
-from nari.types.event import Type as EventType
-from nari.types.event.directorupdate import DirectorUpdateCommand, DirectorUpdate
+from nari.cli.fightlist import FightList
 
 DEFAULT_LOG_FORMAT: str = &#39;[%(levelname)s] %(message)s&#39;
 logger: Logger = getLogger(&#39;nari&#39;)
@@ -52,48 +50,12 @@ def print_matrix(matrix: List[List[str]]):
 
 def parse_fights(reader: Reader) -&gt; List[List[str]]:
     &#34;&#34;&#34;Takes in a reader object and parses the fight details out of it&#34;&#34;&#34;
-    class DirectorFilter(Normaliser):
-        &#34;&#34;&#34;Literally only filters out director updates&#34;&#34;&#34;
-        def on_event(self, event):
-            if event.id == EventType.directorupdate:
-                return event
-            return None
-
-    fight_log: List[dict] = []
-    current_fight: dict = {}
-
-    for event in DirectorFilter(reader):
-        # safety check
-        if not isinstance(event, DirectorUpdate):
-            continue
-        command = event.director_command
-        if command == DirectorUpdateCommand.init:
-            if current_fight:
-                fight_log.append(current_fight)
-            current_fight = {
-                &#39;date&#39;: event.timestamp,
-                &#39;name&#39;: str(event.instance_id),
-            }
-        elif command in (DirectorUpdateCommand.fadeout, DirectorUpdateCommand.clear): # naive, but functional?
-            current_fight[&#39;fights&#39;] = current_fight.get(&#39;fights&#39;, 0) + 1
-
-    column_headers = [&#39;date&#39;, &#39;instance id&#39;, &#39;encounters&#39;]
-    matrix = [column_headers]
-
-    for fight in fight_log:
-        num_fights = fight.get(&#39;fights&#39;, 0)
-        amtstr = &#39;fight&#39; if num_fights == 1 else &#39;fights&#39;
-        matrix.append([
-            f&#39;[{fight[&#34;date&#34;]}]&#39;,
-            fight[&#39;name&#39;],
-            f&#39;{num_fights} {amtstr}&#39;,
-        ])
-
-    return matrix
+    fight_list = FightList(reader)
+    return fight_list.process_events()
 
 
 def create_parser() -&gt; ArgumentParser:
-    &#34;&#34;&#34;Convienience function to create the argument parser&#34;&#34;&#34;
+    &#34;&#34;&#34;Convenience function to create the argument parser&#34;&#34;&#34;
     parser: ArgumentParser = ArgumentParser()
     parser.add_argument(&#39;log&#39;, help=&#39;Path to an ACT .log file&#39;)
     parser.add_argument(&#39;-v&#39;, &#39;--verbose&#39;, action=&#39;store_true&#39;)
@@ -137,13 +99,13 @@ if __name__ == &#39;__main__&#39;:
 <span>def <span class="ident">create_parser</span></span>(<span>) -> argparse.ArgumentParser</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Convienience function to create the argument parser</p></div>
+<div class="desc"><p>Convenience function to create the argument parser</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def create_parser() -&gt; ArgumentParser:
-    &#34;&#34;&#34;Convienience function to create the argument parser&#34;&#34;&#34;
+    &#34;&#34;&#34;Convenience function to create the argument parser&#34;&#34;&#34;
     parser: ArgumentParser = ArgumentParser()
     parser.add_argument(&#39;log&#39;, help=&#39;Path to an ACT .log file&#39;)
     parser.add_argument(&#39;-v&#39;, &#39;--verbose&#39;, action=&#39;store_true&#39;)
@@ -201,44 +163,8 @@ if __name__ == &#39;__main__&#39;:
 </summary>
 <pre><code class="python">def parse_fights(reader: Reader) -&gt; List[List[str]]:
     &#34;&#34;&#34;Takes in a reader object and parses the fight details out of it&#34;&#34;&#34;
-    class DirectorFilter(Normaliser):
-        &#34;&#34;&#34;Literally only filters out director updates&#34;&#34;&#34;
-        def on_event(self, event):
-            if event.id == EventType.directorupdate:
-                return event
-            return None
-
-    fight_log: List[dict] = []
-    current_fight: dict = {}
-
-    for event in DirectorFilter(reader):
-        # safety check
-        if not isinstance(event, DirectorUpdate):
-            continue
-        command = event.director_command
-        if command == DirectorUpdateCommand.init:
-            if current_fight:
-                fight_log.append(current_fight)
-            current_fight = {
-                &#39;date&#39;: event.timestamp,
-                &#39;name&#39;: str(event.instance_id),
-            }
-        elif command in (DirectorUpdateCommand.fadeout, DirectorUpdateCommand.clear): # naive, but functional?
-            current_fight[&#39;fights&#39;] = current_fight.get(&#39;fights&#39;, 0) + 1
-
-    column_headers = [&#39;date&#39;, &#39;instance id&#39;, &#39;encounters&#39;]
-    matrix = [column_headers]
-
-    for fight in fight_log:
-        num_fights = fight.get(&#39;fights&#39;, 0)
-        amtstr = &#39;fight&#39; if num_fights == 1 else &#39;fights&#39;
-        matrix.append([
-            f&#39;[{fight[&#34;date&#34;]}]&#39;,
-            fight[&#39;name&#39;],
-            f&#39;{num_fights} {amtstr}&#39;,
-        ])
-
-    return matrix</code></pre>
+    fight_list = FightList(reader)
+    return fight_list.process_events()</code></pre>
 </details>
 </dd>
 <dt id="nari.cli.client.print_matrix"><code class="name flex">
