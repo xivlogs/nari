@@ -5,7 +5,7 @@ from argparse import ArgumentParser, Namespace
 from logging import basicConfig, getLogger, Logger, CRITICAL, INFO
 from typing import List
 
-from nari.io.actlog import ActLogReader
+from nari.io.reader.actlog import ActLogReader
 from nari.io.reader import Reader
 from nari.cli.fightlist import FightList
 
