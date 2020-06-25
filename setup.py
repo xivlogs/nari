@@ -21,6 +21,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     python_requires='>=3.8',
+    packages=setuptools.find_packages(),
     entry_points={
         'console_scripts': [
             'nari=nari.cli.client:main'
