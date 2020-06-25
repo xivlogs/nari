@@ -39,7 +39,7 @@ class ActionFilter(Normaliser):
 # set up an act log reader
 reader = ActLogReader('/path/to/your/reader.log')
 # A normalizer takes a stream of events – which ActLogReader provides
-action_events = ActionFilter(ActLogReader)
+action_events = ActionFilter(reader)
 # iterate through the events and handle them in interesting ways!
 for action_event in action_events:
     print(action_event)
