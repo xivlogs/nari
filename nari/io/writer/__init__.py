@@ -11,29 +11,15 @@ class Writer(metaclass=ABCMeta):
     def __init__(self, stream: Iterator[Event]):
         self.stream = iter(stream)
 
-    def write_one(self) -> bool:
-        """Attempts to write one event. If it fails, return False. Otherwise, return True"""
-        try:
-            new_event = next(self.stream)
-            self.write_next(new_event)
-        except StopIteration:
-            return False
-
-        return True
-
-    def write_batch(self, amount: int):
-        """Writes a batch of events"""
-        for i in range(amount): # pylint: disable=unused-variable
-            response = self.write_one()
-            if not response:
-                # best to raise an exception, but I dunno
-                return
-
-    def write(self):
-        """Prompts the writer to consume all events"""
-        while True:
-            response = self.write_one()
-            if not response:
+    def write(self, amount: int = 0):
+        """Prompts the writer to consume an amount of events or all events"""
+        index: int = 1
+        while index != amount:
+            try:
+                next_event = next(self.stream)
+                self.write_next(next_event)
+                index += 1
+            except StopIteration:
                 return
 
     @abstractmethod
