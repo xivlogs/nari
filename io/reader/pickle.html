@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>nari.io API documentation</title>
-<meta name="description" content="" />
+<title>nari.io.reader.pickle API documentation</title>
+<meta name="description" content="Reads pickle&#39;d event files" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,28 +17,80 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>nari.io</code></h1>
+<h1 class="title">Module <code>nari.io.reader.pickle</code></h1>
 </header>
 <section id="section-intro">
+<p>Reads pickle'd event files</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Reads pickle&#39;d event files&#34;&#34;&#34;
+
+from pickle import load
+from typing import Optional
+
+from nari.io.reader import Reader
+from nari.types.event.base import Event
+
+
+class PickleReader(Reader):
+    &#34;&#34;&#34;Opens up a pickle file with events and reads them out&#34;&#34;&#34;
+    def __init__(self, filename: str):
+        self.handle = open(filename, &#39;rb&#39;)
+
+    def read_next(self) -&gt; Optional[Event]:
+        try:
+            return load(self.handle)
+        except EOFError:
+            return None</code></pre>
+</details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt><code class="name"><a title="nari.io.reader" href="reader/index.html">nari.io.reader</a></code></dt>
+<dt id="nari.io.reader.pickle.PickleReader"><code class="flex name class">
+<span>class <span class="ident">PickleReader</span></span>
+<span>(</span><span>filename: str)</span>
+</code></dt>
 <dd>
-<div class="desc"><p>Collection of reading-related classes and utilities</p></div>
-</dd>
-<dt><code class="name"><a title="nari.io.writer" href="writer/index.html">nari.io.writer</a></code></dt>
-<dd>
-<div class="desc"><p>Collection of writing-related classes and utilities</p></div>
+<div class="desc"><p>Opens up a pickle file with events and reads them out</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PickleReader(Reader):
+    &#34;&#34;&#34;Opens up a pickle file with events and reads them out&#34;&#34;&#34;
+    def __init__(self, filename: str):
+        self.handle = open(filename, &#39;rb&#39;)
+
+    def read_next(self) -&gt; Optional[Event]:
+        try:
+            return load(self.handle)
+        except EOFError:
+            return None</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="nari.io.reader.Reader" href="index.html#nari.io.reader.Reader">Reader</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="nari.io.reader.Reader" href="index.html#nari.io.reader.Reader">Reader</a></b></code>:
+<ul class="hlist">
+<li><code><a title="nari.io.reader.Reader.read_all" href="index.html#nari.io.reader.Reader.read_all">read_all</a></code></li>
+<li><code><a title="nari.io.reader.Reader.read_next" href="index.html#nari.io.reader.Reader.read_next">read_next</a></code></li>
+</ul>
+</li>
+</ul>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
 </section>
 </article>
 <nav id="sidebar">
@@ -49,13 +101,14 @@
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="nari" href="../index.html">nari</a></code></li>
+<li><code><a title="nari.io.reader" href="index.html">nari.io.reader</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
-<li><code><a title="nari.io.reader" href="reader/index.html">nari.io.reader</a></code></li>
-<li><code><a title="nari.io.writer" href="writer/index.html">nari.io.writer</a></code></li>
+<li>
+<h4><code><a title="nari.io.reader.pickle.PickleReader" href="#nari.io.reader.pickle.PickleReader">PickleReader</a></code></h4>
+</li>
 </ul>
 </li>
 </ul>

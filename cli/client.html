@@ -32,7 +32,7 @@ from argparse import ArgumentParser, Namespace
 from logging import basicConfig, getLogger, Logger, CRITICAL, INFO
 from typing import List
 
-from nari.io.actlog import ActLogReader
+from nari.io.reader.actlog import ActLogReader
 from nari.io.reader import Reader
 from nari.cli.fightlist import FightList
 
@@ -153,7 +153,7 @@ if __name__ == &#39;__main__&#39;:
 </details>
 </dd>
 <dt id="nari.cli.client.parse_fights"><code class="name flex">
-<span>def <span class="ident">parse_fights</span></span>(<span>reader: <a title="nari.io.reader.Reader" href="../io/reader.html#nari.io.reader.Reader">Reader</a>) -> List[List[str]]</span>
+<span>def <span class="ident">parse_fights</span></span>(<span>reader: <a title="nari.io.reader.Reader" href="../io/reader/index.html#nari.io.reader.Reader">Reader</a>) -> List[List[str]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Takes in a reader object and parses the fight details out of it</p></div>

@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>nari.io API documentation</title>
-<meta name="description" content="" />
+<title>nari.io.writer.pickle API documentation</title>
+<meta name="description" content="Uses python pickle to write logs to a blob file. Probably not helpful" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,28 +17,75 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>nari.io</code></h1>
+<h1 class="title">Module <code>nari.io.writer.pickle</code></h1>
 </header>
 <section id="section-intro">
+<p>Uses python pickle to write logs to a blob file. Probably not helpful</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Uses python pickle to write logs to a blob file. Probably not helpful&#34;&#34;&#34;
+
+from pickle import dump
+from typing import Iterator
+
+from nari.io.writer import Writer
+from nari.types.event.base import Event
+
+class PickleWriter(Writer):
+    &#34;&#34;&#34;Writes a stream of events into a binary file&#34;&#34;&#34;
+    def __init__(self, stream: Iterator[Event], filename: str):
+        super().__init__(stream)
+        self.handle = open(filename, &#39;wb&#39;)
+
+    def write_next(self, event: Event):
+        dump(event, self.handle)</code></pre>
+</details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt><code class="name"><a title="nari.io.reader" href="reader/index.html">nari.io.reader</a></code></dt>
+<dt id="nari.io.writer.pickle.PickleWriter"><code class="flex name class">
+<span>class <span class="ident">PickleWriter</span></span>
+<span>(</span><span>stream: Iterator[<a title="nari.types.event.base.Event" href="../../types/event/base.html#nari.types.event.base.Event">Event</a>], filename: str)</span>
+</code></dt>
 <dd>
-<div class="desc"><p>Collection of reading-related classes and utilities</p></div>
-</dd>
-<dt><code class="name"><a title="nari.io.writer" href="writer/index.html">nari.io.writer</a></code></dt>
-<dd>
-<div class="desc"><p>Collection of writing-related classes and utilities</p></div>
+<div class="desc"><p>Writes a stream of events into a binary file</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PickleWriter(Writer):
+    &#34;&#34;&#34;Writes a stream of events into a binary file&#34;&#34;&#34;
+    def __init__(self, stream: Iterator[Event], filename: str):
+        super().__init__(stream)
+        self.handle = open(filename, &#39;wb&#39;)
+
+    def write_next(self, event: Event):
+        dump(event, self.handle)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="nari.io.writer.Writer" href="index.html#nari.io.writer.Writer">Writer</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="nari.io.writer.Writer" href="index.html#nari.io.writer.Writer">Writer</a></b></code>:
+<ul class="hlist">
+<li><code><a title="nari.io.writer.Writer.write" href="index.html#nari.io.writer.Writer.write">write</a></code></li>
+<li><code><a title="nari.io.writer.Writer.write_next" href="index.html#nari.io.writer.Writer.write_next">write_next</a></code></li>
+</ul>
+</li>
+</ul>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
 </section>
 </article>
 <nav id="sidebar">
@@ -49,13 +96,14 @@
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="nari" href="../index.html">nari</a></code></li>
+<li><code><a title="nari.io.writer" href="index.html">nari.io.writer</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
-<li><code><a title="nari.io.reader" href="reader/index.html">nari.io.reader</a></code></li>
-<li><code><a title="nari.io.writer" href="writer/index.html">nari.io.writer</a></code></li>
+<li>
+<h4><code><a title="nari.io.writer.pickle.PickleWriter" href="#nari.io.writer.pickle.PickleWriter">PickleWriter</a></code></h4>
+</li>
 </ul>
 </li>
 </ul>

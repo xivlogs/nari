@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>nari.io API documentation</title>
-<meta name="description" content="" />
+<title>nari.io.reader API documentation</title>
+<meta name="description" content="Collection of reading-related classes and utilities" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,20 +17,52 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>nari.io</code></h1>
+<h1 class="title">Module <code>nari.io.reader</code></h1>
 </header>
 <section id="section-intro">
+<p>Collection of reading-related classes and utilities</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Collection of reading-related classes and utilities&#34;&#34;&#34;
+
+from abc import ABCMeta, abstractmethod
+from typing import List, Iterator, Optional
+
+from nari.types.event.base import Event
+
+
+class Reader(metaclass=ABCMeta):
+    &#34;&#34;&#34;Represents an abstract base for reader objects&#34;&#34;&#34;
+    def __iter__(self) -&gt; Iterator[Event]:
+        return self
+
+    def __next__(self) -&gt; Event:
+        event: Optional[Event] = self.read_next()
+        if event:
+            return event
+        raise StopIteration
+
+    @abstractmethod
+    def read_next(self) -&gt; Optional[Event]:
+        &#34;&#34;&#34;Implementing classes must implement this method to return the next parsed event&#34;&#34;&#34;
+
+    def read_all(self) -&gt; List[Event]:
+        &#34;&#34;&#34;Iterates through all events and returns them as a list&#34;&#34;&#34;
+        return list(self)</code></pre>
+</details>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
-<dt><code class="name"><a title="nari.io.reader" href="reader/index.html">nari.io.reader</a></code></dt>
+<dt><code class="name"><a title="nari.io.reader.actlog" href="actlog.html">nari.io.reader.actlog</a></code></dt>
 <dd>
-<div class="desc"><p>Collection of reading-related classes and utilities</p></div>
+<div class="desc"><p>Classes and functions for handling network logs from ACT</p></div>
 </dd>
-<dt><code class="name"><a title="nari.io.writer" href="writer/index.html">nari.io.writer</a></code></dt>
+<dt><code class="name"><a title="nari.io.reader.pickle" href="pickle.html">nari.io.reader.pickle</a></code></dt>
 <dd>
-<div class="desc"><p>Collection of writing-related classes and utilities</p></div>
+<div class="desc"><p>Reads pickle'd event files</p></div>
 </dd>
 </dl>
 </section>
@@ -39,6 +71,74 @@
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="nari.io.reader.Reader"><code class="flex name class">
+<span>class <span class="ident">Reader</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Represents an abstract base for reader objects</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Reader(metaclass=ABCMeta):
+    &#34;&#34;&#34;Represents an abstract base for reader objects&#34;&#34;&#34;
+    def __iter__(self) -&gt; Iterator[Event]:
+        return self
+
+    def __next__(self) -&gt; Event:
+        event: Optional[Event] = self.read_next()
+        if event:
+            return event
+        raise StopIteration
+
+    @abstractmethod
+    def read_next(self) -&gt; Optional[Event]:
+        &#34;&#34;&#34;Implementing classes must implement this method to return the next parsed event&#34;&#34;&#34;
+
+    def read_all(self) -&gt; List[Event]:
+        &#34;&#34;&#34;Iterates through all events and returns them as a list&#34;&#34;&#34;
+        return list(self)</code></pre>
+</details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="nari.io.reader.actlog.ActLogReader" href="actlog.html#nari.io.reader.actlog.ActLogReader">ActLogReader</a></li>
+<li><a title="nari.io.reader.pickle.PickleReader" href="pickle.html#nari.io.reader.pickle.PickleReader">PickleReader</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="nari.io.reader.Reader.read_all"><code class="name flex">
+<span>def <span class="ident">read_all</span></span>(<span>self) -> List[<a title="nari.types.event.base.Event" href="../../types/event/base.html#nari.types.event.base.Event">Event</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Iterates through all events and returns them as a list</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_all(self) -&gt; List[Event]:
+    &#34;&#34;&#34;Iterates through all events and returns them as a list&#34;&#34;&#34;
+    return list(self)</code></pre>
+</details>
+</dd>
+<dt id="nari.io.reader.Reader.read_next"><code class="name flex">
+<span>def <span class="ident">read_next</span></span>(<span>self) -> Union[<a title="nari.types.event.base.Event" href="../../types/event/base.html#nari.types.event.base.Event">Event</a>, NoneType]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Implementing classes must implement this method to return the next parsed event</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@abstractmethod
+def read_next(self) -&gt; Optional[Event]:
+    &#34;&#34;&#34;Implementing classes must implement this method to return the next parsed event&#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -49,13 +149,24 @@
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="nari" href="../index.html">nari</a></code></li>
+<li><code><a title="nari.io" href="../index.html">nari.io</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
-<li><code><a title="nari.io.reader" href="reader/index.html">nari.io.reader</a></code></li>
-<li><code><a title="nari.io.writer" href="writer/index.html">nari.io.writer</a></code></li>
+<li><code><a title="nari.io.reader.actlog" href="actlog.html">nari.io.reader.actlog</a></code></li>
+<li><code><a title="nari.io.reader.pickle" href="pickle.html">nari.io.reader.pickle</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="nari.io.reader.Reader" href="#nari.io.reader.Reader">Reader</a></code></h4>
+<ul class="">
+<li><code><a title="nari.io.reader.Reader.read_all" href="#nari.io.reader.Reader.read_all">read_all</a></code></li>
+<li><code><a title="nari.io.reader.Reader.read_next" href="#nari.io.reader.Reader.read_next">read_next</a></code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

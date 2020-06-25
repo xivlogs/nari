@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>nari.io API documentation</title>
-<meta name="description" content="" />
+<title>nari.io.writer API documentation</title>
+<meta name="description" content="Collection of writing-related classes and utilities" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,20 +17,49 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>nari.io</code></h1>
+<h1 class="title">Module <code>nari.io.writer</code></h1>
 </header>
 <section id="section-intro">
+<p>Collection of writing-related classes and utilities</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Collection of writing-related classes and utilities&#34;&#34;&#34;
+
+from abc import ABCMeta, abstractmethod
+from typing import List, Iterator, Optional
+
+from nari.types.event.base import Event
+
+
+class Writer(metaclass=ABCMeta):
+    &#34;&#34;&#34;Represents an abstract base for writer objects&#34;&#34;&#34;
+    def __init__(self, stream: Iterator[Event]):
+        self.stream = iter(stream)
+
+    def write(self, amount: int = 0):
+        &#34;&#34;&#34;Prompts the writer to consume an amount of events or all events&#34;&#34;&#34;
+        index: int = 1
+        while index != amount:
+            try:
+                next_event = next(self.stream)
+                self.write_next(next_event)
+                index += 1
+            except StopIteration:
+                return
+
+    @abstractmethod
+    def write_next(self, event: Event) -&gt; None:
+        &#34;&#34;&#34;Implementing classes must implement this method to write the next event&#34;&#34;&#34;</code></pre>
+</details>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
-<dt><code class="name"><a title="nari.io.reader" href="reader/index.html">nari.io.reader</a></code></dt>
+<dt><code class="name"><a title="nari.io.writer.pickle" href="pickle.html">nari.io.writer.pickle</a></code></dt>
 <dd>
-<div class="desc"><p>Collection of reading-related classes and utilities</p></div>
-</dd>
-<dt><code class="name"><a title="nari.io.writer" href="writer/index.html">nari.io.writer</a></code></dt>
-<dd>
-<div class="desc"><p>Collection of writing-related classes and utilities</p></div>
+<div class="desc"><p>Uses python pickle to write logs to a blob file. Probably not helpful</p></div>
 </dd>
 </dl>
 </section>
@@ -39,6 +68,82 @@
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="nari.io.writer.Writer"><code class="flex name class">
+<span>class <span class="ident">Writer</span></span>
+<span>(</span><span>stream: Iterator[<a title="nari.types.event.base.Event" href="../../types/event/base.html#nari.types.event.base.Event">Event</a>])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Represents an abstract base for writer objects</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Writer(metaclass=ABCMeta):
+    &#34;&#34;&#34;Represents an abstract base for writer objects&#34;&#34;&#34;
+    def __init__(self, stream: Iterator[Event]):
+        self.stream = iter(stream)
+
+    def write(self, amount: int = 0):
+        &#34;&#34;&#34;Prompts the writer to consume an amount of events or all events&#34;&#34;&#34;
+        index: int = 1
+        while index != amount:
+            try:
+                next_event = next(self.stream)
+                self.write_next(next_event)
+                index += 1
+            except StopIteration:
+                return
+
+    @abstractmethod
+    def write_next(self, event: Event) -&gt; None:
+        &#34;&#34;&#34;Implementing classes must implement this method to write the next event&#34;&#34;&#34;</code></pre>
+</details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="nari.io.writer.pickle.PickleWriter" href="pickle.html#nari.io.writer.pickle.PickleWriter">PickleWriter</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="nari.io.writer.Writer.write"><code class="name flex">
+<span>def <span class="ident">write</span></span>(<span>self, amount: int = 0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Prompts the writer to consume an amount of events or all events</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write(self, amount: int = 0):
+    &#34;&#34;&#34;Prompts the writer to consume an amount of events or all events&#34;&#34;&#34;
+    index: int = 1
+    while index != amount:
+        try:
+            next_event = next(self.stream)
+            self.write_next(next_event)
+            index += 1
+        except StopIteration:
+            return</code></pre>
+</details>
+</dd>
+<dt id="nari.io.writer.Writer.write_next"><code class="name flex">
+<span>def <span class="ident">write_next</span></span>(<span>self, event: <a title="nari.types.event.base.Event" href="../../types/event/base.html#nari.types.event.base.Event">Event</a>) -> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Implementing classes must implement this method to write the next event</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@abstractmethod
+def write_next(self, event: Event) -&gt; None:
+    &#34;&#34;&#34;Implementing classes must implement this method to write the next event&#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -49,13 +154,23 @@
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="nari" href="../index.html">nari</a></code></li>
+<li><code><a title="nari.io" href="../index.html">nari.io</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
-<li><code><a title="nari.io.reader" href="reader/index.html">nari.io.reader</a></code></li>
-<li><code><a title="nari.io.writer" href="writer/index.html">nari.io.writer</a></code></li>
+<li><code><a title="nari.io.writer.pickle" href="pickle.html">nari.io.writer.pickle</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="nari.io.writer.Writer" href="#nari.io.writer.Writer">Writer</a></code></h4>
+<ul class="">
+<li><code><a title="nari.io.writer.Writer.write" href="#nari.io.writer.Writer.write">write</a></code></li>
+<li><code><a title="nari.io.writer.Writer.write_next" href="#nari.io.writer.Writer.write_next">write_next</a></code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
