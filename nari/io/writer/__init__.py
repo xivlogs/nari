@@ -20,8 +20,12 @@ class Writer(metaclass=ABCMeta):
                 self.write_next(next_event)
                 index += 1
             except StopIteration:
+                self.cleanup()
                 return
 
     @abstractmethod
     def write_next(self, event: Event) -> None:
         """Implementing classes must implement this method to write the next event"""
+
+    def cleanup(self):
+        """Override to provide any cleanup items you need to do after the last item was written"""
