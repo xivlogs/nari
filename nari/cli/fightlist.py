@@ -3,9 +3,9 @@
 from typing import List
 
 from nari.parser.analyser import Analyser, AnalyserTopic
-from nari.types.event import Type as EventType
-from nari.types.event.base import Event
-from nari.types.event.directorupdate import DirectorUpdate, DirectorUpdateCommand
+from nari.types.event.act import Type as EventType
+from nari.types.event import Event
+from nari.types.event.act.directorupdate import DirectorUpdate, DirectorUpdateCommand
 
 
 class FightList(Analyser):

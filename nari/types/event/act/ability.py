@@ -5,8 +5,8 @@ generate one of these events.
 """
 from enum import IntEnum
 
-from nari.types.event.base import Event
-from nari.types.event import Type
+from nari.types.event.act.base import Event
+from nari.types.event.act import Type
 from nari.types.actor import Actor
 from nari.types.ability import Ability as AbilityObject
 

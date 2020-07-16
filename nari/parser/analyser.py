@@ -2,7 +2,7 @@
 
 from enum import IntEnum, auto
 from typing import Iterable, Iterator, Callable, Tuple, Dict, Any, List
-from nari.types.event.base import Event
+from nari.types.event import Event
 
 # some useful typedefs
 FilterFunc = Callable[[Event], bool]

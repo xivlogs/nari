@@ -54,9 +54,23 @@ class EffectType(IntEnum):
     InflictStatus = 0xf
 
 
-class EffectFlag(IntFlag):
+class EffectResultFlag(IntFlag):
     """Extra bitwise flags that modify the ability"""
-    ExtraDamage = 0x40
+    NoEffect = 0x0
+    Absorbed = 0x04
+    ExtendedValue = 0x40
+    EffectOnSource = 0x80
+    Reflected = 0xA0
+
+
+class HitSeverity(IntFlag):
+    """Determines how hard the ability 'hit'"""
+    NormalDamage = 0
+    NormalHeal = 0
+    CritDamage = 1
+    CritHeal = 1
+    DirectHitDamage = 2
+    CritDirectHitDamage = 3
 
 
 class ActionEffect(): # pylint: disable=too-few-public-methods
@@ -67,10 +81,12 @@ class ActionEffect(): # pylint: disable=too-few-public-methods
                  padding: int,
                  percentage: int,
                  multiplier: int,
+                 flags: int,
                  damage: int):
         self.effect_type = effect_type
         self.hit_severity = hit_severity
         self.padding = padding
         self.percentage = percentage
         self.multiplier = multiplier
+        self.flags = flags
         self.damage = damage

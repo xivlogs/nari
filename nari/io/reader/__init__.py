@@ -3,7 +3,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import List, Iterator, Optional
 
-from nari.types.event.base import Event
+from nari.types.event import Event
 
 
 class Reader(metaclass=ABCMeta):

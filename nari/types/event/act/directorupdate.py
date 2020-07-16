@@ -7,8 +7,8 @@ the barrier.
 
 from enum import IntEnum
 
-from nari.types.event.base import Event
-from nari.types.event import Type
+from nari.types.event.act.base import Event
+from nari.types.event.act import Type
 
 
 class DirectorUpdateType(IntEnum):
