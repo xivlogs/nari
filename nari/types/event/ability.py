@@ -14,7 +14,7 @@ class Ability(Event): # pylint: disable=too-few-public-methods
                  action_effects: List[ActionEffect],
                  source_actor: Actor,
                  target_actor: Actor,
-                 ability: AbilityObj,):
+                 ability: AbilityObj):
         super().__init__(timestamp)
         self.source_actor = source_actor
         self.target_actor = target_actor
