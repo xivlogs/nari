@@ -45,18 +45,28 @@ def ability_from_logline(timestamp: datetime, params: List[str]) -> Event:
         action_effects.append(
             action_effect_from_logline(params[n:n+2])
         )
-    source_actor.resources.update(
-        *[int(x) for x in params[22:28]]
-    )
-    source_actor.position.update(
-        *[float(x) for x in params[28:32]]
-    )
-    target_actor.resources.update(
-        *[int(x) for x in params[32:38]]
-    )
-    target_actor.position.update(
-        *[float(x) for x in params[38:42]]
-    )
+    # apparently when the target actor is 'none', then the *source* actor's resources will be empty will also be empty
+    # also apparently, other time(s) it will be blank just because /shrug
+    try:
+        source_actor.resources.update(
+            *[int(x) for x in params[22:28]]
+        )
+        source_actor.position.update(
+            *[float(x) for x in params[28:32]]
+        )
+    except ValueError:
+        pass
+
+    try:
+        target_actor.resources.update(
+            *[int(x) for x in params[32:38]]
+        )
+        target_actor.position.update(
+            *[float(x) for x in params[38:42]]
+        )
+    except ValueError:
+        pass
+
     return Ability(
         timestamp=timestamp,
         action_effects=action_effects,

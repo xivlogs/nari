@@ -3,9 +3,10 @@
 from typing import List
 
 from nari.parser.analyser import Analyser, AnalyserTopic
-from nari.types.event.act import Type as EventType
+# from nari.types.event.act import Type as EventType
 from nari.types.event import Event
-from nari.types.event.act.directorupdate import DirectorUpdate, DirectorUpdateCommand
+from nari.types.event.instance import InstanceInit, InstanceFade
+# from nari.types.event.act.directorupdate import DirectorUpdate, DirectorUpdateCommand
 
 
 class FightList(Analyser):
@@ -16,24 +17,25 @@ class FightList(Analyser):
         self.matrix = [column_headers]
         self.fight_log: List[dict] = []
         self.current_fight: dict = {}
-        self.add_event_hook(predicate=lambda e: e.id == EventType.directorupdate, callback=self.fight_event)
+        self.add_event_hook(predicate=lambda e: isinstance(e, (InstanceInit, InstanceFade)), callback=self.fight_event)
         self.add_topic_hook(AnalyserTopic.stream_end, callback=self.complete)
 
     def fight_event(self, event: Event):
         """For each fight event, figure out stuff"""
         # safety check
-        if not isinstance(event, DirectorUpdate):
+        if not isinstance(event, (InstanceInit, InstanceFade)):
             return
-        command = event.director_command
-        if command == DirectorUpdateCommand.init:
+        # command = event.director_command
+        # if command == DirectorUpdateCommand.init:
+        if isinstance(event, InstanceInit):
             if self.current_fight:
                 self.fight_log.append(self.current_fight)
             self.current_fight = {
                 'date': event.timestamp,
                 'name': str(event.instance_id),
             }
-        elif command in (DirectorUpdateCommand.fadeout, DirectorUpdateCommand.clear): # naive, but functional?
-            self.current_fight['fights'] = self.current_fight.get('fights', 0) + 1
+        # elif command in (DirectorUpdateCommand.fadeout, DirectorUpdateCommand.clear): # naive, but functional?
+            # self.current_fight['fights'] = self.current_fight.get('fights', 0) + 1
 
     def complete(self):
         """Wrap up any lingering issues"""

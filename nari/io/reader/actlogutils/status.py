@@ -1,4 +1,4 @@
-from struct import unpack
+from struct import unpack, error as StructError
 from datetime import datetime
 from typing import List
 
@@ -27,13 +27,14 @@ def status_effect_from_logline(param0, param1, param2):
     # 000A0168 is the status id (last 4 bytes), and status params (first 4 bytes)
     # 41F00000 is the duration as a float (30s, in this case)
     # E0000000 is the source actor id (E0000000 = no source actor)
+    param0_int = int(param0.rjust(8, '0'), 16)
     status_params, status_id = unpack(
         '>HH',
-        int(param0, 16).to_bytes(8, 'big')
+        param0_int.to_bytes(4, 'big')
     )
     duration = unpack(
         '>f',
-        int(param1, 16).to_bytes(8, 'big'),
+        int(param1.rjust(8, '0'), 16).to_bytes(4, 'big'),
     )[0]
     source_actor_id = int(param2, 16)
     return StatusEffect(
@@ -57,9 +58,10 @@ def statuslist_from_logline(timestamp: datetime, params: List[str]) -> Event:
     target_actor.resources.update(
         *[int(x) for x in params[3:9]]
     )
-    target_actor.position.update(
-        *[int(x) for x in params[9:13]]
-    )
+    if '' not in params[9:13]:
+        target_actor.position.update(
+            *[float(x) for x in params[9:13]]
+        )
     remaining_params = len(params) - 1
     status_effects: List[StatusEffect] = []
     for i in range(13, remaining_params, 3):
@@ -82,12 +84,12 @@ def statusapply_from_logline(timestamp: datetime, params: List[str]) -> Event:
     # 5-6 - Target Actor
     # 7 - param(s)
     # 8-9 - Source Actor HP/Max HP
-    status = Status(int(params[0]), params[1])
+    status = Status(int(params[0], 16), params[1])
     duration = float(params[2])
     source_actor = Actor(*params[3:5])
     target_actor = Actor(*params[5:7])
-    status_params = int(params[7])
-    source_actor.resources.update(*[int(x) for x in params[8:10]])
+    status_params = int(params[7], 16)
+    # source_actor.resources.update(*[int(x) for x in params[8:10]])
     return StatusApply(
         timestamp=timestamp,
         status=status,
