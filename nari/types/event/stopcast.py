@@ -19,7 +19,7 @@ class StopCastType(IntEnum):
 
 
 class StopCast(Event): # pylint: disable=too-few-public-methods
-    """An ability that hits multiple people"""
+    """An event that gets stopped by movement, death, or other reasons"""
     def __init__(self, *,
                  timestamp: datetime,
                  source_actor: Actor,
