@@ -3,7 +3,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import Union, List, Iterator, Optional
 
-from nari.types.event.base import Event
+from nari.types.event import Event
 
 
 class Normaliser(metaclass=ABCMeta):

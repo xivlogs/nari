@@ -17,8 +17,8 @@ def action_effect_from_logline(params: List[str]) -> ActionEffect:
     hexdata = ''.join([x.rjust(8, '0') for x in params])
     intdata = int(hexdata, 16)
     parsed_params = unpack('>BBBBHBB', intdata.to_bytes(8, 'big'))
-    param0, param1, param2, effect_type, value, flags, extended_value_high_bytes = parsed_params
-    return ActionEffect(effect_type=effect_type, flags=flags, value=value, extended_value_high_bytes=extended_value_high_bytes, additional_params=[param0, param1, param2])
+    param0, param1, severity, effect_type, value, flags, multiplier = parsed_params
+    return ActionEffect(effect_type=effect_type, severity=severity, flags=flags, value=value, multiplier=multiplier, additional_params=[param0, param1])
 
 def ability_from_logline(timestamp: datetime, params: List[str]) -> Event:
     """Returns an ability event from a semi-parsed act logline"""

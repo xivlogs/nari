@@ -19,7 +19,7 @@ class EffectType(IntEnum):
     MpGain = 11
     TpLoss = 12
     TpGain = 13
-    GpGain = 14
+    StatusApply = 14
     ApplyStatusEffectTarget = 15
     ApplyStatusEffectSource = 16 # effect entry on target but buff applies to source, like storm's eye
     StatusNoEffect = 20
@@ -52,13 +52,21 @@ class HitSeverity(IntFlag):
 class ActionEffect(): # pylint: disable=too-few-public-methods
     """Properties that modify an ability use"""
     def __init__(self, *,
-                 effect_type: EffectType, # IntEnum type in python
+                 effect_type: EffectType,
+                 severity: HitSeverity,
                  flags: int,
                  value: int,
-                 extended_value_high_bytes: int,
+                 multiplier: int,
                  additional_params: List[int]):
         self.effect_type = effect_type
+        self.severity = severity
         self.flags = flags
         self.value = value
-        self.extended_value_high_bytes = extended_value_high_bytes
+        self.multiplier = multiplier
         self.additional_params = additional_params
+
+    @property
+    def damage(self):
+        # Total Damage = 65535 * Multiplier * (Flags & 0x40) + Value
+        is_extended = (self.flags & EffectResultFlag.ExtendedValue) >> 6
+        return 65535 * self.multiplier * is_extended + self.value
