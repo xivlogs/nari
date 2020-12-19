@@ -11,6 +11,8 @@ from nari.io.reader.actlogutils.zone import zonechange_from_logline
 from nari.io.reader.actlogutils.status import statuslist_from_logline, statusapply_from_logline
 from nari.io.reader.actlogutils.limitbreak import limitbreak_from_logline
 from nari.io.reader.actlogutils.ability import ability_from_logline, aoeability_from_logline
+from nari.io.reader.actlogutils.directorupdate import director_events_from_logline
+from nari.io.reader.actlogutils.updatehp import updatehp_from_logline
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[datetime, List[str]], Optional[Event]]
@@ -65,7 +67,8 @@ def date_from_act_timestamp(datestr: str) -> datetime:
 
 def noop(timestamp: datetime, params: List[str]) -> Event:
     """Straight-up ignores things"""
-    print(f'Ignoring an event with timestamp {timestamp} and params: {"|".join(params)}')
+    #print(f'Ignoring an event with timestamp {timestamp} and params: {"|".join(params)}')
+    ...
 
 ID_MAPPINGS: Dict[int, ActEventFn] = {
     ActEventType.version: version_from_logline,
@@ -74,17 +77,17 @@ ID_MAPPINGS: Dict[int, ActEventFn] = {
     ActEventType.config: config_from_logline,
     ActEventType.debug: noop,
     ActEventType.hook: noop,
-    ActEventType.addcombatant: noop, # should probably do this one tbh
-    ActEventType.playerstats: noop,
+    ActEventType.addcombatant: noop, # TODO: pester Ay for docs in spreadsheet; get name for event
+    ActEventType.playerstats: noop, # TODO:
     ActEventType.logline: noop,
     ActEventType.gauge: noop, # TODO: write line->Gauge function
     ActEventType.networkstatuseffect: statuslist_from_logline,
     ActEventType.networkbuff: statusapply_from_logline,
     ActEventType.limitbreak: limitbreak_from_logline,
-    ActEventType.partylist: noop,
-    ActEventType.networknametoggle: noop, # I think we should keep?
-    ActEventType.networkupdatehp: noop, # TODO:
-    ActEventType.directorupdate: noop, # TODO: definitely to do
+    ActEventType.partylist: noop, # TODO: come up with event name, docs, etc. Booli Ay 40x
+    ActEventType.networknametoggle: noop, # TODO: need event name, docs
+    ActEventType.networkupdatehp: updatehp_from_logline,
+    ActEventType.directorupdate: director_events_from_logline,
     ActEventType.networkability: ability_from_logline,
     ActEventType.networkeffectresult: noop, # TODO
 }
