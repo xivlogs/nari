@@ -23,6 +23,8 @@ class EffectType(IntEnum):
     ApplyStatusEffectTarget = 15
     ApplyStatusEffectSource = 16 # effect entry on target but buff applies to source, like storm's eye
     StatusNoEffect = 20
+    RawEnmity = 24
+    """Used by Provoke. ActionEffect.value equals the amount of enmity gained."""
     StartActionCombo = 27
     ComboSucceed = 28
     Knockback = 33
