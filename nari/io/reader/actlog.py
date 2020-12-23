@@ -2,7 +2,7 @@
 from typing import Optional
 
 from nari.io.reader import Reader
-from nari.io.reader.actlogutils import ID_MAPPINGS
+from nari.io.reader.actlogutils import ID_MAPPINGS, date_from_act_timestamp
 # from nari.types.event.act import Type as EventType
 # from nari.types.event.mappings import IdEventMapping
 from nari.types.event import Event
@@ -26,6 +26,7 @@ class ActLogReader(Reader):
         args = line.strip().split('|')
         id_ = int(args[0])
         datestr = args[1]
+        timestamp = date_from_act_timestamp(datestr)
 
         event: Optional[Event] = None
 
@@ -34,13 +35,13 @@ class ActLogReader(Reader):
             #     # special handling - this one doesn't have a checksum
             #     event = IdEventMapping[id_](datestr, params=args[2:])
             # else:
-            event = ID_MAPPINGS[id_](datestr, params=args[2:-1])
+            event = ID_MAPPINGS[id_](timestamp, params=args[2:-1])
             # if self.raise_on_checksum_failure and not event.valid_checksum():
             #     raise InvalidChecksum(f'Checksum is invalid for event: {line} (index {self.index})')
         elif self.raise_on_invalid_id:
             raise EventNotFound(f'No event found for id {id_}')
         else:
-            event = Event(datestr)
+            event = Event(timestamp)
 
         self.index += 1
         return event
