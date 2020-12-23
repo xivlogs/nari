@@ -13,6 +13,7 @@ from nari.io.reader.actlogutils.limitbreak import limitbreak_from_logline
 from nari.io.reader.actlogutils.ability import ability_from_logline, aoeability_from_logline
 from nari.io.reader.actlogutils.directorupdate import director_events_from_logline
 from nari.io.reader.actlogutils.updatehp import updatehp_from_logline
+from nari.io.reader.actlogutils.actorspawn import actor_spawn_from_logline
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[datetime, List[str]], Optional[Event]]
@@ -77,7 +78,7 @@ ID_MAPPINGS: Dict[int, ActEventFn] = {
     ActEventType.config: config_from_logline,
     ActEventType.debug: noop,
     ActEventType.hook: noop,
-    ActEventType.addcombatant: noop, # TODO: pester Ay for docs in spreadsheet; get name for event
+    ActEventType.addcombatant: actor_spawn_from_logline,
     ActEventType.playerstats: noop, # TODO:
     ActEventType.logline: noop,
     ActEventType.gauge: noop, # TODO: write line->Gauge function
