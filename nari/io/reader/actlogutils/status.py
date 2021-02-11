@@ -1,4 +1,6 @@
-from struct import unpack, error as StructError
+"""Parses status from act log line"""
+
+from struct import unpack
 from datetime import datetime
 from typing import List
 
@@ -23,6 +25,7 @@ def classjoblevel_from_logline(param: str) -> ClassJobLevel:
     )
 
 def status_effect_from_logline(param0, param1, param2):
+    """Helper function to parse a status effect from log line data"""
     # Assuming some input of 0A0168|41F00000|E0000000
     # 000A0168 is the status id (last 4 bytes), and status params (first 4 bytes)
     # 41F00000 is the duration as a float (30s, in this case)
@@ -45,6 +48,7 @@ def status_effect_from_logline(param0, param1, param2):
     )
 
 def statuslist_from_logline(timestamp: datetime, params: List[str]) -> Event:
+    """Parse statuslist from a logline"""
     # param layout from act
     # 0-1 - target actor id/name
     # 2 - classjoblevel data
@@ -77,6 +81,7 @@ def statuslist_from_logline(timestamp: datetime, params: List[str]) -> Event:
     )
 
 def statusapply_from_logline(timestamp: datetime, params: List[str]) -> Event:
+    """Parse status apply from act log line"""
     # param layout from act
     # 0-1 - Status ID / Name
     # 2 - Status Duration
@@ -100,6 +105,7 @@ def statusapply_from_logline(timestamp: datetime, params: List[str]) -> Event:
     )
 
 def statusremove_from_logline(timestamp: datetime, params: List[str]) -> Event:
+    """Parse status remove from act log line"""
     # param layout from act
     # 0-1 - Status ID / Name
     # 2 - Status Duration
