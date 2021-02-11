@@ -1,8 +1,9 @@
 from datetime import datetime
 from typing import List
 
-from nari.types.event.actorspawn import ActorSpawn
 from nari.types.actor import Actor
+from nari.types.event import Event
+from nari.types.event.actorspawn import ActorSpawn
 
 def actor_spawn_from_logline(timestamp: datetime, params: List[str]) -> Event:
     # param layout from act
@@ -24,5 +25,5 @@ def actor_spawn_from_logline(timestamp: datetime, params: List[str]) -> Event:
 
     return ActorSpawn(
         timestamp=timestamp,
-        actor=actor
+        actor=source_actor
     )
