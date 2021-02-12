@@ -1,3 +1,4 @@
+"""Parse actor spawn data from act log line"""
 from datetime import datetime
 from typing import List
 
@@ -6,6 +7,7 @@ from nari.types.event import Event
 from nari.types.event.actorspawn import ActorSpawn
 
 def actor_spawn_from_logline(timestamp: datetime, params: List[str]) -> Event:
+    """Helper function to parse spawn data from act log line"""
     # param layout from act
     # 0-1 actor id/name
     # 2-3 source current/max hp

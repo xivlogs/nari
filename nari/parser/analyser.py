@@ -62,7 +62,7 @@ class Analyser():
                 while len(self.hooks_to_remove) > 0:
                     del self.hooks[self.hooks_to_remove.pop()]
                 continue
-            break  
+            break
 
         # call the 'stream_end' topic
         for callback in self.topics.get(AnalyserTopic.stream_end, []):
