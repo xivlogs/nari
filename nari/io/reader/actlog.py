@@ -52,6 +52,5 @@ class ActLogReader(Reader):
             line: str = self.handle.readline()
             if len(line) == 0:
                 return None
-            event = self.handle_line(line)
-            if event is not None:
-                return self.handle_line(line)
+            if (event := self.handle_line(line)) is not None:
+                return event
