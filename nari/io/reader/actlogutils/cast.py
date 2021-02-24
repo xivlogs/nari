@@ -1,4 +1,6 @@
+"""Parses cast information from act log line"""
 from datetime import datetime
+from typing import List
 
 from nari.types.actor import Actor
 from nari.types.ability import Ability as AbilityType
@@ -7,6 +9,7 @@ from nari.types.event.startcast import StartCast
 from nari.types.event.stopcast import StopCast, StopCastType
 
 def startcast_from_logline(timestamp: datetime, params: List[str]) -> Event:
+    """Parses start cast event from act log line"""
     # param layout from act
     # 0-1 Source Actor
     # 2-3 Ability
@@ -25,6 +28,7 @@ def startcast_from_logline(timestamp: datetime, params: List[str]) -> Event:
     )
 
 def stopcast_from_act_timestamp(timestamp: datetime, params: List[str]) -> Event:
+    """Parses stop cast event from act log line"""
     # param layout from act
     # 0-1 Source Actor
     # 2-3 Ability
@@ -37,5 +41,5 @@ def stopcast_from_act_timestamp(timestamp: datetime, params: List[str]) -> Event
         timestamp=timestamp,
         source_actor=source_actor,
         ability=ability,
-        cast_type=stop_type
+        cast_type=stop_type,
     )

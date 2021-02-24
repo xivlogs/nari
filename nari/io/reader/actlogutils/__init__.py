@@ -66,10 +66,10 @@ def date_from_act_timestamp(datestr: str) -> datetime:
     """
     return datetime.strptime(f'{datestr[:26]}{datestr[-6:]}', DEFAULT_DATE_FORMAT)
 
+# pylint: disable=unused-argument
 def noop(timestamp: datetime, params: List[str]) -> Event:
     """Straight-up ignores things"""
-    #print(f'Ignoring an event with timestamp {timestamp} and params: {"|".join(params)}')
-    ...
+    # print(f'Ignoring an event with timestamp {timestamp} and params: {"|".join(params)}')
 
 ID_MAPPINGS: Dict[int, ActEventFn] = {
     ActEventType.version: version_from_logline,

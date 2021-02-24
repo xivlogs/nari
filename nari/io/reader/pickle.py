@@ -4,7 +4,7 @@ from pickle import load
 from typing import Optional
 
 from nari.io.reader import Reader
-from nari.types.event.base import Event
+from nari.types.event import Event
 
 
 class PickleReader(Reader):

@@ -4,7 +4,7 @@ from pickle import dump
 from typing import Iterator
 
 from nari.io.writer import Writer
-from nari.types.event.base import Event
+from nari.types.event import Event
 
 class PickleWriter(Writer):
     """Writes a stream of events into a binary file"""

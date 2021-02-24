@@ -56,13 +56,14 @@ class Analyser():
         for event in self.stream:
             for filter_fn, callback in self.hooks.values():
                 if filter_fn(event):
-                    if not callback(event):
+                    retval = callback(event)
+                    if retval is not None and not retval:
                         break
             else:
                 while len(self.hooks_to_remove) > 0:
                     del self.hooks[self.hooks_to_remove.pop()]
                 continue
-            break  
+            break
 
         # call the 'stream_end' topic
         for callback in self.topics.get(AnalyserTopic.stream_end, []):

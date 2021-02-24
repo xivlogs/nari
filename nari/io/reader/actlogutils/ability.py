@@ -41,9 +41,9 @@ def ability_from_logline(timestamp: datetime, params: List[str]) -> Event:
     target_actor = Actor(*params[4:6])
     action_effects = []
     for i in range(0, 16, 2):
-        n = i + 6
+        index = i + 6
         action_effects.append(
-            action_effect_from_logline(params[n:n+2])
+            action_effect_from_logline(params[index:index+2])
         )
     # apparently when the target actor is 'none', then the *source* actor's resources will be empty will also be empty
     # also apparently, other time(s) it will be blank just because /shrug
@@ -76,15 +76,16 @@ def ability_from_logline(timestamp: datetime, params: List[str]) -> Event:
     )
 
 def aoeability_from_logline(timestamp: datetime, params: List[str]) -> Event:
+    """Parses an aoe ability from logline"""
     # see ability_from_logline above for field definitions
     source_actor = Actor(*params[0:2])
     ability = AbilityType(*params[2:4])
     target_actor = Actor(*params[4:6])
     action_effects = []
     for i in range(0, 16, 2):
-        n = i + 6
+        index = i + 6
         action_effects.append(
-            action_effect_from_logline(params[n:n+2])
+            action_effect_from_logline(params[index:index+2])
         )
     source_actor.resources.update(
         *[int(x) for x in params[22:28]]

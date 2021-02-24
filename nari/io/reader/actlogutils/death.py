@@ -1,3 +1,4 @@
+"""Parses death information from act log line"""
 from datetime import datetime
 from typing import List
 
@@ -6,6 +7,7 @@ from nari.types.event import Event
 from nari.types.event.death import Death
 
 def death_from_logline(timestamp: datetime, params: List[str]) -> Event:
+    """Helper function to parse death information from act log line"""
     # param layout from act
     # 0-1 - 'target actor' (the thing that died)
     # 2-3 - 'source actor' (the thing that did the killing)
