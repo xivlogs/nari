@@ -4,8 +4,8 @@ with open('README.md', 'r') as f:
     long_description = f.read()
 
 dev_requirements = [
-    'mypy',
-    'pylint',
+    'mypy==0.812',
+    'pylint==2.6.2',
 ]
 
 docs_requirements = [
@@ -17,7 +17,7 @@ setup(
     version='0.0.1',
     author='Nonowazu',
     author_email='oowazu.nonowazu@gmail.com',
-    description='A small project to parse ACT network log files',
+    description='A small project to parse FFXIV network event data',
     long_description=long_description,
     long_description_content_type='text/markdown',
     python_requires='>=3.8',
