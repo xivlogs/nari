@@ -1,7 +1,7 @@
 # NARI
 
-![Test](https://github.com/nonowazu/nari/workflows/Test/badge.svg?branch=master)
-![Docs](https://github.com/nonowazu/nari/workflows/Docs/badge.svg?branch=master)
+![Test](https://github.com/xivlogs/nari/workflows/Test/badge.svg?branch=master)
+[![Docs](https://github.com/xivlogs/nari/workflows/Docs/badge.svg?branch=master)](https://xivlogs.github.io/nari)
 [![Discord](https://img.shields.io/discord/811093167290056735?color=7289da&label=Discord&logo=discord)](https://discord.gg/bdYYMSTxPg)
 
 The Nonowazu ACT Reference Implementation (NARI) is a Python library to parse Final Fantasy XIV game data from network
