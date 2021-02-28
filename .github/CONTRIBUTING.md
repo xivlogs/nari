@@ -10,7 +10,7 @@ problem is.
 
 ## Table of Contents
 
-- [I have a Question](#i-have-a-question)
+- [I just have a Question](#i-just-have-a-question)
 - [I have a Feature Idea](#i-have-a-feature-idea)
 - [New Issue](#new-issue)
 - [New Pull Request](#new-pull-request)
@@ -48,10 +48,8 @@ details are neatly summarised from the start.
 
 - Please use the search and see if there's a duplicate issue before posting. If something has been closed, it's
 probably for a reason.
-
 - For feature requests, **include a use case**. This makes it infinitely easier for us to understand what you're trying
  to achieve with the feature.
-
 - For bug reports, **include steps to reproduce the bug**. We can't discuss or address a bug we can't trigger.
 
 
@@ -61,9 +59,12 @@ Thank you for contributing! We're happy to read almost any pull request but it h
 issue to provide context. The PR description should summarise the change but the issue context helps us a lot to see
 the use case and implementation details at a high level.
 
+If you're writing or updating documentation, please keep in mind we use British rather than American English spelling.
+
+
 ### Cosmetic Changes
 
-While we love features and bug fixes, cosmetic changes provide little value and are a time sync to review. They're
+While we love features and bug fixes, cosmetic changes provide little value and are a time sink to review. They're
 generally used for padding contributions instead of improving code. As such, we will not accept cosmetic PRs. It's fine
 to fix these issues inside other PRs that touch the same code however.
 
