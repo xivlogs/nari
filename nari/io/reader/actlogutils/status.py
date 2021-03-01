@@ -5,8 +5,7 @@ from datetime import datetime
 from typing import List
 
 from nari.types.event.statuslist import StatusList
-from nari.types.event.statusapply import StatusApply
-from nari.types.event.statusremove import StatusRemove
+from nari.types.event.status import StatusApply, StatusRemove
 from nari.types.statuseffect import StatusEffect
 from nari.types.status import Status
 from nari.types.actor import Actor

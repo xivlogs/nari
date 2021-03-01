@@ -5,7 +5,7 @@ from typing import List
 from nari.types.event import Event
 from nari.types.actor import Actor
 
-class EffectResultEntry():
+class EffectResultEntry(): # pylint: disable=too-few-public-methods
     """Specific effect result data"""
     def __init__(self, *,
                  effect_index: int,
