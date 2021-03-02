@@ -23,3 +23,20 @@ class Ability(Event): # pylint: disable=too-few-public-methods
 
     def __repr__(self):
         return '<Ability>'
+
+class AoeAbility(Event): # pylint: disable=too-few-public-methods
+    """An ability that hits multiple people"""
+    def __init__(self, *,
+                 timestamp: datetime,
+                 action_effects: List[ActionEffect],
+                 source_actor: Actor,
+                 target_actor: Actor,
+                 ability: AbilityObj):
+        super().__init__(timestamp)
+        self.source_actor = source_actor
+        self.target_actor = target_actor
+        self.action_effects = action_effects
+        self.ability = ability
+
+    def __repr__(self):
+        return '<AoEAbility>'
