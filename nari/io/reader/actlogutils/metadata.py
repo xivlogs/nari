@@ -19,7 +19,7 @@ def config_from_logline(timestamp: datetime, params: List[str]) -> Event:
     # param layout from act
     # 0 a string with a bunch of configurations values separated by commas
     args = params[0].split(', ')
-    values = {k:v for k,v in [s.split(': ') for s in args]}
+    values = dict([s.split(': ') for s in args])
     return Config(timestamp=timestamp, values=values)
 
 # def effect_result_from_logline(timestamp: datetime, params: List[str]) -> Event:

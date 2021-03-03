@@ -9,12 +9,14 @@ from nari.types.ability import Ability as AbilityObj
 
 
 class StopCastType(IntEnum):
+    """Represents reasons a cast could be interrupted"""
     Interrupted = auto()
     Cancelled = auto()
     Unknown = auto()
 
     @classmethod
     def value_from_name(cls, name: str):
+        """Shorthand class method to get the string name from a matching int"""
         return cls.__members__.get(name, cls.Unknown)
 
 

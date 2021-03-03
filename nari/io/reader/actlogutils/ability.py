@@ -4,8 +4,7 @@ from typing import List
 from datetime import datetime
 
 from nari.types.actioneffect import ActionEffect
-from nari.types.event.ability import Ability
-from nari.types.event.aoeability import AoeAbility
+from nari.types.event.ability import Ability, AoeAbility
 from nari.types.actor import Actor
 from nari.types.ability import Ability as AbilityType
 from nari.types.event import Event

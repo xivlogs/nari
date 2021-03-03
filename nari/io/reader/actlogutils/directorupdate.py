@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import List, Optional
 
 from nari.types.event import Event
-from nari.types.event.barriertoggle import BarrierState, BarrierToggle
+from nari.types.event.instance import BarrierState, BarrierToggle
 from nari.types.event.instance import InstanceComplete, InstanceFade, InstanceInit, Fade
 from nari.types.director import DirectorUpdateCommand
 
