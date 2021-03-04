@@ -5,6 +5,3 @@ class EventNotFound(Exception):
 
 class InvalidChecksum(Exception):
     """Thrown when the checksum of an event doesn't match"""
-
-class JobGaugeNotFound(Exception):
-    """Thrown when gauge data is not found for job"""
