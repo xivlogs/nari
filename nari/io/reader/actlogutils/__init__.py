@@ -18,6 +18,7 @@ from nari.io.reader.actlogutils.actorspawn import actor_spawn_from_logline
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[datetime, List[str]], Optional[Event]]
 
+# pylint: disable=invalid-name
 class ActEventType(IntEnum):
     """List of Event types from the ACT network log"""
     logline = 0
@@ -59,6 +60,7 @@ class ActEventType(IntEnum):
     def has_type(cls, name: str) -> bool:
         """Returns true if the name is in the enum"""
         return name in cls.__members__.keys()
+# pylint: enable=invalid-name
 
 def date_from_act_timestamp(datestr: str) -> datetime:
     """Parse timestamp from act log into a python datetime object

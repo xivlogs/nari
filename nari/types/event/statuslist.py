@@ -5,7 +5,7 @@ from typing import List
 from nari.types.event import Event
 from nari.types.classjoblevel import ClassJobLevel
 from nari.types.actor import Actor
-from nari.types.statuseffect import StatusEffect
+from nari.types.status import StatusEffect
 
 
 class StatusList(Event): # pylint: disable=too-few-public-methods

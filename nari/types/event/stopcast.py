@@ -8,6 +8,7 @@ from nari.types.actor import Actor
 from nari.types.ability import Ability as AbilityObj
 
 
+# pylint: disable=invalid-name
 class StopCastType(IntEnum):
     """Represents reasons a cast could be interrupted"""
     Interrupted = auto()
@@ -18,6 +19,7 @@ class StopCastType(IntEnum):
     def value_from_name(cls, name: str):
         """Shorthand class method to get the string name from a matching int"""
         return cls.__members__.get(name, cls.Unknown)
+# pylint: enable=invalid-name
 
 
 class StopCast(Event): # pylint: disable=too-few-public-methods

@@ -5,14 +5,18 @@ from enum import Enum, auto
 from nari.types.event import Event
 
 
+# pylint: disable=invalid-name
 class Fade(Enum):
+    """Enums for fade in/out"""
     In = auto()
     Out = auto()
 
 
 class BarrierState(Enum):
+    """Enums for barrier state"""
     down = auto()
     up = auto()
+# pylint: enable=invalid-name
 
 
 class InstanceComplete(Event): # pylint: disable=too-few-public-methods
