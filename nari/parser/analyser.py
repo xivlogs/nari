@@ -17,10 +17,12 @@ allow_all_events = lambda x: True
 # Hook functions can return False to stop the analyzer entirely
 STOP_PROCESSING = False
 
+# pylint: disable=invalid-name
+# this might be a case where an all-uppercase enum name is important tho
 class AnalyserTopic(IntEnum):
     """List of topics"""
     stream_end = auto()
-
+# pylint: enable=invalid-name
 
 class Analyser():
     """Analyser base class"""

@@ -7,7 +7,7 @@ the barrier.
 
 from enum import IntEnum
 
-
+# pylint: disable=invalid-name
 class DirectorUpdateType(IntEnum):
     """Relates to the type of content that's being 'directed'"""
     BattleLeve = 0x8001
@@ -188,3 +188,4 @@ class DirectorUpdateCommand(IntEnum):
         if value in cls.__members__.values():
             return cls(value).name
         return 'Unknown'
+# pylint: enable=invalid-name

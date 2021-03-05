@@ -6,8 +6,7 @@ from typing import List
 
 from nari.types.event.statuslist import StatusList
 from nari.types.event.status import StatusApply, StatusRemove
-from nari.types.statuseffect import StatusEffect
-from nari.types.status import Status
+from nari.types.status import Status, StatusEffect
 from nari.types.actor import Actor
 from nari.types.event import Event
 from nari.types.classjoblevel import ClassJobLevel

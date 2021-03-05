@@ -3,6 +3,7 @@
 from enum import IntEnum, IntFlag
 from typing import List
 
+# pylint: disable=invalid-name
 class EffectType(IntEnum):
     """The different effect types an ability can have"""
     Nothing = 0
@@ -49,6 +50,7 @@ class HitSeverity(IntFlag):
     CritHeal = 1
     DirectHitDamage = 2
     CritDirectHitDamage = 3
+# pylint: enable=invalid-name
 
 
 class ActionEffect(): # pylint: disable=too-few-public-methods
@@ -69,6 +71,7 @@ class ActionEffect(): # pylint: disable=too-few-public-methods
 
     @property
     def damage(self):
+        """Property that gives the damage of an ActionEffect"""
         # Total Damage = 65535 * Multiplier * (Flags & 0x40) + Value
         is_extended = (self.flags & EffectResultFlag.ExtendedValue) >> 6
         return 65535 * self.multiplier * is_extended + self.value
