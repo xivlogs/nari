@@ -17,9 +17,6 @@ class Gauge(Event):  # pylint: disable=too-few-public-methods
         self.actor_id = actor_id
         self.fields = fields
 
-    def __eq__(self, other):
-        return all((self.timestamp == other.timestamp, self.actor_id == other.actor_id, self.fields == other.fields))
-
     def __repr__(self):
         return '<Gauge>'
 

@@ -82,7 +82,7 @@ ID_MAPPINGS: Dict[int, ActEventFn] = {
     ActEventType.addcombatant: actor_spawn_from_logline,
     ActEventType.playerstats: noop, # TODO:
     ActEventType.logline: noop,
-    ActEventType.gauge: gauge_from_logline(),
+    ActEventType.gauge: gauge_from_logline,
     ActEventType.networkstatuseffect: statuslist_from_logline,
     ActEventType.networkbuff: statusapply_from_logline,
     ActEventType.limitbreak: limitbreak_from_logline,

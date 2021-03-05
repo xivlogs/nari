@@ -1,13 +1,17 @@
 from datetime import datetime
 from typing import List
+
 from nari.types.event.gauge import Gauge
 
 
 def gauge_from_logline(timestamp: datetime, params: List[str]) -> Gauge:
     """Parses gauge event out from act log line"""
-    actor_id = int(params[0], 16)
+    # Param layout from ACT
+    # 0 - 'actor id' which is the player who is logging.
+    # 1-4 - Most gauge data is stored in 1-3. Gauge data and data type is dependent on job so they are left as bytes for
+    #       destructuring later. I have no idea what's in 4 and could not find documentation for it.
 
-    # Unpacks the params into a tuple of four bytes type to be used later, since each job has data stored differently
+    actor_id = int(params[0], 16)
     gauge_data = tuple((string_to_bytes(param) for param in params[1:5]))
 
     # TODO: add exceptions for IndexError
