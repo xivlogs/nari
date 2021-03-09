@@ -1,3 +1,4 @@
+""""Parses gauge events from act log line"""
 from datetime import datetime
 from typing import List
 

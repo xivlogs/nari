@@ -1,8 +1,8 @@
+"""Class that represents gauge events"""
 from datetime import datetime
 from typing import Tuple
 
 from nari.types.event import Event
-from nari.types.actor import Actor
 
 
 class Gauge(Event):  # pylint: disable=too-few-public-methods
