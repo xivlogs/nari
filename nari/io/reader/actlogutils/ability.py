@@ -13,7 +13,7 @@ def action_effect_from_logline(params: List[str]) -> ActionEffect:
     """Takes the eight bytes from an act log line and returns ActionEffect data"""
     if len(params) != 2:
         raise Exception('Yell at nono to come up with a specific exception just for you')
-    hexdata = ''.join([x.rjust(8, '0') for x in params])
+    hexdata = ''.join([x.zfill(8) for x in params])
     intdata = int(hexdata, 16)
     parsed_params = unpack('>BBBBHBB', intdata.to_bytes(8, 'big'))
     param0, param1, severity, effect_type, value, flags, multiplier = parsed_params

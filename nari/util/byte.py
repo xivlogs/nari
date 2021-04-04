@@ -4,7 +4,7 @@
 def hexstr_to_int(string: str, pad: bool = True) -> int:
     """Converts a hexstring to a byte; items less than 4 characters 'wide' are padded"""
     if pad:
-        return int(string.rjust(4, '0'), 16)
+        return int(string.zfill(4), 16)
     return int(string, 16)
 
 

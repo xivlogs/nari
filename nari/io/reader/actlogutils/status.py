@@ -28,14 +28,14 @@ def status_effect_from_logline(param0, param1, param2):
     # 000A0168 is the status id (last 4 bytes), and status params (first 4 bytes)
     # 41F00000 is the duration as a float (30s, in this case)
     # E0000000 is the source actor id (E0000000 = no source actor)
-    param0_int = int(param0.rjust(8, '0'), 16)
+    param0_int = int(param0.zfill(8), 16)
     status_params, status_id = unpack(
         '>HH',
         param0_int.to_bytes(4, 'big')
     )
     duration = unpack(
         '>f',
-        int(param1.rjust(8, '0'), 16).to_bytes(4, 'big'),
+        int(param1.zfill(8), 16).to_bytes(4, 'big'),
     )[0]
     source_actor_id = int(param2, 16)
     return StatusEffect(
