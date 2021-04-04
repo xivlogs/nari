@@ -48,6 +48,6 @@ def config_from_logline(timestamp: datetime, params: List[str]) -> Event:
     # target_actor.position.update(
     #     *[float(x) for x in params[9:13]]
     # )
-    # cji_hexdata = int(params[13].rjust(4, '0'), 16)
+    # cji_hexdata = int(params[13].zfill(4), 16)
     # class_job_id, _ = unpack('>BB', cji_hexdata.to_bytes(2, 'big'))
     # in_use_effects_amount = int(params[16])
