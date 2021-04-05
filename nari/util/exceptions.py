@@ -8,3 +8,6 @@ class InvalidChecksum(Exception):
 
 class JobGaugeNotFound(Exception):
     """Thrown when gauge data is not found for job"""
+
+class ActLineReadError(Exception):
+    """Thrown when error reading a line from ACT log"""
