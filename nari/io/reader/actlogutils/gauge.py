@@ -18,5 +18,5 @@ def gauge_from_logline(timestamp: datetime, params: List[str]) -> Gauge:
         gauge_data = tuple((hexstr_to_bytes(param) for param in params[1:]))
         return Gauge(timestamp=timestamp, actor_id=actor_id, fields=gauge_data)
 
-    except IndexError as e:
-        raise ActLineReadError('Error when splitting Gauge ACT Line') from e
+    except IndexError as index_error:
+        raise ActLineReadError('Error when splitting Gauge ACT Line') from index_error
