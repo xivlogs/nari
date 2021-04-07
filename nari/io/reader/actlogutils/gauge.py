@@ -15,7 +15,7 @@ def gauge_from_logline(timestamp: datetime, params: List[str]) -> Gauge:
 
     try:
         actor_id = int(params[0], 16)
-        gauge_data = tuple((hexstr_to_bytes(param) for param in params[1:]))
+        gauge_data = tuple((hexstr_to_bytes(param) for param in params[1:5]))
         return Gauge(timestamp=timestamp, actor_id=actor_id, fields=gauge_data)
 
     except IndexError as index_error:
