@@ -19,4 +19,3 @@ class Gauge(Event):  # pylint: disable=too-few-public-methods
 
     def __repr__(self):
         return '<Gauge>'
-
