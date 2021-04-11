@@ -15,6 +15,7 @@ from nari.io.reader.actlogutils.directorupdate import director_events_from_logli
 from nari.io.reader.actlogutils.updatehp import updatehp_from_logline
 from nari.io.reader.actlogutils.actorspawn import actor_spawn_from_logline
 from nari.io.reader.actlogutils.gauge import gauge_from_logline
+from nari.io.reader.actlogutils.playerstats import playerstats_from_logline
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[datetime, List[str]], Optional[Event]]
@@ -82,7 +83,7 @@ ID_MAPPINGS: Dict[int, ActEventFn] = {
     ActEventType.debug: noop,
     ActEventType.hook: noop,
     ActEventType.addcombatant: actor_spawn_from_logline,
-    ActEventType.playerstats: noop, # TODO:
+    ActEventType.playerstats: playerstats_from_logline,
     ActEventType.logline: noop,
     ActEventType.gauge: gauge_from_logline,
     ActEventType.networkstatuseffect: statuslist_from_logline,
