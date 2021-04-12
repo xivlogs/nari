@@ -31,9 +31,8 @@ def playerstats_from_logline(timestamp: datetime, params: List[str]) -> PlayerSt
 
     stats_definitions = ("JOB", "STR", "DEX", "VIT", "INT", "MND", "PIE", "ATTACK POWER", "DIRECT HIT", "CRITICAL HIT",
                          "ATTACK MAGIC POTENCY", "HEAL MAGIC POTENCY", "DETERMINATION", "SKILL SPEED", "SPELL SPEED",
-                         "delete",
                          "TENACITY")
-    param_ints = (int(param) for param in params)
+    param_ints = (int(param) for param in params if param != "0")
     player_stats = dict(zip(stats_definitions, param_ints))
 
     # Malformed line check
