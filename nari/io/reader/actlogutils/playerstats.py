@@ -39,10 +39,4 @@ def playerstats_from_logline(timestamp: datetime, params: List[str]) -> PlayerSt
     if len(player_stats) != 17:
         raise ActLineReadError("Params are unexpectedly short")
 
-    # clear the blank field
-    try:
-        del player_stats["delete"]
-    except KeyError as key_error:
-        raise ActLineReadError("Missing delete field") from key_error
-
     return PlayerStats(timestamp, player_stats)
