@@ -2,6 +2,8 @@
 from datetime import datetime
 from typing import List
 
+from nari.types.job import Job
+from nari.types.stats import Stats
 from nari.types.event.playerstats import PlayerStats
 from nari.util.exceptions import ActLineReadError
 
@@ -29,14 +31,12 @@ def playerstats_from_logline(timestamp: datetime, params: List[str]) -> PlayerSt
     16: TENACITY
     """
 
-    stats_definitions = ("JOB", "STR", "DEX", "VIT", "INT", "MND", "PIE", "ATTACK POWER", "DIRECT HIT", "CRITICAL HIT",
-                         "ATTACK MAGIC POTENCY", "HEAL MAGIC POTENCY", "DETERMINATION", "SKILL SPEED", "SPELL SPEED",
-                         "TENACITY")
-    param_ints = (int(param) for param in params if param != "0")
-    player_stats = dict(zip(stats_definitions, param_ints))
-
+    param_ints = [int(param) for param in params if param != "0"]
     # Malformed line check
-    if len(player_stats) != 17:
+    if len(param_ints) != 16:
         raise ActLineReadError("Params are unexpectedly short")
 
-    return PlayerStats(timestamp, player_stats)
+    job = Job(param_ints.pop(0))
+    stats = [Stats(param) for param in param_ints]
+
+    return PlayerStats(timestamp, job, stats)
