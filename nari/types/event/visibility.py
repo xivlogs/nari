@@ -5,8 +5,8 @@ from enum import Enum, auto
 from nari.types.event import Event
 from nari.types.actor import Actor
 
-
-class VisibilityType(Enum): # pylint: disable=invalid-name
+# pylint: disable=invalid-name
+class VisibilityType(Enum):
     """Enums for concepts that have visibility"""
     Nameplate = auto()
 
