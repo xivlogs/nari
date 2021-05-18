@@ -1,6 +1,6 @@
 """Parses playerstats events from ACT log line"""
 from datetime import datetime
-from typing import List
+from typing import List, Dict
 
 from nari.types.job import Job
 from nari.types.stats import Stats
@@ -31,12 +31,35 @@ def playerstats_from_logline(timestamp: datetime, params: List[str]) -> PlayerSt
     16: TENACITY
     """
 
-    param_ints = [int(param) for param in params if param != "0"]
+    # param to stat dict
+    param_to_stat = {
+        0: 0,
+        1: Stats.STR,
+        2: Stats.DEX,
+        3: Stats.VIT,
+        4: Stats.INT,
+        5: Stats.MND,
+        6: Stats.PIE,
+        7: Stats.ATK,
+        8: Stats.DH,
+        9: Stats.CRIT,
+        10: Stats.MATK,
+        11: Stats.HATK,
+        12: Stats.DET,
+        13: Stats.SKS,
+        14: Stats.SPS,
+        15: Stats.TEN,
+    }
+
+    # to ensure the correct number of params are extracted
+    param_count = 17
+
+    param_ints = [int(param) for param in params[0:param_count] if param != "0"]
     # Malformed line check
     if len(param_ints) != 16:
         raise ActLineReadError("Params are unexpectedly short")
 
-    job = Job(param_ints.pop(0))
-    stats = [Stats(param) for param in param_ints]
+    job = Job(param_ints[0])
+    stats: Dict[Stats, int] = {param_to_stat[i]: param for i, param in enumerate(param_ints)}
 
     return PlayerStats(timestamp, job, stats)
