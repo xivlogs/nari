@@ -40,7 +40,7 @@ def playerstats_from_logline(timestamp: datetime, params: List[str]) -> PlayerSt
     if len(param_ints) != 16:
         raise ActLineReadError("Params are unexpectedly short")
 
-    job = Job(param_ints[0])
+    job = Job(param_ints.pop(0))
     stats: Dict[Stats, int] = dict(zip(param_order, param_ints))
 
     return PlayerStats(timestamp, job, stats)
