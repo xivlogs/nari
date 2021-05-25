@@ -13,6 +13,7 @@ class PickleWriter(Writer):
         self.handle = open(filename, 'wb') # pylint: disable=consider-using-with
 
     def __del__(self):
+        """Handles closing the file when the object undergoes garbage collection"""
         self.handle.close()
 
     def write_next(self, event: Event):

@@ -15,7 +15,7 @@ class ActLogReader(Reader):
         # network events, and one for other types of events. Without breaking the code too badly,
         # might be good to identify if an ID is based off network or 'other' (memory events only?)
         # and cycle through the correct indexes
-        # TODO:
+        # TODO: set up network_index and memory_index
         self.index = 1
         self.raise_on_checksum_failure = raise_on_checksum_failure
         self.raise_on_invalid_id = raise_on_invalid_id
