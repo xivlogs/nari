@@ -10,7 +10,7 @@ class ActLogReader(Reader):
     """Implementation of the Reader class for parsing ACT network logs"""
     def __init__(self, actlog_path, *, raise_on_checksum_failure=False, raise_on_invalid_id=False):
         # might need a helper function, but eh.
-        self.handle = open(actlog_path, 'r') # pylint: disable=consider-using-with
+        self.handle = open(actlog_path, 'r')
         # Let's talk about this. ACT network logs seem to use two different indexes – one for
         # network events, and one for other types of events. Without breaking the code too badly,
         # might be good to identify if an ID is based off network or 'other' (memory events only?)

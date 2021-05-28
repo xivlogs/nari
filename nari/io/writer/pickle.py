@@ -10,7 +10,7 @@ class PickleWriter(Writer):
     """Writes a stream of events into a binary file"""
     def __init__(self, stream: Iterator[Event], filename: str):
         super().__init__(stream)
-        self.handle = open(filename, 'wb') # pylint: disable=consider-using-with
+        self.handle = open(filename, 'wb')
 
     def __del__(self):
         """Handles closing the file when the object undergoes garbage collection"""
