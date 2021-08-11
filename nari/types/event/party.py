@@ -11,7 +11,7 @@ class PartyList(Event): # pylint: disable=too-few-public-methods
                  timestamp: datetime,
                  ids: List[int],
                  other_ids: List[int] = [],
-    ):
+                ):
         super().__init__(timestamp)
         self.ids = ids
         self.other_ids = other_ids

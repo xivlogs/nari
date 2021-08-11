@@ -1,5 +1,5 @@
 """"Parses partylist events from act log line"""
-from datetime import datetime, time
+from datetime import datetime
 from typing import List
 
 from nari.types.event import Event
@@ -17,8 +17,8 @@ def partylist_from_logline(timestamp: datetime, params: List[str]) -> Event:
     amount = int(params[0])
     if amount == 0:
         return # TODO: perhaps send a 'PartyDisband' event?
-    else:
-        # amount is > 1; grab local party first
-        ids = [int(i) for i in params[1:amount+1]]
-        # TODO: parse other_ids
-        return PartyList(timestamp=timestamp, ids=ids)
+
+    # amount is > 1; grab local party first
+    ids = [int(i) for i in params[1:amount+1]]
+    other_ids = [int(i) for i in params[amount+1:]]
+    return PartyList(timestamp=timestamp, ids=ids, other_ids=other_ids)
