@@ -19,6 +19,6 @@ def partylist_from_logline(timestamp: datetime, params: List[str]) -> Event:
         return # TODO: perhaps send a 'PartyDisband' event?
 
     # amount is > 1; grab local party first
-    ids = [int(i) for i in params[1:amount+1]]
-    other_ids = [int(i) for i in params[amount+1:]]
+    ids = [int(i, 16) for i in params[1:amount+1]]
+    other_ids = [int(i, 16) for i in params[amount+1:]]
     return PartyList(timestamp=timestamp, ids=ids, other_ids=other_ids)
