@@ -17,6 +17,7 @@ from nari.io.reader.actlogutils.actorspawn import actor_spawn_from_logline
 from nari.io.reader.actlogutils.gauge import gauge_from_logline
 from nari.io.reader.actlogutils.playerstats import playerstats_from_logline
 from nari.io.reader.actlogutils.visibility import visibility_from_logline
+from nari.io.reader.actlogutils.party import partylist_from_logline
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[datetime, List[str]], Optional[Event]]
@@ -90,7 +91,7 @@ ID_MAPPINGS: Dict[int, ActEventFn] = {
     ActEventType.networkstatuseffect: statuslist_from_logline,
     ActEventType.networkbuff: statusapply_from_logline,
     ActEventType.limitbreak: limitbreak_from_logline,
-    ActEventType.partylist: noop, # TODO: come up with event name, docs, etc. Booli Ay 40x
+    ActEventType.partylist: partylist_from_logline,
     ActEventType.networknametoggle: visibility_from_logline,
     ActEventType.networkupdatehp: updatehp_from_logline,
     ActEventType.directorupdate: director_events_from_logline,
