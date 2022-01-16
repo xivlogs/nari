@@ -18,6 +18,7 @@ from nari.io.reader.actlogutils.gauge import gauge_from_logline
 from nari.io.reader.actlogutils.playerstats import playerstats_from_logline
 from nari.io.reader.actlogutils.visibility import visibility_from_logline
 from nari.io.reader.actlogutils.party import partylist_from_logline
+from nari.io.reader.actlogutils.effectresult import effectresult_from_logline
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[datetime, List[str]], Optional[Event]]
@@ -96,5 +97,5 @@ ID_MAPPINGS: Dict[int, ActEventFn] = {
     ActEventType.networkupdatehp: updatehp_from_logline,
     ActEventType.directorupdate: director_events_from_logline,
     ActEventType.networkability: ability_from_logline,
-    ActEventType.networkeffectresult: noop, # TODO
+    ActEventType.networkeffectresult: effectresult_from_logline,
 }
