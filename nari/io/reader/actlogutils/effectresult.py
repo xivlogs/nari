@@ -61,4 +61,3 @@ def effectresult_from_logline(timestamp: datetime, params: List[str]) -> Event:
         shield_percent=shield_percent,
         effect_results=effect_result_entries,
     )
-
