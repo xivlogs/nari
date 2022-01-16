@@ -45,7 +45,6 @@ def effectresult_from_logline(timestamp: datetime, params: List[str]) -> Event:
         effect_hexdata = int(params[i].zfill(8), 16)
         effect_index, _, effect_id = unpack('>BBH', effect_hexdata.to_bytes(4, 'big'))
         effect_duration = unpack('<f', int(params[i+2].zfill(8), 16).to_bytes(4, 'little'))
-        #effect_duration = float(params[i+2].zfill(4), 16)
         source_actor_id = int(params[i+3].zfill(4), 16)
         effect_result_entries.append(
             EffectResultEntry(
