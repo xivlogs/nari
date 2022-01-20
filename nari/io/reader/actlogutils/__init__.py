@@ -97,5 +97,6 @@ ID_MAPPINGS: Dict[int, ActEventFn] = {
     ActEventType.networkupdatehp: updatehp_from_logline,
     ActEventType.directorupdate: director_events_from_logline,
     ActEventType.networkability: ability_from_logline,
+    ActEventType.networkaoeability: aoeability_from_logline,
     ActEventType.networkeffectresult: effectresult_from_logline,
 }

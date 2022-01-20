@@ -65,13 +65,15 @@ def ability_from_logline(timestamp: datetime, params: List[str]) -> Event:
         )
     except ValueError:
         pass
+    sequence_id = int(params[42], 16)
 
     return Ability(
         timestamp=timestamp,
         action_effects=action_effects,
         source_actor=source_actor,
         target_actor=target_actor,
-        ability=ability
+        ability=ability,
+        sequence_id=sequence_id,
     )
 
 def aoeability_from_logline(timestamp: datetime, params: List[str]) -> Event:
@@ -98,10 +100,12 @@ def aoeability_from_logline(timestamp: datetime, params: List[str]) -> Event:
     target_actor.position.update(
         *[float(x) for x in params[38:42]]
     )
+    sequence_id = int(params[42], 16)
     return AoeAbility(
         timestamp=timestamp,
         action_effects=action_effects,
         source_actor=source_actor,
         target_actor=target_actor,
-        ability=ability
+        ability=ability,
+        sequence_id=sequence_id,
     )
