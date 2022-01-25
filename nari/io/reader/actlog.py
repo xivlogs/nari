@@ -15,8 +15,8 @@ class ActLogReader(Reader):
         # network events, and one for other types of events. Without breaking the code too badly,
         # might be good to identify if an ID is based off network or 'other' (memory events only?)
         # and cycle through the correct indexes
-        # TODO: set up network_index and memory_index
-        self.index = 1
+        self.network_index = 1
+        self.memory_index = 1
         self.raise_on_checksum_failure = raise_on_checksum_failure
         self.raise_on_invalid_id = raise_on_invalid_id
 
@@ -28,6 +28,7 @@ class ActLogReader(Reader):
         """Handles an act-specific line"""
         args = line.strip().split('|')
         id_ = int(args[0])
+        # TODO: increment network_index or memory_index here, so we can do a checksum check here
         datestr = args[1]
         timestamp = date_from_act_timestamp(datestr)
 
@@ -35,14 +36,11 @@ class ActLogReader(Reader):
 
         if id_ in ID_MAPPINGS:
             event = ID_MAPPINGS[id_](timestamp, params=args[2:-1])
-            # if self.raise_on_checksum_failure and not event.valid_checksum():
-            #     raise InvalidChecksum(f'Checksum is invalid for event: {line} (index {self.index})')
         elif self.raise_on_invalid_id:
             raise EventNotFound(f'No event found for id {id_}')
         else:
             event = Event(timestamp)
 
-        self.index += 1
         return event
 
 
