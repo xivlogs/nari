@@ -47,4 +47,4 @@ for action_event in action_events:
 
 ## Contributing
 
-Anyone can contribute, so long as contributions are keeping with the goals of the project. PRs are welcome, but make sure your code lints (with `pylint`) and has 3.7-style annotations. To view the docs locally or lint the project, run `pip install .[docs]` or `pip install .[dev]` and run either `pdoc --html -f -o docs nari` or `pylint nari`
+Anyone can contribute, so long as contributions are keeping with the goals of the project. PRs are welcome, but make sure your code lints (with `pylint`) and has appropriate type annotations. To view the docs locally or lint the project, run `pip install .[docs]` or `pip install .[dev]` and run either `pdoc --html -f -o docs nari` or `pylint nari`
