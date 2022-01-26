@@ -20,7 +20,7 @@ setup(
     description='A small project to parse ACT network log files',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    python_requires='>=3.8',
+    python_requires='>=3.10',
     packages=find_packages(),
     entry_points={
         'console_scripts': [
