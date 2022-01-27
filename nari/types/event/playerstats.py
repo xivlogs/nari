@@ -7,7 +7,7 @@ from nari.types.job import Job
 from nari.types.stats import Stats
 
 
-class PlayerStats(Event):  # pylint: disable=too-few-public-methods
+class PlayerStats(Event):  # pylint: disable=too-few-public-methods,too-many-instance-attributes
     """Represents the event when the player's stats change. Also happens when
     zone/instance changes.
     """
