@@ -8,7 +8,7 @@ from nari.types.event.instance import BarrierState, BarrierToggle
 from nari.types.event.instance import InstanceComplete, InstanceFade, InstanceInit, Fade
 from nari.types.director import DirectorUpdateCommand
 
-def director_events_from_logline(timestamp: datetime, params: List[str]) -> Event:
+def director_events_from_logline(timestamp: datetime, params: List[str]) -> Optional[Event]:
     """Helper function to parse director events from act log lines"""
     # Param layout from act:
     # 0 - first 2 bytes are from category, second 2 bytes is instance_id

@@ -24,7 +24,7 @@ class ActLogReader(Reader):
         """Handles closing the file when the object undergoes garbage collection"""
         self.handle.close()
 
-    def handle_line(self, line: str) -> Event:
+    def handle_line(self, line: str) -> Optional[Event]:
         """Handles an act-specific line"""
         args = line.strip().split('|')
         id_ = int(args[0])
@@ -35,7 +35,7 @@ class ActLogReader(Reader):
         event: Optional[Event] = None
 
         if id_ in ID_MAPPINGS:
-            event = ID_MAPPINGS[id_](timestamp, params=args[2:-1])
+            event = ID_MAPPINGS[id_](timestamp, args[2:-1])
         elif self.raise_on_invalid_id:
             raise EventNotFound(f'No event found for id {id_}')
         else:
