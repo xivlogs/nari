@@ -2,21 +2,21 @@
 from typing import Optional
 
 from nari.io.reader import Reader
-from nari.io.reader.actlogutils import ID_MAPPINGS, date_from_act_timestamp
+from nari.io.reader.actlogutils import ID_MAPPINGS, ActEventType, date_from_act_timestamp, validate_checksum
 from nari.types.event import Event
 from nari.util.exceptions import EventNotFound
+
+
+class InvalidActChecksum(Exception):
+    """Raised when a checksum is invalid"""
+
 
 class ActLogReader(Reader):
     """Implementation of the Reader class for parsing ACT network logs"""
     def __init__(self, actlog_path, *, raise_on_checksum_failure=False, raise_on_invalid_id=False):
         # might need a helper function, but eh.
         self.handle = open(actlog_path, 'r')
-        # Let's talk about this. ACT network logs seem to use two different indexes – one for
-        # network events, and one for other types of events. Without breaking the code too badly,
-        # might be good to identify if an ID is based off network or 'other' (memory events only?)
-        # and cycle through the correct indexes
-        self.network_index = 1
-        self.memory_index = 1
+        self.index = 1
         self.raise_on_checksum_failure = raise_on_checksum_failure
         self.raise_on_invalid_id = raise_on_invalid_id
 
@@ -28,7 +28,19 @@ class ActLogReader(Reader):
         """Handles an act-specific line"""
         args = line.strip().split('|')
         id_ = int(args[0])
-        # TODO: increment network_index or memory_index here, so we can do a checksum check here
+
+        if self.raise_on_invalid_id and id_ not in ID_MAPPINGS:
+            raise EventNotFound(f"ACT id: {id_}")
+
+        if self.raise_on_checksum_failure:
+            if id_ in (ActEventType.zonechange, ActEventType.version):
+                self.index = 1
+
+            if validate_checksum(line.strip(), self.index) is False:
+                raise InvalidActChecksum(f'Invalid checksum for line {line.strip()} with index {self.index})')
+
+            self.index += 1
+
         datestr = args[1]
         timestamp = date_from_act_timestamp(datestr)
 
@@ -36,8 +48,6 @@ class ActLogReader(Reader):
 
         if id_ in ID_MAPPINGS:
             event = ID_MAPPINGS[id_](timestamp, args[2:-1])
-        elif self.raise_on_invalid_id:
-            raise EventNotFound(f'No event found for id {id_}')
         else:
             event = Event(timestamp)
 
