@@ -5,10 +5,7 @@ from nari.io.reader import Reader
 from nari.io.reader.actlogutils import ID_MAPPINGS, ActEventType, date_from_act_timestamp, validate_checksum
 from nari.types.event import Event
 from nari.util.exceptions import EventNotFound
-
-
-class InvalidActChecksum(Exception):
-    """Raised when a checksum is invalid"""
+from nari.io.reader.actlogutils.exceptions import InvalidActChecksum
 
 
 class ActLogReader(Reader):
