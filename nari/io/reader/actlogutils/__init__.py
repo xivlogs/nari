@@ -1,5 +1,6 @@
 """Just a bunch of helper methods to spit out events from the act log"""
 from datetime import datetime
+from hashlib import md5
 from typing import Callable, Dict, List, Optional
 from enum import IntEnum
 
@@ -41,6 +42,7 @@ class ActEventType(IntEnum):
     networkdeath = 25
     networkbuff = 26
     networktargetheadmarker = 27
+    networkwaymark = 28
     networktargetmarker = 29
     networkbuffremove = 30
     gauge = 31
@@ -73,6 +75,17 @@ def date_from_act_timestamp(datestr: str) -> datetime:
     """
     return datetime.strptime(f'{datestr[:26]}{datestr[-6:]}', DEFAULT_DATE_FORMAT)
 
+def validate_checksum(line: str, index: int) -> bool:
+    """Validates an act log line
+    Given some line 1|foo|bar|baz|a823425f532c540667195f641dd3649b, and an index of 1, then the md5sum of
+    1|foo|bar|baz|1 (where 1 is the index) should be a823425f532c540667195f641dd3649b (which is the checksum value)
+    """
+    parts = line.split('|')
+    check_hash = parts[-1].encode('utf-8')
+    to_hash = f'{"|".join(parts[:-1])}|{index}'.encode('utf-8')
+
+    return md5(to_hash).hexdigest().encode('utf-8') == check_hash
+
 # pylint: disable=unused-argument
 def noop(timestamp: datetime, params: List[str]) -> Event:
     """Straight-up ignores things"""
@@ -86,17 +99,26 @@ ID_MAPPINGS: Dict[int, ActEventFn] = {
     ActEventType.debug: noop,
     ActEventType.hook: noop,
     ActEventType.addcombatant: actor_spawn_from_logline,
+    ActEventType.removecombatant: noop, # TODO: ???
     ActEventType.playerstats: playerstats_from_logline,
     ActEventType.logline: noop,
     ActEventType.gauge: gauge_from_logline,
     ActEventType.networkstatuseffect: statuslist_from_logline,
+    ActEventType.networkwaymark: noop, # TODO: ?
+    ActEventType.networkdeath: noop, # TODO: how the mighty have forgotten
     ActEventType.networkbuff: statusapply_from_logline,
+    ActEventType.networkbuffremove: noop, # TODO: quarry
     ActEventType.limitbreak: limitbreak_from_logline,
     ActEventType.partylist: partylist_from_logline,
     ActEventType.networknametoggle: visibility_from_logline,
     ActEventType.networkupdatehp: updatehp_from_logline,
     ActEventType.directorupdate: director_events_from_logline,
+    ActEventType.networkbegincast: noop, # TODO: quarry myself
+    ActEventType.networkcancelability: noop, # TODO: how did I miss all of these?!
     ActEventType.networkability: ability_from_logline,
     ActEventType.networkaoeability: aoeability_from_logline,
+    ActEventType.networkdot: noop, # TODO: make less trouble
     ActEventType.networkeffectresult: effectresult_from_logline,
+    ActEventType.networktargetheadmarker: noop, # TODO: ):
+    ActEventType.networktether: noop, # TODO: ?
 }
