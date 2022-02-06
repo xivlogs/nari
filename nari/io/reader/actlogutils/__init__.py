@@ -20,6 +20,7 @@ from nari.io.reader.actlogutils.playerstats import playerstats_from_logline
 from nari.io.reader.actlogutils.visibility import visibility_from_logline
 from nari.io.reader.actlogutils.party import partylist_from_logline
 from nari.io.reader.actlogutils.effectresult import effectresult_from_logline
+from nari.io.reader.actlogutils.cast import startcast_from_logline, stopcast_from_logline
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[datetime, List[str]], Optional[Event]]
@@ -113,8 +114,8 @@ ID_MAPPINGS: Dict[int, ActEventFn] = {
     ActEventType.networknametoggle: visibility_from_logline,
     ActEventType.networkupdatehp: updatehp_from_logline,
     ActEventType.directorupdate: director_events_from_logline,
-    ActEventType.networkbegincast: noop, # TODO: quarry myself
-    ActEventType.networkcancelability: noop, # TODO: how did I miss all of these?!
+    ActEventType.networkbegincast: startcast_from_logline,
+    ActEventType.networkcancelability: stopcast_from_logline, # TODO: how did I miss all of these?!
     ActEventType.networkability: ability_from_logline,
     ActEventType.networkaoeability: aoeability_from_logline,
     ActEventType.networkdot: noop, # TODO: make less trouble
