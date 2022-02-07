@@ -9,14 +9,23 @@ from nari.types.event.instance import InstanceComplete, InstanceFade, InstanceIn
 from nari.types.director import DirectorUpdateCommand
 
 def director_events_from_logline(timestamp: datetime, params: List[str]) -> Optional[Event]:
-    """Helper function to parse director events from act log lines"""
-    # Param layout from act:
-    # 0 - first 2 bytes are from category, second 2 bytes is instance_id
-    # 1 - director 'command'
-    # 2-N - depends on the command
-    #
-    # Basically, we're going to return one of BarrierToggle, InstanceComplete,
-    # InstanceVote, InstanceFade, or InstanceInit from this event
+    """Parses a director event from an act log line
+
+    ACT Event ID (decimal): 33
+
+    ## Param layout from act
+
+    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+
+    This event will be one of `BarrierToggle`, `InstanceComplete`, `InstanceVote`, `InstanceFade`, or `InstanceInit`.
+
+    |Index|Type|Description|
+    |----:|----|:----------|
+    |0    |int|The first two bytes are from the category, and the second two bytes make up the instance ID.|
+    |1    |int|The director command ID.|
+    |2-N  ||Depends on the command.|
+    
+    """
     # category = int(params[0][:4], 16)
     instance_id = int(params[0][:4], 16)
     command = int(params[1], 16)
