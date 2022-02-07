@@ -30,12 +30,12 @@ def ability_from_logline(timestamp: datetime, params: List[str]) -> Event:
 
     |Index|Type|Description|
     |----:|----|:----------|
-    |0    |int|Source Actor ID|
-    |1    |string|Source Actor Name|
-    |2    |int|Ability id|
-    |3    |string|ability name|
-    |4    |int|Target Actor ID|
-    |5    |string|Target Actor Name|
+    |0    |int|Source actor ID|
+    |1    |string|Source actor Name|
+    |2    |int|Ability ID|
+    |3    |string|Ability name|
+    |4    |int|Target actor ID|
+    |5    |string|Target actor Name|
     |6-21 |ActionEffect(s)|Every two fields make up 1 ActionEffect. See `action_effect_from_logline` for more info on parsing this.|
     |22   |int|Source current HP|
     |23   |int|Source max MP|
@@ -60,20 +60,6 @@ def ability_from_logline(timestamp: datetime, params: List[str]) -> Event:
     |42   |int|Sequence ID|
 
     """
-    # param layout from act
-    # 0-1 source actor id/name
-    # 2-3 ability id/name
-    # 4-5 target actor id/name
-    # 6-21 ActionEffect(s) (every 2 fields is 1 ActionEffect)
-    # 22-23 source current/max hp
-    # 24-25 source current/max mp
-    # 26-27 source current/max tp/others?
-    # 28-31 source actor x/y/z/facing
-    # 32-33 target current/max hp
-    # 34-35 target current/max mp
-    # 36-37 target current/max tp/others?
-    # 38-41 target actor x/y/z/facing
-    # 42 globalsequence
     source_actor = Actor(*params[0:2])
     ability = AbilityType(*params[2:4])
     target_actor = Actor(*params[4:6])
