@@ -26,7 +26,7 @@ def startcast_from_logline(timestamp: datetime, params: List[str]) -> Event:
     |4    |int|Target actor ID|
     |5    |string|Target actor name|
     |6    |float|Duration?|
-    |7    |int|Blank field?|
+    |7    |string|Blank field?|
 
     """
     source_actor = Actor(*params[0:2])
