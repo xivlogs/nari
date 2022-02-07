@@ -20,7 +20,46 @@ def action_effect_from_logline(params: List[str]) -> ActionEffect:
     return ActionEffect(effect_type=effect_type, severity=severity, flags=flags, value=value, multiplier=multiplier, additional_params=[param0, param1])
 
 def ability_from_logline(timestamp: datetime, params: List[str]) -> Event:
-    """Returns an ability event from a semi-parsed act logline"""
+    """Returns an ability event from an act logline
+
+    ACT Event ID (decimal): 21
+
+    ## Param layout from act
+
+    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+
+    |Index|Type|Description|
+    |----:|----|:----------|
+    |0    |int|Source Actor ID|
+    |1    |string|Source Actor Name|
+    |2    |int|Ability id|
+    |3    |string|ability name|
+    |4    |int|Target Actor ID|
+    |5    |string|Target Actor Name|
+    |6-21 |ActionEffect(s)|Every two fields make up 1 ActionEffect. See `action_effect_from_logline` for more info on parsing this.|
+    |22   |int|Source current HP|
+    |23   |int|Source max MP|
+    |24   |int|Source current HP|
+    |25   |int|Source max HP|
+    |26   |int|Source current TP/others?|
+    |27   |int|Source max TP/others?|
+    |28   |float|Source actor X position|
+    |29   |float|Source actor Y position|
+    |30   |float|Source actor Z position|
+    |31   |float|Source actor facing|
+    |32   |int|Target current HP|
+    |33   |int|Target max MP|
+    |34   |int|Target current HP|
+    |35   |int|Target max HP|
+    |36   |int|Target current TP/others?|
+    |37   |int|Target max TP/others?|
+    |38   |float|Target actor X position|
+    |39   |float|Target actor Y position|
+    |40   |float|Target actor Z position|
+    |41   |float|Target actor facing|
+    |42   |int|Sequence ID|
+
+    """
     # param layout from act
     # 0-1 source actor id/name
     # 2-3 ability id/name
