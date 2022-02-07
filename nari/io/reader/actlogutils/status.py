@@ -46,15 +46,32 @@ def status_effect_from_logline(param0, param1, param2):
     )
 
 def statuslist_from_logline(timestamp: datetime, params: List[str]) -> Event:
-    """Parse statuslist from a logline"""
-    # param layout from act
-    # 0-1 - target actor id/name
-    # 2 - classjoblevel data
-    # 3-4 - hp / hp max
-    # 5-6 - mp / mp max
-    # 7-8 - tp / tp max
-    # 9-12 - x/y/z/facing
-    # 13- - status effect list, in sets of 3
+    """Parses a StatusList event from an act log line
+
+    ACT Event ID (decimal): 38
+
+    ## Param layout from act
+
+    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+
+    |Index|Type|Description|
+    |----:|----|:----------|
+    |0    |int|Target actor ID|
+    |1    |string|Target actor name|
+    |2    |ClassJobLevel|Target actor ClassJob level|
+    |3    |int|Target current HP|
+    |4    |int|Target max HP|
+    |5    |int|Target current MP|
+    |6    |int|Target max MP|
+    |7    |int|Target current TP/others?|
+    |8    |int|Target max TP/others?|
+    |9    |float|Target actor X position|
+    |10   |float|Target actor Y position|
+    |11   |float|Target actor Z position|
+    |12   |float|Target actor facing|
+    |13-N |StatusEffect(s)|List of StatusEffects, in sets of 3|
+    
+    """
     target_actor = Actor(*params[0:2])
     class_job_level = classjoblevel_from_logline(params[2])
     target_actor.resources.update(
