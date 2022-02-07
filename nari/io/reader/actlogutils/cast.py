@@ -9,13 +9,26 @@ from nari.types.event.startcast import StartCast
 from nari.types.event.stopcast import StopCast, StopCastType
 
 def startcast_from_logline(timestamp: datetime, params: List[str]) -> Event:
-    """Parses start cast event from act log line"""
-    # param layout from act
-    # 0-1 Source Actor
-    # 2-3 Ability
-    # 4-5 Target Actor
-    # 6 duration ???
-    # 7 blank field ???
+    """Parses a start cast event from an act log line
+
+    ACT Event ID (decimal): 20
+
+    ## Param layout from act
+
+    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+
+    |Index|Type|Description|
+    |----:|----|:----------|
+    |0    |int|Source actor ID|
+    |1    |string|Source actor name|
+    |2    |int|Ability ID|
+    |3    |string|Ability name|
+    |4    |int|Target actor ID|
+    |5    |string|Target actor name|
+    |6    |float|Duration?|
+    |7    |string|Blank field?|
+
+    """
     source_actor = Actor(*params[0:2])
     ability = AbilityType(*params[2:4])
     target_actor = Actor(*params[4:6])
