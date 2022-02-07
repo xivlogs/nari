@@ -63,8 +63,8 @@ def statuslist_from_logline(timestamp: datetime, params: List[str]) -> Event:
     |4    |int|Target max HP|
     |5    |int|Target current MP|
     |6    |int|Target max MP|
-    |7    |int|Target current TP/others?|
-    |8    |int|Target max TP/others?|
+    |7    |int|Target current TP|
+    |8    |int|Target max TP|
     |9    |float|Target actor X position|
     |10   |float|Target actor Y position|
     |11   |float|Target actor Z position|
