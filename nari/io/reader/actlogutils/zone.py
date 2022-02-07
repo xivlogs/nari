@@ -7,7 +7,20 @@ from nari.types.event import Event
 from nari.types.event.zone import ZoneChange
 
 def zonechange_from_logline(timestamp: datetime, params: List[str]) -> Event:
-    """Helper function to parse zone information from act log line"""
+    """Parses a ZoneChange event from an act log line
+
+    ACT Event ID (decimal): 1
+
+    ## Param layout from act
+
+    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+
+    |Index|Type|Description|
+    |----:|----|:----------|
+    |0    |int|Zone ID|
+    |1    |string|Zone name|
+    
+    """
     # param layout from act
     # 0 - zone id
     # 1 - zone name
