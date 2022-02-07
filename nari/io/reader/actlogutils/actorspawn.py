@@ -18,7 +18,7 @@ def actor_spawn_from_logline(timestamp: datetime, params: List[str]) -> Event:
     |Index|Type|Description|
     |----:|----|:----------|
     |0    |int|Source actor ID|
-    |1    |string|Source actor Name|
+    |1    |string|Source actor name|
     |2    |int|Source current HP|
     |3    |int|Source max HP|
     |4    |int|Source current MP|
@@ -29,7 +29,7 @@ def actor_spawn_from_logline(timestamp: datetime, params: List[str]) -> Event:
     |9    |float|Source actor Y position|
     |10   |float|Source actor Z position|
     |11   |float|Source actor facing|
-    
+
     """
     source_actor = Actor(*params[0:2])
     try:

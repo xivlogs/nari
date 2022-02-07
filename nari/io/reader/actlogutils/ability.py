@@ -31,11 +31,11 @@ def ability_from_logline(timestamp: datetime, params: List[str]) -> Event:
     |Index|Type|Description|
     |----:|----|:----------|
     |0    |int|Source actor ID|
-    |1    |string|Source actor Name|
+    |1    |string|Source actor name|
     |2    |int|Ability ID|
     |3    |string|Ability name|
     |4    |int|Target actor ID|
-    |5    |string|Target actor Name|
+    |5    |string|Target actor name|
     |6-21 |ActionEffect(s)|Every two fields make up 1 ActionEffect. See `action_effect_from_logline` for more info on parsing this.|
     |22   |int|Source current HP|
     |23   |int|Source max MP|
