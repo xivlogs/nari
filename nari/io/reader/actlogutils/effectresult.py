@@ -26,7 +26,7 @@ def effectresult_from_logline(timestamp: datetime, params: List[str]) -> Event:
     |5    |int|Actor current MP|
     |6    |int|Actor max MP|
     |7    |uint8|Shield|
-    |8    |string|Blank field?|
+    |8    |null|Blank field|
     |9    |float|Actor X position|
     |10   |float|Actor Y position|
     |11   |float|Actor Z position|
