@@ -3,6 +3,7 @@ from datetime import datetime
 from hashlib import md5
 from typing import Callable, Dict, List, Optional
 from enum import IntEnum
+from nari.io.reader.actlogutils.cast import stopcast_from_act_timestamp
 
 from nari.types.event import Event
 from nari.types.event.limitbreak import LimitBreak
@@ -114,7 +115,7 @@ ID_MAPPINGS: Dict[int, ActEventFn] = {
     ActEventType.networkupdatehp: updatehp_from_logline,
     ActEventType.directorupdate: director_events_from_logline,
     ActEventType.networkbegincast: noop, # TODO: quarry myself
-    ActEventType.networkcancelability: noop, # TODO: how did I miss all of these?!
+    ActEventType.networkcancelability: stopcast_from_act_timestamp,
     ActEventType.networkability: ability_from_logline,
     ActEventType.networkaoeability: aoeability_from_logline,
     ActEventType.networkdot: noop, # TODO: make less trouble

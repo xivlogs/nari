@@ -58,7 +58,10 @@ def effectresult_from_logline(timestamp: datetime, params: List[str]) -> Event:
         )
     except ValueError:
         pass
-    shield_percent = int(params[7], 16)
+    try:
+        shield_percent = int(params[7], 16)
+    except ValueError:
+        shield_percent = 0
 
     effect_result_entries = []
     for i in range(17, len(params)-1, 4): # len(params)-1 because the last param is always blank

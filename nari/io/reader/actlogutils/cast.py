@@ -44,13 +44,23 @@ def startcast_from_logline(timestamp: datetime, params: List[str]) -> Event:
     )
 
 def stopcast_from_act_timestamp(timestamp: datetime, params: List[str]) -> Event:
-    """Parses stop cast event from act log line"""
-    # TODO: move these into the docstring
-    # param layout from act
-    # 0-1 Source Actor
-    # 2-3 Ability
-    # 4 Interrupted or Cancelled
-    # 5 blank field ???
+    """Parses stop cast event from act log line
+    
+    ACT Event ID (decimal): 20
+
+    ## Param layout from act
+
+    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+
+    |Index|Type|Description|
+    |----:|----|:----------|
+    |0    |int|Source actor ID|
+    |1    |string|Source actor name|
+    |2    |int|Ability ID|
+    |3    |string|Ability name|
+    |4    |int|Type of interrupt|
+    |5    |null|Blank field|
+    """
     source_actor = Actor(*params[0:2])
     ability = AbilityType(*params[2:4])
     stop_type = StopCastType.value_from_name(params[4])

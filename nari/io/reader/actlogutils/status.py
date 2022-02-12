@@ -74,9 +74,12 @@ def statuslist_from_logline(timestamp: datetime, params: List[str]) -> Event:
     """
     target_actor = Actor(*params[0:2])
     class_job_level = classjoblevel_from_logline(params[2])
-    target_actor.resources.update(
-        *[int(x) for x in params[3:9]]
-    )
+    try:
+        target_actor.resources.update(
+            *[int(x) for x in params[3:9]]
+        )
+    except ValueError:
+        pass
     if '' not in params[9:13]:
         target_actor.position.update(
             *[float(x) for x in params[9:13]]

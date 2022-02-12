@@ -113,18 +113,24 @@ def aoeability_from_logline(timestamp: datetime, params: List[str]) -> Event:
         action_effects.append(
             action_effect_from_logline(params[index:index+2])
         )
-    source_actor.resources.update(
-        *[int(x) for x in params[22:28]]
-    )
-    source_actor.position.update(
-        *[float(x) for x in params[28:32]]
-    )
-    target_actor.resources.update(
-        *[int(x) for x in params[32:38]]
-    )
-    target_actor.position.update(
-        *[float(x) for x in params[38:42]]
-    )
+    try:
+        source_actor.resources.update(
+            *[int(x) for x in params[22:28]]
+        )
+        source_actor.position.update(
+            *[float(x) for x in params[28:32]]
+        )
+    except ValueError:
+        pass
+    try:
+        target_actor.resources.update(
+            *[int(x) for x in params[32:38]]
+        )
+        target_actor.position.update(
+            *[float(x) for x in params[38:42]]
+        )
+    except ValueError:
+        pass
     sequence_id = int(params[42], 16)
     return AoeAbility(
         timestamp=timestamp,
