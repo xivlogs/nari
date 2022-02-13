@@ -1,6 +1,6 @@
 """Just a bunch of helper methods to spit out events from the act log"""
 from datetime import datetime
-from hashlib import md5
+from hashlib import sha256
 from typing import Callable, Dict, List, Optional
 from enum import IntEnum
 
@@ -85,7 +85,7 @@ def validate_checksum(line: str, index: int) -> bool:
     check_hash = parts[-1].encode('utf-8')
     to_hash = f'{"|".join(parts[:-1])}|{index}'.encode('utf-8')
 
-    return md5(to_hash).hexdigest().encode('utf-8') == check_hash
+    return sha256(to_hash).hexdigest().encode('utf-8')[:16] == check_hash
 
 # pylint: disable=unused-argument
 def noop(timestamp: datetime, params: List[str]) -> Event:
