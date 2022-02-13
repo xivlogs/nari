@@ -35,13 +35,15 @@ def startcast_from_logline(timestamp: datetime, params: List[str]) -> Event:
     ability = AbilityType(*params[2:4])
     target_actor = Actor(*params[4:6])
     # TODO: parse xyz and facing
+    duration = float(params[6])
     return StartCast(
         timestamp=timestamp,
         source_actor=source_actor,
         ability=ability,
         target_actor=target_actor,
-        duration=int(params[6]),
+        duration=duration,
     )
+
 
 def stopcast_from_act_timestamp(timestamp: datetime, params: List[str]) -> Event:
     """Parses stop cast event from act log line
