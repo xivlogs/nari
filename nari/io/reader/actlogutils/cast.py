@@ -45,7 +45,7 @@ def startcast_from_logline(timestamp: datetime, params: List[str]) -> Event:
     )
 
 
-def stopcast_from_act_timestamp(timestamp: datetime, params: List[str]) -> Event:
+def stopcast_from_logline(timestamp: datetime, params: List[str]) -> Event:
     """Parses stop cast event from act log line
     
     ACT Event ID (decimal): 20

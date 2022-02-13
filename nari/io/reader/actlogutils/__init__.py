@@ -3,7 +3,6 @@ from datetime import datetime
 from hashlib import sha256
 from typing import Callable, Dict, List, Optional
 from enum import IntEnum
-from nari.io.reader.actlogutils.cast import stopcast_from_act_timestamp
 
 from nari.types.event import Event
 from nari.types.event.limitbreak import LimitBreak
