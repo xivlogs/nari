@@ -8,25 +8,45 @@ from nari.types.actor import Actor
 from nari.types.event.effectresult import EffectResult, EffectResultEntry
 
 def effectresult_from_logline(timestamp: datetime, params: List[str]) -> Event:
-    """Helper function to parse effect result data from act log line"""
-    # param layout from act
-    # 0-1 Actor ID/Name
-    # 2 Sequence ID (uint32)
-    # 3-4 Actor HP/Max HP
-    # 5-6 Actor MP/Max MP
-    # 7 Shield (uint8)
-    # 8 Blank?
-    # 9-12 X/Y/Z/Facing
-    # 13 unknown
-    # 14 unknown
-    # 15 unknown
-    # 16 effect result entry count
-    # 17-(N-1) Effect Result Entries (up to 4 groups, meaning N <= 29)
-    # These have the following 4 fields in order
-    #     1. BBH -> EffectIndex / Padding / EffectId
-    #     2. II -> padding / some kind of param
-    #     3. effect duration (float as hex)
-    #     4. source actor id
+    """Returns an effect result event from an act log line
+
+    ACT Event ID (decimal): 37
+
+    ## Param layout from act
+
+    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+
+    |Index|Type|Description|
+    |----:|----|:----------|
+    |0    |int|Actor ID|
+    |1    |string|Actor name|
+    |2    |uint32|Sequence ID|
+    |3    |int|Actor current HP|
+    |4    |int|Actor max HP|
+    |5    |int|Actor current MP|
+    |6    |int|Actor max MP|
+    |7    |uint8|Shield|
+    |8    |null|Blank field|
+    |9    |float|Actor X position|
+    |10   |float|Actor Y position|
+    |11   |float|Actor Z position|
+    |12   |float|Actor facing|
+    |13   |int|Unknown|
+    |14   |int|Unknown|
+    |15   |int|Unknown|
+    |16   |int|EffectResult entry count|
+    |17-N |EffectResult(s)|Every four fields makes up one EffectResult entry, and there are up to four groups, meaning N <= 29.|
+
+    Each EffectResult entry has the following four fields, in order:
+    
+    |Index|Type|Description|
+    |----:|----|:----------|
+    |0    |int|BBH -> EffectIndex / Padding / EffectId|
+    |1    |int|II -> padding / some kind of param|
+    |2    |float|Effect duration (as hex)|
+    |3    |int|Source actor ID|
+
+    """
     target_actor = Actor(*params[0:2])
     sequence_id = int(params[2], 16)
     try:
@@ -38,7 +58,10 @@ def effectresult_from_logline(timestamp: datetime, params: List[str]) -> Event:
         )
     except ValueError:
         pass
-    shield_percent = int(params[7], 16)
+    try:
+        shield_percent = int(params[7], 16)
+    except ValueError:
+        shield_percent = 0
 
     effect_result_entries = []
     for i in range(17, len(params)-1, 4): # len(params)-1 because the last param is always blank

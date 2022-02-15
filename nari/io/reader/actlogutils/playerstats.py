@@ -9,28 +9,36 @@ from nari.util.exceptions import ActLineReadError
 
 
 def playerstats_from_logline(timestamp: datetime, params: List[str]) -> PlayerStats:
-    """Parses playerstats event from logline.
+    """Parses a PlayerStats event from an act log line
+
+    ACT Event ID (decimal): 12
+
+    ## Param layout from act
+
+    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+
     Param 15 is blank so it is parsed out.
 
-    Format is as follows:
-
-    0: JOB
-    1: STR
-    2: DEX
-    3: VIT
-    4: INT
-    5: MND
-    6: PIE
-    7: ATTACK POWER
-    8: DHIT
-    9: CRIT
-    10: ATTACK MAGIC POTENCY
-    11: HEAL MAGIC POTENCY
-    12: DET
-    13: SKILL SPEED
-    14: SPELL SPEED
-    15: Blank (0)
-    16: TENACITY
+    |Index|Type|Description|
+    |----:|----|:----------|
+    |0    |int|Class/Job ID|
+    |1    |int|Strength|
+    |2    |int|Dexterity|
+    |3    |int|Vitality|
+    |4    |int|Intelligence|
+    |5    |int|Mind|
+    |6    |int|Piety|
+    |7    |int|Attack power|
+    |8    |int|Direct hit|
+    |9    |int|Critical hit|
+    |10   |int|Attack magic potency|
+    |11   |int|Heal magic potency|
+    |12   |int|Determination|
+    |13   |int|Skill speed|
+    |14   |int|Spell speed|
+    |15   |int|Blank (0)|
+    |16   |int|Tenacity|
+    
     """
 
     param_order: List[Stats] = [

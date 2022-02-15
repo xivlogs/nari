@@ -7,13 +7,20 @@ from nari.types.event.party import PartyList
 
 
 def partylist_from_logline(timestamp: datetime, params: List[str]) -> Optional[Event]:
-    """Parses a partylist event out from act log line"""
-    # Param layout from ACT
-    # 0 - number of actor IDs
-    # 1 - 0 or more actor IDs for the party. First entry is always your actor;
-    #     subsequent actors are those of your party (up to the amount listed
-    #     in param 0). Any further actors are actors that are a part of your
-    #     alliance
+    """Parses a PartyList event from an act log line
+
+    ACT Event ID (decimal): 11
+
+    ## Param layout from act
+
+    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+
+    |Index|Type|Description|
+    |----:|----|:----------|
+    |0    |int|Number of actor IDs|
+    |1    |int|Zero or more actor IDs for the party. First entry is always your actor; subsequent actors are those of your party (up to the amount listed in param 0). Any further actors are actors that are a part of your alliance.|
+    
+    """
     amount = int(params[0])
     if amount == 0:
         return None
