@@ -1,6 +1,5 @@
 """Stuff for death of actors"""
-from datetime import datetime
-
+from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
 
@@ -8,7 +7,7 @@ from nari.types.actor import Actor
 class Death(Event): # pylint: disable=too-few-public-methods
     """Event represents the death of an actor"""
     def __init__(self, *,
-                 timestamp: datetime,
+                 timestamp: Timestamp,
                  source_actor: Actor,
                  target_actor: Actor,
                 ):

@@ -1,12 +1,11 @@
 """Parses lb information from act log line"""
-
-from datetime import datetime
 from typing import List
 
+from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.event.limitbreak import LimitBreak
 
-def limitbreak_from_logline(timestamp: datetime, params: List[str]) -> Event:
+def limitbreak_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
     """Parses a limit break event from an act log line
 
     ACT Event ID (decimal): 36
@@ -19,7 +18,6 @@ def limitbreak_from_logline(timestamp: datetime, params: List[str]) -> Event:
     |----:|----|:----------|
     |0    |int|Bar amount; 10,000 = 1 full bar.|
     |1    |int|Number of bars (3 for 3 full limit bars).|
-    
     """
     amount = int(params[0], 16)
     bars = int(params[1])

@@ -1,7 +1,7 @@
 """Type for when player stats change"""
-from datetime import datetime
 from typing import Dict
 
+from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.job import Job
 from nari.types.stats import Stats
@@ -11,7 +11,7 @@ class PlayerStats(Event):  # pylint: disable=too-few-public-methods,too-many-ins
     """Represents the event when the player's stats change. Also happens when
     zone/instance changes.
     """
-    def __init__(self, timestamp: datetime,
+    def __init__(self, timestamp: Timestamp,
                  job: Job,
                  stats: Dict[Stats, int],
                  ):

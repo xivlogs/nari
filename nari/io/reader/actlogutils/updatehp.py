@@ -1,12 +1,11 @@
 """Parses HP data from act log line"""
-
-from datetime import datetime
 from typing import List
 
+from nari.types import Timestamp
 from nari.types.event.updatehpmp import UpdateHpMp
 from nari.types.actor import Actor
 
-def updatehp_from_logline(timestamp: datetime, params: List[str]) -> UpdateHpMp:
+def updatehp_from_logline(timestamp: Timestamp, params: List[str]) -> UpdateHpMp:
     """Parses an UpdateHpMp event from an act log line
 
     ACT Event ID (decimal): 39
@@ -30,7 +29,6 @@ def updatehp_from_logline(timestamp: datetime, params: List[str]) -> UpdateHpMp:
     |10   |float|Actor Z position|
     |11   |float|Actor facing|
     |12   |string|Blank because ACT|
-    
     """
     actor = Actor(*params[0:2])
     try:

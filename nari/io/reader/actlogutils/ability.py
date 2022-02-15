@@ -1,8 +1,8 @@
 """Parsing act data about abilities"""
 from struct import unpack
 from typing import List
-from datetime import datetime
 
+from nari.types import Timestamp
 from nari.types.actioneffect import ActionEffect
 from nari.types.event.ability import Ability, AoeAbility
 from nari.types.actor import Actor
@@ -19,7 +19,7 @@ def action_effect_from_logline(params: List[str]) -> ActionEffect:
     param0, param1, severity, effect_type, value, flags, multiplier = parsed_params
     return ActionEffect(effect_type=effect_type, severity=severity, flags=flags, value=value, multiplier=multiplier, additional_params=[param0, param1])
 
-def ability_from_logline(timestamp: datetime, params: List[str]) -> Event:
+def ability_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
     """Returns an ability event from an act logline
 
     ACT Event ID (decimal): 21
@@ -101,7 +101,7 @@ def ability_from_logline(timestamp: datetime, params: List[str]) -> Event:
         sequence_id=sequence_id,
     )
 
-def aoeability_from_logline(timestamp: datetime, params: List[str]) -> Event:
+def aoeability_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
     """Parses an aoe ability from logline"""
     # see ability_from_logline above for field definitions
     source_actor = Actor(*params[0:2])

@@ -1,13 +1,13 @@
 """Parses effect results from logline"""
-from datetime import datetime
 from typing import List
 from struct import unpack
 
+from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
 from nari.types.event.effectresult import EffectResult, EffectResultEntry
 
-def effectresult_from_logline(timestamp: datetime, params: List[str]) -> Event:
+def effectresult_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
     """Returns an effect result event from an act log line
 
     ACT Event ID (decimal): 37
@@ -38,7 +38,7 @@ def effectresult_from_logline(timestamp: datetime, params: List[str]) -> Event:
     |17-N |EffectResult(s)|Every four fields makes up one EffectResult entry, and there are up to four groups, meaning N <= 29.|
 
     Each EffectResult entry has the following four fields, in order:
-    
+
     |Index|Type|Description|
     |----:|----|:----------|
     |0    |int|BBH -> EffectIndex / Padding / EffectId|

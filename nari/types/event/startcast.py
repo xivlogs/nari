@@ -1,6 +1,5 @@
 """Stuff for preparecast"""
-from datetime import datetime
-
+from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
 from nari.types.ability import Ability
@@ -9,7 +8,7 @@ from nari.types.ability import Ability
 class StartCast(Event): # pylint: disable=too-few-public-methods
     """Event represents the preparation towards a cast"""
     def __init__(self, *,
-                 timestamp: datetime,
+                 timestamp: Timestamp,
                  source_actor: Actor,
                  ability: Ability,
                  target_actor: Actor,

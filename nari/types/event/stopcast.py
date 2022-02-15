@@ -1,8 +1,7 @@
 """Class that represents a cast being interrupted or cancelled"""
-
-from datetime import datetime
 from enum import IntEnum, auto
 
+from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
 from nari.types.ability import Ability as AbilityObj
@@ -25,7 +24,7 @@ class StopCastType(IntEnum):
 class StopCast(Event): # pylint: disable=too-few-public-methods
     """An event that gets stopped by movement, death, or other reasons"""
     def __init__(self, *,
-                 timestamp: datetime,
+                 timestamp: Timestamp,
                  source_actor: Actor,
                  ability: AbilityObj,
                  cast_type: StopCastType):

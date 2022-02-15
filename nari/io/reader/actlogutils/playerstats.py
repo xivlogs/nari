@@ -1,14 +1,14 @@
 """Parses playerstats events from ACT log line"""
-from datetime import datetime
 from typing import List, Dict
 
+from nari.types import Timestamp
 from nari.types.job import Job
 from nari.types.stats import Stats
 from nari.types.event.playerstats import PlayerStats
 from nari.util.exceptions import ActLineReadError
 
 
-def playerstats_from_logline(timestamp: datetime, params: List[str]) -> PlayerStats:
+def playerstats_from_logline(timestamp: Timestamp, params: List[str]) -> PlayerStats:
     """Parses a PlayerStats event from an act log line
 
     ACT Event ID (decimal): 12
@@ -38,7 +38,6 @@ def playerstats_from_logline(timestamp: datetime, params: List[str]) -> PlayerSt
     |14   |int|Spell speed|
     |15   |int|Blank (0)|
     |16   |int|Tenacity|
-    
     """
 
     param_order: List[Stats] = [

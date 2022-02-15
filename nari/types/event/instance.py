@@ -1,7 +1,7 @@
 """Classes that represent events around instance state"""
-from datetime import datetime
 from enum import Enum, auto
 
+from nari.types import Timestamp
 from nari.types.event import Event
 
 
@@ -22,7 +22,7 @@ class BarrierState(Enum):
 class InstanceComplete(Event): # pylint: disable=too-few-public-methods
     """Represents an instance being complete"""
     def __init__(self, *,
-                 timestamp: datetime,
+                 timestamp: Timestamp,
                  instance_id: int,
                 ):
         super().__init__(timestamp)
@@ -35,7 +35,7 @@ class InstanceComplete(Event): # pylint: disable=too-few-public-methods
 class InstanceVote(Event): # pylint: disable=too-few-public-methods
     """Represents voting mechanics"""
     def __init__(self, *,
-                 timestamp: datetime,
+                 timestamp: Timestamp,
                 instance_id: int,
                 ):
         super().__init__(timestamp)
@@ -48,7 +48,7 @@ class InstanceVote(Event): # pylint: disable=too-few-public-methods
 class InstanceFade(Event): # pylint: disable=too-few-public-methods
     """Represents fade out/in"""
     def __init__(self, *,
-                 timestamp: datetime,
+                 timestamp: Timestamp,
                  instance_id: int,
                  state: Fade
                 ):
@@ -63,7 +63,7 @@ class InstanceFade(Event): # pylint: disable=too-few-public-methods
 class BarrierToggle(Event): # pylint: disable=too-few-public-methods
     """Represents a barrier changing state"""
     def __init__(self, *,
-                 timestamp: datetime,
+                 timestamp: Timestamp,
                  instance_id: int,
                  state: BarrierState,
                 ):
@@ -78,7 +78,7 @@ class BarrierToggle(Event): # pylint: disable=too-few-public-methods
 class InstanceInit(Event): # pylint: disable=too-few-public-methods
     """Represents entering an instance"""
     def __init__(self, *,
-                 timestamp: datetime,
+                 timestamp: Timestamp,
                  instance_id: int,
                 ):
         super().__init__(timestamp)

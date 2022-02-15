@@ -1,7 +1,7 @@
 """Class that represents blahblahblah"""
-from datetime import datetime
 from typing import List
 
+from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
 
@@ -21,7 +21,7 @@ class EffectResultEntry(): # pylint: disable=too-few-public-methods
 class EffectResult(Event): # pylint: disable=too-few-public-methods
     """Represents"""
     def __init__(self, *,
-                 timestamp: datetime,
+                 timestamp: Timestamp,
                  target_actor: Actor,
                  sequence_id: int,
                  shield_percent: int,
