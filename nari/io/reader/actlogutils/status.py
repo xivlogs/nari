@@ -1,9 +1,8 @@
 """Parses status from act log line"""
-
 from struct import unpack
-from datetime import datetime
 from typing import List
 
+from nari.types import Timestamp
 from nari.types.event.statuslist import StatusList
 from nari.types.event.status import StatusApply, StatusRemove
 from nari.types.status import Status, StatusEffect
@@ -45,7 +44,7 @@ def status_effect_from_logline(param0, param1, param2):
         source_actor_id=source_actor_id
     )
 
-def statuslist_from_logline(timestamp: datetime, params: List[str]) -> Event:
+def statuslist_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
     """Parses a StatusList event from an act log line
 
     ACT Event ID (decimal): 38
@@ -70,7 +69,6 @@ def statuslist_from_logline(timestamp: datetime, params: List[str]) -> Event:
     |11   |float|Target actor Z position|
     |12   |float|Target actor facing|
     |13-N |StatusEffect(s)|List of StatusEffects, in sets of 3|
-    
     """
     target_actor = Actor(*params[0:2])
     class_job_level = classjoblevel_from_logline(params[2])
@@ -98,7 +96,7 @@ def statuslist_from_logline(timestamp: datetime, params: List[str]) -> Event:
         status_effects=status_effects
     )
 
-def statusapply_from_logline(timestamp: datetime, params: List[str]) -> Event:
+def statusapply_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
     """Parse status apply from act log line"""
     # param layout from act
     # 0-1 - Status ID / Name
@@ -122,7 +120,7 @@ def statusapply_from_logline(timestamp: datetime, params: List[str]) -> Event:
         params=status_params,
     )
 
-def statusremove_from_logline(timestamp: datetime, params: List[str]) -> Event:
+def statusremove_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
     """Parse status remove from act log line"""
     # param layout from act
     # 0-1 - Status ID / Name

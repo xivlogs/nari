@@ -1,12 +1,11 @@
 """Class that represents version(s)"""
-from datetime import datetime
-
+from nari.types import Timestamp
 from nari.types.event import Event
 
 class Version(Event): # pylint: disable=too-few-public-methods
     """Represents a version string found in the events"""
     def __init__(self, *,
-                 timestamp: datetime,
+                 timestamp: Timestamp,
                  version: str
                 ):
         super().__init__(timestamp)

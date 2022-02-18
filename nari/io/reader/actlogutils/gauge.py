@@ -1,12 +1,12 @@
 """"Parses gauge events from act log line"""
-from datetime import datetime
 from typing import List
 
+from nari.types import Timestamp
 from nari.types.event.gauge import Gauge
 from nari.util.byte import hexstr_to_bytes
 from nari.util.exceptions import ActLineReadError
 
-def gauge_from_logline(timestamp: datetime, params: List[str]) -> Gauge:
+def gauge_from_logline(timestamp: Timestamp, params: List[str]) -> Gauge:
     """Parses a gauge event from an act log line
 
     ACT Event ID (decimal): 31
@@ -19,7 +19,6 @@ def gauge_from_logline(timestamp: datetime, params: List[str]) -> Gauge:
     |----:|----|:----------|
     |0    |int|Actor ID - The player who is logging.|
     |1-4  |uint32|Gauge data is from a C-style union type stored with fields depending on job. ACT represents this as four 32-bit unsigned ints so they're left as bytes for destructuring later.|
-    
     """
 
     try:

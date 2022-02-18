@@ -1,14 +1,13 @@
 """Parses director events from act log lines"""
-
-from datetime import datetime
 from typing import List, Optional
 
+from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.event.instance import BarrierState, BarrierToggle
 from nari.types.event.instance import InstanceComplete, InstanceFade, InstanceInit, Fade
 from nari.types.director import DirectorUpdateCommand
 
-def director_events_from_logline(timestamp: datetime, params: List[str]) -> Optional[Event]:
+def director_events_from_logline(timestamp: Timestamp, params: List[str]) -> Optional[Event]:
     """Parses a director event from an act log line
 
     ACT Event ID (decimal): 33
@@ -24,7 +23,6 @@ def director_events_from_logline(timestamp: datetime, params: List[str]) -> Opti
     |0    |int|The first two bytes are from the category, and the second two bytes make up the instance ID.|
     |1    |int|The director command ID.|
     |2-N  ||Depends on the command.|
-    
     """
     # category = int(params[0][:4], 16)
     instance_id = int(params[0][:4], 16)

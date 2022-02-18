@@ -1,20 +1,19 @@
 """Parses metadata events from act log line"""
-
-from datetime import datetime
 from typing import List
 
+from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.event.version import Version
 from nari.types.event.config import Config
 # from nari.types.actor import Actor
 
-def version_from_logline(timestamp: datetime, params: List[str]) -> Event:
+def version_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
     """Parses version information from act log line"""
     # param layout from act
     # 0 the version string that's it pack it up and take it home
     return Version(timestamp=timestamp, version=params[0])
 
-def config_from_logline(timestamp: datetime, params: List[str]) -> Event:
+def config_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
     """Parses config from act log line"""
     # param layout from act
     # 0 a string with a bunch of configurations values separated by commas
@@ -22,7 +21,7 @@ def config_from_logline(timestamp: datetime, params: List[str]) -> Event:
     values = dict([s.split(': ') for s in args])
     return Config(timestamp=timestamp, values=values)
 
-# def effect_result_from_logline(timestamp: datetime, params: List[str]) -> Event:
+# def effect_result_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
     # param layout from act
     # 0-1  ActorId / Name
     # 2    SequenceId (Hex)

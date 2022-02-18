@@ -5,6 +5,7 @@ from typing import Callable, Dict, List, Optional
 from enum import IntEnum
 
 from nari.types.event import Event
+from nari.types import Timestamp
 from nari.types.event.limitbreak import LimitBreak
 # here we go
 from nari.io.reader.actlogutils.metadata import version_from_logline, config_from_logline
@@ -23,7 +24,7 @@ from nari.io.reader.actlogutils.effectresult import effectresult_from_logline
 from nari.io.reader.actlogutils.cast import startcast_from_logline, stopcast_from_logline
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
-ActEventFn = Callable[[datetime, List[str]], Optional[Event]]
+ActEventFn = Callable[[Timestamp, List[str]], Optional[Event]]
 
 # pylint: disable=invalid-name
 class ActEventType(IntEnum):
@@ -70,11 +71,11 @@ class ActEventType(IntEnum):
         return name in cls.__members__.keys()
 # pylint: enable=invalid-name
 
-def date_from_act_timestamp(datestr: str) -> datetime:
-    """Parse timestamp from act log into a python datetime object
+def date_from_act_timestamp(datestr: str) -> Timestamp:
+    """Parse timestamp from act log into a Timestamp
     Look, this is dirty. This is wrong. Please someone find a better way to do this.
     """
-    return datetime.strptime(f'{datestr[:26]}{datestr[-6:]}', DEFAULT_DATE_FORMAT)
+    return int(datetime.strptime(f'{datestr[:26]}{datestr[-6:]}', DEFAULT_DATE_FORMAT).timestamp() * 1000)
 
 def validate_checksum(line: str, index: int) -> bool:
     """Validates an act log line
@@ -88,7 +89,7 @@ def validate_checksum(line: str, index: int) -> bool:
     return sha256(to_hash).hexdigest().encode('utf-8')[:16] == check_hash
 
 # pylint: disable=unused-argument
-def noop(timestamp: datetime, params: List[str]) -> Event:
+def noop(timestamp: Timestamp, params: List[str]) -> Event:
     """Straight-up ignores things"""
     # print(f'Ignoring an event with timestamp {timestamp} and params: {"|".join(params)}')
 
