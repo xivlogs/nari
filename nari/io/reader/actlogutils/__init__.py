@@ -56,6 +56,7 @@ class ActEventType(IntEnum):
     networkstatuseffect = 38
     networkupdatehp = 39
     changemap = 40
+    logmessageformat = 41
     config = 249
     hook = 250
     debug = 251
@@ -103,6 +104,7 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.debug: noop,
     ActEventType.hook: noop,
     ActEventType.addcombatant: actor_spawn_from_logline,
+    ActEventType.logmessageformat: noop,
     ActEventType.removecombatant: noop, # TODO: ???
     ActEventType.playerstats: playerstats_from_logline,
     ActEventType.logline: noop,
