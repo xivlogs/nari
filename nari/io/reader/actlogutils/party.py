@@ -1,12 +1,12 @@
 """"Parses partylist events from act log line"""
-from typing import List, Optional
+from typing import Optional
 
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.event.party import PartyList
 
 
-def partylist_from_logline(timestamp: Timestamp, params: List[str]) -> Optional[Event]:
+def partylist_from_logline(timestamp: Timestamp, params: list[str]) -> Optional[Event]:
     """Parses a PartyList event from an act log line
 
     ACT Event ID (decimal): 11

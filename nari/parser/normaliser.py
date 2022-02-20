@@ -1,7 +1,7 @@
 """Provides the Normaliser abstract base class"""
 
 from abc import ABCMeta, abstractmethod
-from typing import Union, List, Iterator, Optional
+from typing import Iterator, Optional
 
 from nari.types.event import Event
 
@@ -10,19 +10,19 @@ class Normaliser(metaclass=ABCMeta):
     """Normalisers take in interable events and spit out iterable events"""
     def __init__(self, stream: Iterator[Event]):
         self.stream = iter(stream)
-        self.buffer: List[Event] = []
+        self.buffer: list[Event] = []
         self.stream_finished = False
 
     def __iter__(self) -> Iterator[Event]:
         return self
 
     def __next__(self) -> Event:
-        event: Union[Event, None] = self.handle_next()
+        event = self.handle_next()
         if event:
             return event
         raise StopIteration
 
-    def grab_next_event(self) -> Union[List[Event], Event, None]:
+    def grab_next_event(self) -> list[Event] | Event | None:
         """Keeps iterating down the stream until it either has nothing left or it gets an event we're happy with"""
         while not self.stream_finished:
             # try to grab a single event
@@ -57,7 +57,7 @@ class Normaliser(metaclass=ABCMeta):
         return None
 
     @abstractmethod
-    def on_event(self, event: Event) -> Union[List[Event], Event]:
+    def on_event(self, event: Event) -> list[Event] | Event:
         """Takes an event and returns either a single event in turn, or a list of events
 
         A normaliser that does nothing would just implement the method to return the same

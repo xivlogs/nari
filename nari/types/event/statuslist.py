@@ -1,6 +1,4 @@
 """Stuff for the application of statuses"""
-from typing import List
-
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.classjoblevel import ClassJobLevel
@@ -14,7 +12,7 @@ class StatusList(Event): # pylint: disable=too-few-public-methods
                  timestamp: Timestamp,
                  class_job_level: ClassJobLevel,
                  target_actor: Actor,
-                 status_effects: List[StatusEffect]
+                 status_effects: list[StatusEffect]
                 ):
         super().__init__(timestamp)
         self.class_job_level = class_job_level

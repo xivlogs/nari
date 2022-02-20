@@ -1,7 +1,7 @@
 """Just a bunch of helper methods to spit out events from the act log"""
 from datetime import datetime
 from hashlib import sha256
-from typing import Callable, Dict, List, Optional
+from typing import Callable, Optional
 from enum import IntEnum
 
 from nari.types.event import Event
@@ -24,7 +24,7 @@ from nari.io.reader.actlogutils.effectresult import effectresult_from_logline
 from nari.io.reader.actlogutils.cast import startcast_from_logline, stopcast_from_logline
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
-ActEventFn = Callable[[Timestamp, List[str]], Optional[Event]]
+ActEventFn = Callable[[Timestamp, list[str]], Optional[Event]]
 
 # pylint: disable=invalid-name
 class ActEventType(IntEnum):
@@ -89,11 +89,11 @@ def validate_checksum(line: str, index: int) -> bool:
     return sha256(to_hash).hexdigest().encode('utf-8')[:16] == check_hash
 
 # pylint: disable=unused-argument
-def noop(timestamp: Timestamp, params: List[str]) -> Event:
+def noop(timestamp: Timestamp, params: list[str]) -> Event:
     """Straight-up ignores things"""
     # print(f'Ignoring an event with timestamp {timestamp} and params: {"|".join(params)}')
 
-ID_MAPPINGS: Dict[int, ActEventFn] = {
+ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.version: version_from_logline,
     ActEventType.zonechange: zonechange_from_logline,
     ActEventType.changeplayer: noop,

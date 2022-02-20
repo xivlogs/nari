@@ -1,6 +1,4 @@
 """Class that represents blahblahblah"""
-from typing import List
-
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
@@ -25,7 +23,7 @@ class EffectResult(Event): # pylint: disable=too-few-public-methods
                  target_actor: Actor,
                  sequence_id: int,
                  shield_percent: int,
-                 effect_results: List[EffectResultEntry]
+                 effect_results: list[EffectResultEntry]
                 ):
         super().__init__(timestamp)
         self.target_actor = target_actor

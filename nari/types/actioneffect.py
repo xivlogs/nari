@@ -1,7 +1,6 @@
 """Stores data about ActionEffects"""
 
 from enum import IntEnum, IntFlag
-from typing import List
 
 # pylint: disable=invalid-name
 class EffectType(IntEnum):
@@ -61,7 +60,7 @@ class ActionEffect(): # pylint: disable=too-few-public-methods
                  flags: int,
                  value: int,
                  multiplier: int,
-                 additional_params: List[int]):
+                 additional_params: list[int]):
         self.effect_type = effect_type
         self.severity = severity
         self.flags = flags
