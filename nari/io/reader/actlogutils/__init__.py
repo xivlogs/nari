@@ -55,6 +55,7 @@ class ActEventType(IntEnum):
     networkeffectresult = 37
     networkstatuseffect = 38
     networkupdatehp = 39
+    changemap = 40
     config = 249
     hook = 250
     debug = 251
@@ -96,6 +97,7 @@ def noop(timestamp: Timestamp, params: list[str]) -> Event:
 ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.version: version_from_logline,
     ActEventType.zonechange: zonechange_from_logline,
+    ActEventType.changemap: noop,
     ActEventType.changeplayer: noop,
     ActEventType.config: config_from_logline,
     ActEventType.debug: noop,
