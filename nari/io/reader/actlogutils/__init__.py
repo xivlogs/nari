@@ -43,7 +43,7 @@ class ActEventType(IntEnum):
     networkdot = 24
     networkdeath = 25
     networkbuff = 26
-    networktargetheadmarker = 27
+    networkoverheadicon = 27
     networkwaymark = 28
     networktargetmarker = 29
     networkbuffremove = 30
@@ -125,6 +125,7 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.networkaoeability: aoeability_from_logline,
     ActEventType.networkdot: noop, # TODO: make less trouble
     ActEventType.networkeffectresult: effectresult_from_logline,
-    ActEventType.networktargetheadmarker: noop, # TODO: ):
+    ActEventType.networkoverheadicon: noop,
+    ActEventType.networktargetmarker: noop,
     ActEventType.networktether: noop, # TODO: ?
 }
