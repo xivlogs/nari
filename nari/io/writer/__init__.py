@@ -1,7 +1,7 @@
 """Collection of writing-related classes and utilities"""
 
 from abc import ABCMeta, abstractmethod
-from typing import List, Iterator, Optional
+from typing import Iterator
 
 from nari.types.event import Event
 

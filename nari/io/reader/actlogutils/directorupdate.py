@@ -1,5 +1,5 @@
 """Parses director events from act log lines"""
-from typing import List, Optional
+from typing import Optional
 
 from nari.types import Timestamp
 from nari.types.event import Event
@@ -7,7 +7,7 @@ from nari.types.event.instance import BarrierState, BarrierToggle
 from nari.types.event.instance import InstanceComplete, InstanceFade, InstanceInit, Fade
 from nari.types.director import DirectorUpdateCommand
 
-def director_events_from_logline(timestamp: Timestamp, params: List[str]) -> Optional[Event]:
+def director_events_from_logline(timestamp: Timestamp, params: list[str]) -> Optional[Event]:
     """Parses a director event from an act log line
 
     ACT Event ID (decimal): 33

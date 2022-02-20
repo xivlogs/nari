@@ -1,6 +1,4 @@
 """Class that represents ability usages"""
-from typing import List
-
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
@@ -11,7 +9,7 @@ class Ability(Event): # pylint: disable=too-few-public-methods
     """Represents an ability use"""
     def __init__(self, *,
                  timestamp: Timestamp,
-                 action_effects: List[ActionEffect],
+                 action_effects: list[ActionEffect],
                  source_actor: Actor,
                  target_actor: Actor,
                  ability: AbilityObj,
@@ -30,7 +28,7 @@ class AoeAbility(Event): # pylint: disable=too-few-public-methods
     """An ability that hits multiple people"""
     def __init__(self, *,
                  timestamp: Timestamp,
-                 action_effects: List[ActionEffect],
+                 action_effects: list[ActionEffect],
                  source_actor: Actor,
                  target_actor: Actor,
                  ability: AbilityObj,

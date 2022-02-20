@@ -1,6 +1,4 @@
 """Parses playerstats events from ACT log line"""
-from typing import List, Dict
-
 from nari.types import Timestamp
 from nari.types.job import Job
 from nari.types.stats import Stats
@@ -8,7 +6,7 @@ from nari.types.event.playerstats import PlayerStats
 from nari.util.exceptions import ActLineReadError
 
 
-def playerstats_from_logline(timestamp: Timestamp, params: List[str]) -> PlayerStats:
+def playerstats_from_logline(timestamp: Timestamp, params: list[str]) -> PlayerStats:
     """Parses a PlayerStats event from an act log line
 
     ACT Event ID (decimal): 12
@@ -40,7 +38,7 @@ def playerstats_from_logline(timestamp: Timestamp, params: List[str]) -> PlayerS
     |16   |int|Tenacity|
     """
 
-    param_order: List[Stats] = [
+    param_order: list[Stats] = [
         Stats.STR,
         Stats.DEX,
         Stats.VIT,
@@ -68,6 +66,6 @@ def playerstats_from_logline(timestamp: Timestamp, params: List[str]) -> PlayerS
         raise ActLineReadError("Params are unexpectedly short")
 
     job = Job(param_ints.pop(0))
-    stats: Dict[Stats, int] = dict(zip(param_order, param_ints))
+    stats: dict[Stats, int] = dict(zip(param_order, param_ints))
 
     return PlayerStats(timestamp, job, stats)

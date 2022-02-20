@@ -1,16 +1,16 @@
 """Analysers parse streams of data like Normalisers and Writers, but don't push out an event stream"""
 
 from enum import IntEnum, auto
-from typing import Iterable, Iterator, Callable, Tuple, Dict, Any, List, Optional
+from typing import Iterable, Iterator, Callable, Any, Optional
 from nari.types.event import Event
 
 # some useful typedefs
 FilterFunc = Callable[[Event], bool]
 CallbackFunc = Callable[[Event], Optional[bool]]
 TopicCallbackFunc = Callable[[], None]
-FilterCallbackBundle = Tuple[FilterFunc, CallbackFunc]
-Hooks = Dict[int, FilterCallbackBundle]
-Topics = Dict[int, List[TopicCallbackFunc]]
+FilterCallbackBundle = tuple[FilterFunc, CallbackFunc]
+Hooks = dict[int, FilterCallbackBundle]
+Topics = dict[int, list[TopicCallbackFunc]]
 
 # The default for a hook is to just subscribe to everything. Be careful and define a predicate if you can
 allow_all_events = lambda x: True
@@ -29,7 +29,7 @@ class Analyser():
     def __init__(self, stream: Iterable[Event]):
         self.stream: Iterator[Event] = iter(stream)
         self.hooks: Hooks = {}
-        self.hooks_to_remove: List[int] = []
+        self.hooks_to_remove: list[int] = []
         self.topics: Topics = {}
         self.init()
 

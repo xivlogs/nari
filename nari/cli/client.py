@@ -3,7 +3,7 @@
 
 from argparse import ArgumentParser, Namespace
 from logging import basicConfig, getLogger, Logger, CRITICAL, INFO
-from typing import List
+from typing import TypeVar
 
 from nari.io.reader.actlog import ActLogReader
 from nari.io.reader import Reader
@@ -12,8 +12,10 @@ from nari.cli.fightlist import FightList
 DEFAULT_LOG_FORMAT: str = '[%(levelname)s] %(message)s'
 logger: Logger = getLogger('nari')
 
+T = TypeVar('T') # pylint: disable=invalid-name
+Matrix = list[list[T]]
 
-def print_matrix(matrix: List[List[str]]):
+def print_matrix(matrix: Matrix[str]):
     """Hacky function to print out an 'aligned' set of data"""
     col_width = max(len(word) for row in matrix for word in row) + 2
     for row in matrix:
@@ -21,7 +23,7 @@ def print_matrix(matrix: List[List[str]]):
 
 
 
-def parse_fights(reader: Reader) -> List[List[str]]:
+def parse_fights(reader: Reader) -> Matrix[str]:
     """Takes in a reader object and parses the fight details out of it"""
     fight_list = FightList(reader)
     return fight_list.process_events()

@@ -1,20 +1,16 @@
 """Helper classes for parsing out fights from event data"""
-
-from typing import List
-
 from nari.parser.analyser import Analyser, AnalyserTopic
 from nari.types.event import Event
 from nari.types.event.instance import InstanceComplete, InstanceInit, InstanceFade
-# from nari.types.event.act.directorupdate import DirectorUpdate, DirectorUpdateCommand
 
 
 class FightList(Analyser):
     """Takes a stream of (filtered) DirectorUpdate events and parses them into an array of fights"""
     # pylint: disable=attribute-defined-outside-init
     def init(self):
-        column_headers: List[str] = ['date', 'instance id', 'encounters']
+        column_headers: list[str] = ['date', 'instance id', 'encounters']
         self.matrix = [column_headers]
-        self.fight_log: List[dict] = []
+        self.fight_log: list[dict] = []
         self.current_fight: dict = {}
         self.add_event_hook(predicate=lambda e: isinstance(e, (InstanceInit, InstanceFade, InstanceComplete)), callback=self.fight_event)
         self.add_topic_hook(AnalyserTopic.stream_end, callback=self.complete)

@@ -1,12 +1,10 @@
 """Parses death information from act log line"""
-from typing import List
-
 from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.event import Event
 from nari.types.event.death import Death
 
-def death_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
+def death_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Parses a death event from an act log line
 
     ACT Event ID (decimal): 25

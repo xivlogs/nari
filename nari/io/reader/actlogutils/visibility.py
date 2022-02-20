@@ -1,12 +1,10 @@
 """Parses visibility data from act log data"""
-from typing import List
-
 from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.event import Event
 from nari.types.event.visibility import VisibilityChange, VisibilityState, VisibilityType
 
-def visibility_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
+def visibility_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Parses a VisibilityChange event from an act log line
 
     ACT Event ID (decimal): 34

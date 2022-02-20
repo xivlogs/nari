@@ -1,12 +1,10 @@
 """"Parses gauge events from act log line"""
-from typing import List
-
 from nari.types import Timestamp
 from nari.types.event.gauge import Gauge
 from nari.util.byte import hexstr_to_bytes
 from nari.util.exceptions import ActLineReadError
 
-def gauge_from_logline(timestamp: Timestamp, params: List[str]) -> Gauge:
+def gauge_from_logline(timestamp: Timestamp, params: list[str]) -> Gauge:
     """Parses a gauge event from an act log line
 
     ACT Event ID (decimal): 31

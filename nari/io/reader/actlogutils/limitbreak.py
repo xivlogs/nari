@@ -1,11 +1,9 @@
 """Parses lb information from act log line"""
-from typing import List
-
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.event.limitbreak import LimitBreak
 
-def limitbreak_from_logline(timestamp: Timestamp, params: List[str]) -> Event:
+def limitbreak_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Parses a limit break event from an act log line
 
     ACT Event ID (decimal): 36
