@@ -107,9 +107,9 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.gauge: gauge_from_logline,
     ActEventType.networkstatuseffect: statuslist_from_logline,
     ActEventType.networkwaymark: noop, # TODO: ?
-    ActEventType.networkdeath: noop, # TODO: how the mighty have forgotten
+    ActEventType.networkdeath: noop,
     ActEventType.networkbuff: statusapply_from_logline,
-    ActEventType.networkbuffremove: noop, # TODO: quarry
+    ActEventType.networkbuffremove: noop,
     ActEventType.limitbreak: limitbreak_from_logline,
     ActEventType.partylist: partylist_from_logline,
     ActEventType.networknametoggle: visibility_from_logline,
