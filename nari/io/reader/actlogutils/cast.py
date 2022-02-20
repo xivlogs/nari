@@ -32,7 +32,12 @@ def startcast_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     source_actor = Actor(*params[0:2])
     ability = AbilityType(*params[2:4])
     target_actor = Actor(*params[4:6])
-    # TODO: parse xyz and facing
+    try:
+        source_actor.position.update(
+            *[int(x) for x in params[7:11]]
+        )
+    except ValueError:
+        pass
     duration = float(params[6])
     return StartCast(
         timestamp=timestamp,
