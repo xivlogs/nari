@@ -4,6 +4,7 @@ from nari.types.actor import Actor
 from nari.types.event import Event
 from nari.types.event.markers import ContentMarker
 
+
 def targeticon_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Parses a target icon event from an act log line
 

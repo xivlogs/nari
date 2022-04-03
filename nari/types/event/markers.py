@@ -5,6 +5,7 @@ from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
 
+
 # pylint: disable=invalid-name
 class PlayerMarkerType(Enum):
     """Enums for player-assigned markers, these IDs can be found in the Marker.exd client file"""
@@ -22,6 +23,7 @@ class PlayerMarkerType(Enum):
     Circle = 12
     Plus = 13
     Triangle = 14
+
 
 class ContentMarker(Event): # pylint: disable=too-few-public-methods
     """Event representing content-applied markers"""
