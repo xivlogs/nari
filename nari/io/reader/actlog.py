@@ -50,7 +50,6 @@ class ActLogReader(Reader):
 
         return event
 
-
     def read_next(self) -> Optional[Event]:
         """Returns an array of all the act log events from the file"""
         # keep reading until we get a non-None response from handle_line
