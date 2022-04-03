@@ -19,6 +19,7 @@ from nari.io.reader.actlogutils.actorspawn import actor_spawn_from_logline
 from nari.io.reader.actlogutils.gauge import gauge_from_logline
 from nari.io.reader.actlogutils.playerstats import playerstats_from_logline
 from nari.io.reader.actlogutils.visibility import visibility_from_logline
+from nari.io.reader.actlogutils.targeticon import targeticon_from_logline
 from nari.io.reader.actlogutils.party import partylist_from_logline
 from nari.io.reader.actlogutils.effectresult import effectresult_from_logline
 from nari.io.reader.actlogutils.cast import startcast_from_logline, stopcast_from_logline
@@ -125,7 +126,7 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.networkaoeability: aoeability_from_logline,
     ActEventType.networkdot: noop, # TODO: make less trouble
     ActEventType.networkeffectresult: effectresult_from_logline,
-    ActEventType.networkoverheadicon: noop,
+    ActEventType.networkoverheadicon: targeticon_from_logline,
     ActEventType.networktargetmarker: noop,
     ActEventType.networktether: noop, # TODO: ?
 }
