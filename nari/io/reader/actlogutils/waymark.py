@@ -50,6 +50,6 @@ def waymark_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
         timestamp=timestamp,
         actor=actor,
         operator=op,
-        marker=marker_id,
+        marker=Waypoint(marker_id),
         position=position
     )

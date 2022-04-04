@@ -48,5 +48,5 @@ def targetmarker_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
         source_actor=source_actor,
         target_actor=target_actor,
         operator=op,
-        marker=marker_id
+        marker=PlayerMarkerType(marker_id)
     )
