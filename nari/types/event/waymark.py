@@ -50,4 +50,4 @@ class Waymark(Event): # pylint: disable=too-few-public-methods
         self.position = position
 
     def __repr__(self):
-        return f'<Waymark {self.marker}>'
+        return f'<Waymark {self.operator.name} {self.marker.name}>'

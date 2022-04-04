@@ -17,4 +17,4 @@ class Tether(Event): # pylint: disable=too-few-public-methods
         self.tether_id = tether_id
 
     def __repr__(self):
-        return f'<Tether {self.tether_id}>'
+        return f'<Tether {self.target_actor.name} with {self.tether_id}>'
