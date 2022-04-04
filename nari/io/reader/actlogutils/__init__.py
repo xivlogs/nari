@@ -20,6 +20,9 @@ from nari.io.reader.actlogutils.gauge import gauge_from_logline
 from nari.io.reader.actlogutils.playerstats import playerstats_from_logline
 from nari.io.reader.actlogutils.visibility import visibility_from_logline
 from nari.io.reader.actlogutils.targeticon import targeticon_from_logline
+from nari.io.reader.actlogutils.targetmarker import targetmarker_from_logline
+from nari.io.reader.actlogutils.tether import tether_from_logline
+from nari.io.reader.actlogutils.waymark import waymark_from_logline
 from nari.io.reader.actlogutils.party import partylist_from_logline
 from nari.io.reader.actlogutils.effectresult import effectresult_from_logline
 from nari.io.reader.actlogutils.cast import startcast_from_logline, stopcast_from_logline
@@ -106,12 +109,12 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.hook: noop,
     ActEventType.addcombatant: actor_spawn_from_logline,
     ActEventType.logmessageformat: noop,
-    ActEventType.removecombatant: noop, # TODO: ???
+    ActEventType.removecombatant: noop,
     ActEventType.playerstats: playerstats_from_logline,
     ActEventType.logline: noop,
     ActEventType.gauge: gauge_from_logline,
     ActEventType.networkstatuseffect: statuslist_from_logline,
-    ActEventType.networkwaymark: noop, # TODO: ?
+    ActEventType.networkwaymark: waymark_from_logline,
     ActEventType.networkdeath: noop,
     ActEventType.networkbuff: statusapply_from_logline,
     ActEventType.networkbuffremove: noop,
@@ -127,6 +130,6 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.networkdot: noop, # TODO: make less trouble
     ActEventType.networkeffectresult: effectresult_from_logline,
     ActEventType.networkoverheadicon: targeticon_from_logline,
-    ActEventType.networktargetmarker: noop,
-    ActEventType.networktether: noop, # TODO: ?
+    ActEventType.networktargetmarker: targetmarker_from_logline,
+    ActEventType.networktether: tether_from_logline,
 }

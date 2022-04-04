@@ -68,4 +68,4 @@ class PlayerMarker(Event): # pylint: disable=too-few-public-methods
         self.marker = marker
 
     def __repr__(self):
-        return f'<PlayerMarker {self.marker}>'
+        return f'<PlayerMarker {self.operator.name} {self.marker.name}>'
