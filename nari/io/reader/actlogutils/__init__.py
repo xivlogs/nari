@@ -109,7 +109,7 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.hook: noop,
     ActEventType.addcombatant: actor_spawn_from_logline,
     ActEventType.logmessageformat: noop,
-    ActEventType.removecombatant: noop, # TODO: ???
+    ActEventType.removecombatant: noop,
     ActEventType.playerstats: playerstats_from_logline,
     ActEventType.logline: noop,
     ActEventType.gauge: gauge_from_logline,
