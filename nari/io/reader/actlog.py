@@ -12,7 +12,7 @@ class ActLogReader(Reader):
     """Implementation of the Reader class for parsing ACT network logs"""
     def __init__(self, actlog_path, *, raise_on_checksum_failure=False, raise_on_invalid_id=False):
         # might need a helper function, but eh.
-        self.handle = open(actlog_path, 'r')
+        self.handle = open(actlog_path, 'r', encoding='utf-8') # pylint: disable=consider-using-with
         self.index = 1
         self.raise_on_checksum_failure = raise_on_checksum_failure
         self.raise_on_invalid_id = raise_on_invalid_id

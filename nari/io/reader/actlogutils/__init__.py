@@ -70,8 +70,8 @@ class ActEventType(IntEnum):
 
     @classmethod
     def has_type(cls, name: str) -> bool:
-        """Returns true if the name is in the enum"""
-        return name in cls.__members__.keys()
+        """Returns True if the name is in the enum"""
+        return name in cls.__members__.keys() # pylint: disable=consider-iterating-dictionary
 # pylint: enable=invalid-name
 
 def date_from_act_timestamp(datestr: str) -> Timestamp:
