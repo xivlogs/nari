@@ -21,6 +21,7 @@ from nari.io.reader.actlogutils.playerstats import playerstats_from_logline
 from nari.io.reader.actlogutils.visibility import visibility_from_logline
 from nari.io.reader.actlogutils.targeticon import targeticon_from_logline
 from nari.io.reader.actlogutils.targetmarker import targetmarker_from_logline
+from nari.io.reader.actlogutils.tether import tether_from_logline
 from nari.io.reader.actlogutils.waymark import waymark_from_logline
 from nari.io.reader.actlogutils.party import partylist_from_logline
 from nari.io.reader.actlogutils.effectresult import effectresult_from_logline
@@ -130,5 +131,5 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.networkeffectresult: effectresult_from_logline,
     ActEventType.networkoverheadicon: targeticon_from_logline,
     ActEventType.networktargetmarker: targetmarker_from_logline,
-    ActEventType.networktether: noop, # TODO: ?
+    ActEventType.networktether: tether_from_logline,
 }
