@@ -1,4 +1,4 @@
-"""Parses cast information from act log line"""
+"""Parses cast data from ACT log line"""
 from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.ability import Ability as AbilityType
@@ -23,11 +23,11 @@ def startcast_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     |3    |string|Ability name|
     |4    |int|Target actor ID|
     |5    |string|Target actor name|
-    |6    |float|Duration?|
+    |6    |float|Duration (ms)|
     |7    |float|Source actor X position|
     |8    |float|Source actor Y position|
     |9    |float|Source actor Z position|
-    |10   |float|Source actor facing|
+    |10   |float|Source actor bearing|
     """
     source_actor = Actor(*params[0:2])
     ability = AbilityType(*params[2:4])

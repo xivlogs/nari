@@ -1,4 +1,4 @@
-"""Parse actor spawn data from act log line"""
+"""Parse actor spawn data from ACT log line"""
 from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.event import Event
@@ -26,7 +26,7 @@ def actor_spawn_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     |8    |float|Source actor X position|
     |9    |float|Source actor Y position|
     |10   |float|Source actor Z position|
-    |11   |float|Source actor facing|
+    |11   |float|Source actor bearing|
 
     """
     source_actor = Actor(*params[0:2])

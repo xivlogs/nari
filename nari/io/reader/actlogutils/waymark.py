@@ -1,4 +1,4 @@
-"""Parses waymark data from act log data"""
+"""Parse waymark data from ACT log line"""
 from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.event import Event

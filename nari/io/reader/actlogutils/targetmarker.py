@@ -1,4 +1,4 @@
-"""Parses player-applied overhead markers data from act log data"""
+"""Parse player-applied overhead marker data from ACT log line"""
 from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.event import Event

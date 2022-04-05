@@ -1,4 +1,4 @@
-"""Parses director events from act log lines"""
+"""Parse director update commands from ACT log lines"""
 from typing import Optional
 
 from nari.types import Timestamp

@@ -1,4 +1,4 @@
-"""Parses effect results from logline"""
+"""Parse effect result data from ACT log line"""
 from struct import unpack
 
 from nari.types import Timestamp
@@ -29,7 +29,7 @@ def effectresult_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     |9    |float|Actor X position|
     |10   |float|Actor Y position|
     |11   |float|Actor Z position|
-    |12   |float|Actor facing|
+    |12   |float|Actor bearing|
     |13   |int|Unknown|
     |14   |int|Unknown|
     |15   |int|Unknown|

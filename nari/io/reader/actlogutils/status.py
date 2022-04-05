@@ -1,4 +1,4 @@
-"""Parses status from act log line"""
+"""Parse status data from ACT log line"""
 from struct import unpack
 
 from nari.types import Timestamp
@@ -66,7 +66,7 @@ def statuslist_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     |9    |float|Target actor X position|
     |10   |float|Target actor Y position|
     |11   |float|Target actor Z position|
-    |12   |float|Target actor facing|
+    |12   |float|Target actor bearing|
     |13-N |StatusEffect(s)|List of StatusEffects, in sets of 3|
     """
     target_actor = Actor(*params[0:2])

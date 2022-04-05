@@ -1,4 +1,4 @@
-""""Parses partylist events from act log line"""
+"""Parse partylist data from ACT log line"""
 from typing import Optional
 
 from nari.types import Timestamp

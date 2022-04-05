@@ -1,4 +1,4 @@
-"""Parsing act data about abilities"""
+"""Parse ability (action) data from ACT log line"""
 from struct import unpack
 
 from nari.types import Timestamp
@@ -45,7 +45,7 @@ def ability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     |28   |float|Source actor X position|
     |29   |float|Source actor Y position|
     |30   |float|Source actor Z position|
-    |31   |float|Source actor facing|
+    |31   |float|Source actor bearing|
     |32   |int|Target current HP|
     |33   |int|Target max HP|
     |34   |int|Target current MP|
@@ -55,7 +55,7 @@ def ability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     |38   |float|Target actor X position|
     |39   |float|Target actor Y position|
     |40   |float|Target actor Z position|
-    |41   |float|Target actor facing|
+    |41   |float|Target actor bearing|
     |42   |int|Sequence ID|
 
     """

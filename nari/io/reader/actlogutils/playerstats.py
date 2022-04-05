@@ -1,4 +1,4 @@
-"""Parses playerstats events from ACT log line"""
+"""Parse player stats data from ACT log line"""
 from nari.types import Timestamp
 from nari.types.job import Job
 from nari.types.stats import Stats

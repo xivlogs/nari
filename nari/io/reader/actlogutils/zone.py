@@ -1,4 +1,4 @@
-"""parses zone change information from act log line"""
+"""Parse zone change data from ACT log line"""
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.event.zone import ZoneChange

@@ -1,4 +1,4 @@
-"""Parses lb information from act log line"""
+"""Parses LB bar state data from ACT log line"""
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.event.limitbreak import LimitBreak

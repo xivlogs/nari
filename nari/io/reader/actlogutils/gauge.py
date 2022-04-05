@@ -1,4 +1,4 @@
-""""Parses gauge events from act log line"""
+""""Parse gauge data from ACT log line"""
 from nari.types import Timestamp
 from nari.types.event.gauge import Gauge
 from nari.util.byte import hexstr_to_bytes
