@@ -7,7 +7,7 @@ from nari.types.event.actorspawn import ActorSpawn
 def actor_spawn_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Returns an actor spawn event from an act logline
 
-    ACT Event ID (decimal):
+    ACT Event ID (decimal): 3
 
     ## Param layout from act
 
