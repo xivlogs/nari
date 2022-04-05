@@ -7,11 +7,13 @@ from nari.types.event.ability import Ability, AoeAbility
 from nari.types.actor import Actor
 from nari.types.ability import Ability as AbilityType
 from nari.types.event import Event
+from nari.io.reader.actlogutils.exceptions import ActLineParsingException
+
 
 def action_effect_from_logline(params: list[str]) -> ActionEffect:
     """Takes the eight bytes from an ACT log line and returns ActionEffect data"""
     if len(params) != 2:
-        raise Exception('insert a custom exception right here')
+        raise ActLineParsingException(f'Expected 2 arguments to unpack for ActionEffect data, got {len(params)}')
     hexdata = ''.join([x.zfill(8) for x in params])
     intdata = int(hexdata, 16)
     parsed_params = unpack('>BBBBHBB', intdata.to_bytes(8, 'big'))
