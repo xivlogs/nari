@@ -7,13 +7,13 @@ from nari.types.actor import Actor
 from nari.types.event.effectresult import EffectResult, EffectResultEntry
 
 def effectresult_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Returns an effect result event from an act log line
+    """Returns an effect result event from an ACT log line
 
     ACT Event ID (decimal): 37
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|

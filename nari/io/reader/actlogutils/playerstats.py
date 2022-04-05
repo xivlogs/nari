@@ -7,13 +7,13 @@ from nari.util.exceptions import ActLineReadError
 
 
 def playerstats_from_logline(timestamp: Timestamp, params: list[str]) -> PlayerStats:
-    """Parses a PlayerStats event from an act log line
+    """Parses a PlayerStats event from an ACT log line
 
     ACT Event ID (decimal): 12
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     Param 15 is blank so it is parsed out.
 

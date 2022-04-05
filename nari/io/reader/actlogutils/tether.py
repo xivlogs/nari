@@ -6,13 +6,13 @@ from nari.types.event.tether import Tether
 
 
 def tether_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parses a tether event from an act log line
+    """Parses a tether event from an ACT log line
 
     ACT Event ID (decimal): 35
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|

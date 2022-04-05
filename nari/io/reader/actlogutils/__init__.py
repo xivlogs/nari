@@ -1,4 +1,4 @@
-"""Just a bunch of helper methods to spit out events from the act log"""
+"""Just a bunch of helper methods to spit out events from the ACT log"""
 from datetime import datetime
 from hashlib import sha256
 from typing import Callable, Optional
@@ -81,13 +81,13 @@ class ActEventType(IntEnum):
 # pylint: enable=invalid-name
 
 def date_from_act_timestamp(datestr: str) -> Timestamp:
-    """Parse timestamp from act log into a Timestamp
+    """Parse timestamp from ACT log into a Timestamp
     Look, this is dirty. This is wrong. Please someone find a better way to do this.
     """
     return int(datetime.strptime(f'{datestr[:26]}{datestr[-6:]}', DEFAULT_DATE_FORMAT).timestamp() * 1000)
 
 def validate_checksum(line: str, index: int) -> bool:
-    """Validates an act log line
+    """Validates an ACT log line
     Given some line 1|foo|bar|baz|a823425f532c540667195f641dd3649b, and an index of 1, then the md5sum of
     1|foo|bar|baz|1 (where 1 is the index) should be a823425f532c540667195f641dd3649b (which is the checksum value)
     """

@@ -9,9 +9,9 @@ from nari.types.ability import Ability as AbilityType
 from nari.types.event import Event
 
 def action_effect_from_logline(params: list[str]) -> ActionEffect:
-    """Takes the eight bytes from an act log line and returns ActionEffect data"""
+    """Takes the eight bytes from an ACT log line and returns ActionEffect data"""
     if len(params) != 2:
-        raise Exception('Yell at nono to come up with a specific exception just for you')
+        raise Exception('insert a custom exception right here')
     hexdata = ''.join([x.zfill(8) for x in params])
     intdata = int(hexdata, 16)
     parsed_params = unpack('>BBBBHBB', intdata.to_bytes(8, 'big'))
@@ -19,13 +19,13 @@ def action_effect_from_logline(params: list[str]) -> ActionEffect:
     return ActionEffect(effect_type=effect_type, severity=severity, flags=flags, value=value, multiplier=multiplier, additional_params=[param0, param1])
 
 def ability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Returns an ability event from an act logline
+    """Returns an ability event from an ACT log line
 
     ACT Event ID (decimal): 21
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|
@@ -101,7 +101,7 @@ def ability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     )
 
 def aoeability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parses an aoe ability from logline"""
+    """Parses an AoE ability from log line"""
     # see ability_from_logline above for field definitions
     source_actor = Actor(*params[0:2])
     ability = AbilityType(*params[2:4])

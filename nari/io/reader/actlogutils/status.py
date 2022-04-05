@@ -44,13 +44,13 @@ def status_effect_from_logline(param0, param1, param2):
     )
 
 def statuslist_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parses a StatusList event from an act log line
+    """Parses a StatusList event from an ACT log line
 
     ACT Event ID (decimal): 38
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|
@@ -96,7 +96,7 @@ def statuslist_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     )
 
 def statusapply_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parse status apply from act log line"""
+    """Parse status apply from ACT log line"""
     # param layout from act
     # 0-1 - Status ID / Name
     # 2 - Status Duration
@@ -120,7 +120,7 @@ def statusapply_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     )
 
 def statusremove_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parse status remove from act log line"""
+    """Parse status remove from ACT log line"""
     # param layout from act
     # 0-1 - Status ID / Name
     # 2 - Status Duration

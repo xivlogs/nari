@@ -1,4 +1,4 @@
-"""Parses metadata events from act log line"""
+"""Parses metadata events from ACT log line"""
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.event.version import Version
@@ -6,13 +6,13 @@ from nari.types.event.config import Config
 # from nari.types.actor import Actor
 
 def version_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parses version information from act log line"""
+    """Parses version information from ACT log line"""
     # param layout from act
     # 0 the version string that's it pack it up and take it home
     return Version(timestamp=timestamp, version=params[0])
 
 def config_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parses config from act log line"""
+    """Parses config from ACT log line"""
     # param layout from act
     # 0 a string with a bunch of configurations values separated by commas
     args = params[0].split(', ')

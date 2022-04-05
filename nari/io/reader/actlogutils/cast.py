@@ -7,13 +7,13 @@ from nari.types.event.startcast import StartCast
 from nari.types.event.stopcast import StopCast, StopCastType
 
 def startcast_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parses a start cast event from an act log line
+    """Parses a start cast event from an ACT log line
 
     ACT Event ID (decimal): 20
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|
@@ -49,13 +49,13 @@ def startcast_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
 
 
 def stopcast_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parses stop cast event from act log line
+    """Parses stop cast event from ACT log line
 
     ACT Event ID (decimal): 20
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|

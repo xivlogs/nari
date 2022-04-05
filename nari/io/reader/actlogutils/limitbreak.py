@@ -4,13 +4,13 @@ from nari.types.event import Event
 from nari.types.event.limitbreak import LimitBreak
 
 def limitbreak_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parses a limit break event from an act log line
+    """Parses a limit break event from an ACT log line
 
     ACT Event ID (decimal): 36
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|

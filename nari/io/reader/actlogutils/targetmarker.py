@@ -7,13 +7,13 @@ from nari.io.reader.actlogutils.exceptions import InvalidMarkerID, InvalidMarker
 
 
 def targetmarker_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parses a target marker event from an act log line
+    """Parses a target marker event from an ACT log line
 
     ACT Event ID (decimal): 29
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|

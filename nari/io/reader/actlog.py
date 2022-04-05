@@ -22,7 +22,7 @@ class ActLogReader(Reader):
         self.handle.close()
 
     def handle_line(self, line: str) -> Optional[Event]:
-        """Handles an act-specific line"""
+        """Handles an ACT-specific line"""
         args = line.strip().split('|')
         id_ = int(args[0])
 
@@ -51,7 +51,7 @@ class ActLogReader(Reader):
         return event
 
     def read_next(self) -> Optional[Event]:
-        """Returns an array of all the act log events from the file"""
+        """Returns an array of all the ACT log events from the file"""
         # keep reading until we get a non-None response from handle_line
         while True:
             line: str = self.handle.readline()

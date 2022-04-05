@@ -7,13 +7,13 @@ from nari.types.event.party import PartyList
 
 
 def partylist_from_logline(timestamp: Timestamp, params: list[str]) -> Optional[Event]:
-    """Parses a PartyList event from an act log line
+    """Parses a PartyList event from an ACT log line
 
     ACT Event ID (decimal): 11
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|
