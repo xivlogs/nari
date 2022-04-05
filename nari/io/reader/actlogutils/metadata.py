@@ -5,6 +5,7 @@ from nari.types.event.version import Version
 from nari.types.event.config import Config
 # from nari.types.actor import Actor
 
+
 def version_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Parses version information from ACT log line"""
     # param layout from act

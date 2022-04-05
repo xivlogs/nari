@@ -3,6 +3,7 @@ from nari.types import Timestamp
 from nari.types.event.updatehpmp import UpdateHpMp
 from nari.types.actor import Actor
 
+
 def updatehp_from_logline(timestamp: Timestamp, params: list[str]) -> UpdateHpMp:
     """Parses an UpdateHpMp event from an ACT log line
 

@@ -4,6 +4,7 @@ from nari.types.actor import Actor
 from nari.types.event import Event
 from nari.types.event.visibility import VisibilityChange, VisibilityState, VisibilityType
 
+
 def visibility_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Parses a VisibilityChange event from an ACT log line
 

@@ -3,6 +3,7 @@ from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.event.zone import ZoneChange
 
+
 def zonechange_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Parses a ZoneChange event from an ACT log line
 

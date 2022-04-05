@@ -4,6 +4,7 @@ from nari.types.actor import Actor
 from nari.types.event import Event
 from nari.types.event.death import Death
 
+
 def death_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Parses a death animation event from an ACT log line
 

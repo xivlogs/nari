@@ -9,6 +9,7 @@ from nari.types.actor import Actor
 from nari.types.event import Event
 from nari.types.classjoblevel import ClassJobLevel
 
+
 def classjoblevel_from_logline(param: str) -> ClassJobLevel:
     """Takes a classjoblevel field (From status packets) and parses it"""
     intdata = int(param, 16)

@@ -6,6 +6,7 @@ from nari.types.event import Event
 from nari.types.event.startcast import StartCast
 from nari.types.event.stopcast import StopCast, StopCastType
 
+
 def startcast_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Parses a start cast event from an ACT log line
 

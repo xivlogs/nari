@@ -6,6 +6,7 @@ from nari.types.event import Event
 from nari.types.actor import Actor
 from nari.types.event.effectresult import EffectResult, EffectResultEntry
 
+
 def effectresult_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Returns an effect result event from an ACT log line
 
