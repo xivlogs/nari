@@ -30,7 +30,7 @@ class ActLogReader(Reader):
             raise EventNotFound(f"ACT id: {id_}")
 
         if self.raise_on_checksum_failure:
-            if id_ in (ActEventType.zonechange, ActEventType.version):
+            if id_ in (ActEventType.memoryzonechange, ActEventType.version):
                 self.index = 1
 
             if validate_checksum(line.strip(), self.index) is False:
