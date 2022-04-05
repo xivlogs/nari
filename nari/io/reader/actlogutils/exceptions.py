@@ -1,5 +1,9 @@
 """Exceptions related to ACT log parsing"""
 
+class ActLineParsingException(Exception):
+    """Raised when an ACT log line cannot be parsed"""
+
+
 class InvalidActChecksum(Exception):
     """Raised when a checksum is invalid"""
 

@@ -1,4 +1,4 @@
-"""Parses status from act log line"""
+"""Parse status data from ACT log line"""
 from struct import unpack
 
 from nari.types import Timestamp
@@ -8,6 +8,7 @@ from nari.types.status import Status, StatusEffect
 from nari.types.actor import Actor
 from nari.types.event import Event
 from nari.types.classjoblevel import ClassJobLevel
+
 
 def classjoblevel_from_logline(param: str) -> ClassJobLevel:
     """Takes a classjoblevel field (From status packets) and parses it"""
@@ -44,13 +45,13 @@ def status_effect_from_logline(param0, param1, param2):
     )
 
 def statuslist_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parses a StatusList event from an act log line
+    """Parses a StatusList event from an ACT log line
 
     ACT Event ID (decimal): 38
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|
@@ -66,7 +67,7 @@ def statuslist_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     |9    |float|Target actor X position|
     |10   |float|Target actor Y position|
     |11   |float|Target actor Z position|
-    |12   |float|Target actor facing|
+    |12   |float|Target actor bearing|
     |13-N |StatusEffect(s)|List of StatusEffects, in sets of 3|
     """
     target_actor = Actor(*params[0:2])
@@ -96,7 +97,7 @@ def statuslist_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     )
 
 def statusapply_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parse status apply from act log line"""
+    """Parse status apply from ACT log line"""
     # param layout from act
     # 0-1 - Status ID / Name
     # 2 - Status Duration
@@ -120,7 +121,7 @@ def statusapply_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     )
 
 def statusremove_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parse status remove from act log line"""
+    """Parse status remove from ACT log line"""
     # param layout from act
     # 0-1 - Status ID / Name
     # 2 - Status Duration

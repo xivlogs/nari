@@ -1,17 +1,18 @@
-"""Parses visibility data from act log data"""
+"""Parse visibility data from ACT log line"""
 from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.event import Event
 from nari.types.event.visibility import VisibilityChange, VisibilityState, VisibilityType
 
+
 def visibility_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parses a VisibilityChange event from an act log line
+    """Parses a VisibilityChange event from an ACT log line
 
     ACT Event ID (decimal): 34
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|

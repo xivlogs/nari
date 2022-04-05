@@ -1,4 +1,4 @@
-"""Just a bunch of helper methods to spit out events from the act log"""
+"""Just a bunch of helper methods to spit out events from the ACT log"""
 from datetime import datetime
 from hashlib import sha256
 from typing import Callable, Optional
@@ -33,38 +33,41 @@ ActEventFn = Callable[[Timestamp, list[str]], Optional[Event]]
 # pylint: disable=invalid-name
 class ActEventType(IntEnum):
     """List of Event types from the ACT network log"""
-    logline = 0
-    zonechange = 1
-    changeplayer = 2
-    addcombatant = 3
-    removecombatant = 4
-    partylist = 11
-    playerstats = 12
-    networkbegincast = 20
+    memorychatlog = 0
+    memoryzonechange = 1
+    memorychangeprimaryplayer = 2
+    memoryaddcombatant = 3
+    memoryremovecombatant = 4
+    memorypartylist = 11
+    memoryplayerstats = 12
+    networkstartscasting = 20
     networkability = 21
     networkaoeability = 22
     networkcancelability = 23
-    networkdot = 24
+    networkdothot = 24
     networkdeath = 25
-    networkbuff = 26
-    networkoverheadicon = 27
-    networkwaymark = 28
-    networktargetmarker = 29
-    networkbuffremove = 30
-    gauge = 31
-    directorupdate = 33
+    networkstatusadd = 26
+    networktargeticon = 27
+    networkwaymarkmarker = 28
+    networksignmarker = 29
+    networkstatusremove = 30
+    networkgauge = 31
+    unusedworld = 32
+    networkdirector = 33
     networknametoggle = 34
     networktether = 35
-    limitbreak = 36
+    networklimitbreak = 36
     networkeffectresult = 37
-    networkstatuseffect = 38
+    networkstatuslist = 38
     networkupdatehp = 39
-    changemap = 40
-    logmessageformat = 41
+    memorychangemap = 40
+    memorysystemlogmessage = 41
     config = 249
     hook = 250
     debug = 251
+    packetdump = 252
     version = 253
+    error = 254
 
     @classmethod
     def has_id(cls, id_: int) -> bool:
@@ -78,13 +81,13 @@ class ActEventType(IntEnum):
 # pylint: enable=invalid-name
 
 def date_from_act_timestamp(datestr: str) -> Timestamp:
-    """Parse timestamp from act log into a Timestamp
+    """Parse timestamp from ACT log into a Timestamp
     Look, this is dirty. This is wrong. Please someone find a better way to do this.
     """
     return int(datetime.strptime(f'{datestr[:26]}{datestr[-6:]}', DEFAULT_DATE_FORMAT).timestamp() * 1000)
 
 def validate_checksum(line: str, index: int) -> bool:
-    """Validates an act log line
+    """Validates an ACT log line
     Given some line 1|foo|bar|baz|a823425f532c540667195f641dd3649b, and an index of 1, then the md5sum of
     1|foo|bar|baz|1 (where 1 is the index) should be a823425f532c540667195f641dd3649b (which is the checksum value)
     """
@@ -100,36 +103,43 @@ def noop(timestamp: Timestamp, params: list[str]) -> Event:
     # print(f'Ignoring an event with timestamp {timestamp} and params: {"|".join(params)}')
 
 ID_MAPPINGS: dict[int, ActEventFn] = {
-    ActEventType.version: version_from_logline,
-    ActEventType.zonechange: zonechange_from_logline,
-    ActEventType.changemap: noop,
-    ActEventType.changeplayer: noop,
+    # Internal events
     ActEventType.config: config_from_logline,
     ActEventType.debug: noop,
+    ActEventType.error: noop,
     ActEventType.hook: noop,
-    ActEventType.addcombatant: actor_spawn_from_logline,
-    ActEventType.logmessageformat: noop,
-    ActEventType.removecombatant: noop,
-    ActEventType.playerstats: playerstats_from_logline,
-    ActEventType.logline: noop,
-    ActEventType.gauge: gauge_from_logline,
-    ActEventType.networkstatuseffect: statuslist_from_logline,
-    ActEventType.networkwaymark: waymark_from_logline,
+    ActEventType.packetdump: noop,
+    ActEventType.version: version_from_logline,
+    # Memory events
+    ActEventType.memorychatlog: noop,
+    ActEventType.memoryzonechange: zonechange_from_logline,
+    ActEventType.memorychangemap: noop,
+    ActEventType.memorychangeprimaryplayer: noop,
+    ActEventType.memoryaddcombatant: actor_spawn_from_logline,
+    ActEventType.memoryremovecombatant: noop,
+    ActEventType.memorysystemlogmessage: noop,
+    ActEventType.memoryplayerstats: playerstats_from_logline,
+    ActEventType.memorypartylist: partylist_from_logline,
+    # Network events
+    ActEventType.networkgauge: gauge_from_logline,
     ActEventType.networkdeath: noop,
-    ActEventType.networkbuff: statusapply_from_logline,
-    ActEventType.networkbuffremove: noop,
-    ActEventType.limitbreak: limitbreak_from_logline,
-    ActEventType.partylist: partylist_from_logline,
     ActEventType.networknametoggle: visibility_from_logline,
     ActEventType.networkupdatehp: updatehp_from_logline,
-    ActEventType.directorupdate: director_events_from_logline,
-    ActEventType.networkbegincast: startcast_from_logline,
+    ActEventType.networkdirector: director_events_from_logline,
+    ActEventType.networkstartscasting: startcast_from_logline,
     ActEventType.networkcancelability: stopcast_from_logline,
     ActEventType.networkability: ability_from_logline,
     ActEventType.networkaoeability: aoeability_from_logline,
-    ActEventType.networkdot: noop, # TODO: make less trouble
     ActEventType.networkeffectresult: effectresult_from_logline,
-    ActEventType.networkoverheadicon: targeticon_from_logline,
-    ActEventType.networktargetmarker: targetmarker_from_logline,
+    ActEventType.networkstatuslist: statuslist_from_logline,
+    ActEventType.networkstatusadd: statusapply_from_logline,
+    ActEventType.networkstatusremove: noop,
+    ActEventType.networkdothot: noop, # TODO: make less trouble
+    ActEventType.networklimitbreak: limitbreak_from_logline,
+    ActEventType.networksignmarker: targetmarker_from_logline,
+    ActEventType.networktargeticon: targeticon_from_logline,
+    ActEventType.networkwaymarkmarker: waymark_from_logline,
     ActEventType.networktether: tether_from_logline,
+    # Defined by ACT but unused events
+    ActEventType.unusedworld: noop,
 }

@@ -1,4 +1,4 @@
-"""Parsing act data about abilities"""
+"""Parse ability (action) data from ACT log line"""
 from struct import unpack
 
 from nari.types import Timestamp
@@ -7,11 +7,13 @@ from nari.types.event.ability import Ability, AoeAbility
 from nari.types.actor import Actor
 from nari.types.ability import Ability as AbilityType
 from nari.types.event import Event
+from nari.io.reader.actlogutils.exceptions import ActLineParsingException
+
 
 def action_effect_from_logline(params: list[str]) -> ActionEffect:
-    """Takes the eight bytes from an act log line and returns ActionEffect data"""
+    """Takes the eight bytes from an ACT log line and returns ActionEffect data"""
     if len(params) != 2:
-        raise Exception('Yell at nono to come up with a specific exception just for you')
+        raise ActLineParsingException(f'Expected 2 arguments to unpack for ActionEffect data, got {len(params)}')
     hexdata = ''.join([x.zfill(8) for x in params])
     intdata = int(hexdata, 16)
     parsed_params = unpack('>BBBBHBB', intdata.to_bytes(8, 'big'))
@@ -19,13 +21,13 @@ def action_effect_from_logline(params: list[str]) -> ActionEffect:
     return ActionEffect(effect_type=effect_type, severity=severity, flags=flags, value=value, multiplier=multiplier, additional_params=[param0, param1])
 
 def ability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Returns an ability event from an act logline
+    """Returns an ability event from an ACT log line
 
     ACT Event ID (decimal): 21
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|
@@ -45,7 +47,7 @@ def ability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     |28   |float|Source actor X position|
     |29   |float|Source actor Y position|
     |30   |float|Source actor Z position|
-    |31   |float|Source actor facing|
+    |31   |float|Source actor bearing|
     |32   |int|Target current HP|
     |33   |int|Target max HP|
     |34   |int|Target current MP|
@@ -55,7 +57,7 @@ def ability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     |38   |float|Target actor X position|
     |39   |float|Target actor Y position|
     |40   |float|Target actor Z position|
-    |41   |float|Target actor facing|
+    |41   |float|Target actor bearing|
     |42   |int|Sequence ID|
 
     """
@@ -101,7 +103,7 @@ def ability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     )
 
 def aoeability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Parses an aoe ability from logline"""
+    """Parses an AoE ability from log line"""
     # see ability_from_logline above for field definitions
     source_actor = Actor(*params[0:2])
     ability = AbilityType(*params[2:4])

@@ -1,4 +1,4 @@
-"""Parses effect results from logline"""
+"""Parse effect result data from ACT log line"""
 from struct import unpack
 
 from nari.types import Timestamp
@@ -6,14 +6,15 @@ from nari.types.event import Event
 from nari.types.actor import Actor
 from nari.types.event.effectresult import EffectResult, EffectResultEntry
 
+
 def effectresult_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
-    """Returns an effect result event from an act log line
+    """Returns an effect result event from an ACT log line
 
     ACT Event ID (decimal): 37
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|
@@ -29,7 +30,7 @@ def effectresult_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     |9    |float|Actor X position|
     |10   |float|Actor Y position|
     |11   |float|Actor Z position|
-    |12   |float|Actor facing|
+    |12   |float|Actor bearing|
     |13   |int|Unknown|
     |14   |int|Unknown|
     |15   |int|Unknown|

@@ -1,17 +1,18 @@
-""""Parses gauge events from act log line"""
+""""Parse gauge data from ACT log line"""
 from nari.types import Timestamp
 from nari.types.event.gauge import Gauge
 from nari.util.byte import hexstr_to_bytes
 from nari.util.exceptions import ActLineReadError
 
+
 def gauge_from_logline(timestamp: Timestamp, params: list[str]) -> Gauge:
-    """Parses a gauge event from an act log line
+    """Parses a gauge event from an ACT log line
 
     ACT Event ID (decimal): 31
 
-    ## Param layout from act
+    ## Param layout from ACT
 
-    The first two params in every event is the act event ID and the timestamp it was parsed; the following table documents all the other fields.
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
     |Index|Type|Description|
     |----:|----|:----------|
