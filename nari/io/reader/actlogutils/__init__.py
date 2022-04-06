@@ -13,6 +13,7 @@ from nari.io.reader.actlogutils.zone import zonechange_from_logline
 from nari.io.reader.actlogutils.status import statuslist_from_logline, statuslist3_from_logline, statusapply_from_logline
 from nari.io.reader.actlogutils.limitbreak import limitbreak_from_logline
 from nari.io.reader.actlogutils.ability import ability_from_logline, aoeability_from_logline
+from nari.io.reader.actlogutils.tick import tick_from_logline
 from nari.io.reader.actlogutils.directorupdate import director_events_from_logline
 from nari.io.reader.actlogutils.updatehp import updatehp_from_logline
 from nari.io.reader.actlogutils.actorspawn import actor_spawn_from_logline
@@ -136,7 +137,7 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.networkstatuslist3: statuslist3_from_logline,
     ActEventType.networkstatusadd: statusapply_from_logline,
     ActEventType.networkstatusremove: noop,
-    ActEventType.networkdothot: noop, # TODO: make less trouble
+    ActEventType.networkdothot: tick_from_logline,
     ActEventType.networklimitbreak: limitbreak_from_logline,
     ActEventType.networksignmarker: targetmarker_from_logline,
     ActEventType.networktargeticon: targeticon_from_logline,
