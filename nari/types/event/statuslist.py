@@ -7,7 +7,7 @@ from nari.types.status import StatusEffect
 
 
 class StatusList(Event): # pylint: disable=too-few-public-methods
-    """Whenever a status is applied"""
+    """A list of Statuses on an Actor"""
     def __init__(self, *,
                  timestamp: Timestamp,
                  class_job_level: ClassJobLevel,
@@ -21,3 +21,18 @@ class StatusList(Event): # pylint: disable=too-few-public-methods
 
     def __repr__(self):
         return '<StatusList>'
+
+
+class StatusListBasic(Event): # pylint: disable=too-few-public-methods
+    """A simplified list of Statuses on an Actor"""
+    def __init__(self, *,
+                 timestamp: Timestamp,
+                 target_actor: Actor,
+                 status_effects: list[StatusEffect]
+                ):
+        super().__init__(timestamp)
+        self.target_actor = target_actor
+        self.status_effects = status_effects
+
+    def __repr__(self):
+        return '<StatusListBasic>'
