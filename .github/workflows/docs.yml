@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'nari/**.py'
 
 jobs:
   docs:
