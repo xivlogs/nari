@@ -2,7 +2,7 @@
 from struct import unpack
 
 from nari.types import Timestamp
-from nari.types.event.statuslist import StatusList
+from nari.types.event.statuslist import StatusList, StatusListBasic
 from nari.types.event.status import StatusApply, StatusRemove
 from nari.types.status import Status, StatusEffect
 from nari.types.actor import Actor
@@ -93,6 +93,35 @@ def statuslist_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
         timestamp=timestamp,
         class_job_level=class_job_level,
         target_actor=target_actor,
+        status_effects=status_effects
+    )
+
+def statuslist3_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
+    """Parses a StatusList3 event from an ACT log line
+
+    ACT Event ID (decimal): 42
+
+    ## Param layout from ACT
+
+    The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
+
+    |Index|Type|Description|
+    |----:|----|:----------|
+    |0    |int|Actor ID|
+    |1    |string|Actor name|
+    |2-N |StatusEffect(s)|List of StatusEffects, in sets of 3|
+    """
+    actor = Actor(*params[0:2])
+    remaining_params = len(params) - 1
+    status_effects: list[StatusEffect] = []
+    for i in range(2, remaining_params, 3):
+        status_effects.append(
+            status_effect_from_logline(*params[i:i+3])
+        )
+
+    return StatusListBasic(
+        timestamp=timestamp,
+        target_actor=actor,
         status_effects=status_effects
     )
 
