@@ -10,7 +10,7 @@ from nari.types.event.limitbreak import LimitBreak
 # here we go
 from nari.io.reader.actlogutils.metadata import version_from_logline, config_from_logline
 from nari.io.reader.actlogutils.zone import zonechange_from_logline
-from nari.io.reader.actlogutils.status import statuslist_from_logline, statusapply_from_logline
+from nari.io.reader.actlogutils.status import statuslist_from_logline, statuslist3_from_logline, statusapply_from_logline
 from nari.io.reader.actlogutils.limitbreak import limitbreak_from_logline
 from nari.io.reader.actlogutils.ability import ability_from_logline, aoeability_from_logline
 from nari.io.reader.actlogutils.directorupdate import director_events_from_logline
@@ -62,6 +62,7 @@ class ActEventType(IntEnum):
     networkupdatehp = 39
     memorychangemap = 40
     memorysystemlogmessage = 41
+    networkstatuslist3 = 42
     config = 249
     hook = 250
     debug = 251
@@ -132,6 +133,7 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.networkaoeability: aoeability_from_logline,
     ActEventType.networkeffectresult: effectresult_from_logline,
     ActEventType.networkstatuslist: statuslist_from_logline,
+    ActEventType.networkstatuslist3: statuslist3_from_logline,
     ActEventType.networkstatusadd: statusapply_from_logline,
     ActEventType.networkstatusremove: noop,
     ActEventType.networkdothot: noop, # TODO: make less trouble
