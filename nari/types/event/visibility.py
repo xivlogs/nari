@@ -1,4 +1,4 @@
-"""Events for visibility"""
+"""Classes for visibility state management"""
 from enum import Enum, auto
 
 from nari.types import Timestamp
@@ -18,12 +18,13 @@ class VisibilityState(Enum):
 
 
 class VisibilityChange(Event): # pylint: disable=too-few-public-methods
-    """Event representing visibility changes"""
+    """Represents a visibility change"""
     def __init__(self, *,
                  timestamp: Timestamp,
                  actor: Actor,
                  visibility_type: VisibilityType,
-                 state: VisibilityState):
+                 state: VisibilityState,
+                ):
         super().__init__(timestamp)
         self.actor = actor
         self.visibility_type = visibility_type

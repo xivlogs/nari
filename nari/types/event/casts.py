@@ -14,7 +14,8 @@ class CastStart(Event): # pylint: disable=too-few-public-methods
                  source_actor: Actor,
                  ability: Ability,
                  target_actor: Actor,
-                 duration: float):
+                 duration: float,
+                ):
         super().__init__(timestamp)
         self.source_actor = source_actor
         self.ability = ability
@@ -45,7 +46,8 @@ class CastStop(Event): # pylint: disable=too-few-public-methods
                  timestamp: Timestamp,
                  source_actor: Actor,
                  ability: Ability,
-                 cause: CastStopCause):
+                 cause: CastStopCause,
+                ):
         super().__init__(timestamp)
         self.source_actor = source_actor
         self.ability = ability

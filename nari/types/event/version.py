@@ -6,7 +6,7 @@ class Version(Event): # pylint: disable=too-few-public-methods
     """Represents a version string found in the events"""
     def __init__(self, *,
                  timestamp: Timestamp,
-                 version: str
+                 version: str,
                 ):
         super().__init__(timestamp)
         self.version = version

@@ -1,4 +1,4 @@
-"""Events for markers"""
+"""Classes for overhead markers"""
 from enum import IntEnum
 
 from nari.types import Timestamp
@@ -11,7 +11,8 @@ class ContentMarker(Event): # pylint: disable=too-few-public-methods
     def __init__(self, *,
                  timestamp: Timestamp,
                  actor: Actor,
-                 marker_id: int):
+                 marker_id: int,
+                ):
         super().__init__(timestamp)
         self.actor = actor
         self.marker_id = marker_id
@@ -60,7 +61,8 @@ class PlayerMarker(Event): # pylint: disable=too-few-public-methods
                  source_actor: Actor,
                  target_actor: Actor,
                  operator: MarkerOperation,
-                 marker: PlayerMarkerType):
+                 marker: PlayerMarkerType,
+                ):
         super().__init__(timestamp)
         self.source_actor = source_actor
         self.target_actor = target_actor

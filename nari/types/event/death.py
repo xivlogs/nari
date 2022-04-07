@@ -1,11 +1,11 @@
-"""Stuff for death of actors"""
+"""Class that represents an Actor dying"""
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
 
 
 class Death(Event): # pylint: disable=too-few-public-methods
-    """Event represents the death of an actor"""
+    """Represents an Actor dying"""
     def __init__(self, *,
                  timestamp: Timestamp,
                  source_actor: Actor,
@@ -16,4 +16,4 @@ class Death(Event): # pylint: disable=too-few-public-methods
         self.target_actor = target_actor
 
     def __repr__(self):
-        return '<StatusApply>'
+        return '<Death>'

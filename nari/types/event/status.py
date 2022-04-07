@@ -1,4 +1,4 @@
-"""Stuff for application of statuses"""
+"""Classes for status events"""
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
@@ -6,14 +6,14 @@ from nari.types.status import Status
 
 
 class StatusApply(Event): # pylint: disable=too-few-public-methods
-    """Event represents the application of a status"""
+    """Represents the application of a status"""
     def __init__(self, *,
                  timestamp: Timestamp,
                  status: Status,
                  duration: float,
                  source_actor: Actor,
                  target_actor: Actor,
-                 params: int
+                 params: int,
                 ):
         super().__init__(timestamp)
         self.status = status
@@ -27,14 +27,14 @@ class StatusApply(Event): # pylint: disable=too-few-public-methods
 
 
 class StatusRemove(Event): # pylint: disable=too-few-public-methods
-    """Event represents the application of a status"""
+    """Represents the removal of a status"""
     def __init__(self, *,
                  timestamp: Timestamp,
                  status: Status,
                  duration: float,
                  source_actor: Actor,
                  target_actor: Actor,
-                 params: int
+                 params: int,
                 ):
         super().__init__(timestamp)
         self.status = status

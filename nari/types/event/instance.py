@@ -1,4 +1,4 @@
-"""Classes that represent events around instance state"""
+"""Classes that represent director commands to manage instance duty state"""
 from enum import Enum, auto
 
 from nari.types import Timestamp
@@ -33,10 +33,10 @@ class InstanceComplete(Event): # pylint: disable=too-few-public-methods
 
 
 class InstanceVote(Event): # pylint: disable=too-few-public-methods
-    """Represents voting mechanics"""
+    """Represents the vote start"""
     def __init__(self, *,
                  timestamp: Timestamp,
-                instance_id: int,
+                 instance_id: int,
                 ):
         super().__init__(timestamp)
         self.instance_id = instance_id
@@ -50,7 +50,7 @@ class InstanceFade(Event): # pylint: disable=too-few-public-methods
     def __init__(self, *,
                  timestamp: Timestamp,
                  instance_id: int,
-                 state: Fade
+                 state: Fade,
                 ):
         super().__init__(timestamp)
         self.instance_id = instance_id
