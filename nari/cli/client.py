@@ -3,7 +3,6 @@
 
 from argparse import ArgumentParser, Namespace
 from logging import basicConfig, getLogger, Logger, CRITICAL, INFO
-from tkinter.tix import COLUMN
 from typing import TypeVar
 
 from nari.io.reader.actlog import ActLogReader
