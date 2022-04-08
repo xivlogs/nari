@@ -3,17 +3,20 @@
 
 from argparse import ArgumentParser, Namespace
 from logging import basicConfig, getLogger, Logger, CRITICAL, INFO
+from tkinter.tix import COLUMN
 from typing import TypeVar
 
 from nari.io.reader.actlog import ActLogReader
 from nari.io.reader import Reader
-from nari.cli.fightlist import FightList
+from nari.types.event.instance import InstanceComplete, InstanceFade, InstanceInit
+
 
 DEFAULT_LOG_FORMAT: str = '[%(levelname)s] %(message)s'
 logger: Logger = getLogger('nari')
 
 T = TypeVar('T') # pylint: disable=invalid-name
 Matrix = list[list[T]]
+
 
 def print_matrix(matrix: Matrix[str]):
     """Hacky function to print out an 'aligned' set of data"""
@@ -22,11 +25,36 @@ def print_matrix(matrix: Matrix[str]):
         print(''.join(word.ljust(col_width) for word in row))
 
 
-
 def parse_fights(reader: Reader) -> Matrix[str]:
     """Takes in a reader object and parses the fight details out of it"""
-    fight_list = FightList(reader)
-    return fight_list.process_events()
+    column_headers: list[str] = ['date', 'instance id', 'encounters']
+    matrix = [column_headers]
+    fight_log: list[dict] = []
+    current_fight: dict = {}
+
+    for event in filter(lambda e: isinstance(e, (InstanceInit, InstanceFade, InstanceComplete)), reader):
+        if isinstance(event, InstanceInit):
+            if current_fight:
+                fight_log.append(current_fight)
+            current_fight = {
+                'date': event.timestamp,
+                'name': str(event.instance_id),
+            }
+        elif isinstance(event, (InstanceFade, InstanceComplete)):
+            current_fight['fights'] = current_fight.get('fights', 0) + 1
+
+    # wrap up any lingering fights
+    if current_fight:
+        fight_log.append(current_fight)
+
+    for fight in fight_log:
+        num_fights = fight.get('fights', 0)
+        amtstr = 'fight' if num_fights == 1 else 'fights'
+        matrix.append([
+            f'[{fight["date"]}]',
+            fight['name'],
+            f'{num_fights} {amtstr}'
+        ])
 
 
 def create_parser() -> ArgumentParser:
