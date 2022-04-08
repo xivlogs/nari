@@ -55,6 +55,8 @@ def parse_fights(reader: Reader) -> Matrix[str]:
             f'{num_fights} {amtstr}'
         ])
 
+    return matrix
+
 
 def create_parser() -> ArgumentParser:
     """Convenience function to create the argument parser"""
