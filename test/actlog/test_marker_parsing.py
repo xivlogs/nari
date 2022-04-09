@@ -10,7 +10,7 @@ class TestLineChecksum(unittest.TestCase):
 
     def test_line(self):
         """
-        Tests act validation for marker parsing
+        Tests ACT validation for marker parsing
         """
         timestamp = 0000 # THE START OF TIME
         add_marker_attack_1 = "Add|0|10909B23|Danger Duckling|40001112|Striking Dummy".split('|')
