@@ -27,7 +27,7 @@ class CastStart(Event): # pylint: disable=too-few-public-methods
 
 
 # pylint: disable=invalid-name
-class CastStopCause(IntEnum):
+class CastStopCategory(IntEnum):
     """Represents reasons a cast could be interrupted"""
     Interrupted = auto()
     Cancelled = auto()
@@ -46,7 +46,7 @@ class CastStop(Event): # pylint: disable=too-few-public-methods
                  timestamp: Timestamp,
                  source_actor: Actor,
                  ability: Ability,
-                 cause: CastStopCause,
+                 cause: CastStopCategory,
                 ):
         super().__init__(timestamp)
         self.source_actor = source_actor
