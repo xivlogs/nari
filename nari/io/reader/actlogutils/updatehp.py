@@ -13,6 +13,8 @@ def updatehp_from_logline(timestamp: Timestamp, params: list[str]) -> UpdateHpMp
 
     The first two params in every event is the ACT event ID and the timestamp it was parsed; the following table documents all the other fields.
 
+    The max values are not parsed as they're injected by ACT from memory and don't exist in the underlying packet.
+
     |Index|Type|Description|
     |----:|----|:----------|
     |0    |int|Actor ID|
