@@ -3,7 +3,7 @@ from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.ability import Ability as AbilityType
 from nari.types.event import Event
-from nari.types.event.casts import CastStart, CastStop, CastStopCategory
+from nari.types.event.cast import CastStart, CastStop, CastStopCategory
 
 
 def startcast_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
