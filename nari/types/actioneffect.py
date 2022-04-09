@@ -3,7 +3,7 @@
 from enum import IntEnum, IntFlag
 
 # pylint: disable=invalid-name
-class EffectType(IntEnum):
+class EffectResultCategory(IntEnum):
     """The different effect types an ability can have"""
     Nothing = 0
     Miss = 1
@@ -55,13 +55,13 @@ class HitSeverity(IntFlag):
 class ActionEffect(): # pylint: disable=too-few-public-methods
     """Properties that modify an ability use"""
     def __init__(self, *,
-                 effect_type: EffectType,
+                 effect_category: EffectResultCategory,
                  severity: HitSeverity,
                  flags: int,
                  value: int,
                  multiplier: int,
                  additional_params: list[int]):
-        self.effect_type = effect_type
+        self.effect_category = effect_category
         self.severity = severity
         self.flags = flags
         self.value = value
