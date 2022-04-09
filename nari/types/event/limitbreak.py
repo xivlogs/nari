@@ -1,15 +1,18 @@
-"""This event generates at periodic intervals to represent the limit gauge 'growing'"""
+"""Class that represents the Limit Break gauge state"""
+from nari.types import Timestamp
+from nari.types.event import Event
 
-from nari.types.event.base import Event
-from nari.types.event import Type
 
-class LimitBreak(Event):
-    """Event when limit break is gained"""
-    __id__ = Type.limitbreak.value
-    # looks like it has two params:
-    # 0000|1
-    # I think the first one is the state of the bar.
-    # Not sure what the second one is.
+class LimitBreak(Event): # pylint: disable=too-few-public-methods
+    """Represents changes to the value of the Limit Break bar"""
+    def __init__(self, *,
+                 timestamp: Timestamp,
+                 amount: int,
+                 bars: int,
+                ):
+        super().__init__(timestamp)
+        self.amount = amount
+        self.bars = bars
 
     def __repr__(self):
         return '<LimitBreak>'

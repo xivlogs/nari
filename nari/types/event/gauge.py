@@ -1,10 +1,21 @@
-"""This data is only relevant to the person parsing – Gauge events will only show up that player"""
+"""Class that represents gauge events"""
+from typing import Tuple
 
-from nari.types.event.base import Event
-from nari.types.event import Type
+from nari.types import Timestamp
+from nari.types.event import Event
 
-class Gauge(Event):
-    """ID 31 is a gauge event"""
-    __id__ = Type.gauge.value
+
+class Gauge(Event):  # pylint: disable=too-few-public-methods
+    """Represents the gauge state of any job"""
+
+    def __init__(self, *,
+                 timestamp: Timestamp,
+                 actor_id: int,
+                 fields: Tuple[bytes, ...],
+                ):
+        super().__init__(timestamp)
+        self.actor_id = actor_id
+        self.fields = fields
+
     def __repr__(self):
         return '<Gauge>'

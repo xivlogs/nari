@@ -4,13 +4,17 @@ from pickle import load
 from typing import Optional
 
 from nari.io.reader import Reader
-from nari.types.event.base import Event
+from nari.types.event import Event
 
 
 class PickleReader(Reader):
     """Opens up a pickle file with events and reads them out"""
     def __init__(self, filename: str):
-        self.handle = open(filename, 'rb')
+        self.handle = open(filename, 'rb') # pylint: disable=consider-using-with
+
+    def __del__(self):
+        """Handles closing the file when the object undergoes garbage collection"""
+        self.handle.close()
 
     def read_next(self) -> Optional[Event]:
         try:

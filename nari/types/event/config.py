@@ -1,13 +1,15 @@
-"""ACT has it's own special type to represent it's configuration"""
+"""Class that represents configuration value(s)"""
+from nari.types import Timestamp
+from nari.types.event import Event
 
-from nari.types.event.base import Event
-from nari.types.event import Type
-
-class Config(Event):
-    """Represents ACT config options"""
-    __id__ = Type.config.value
-    def handle_params(self):
-        self.options = self.params[0].split(', ')
+class Config(Event): # pylint: disable=too-few-public-methods
+    """Represents a version string found in the events"""
+    def __init__(self, *,
+                 timestamp: Timestamp,
+                 values: dict[str, str],
+                ):
+        super().__init__(timestamp)
+        self.values = values
 
     def __repr__(self):
-        return f'<Config ({";".join(self.options)})>'
+        return f'<Config {self.values.items()}>'

@@ -1,9 +1,9 @@
 """Collection of reading-related classes and utilities"""
 
 from abc import ABCMeta, abstractmethod
-from typing import List, Iterator, Optional
+from typing import Iterator, Optional
 
-from nari.types.event.base import Event
+from nari.types.event import Event
 
 
 class Reader(metaclass=ABCMeta):
@@ -21,6 +21,6 @@ class Reader(metaclass=ABCMeta):
     def read_next(self) -> Optional[Event]:
         """Implementing classes must implement this method to return the next parsed event"""
 
-    def read_all(self) -> List[Event]:
+    def read_all(self) -> list[Event]:
         """Iterates through all events and returns them as a list"""
         return list(self)

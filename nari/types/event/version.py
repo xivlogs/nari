@@ -1,10 +1,15 @@
-"""The ACT version"""
+"""Class that represents version(s)"""
+from nari.types import Timestamp
+from nari.types.event import Event
 
-from nari.types.event.base import Event
-from nari.types.event import Type
+class Version(Event): # pylint: disable=too-few-public-methods
+    """Represents a version string found in the events"""
+    def __init__(self, *,
+                 timestamp: Timestamp,
+                 version: str,
+                ):
+        super().__init__(timestamp)
+        self.version = version
 
-class Version(Event):
-    """Represents the act version"""
-    __id__ = Type.version.value
     def __repr__(self):
-        return f'<Version {self.params[0]}>'
+        return '<Version>'
