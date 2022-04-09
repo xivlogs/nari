@@ -2,7 +2,7 @@
 from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.event import Event
-from nari.types.event.markers import ContentMarker
+from nari.types.event.markers import OverheadVFX
 
 
 def targeticon_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
@@ -26,7 +26,7 @@ def targeticon_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     |7    |int|padding|
     """
     actor = Actor(*params[0:2])
-    return ContentMarker(
+    return OverheadVFX(
         timestamp=timestamp,
         actor=actor,
         marker_id=int(params[4])
