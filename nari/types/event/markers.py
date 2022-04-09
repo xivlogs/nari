@@ -32,20 +32,20 @@ class MarkerOperation(IntEnum):
 # pylint: disable=invalid-name
 class PlayerMarkerType(IntEnum):
     """Enums for player-applied markers, these IDs can be found in the Marker.exd client file"""
-    Attack1 = 1
-    Attack2 = 2
-    Attack3 = 3
-    Attack4 = 4
-    Attack5 = 5
-    Bind1 = 6
-    Bind2 = 7
-    Bind3 = 8
-    Ignore1 = 9
-    Ignore2 = 10
-    Square = 11
-    Circle = 12
-    Plus = 13
-    Triangle = 14
+    Attack1 = 0
+    Attack2 = 1
+    Attack3 = 2
+    Attack4 = 3
+    Attack5 = 4
+    Bind1 = 5
+    Bind2 = 6
+    Bind3 = 7
+    Ignore1 = 8
+    Ignore2 = 9
+    Square = 10
+    Circle = 11
+    Plus = 12
+    Triangle = 13
 
     @classmethod
     def contains(cls, value: int) -> bool:
