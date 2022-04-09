@@ -30,11 +30,11 @@ def updatehp_from_logline(timestamp: Timestamp, params: list[str]) -> UpdateHpMp
     |12   |string|Blank because ACT|
     """
     actor = Actor(*params[0:2])
-    try:
-        actor.resources.update(
-            *[int(x) for x in params[2:8]]
-        )
-    except ValueError:
-        pass
 
-    return UpdateHpMp(timestamp=timestamp, actor=actor)
+    return UpdateHpMp(
+        timestamp=timestamp,
+        actor=actor,
+        hp=int(params[2]),
+        mp=int(params[4]),
+        sp=int(params[6])
+    )
