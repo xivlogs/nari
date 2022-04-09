@@ -2,7 +2,7 @@
 from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.event import Event
-from nari.types.event.markers import MarkerOperation, PlayerMarker, PlayerMarkerType
+from nari.types.event.markers import MarkerOperation, OverheadMarker, PlayerMarker
 from nari.io.reader.actlogutils.exceptions import InvalidMarkerID, InvalidMarkerOperation
 
 
@@ -40,13 +40,13 @@ def targetmarker_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
             raise InvalidMarkerOperation(value)
 
     marker_id = int(params[1])
-    if not PlayerMarkerType.contains(marker_id):
+    if not PlayerMarker.contains(marker_id):
         raise InvalidMarkerID(marker_id)
 
-    return PlayerMarker(
+    return OverheadMarker(
         timestamp=timestamp,
         source_actor=source_actor,
         target_actor=target_actor,
         operator=op,
-        marker=PlayerMarkerType(marker_id)
+        marker=PlayerMarker(marker_id)
     )

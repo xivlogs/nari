@@ -1,11 +1,11 @@
-"""Class that represents blahblahblah"""
+"""Class that represents an Actor spawning"""
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
 
 
-class ActorSpawn(Event): # pylint: disable=too-few-public-methods
-    """Represents"""
+class ActorSpawn(Event): # pylint: disable=too-few-public-methods,duplicate-code
+    """Represents an Actor spawning"""
     def __init__(self, *,
                  timestamp: Timestamp,
                  actor: Actor,

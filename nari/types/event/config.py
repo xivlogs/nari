@@ -6,7 +6,7 @@ class Config(Event): # pylint: disable=too-few-public-methods
     """Represents a version string found in the events"""
     def __init__(self, *,
                  timestamp: Timestamp,
-                 values: dict[str, str]
+                 values: dict[str, str],
                 ):
         super().__init__(timestamp)
         self.values = values

@@ -1,4 +1,4 @@
-"""Classes that represent changes to your parties"""
+"""Classes that represent changes to a party"""
 from nari.types import Timestamp
 from nari.types.event import Event
 

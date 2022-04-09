@@ -5,7 +5,7 @@ from nari.types import Timestamp
 from nari.types.actioneffect import ActionEffect
 from nari.types.event.ability import Ability, AoeAbility
 from nari.types.actor import Actor
-from nari.types.ability import Ability as AbilityType
+from nari.types.ability import Ability as AbilityEvent
 from nari.types.event import Event
 from nari.io.reader.actlogutils.exceptions import ActLineParsingException
 
@@ -17,8 +17,8 @@ def action_effect_from_logline(params: list[str]) -> ActionEffect:
     hexdata = ''.join([x.zfill(8) for x in params])
     intdata = int(hexdata, 16)
     parsed_params = unpack('>BBBBHBB', intdata.to_bytes(8, 'big'))
-    param0, param1, severity, effect_type, value, flags, multiplier = parsed_params
-    return ActionEffect(effect_type=effect_type, severity=severity, flags=flags, value=value, multiplier=multiplier, additional_params=[param0, param1])
+    param0, param1, severity, effect_category, value, flags, multiplier = parsed_params
+    return ActionEffect(effect_category=effect_category, severity=severity, flags=flags, value=value, multiplier=multiplier, additional_params=[param0, param1])
 
 def ability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Returns an ability event from an ACT log line
@@ -62,7 +62,7 @@ def ability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
 
     """
     source_actor = Actor(*params[0:2])
-    ability = AbilityType(*params[2:4])
+    ability = AbilityEvent(*params[2:4])
     target_actor = Actor(*params[4:6])
     action_effects = []
     for i in range(0, 16, 2):
@@ -106,7 +106,7 @@ def aoeability_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """Parses an AoE ability from log line"""
     # see ability_from_logline above for field definitions
     source_actor = Actor(*params[0:2])
-    ability = AbilityType(*params[2:4])
+    ability = AbilityEvent(*params[2:4])
     target_actor = Actor(*params[4:6])
     action_effects = []
     for i in range(0, 16, 2):

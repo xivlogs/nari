@@ -2,7 +2,7 @@
 from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.event import Event
-from nari.types.event.visibility import VisibilityChange, VisibilityState, VisibilityType
+from nari.types.event.visibility import VisibilityCategory, VisibilityChange, VisibilityState
 
 
 def visibility_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
@@ -27,6 +27,6 @@ def visibility_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     return VisibilityChange(
         timestamp=timestamp,
         actor=actor,
-        visibility_type=VisibilityType.Nameplate,
+        visibility_category=VisibilityCategory.Nameplate,
         state=visibility
     )

@@ -3,8 +3,7 @@ from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.ability import Ability as AbilityType
 from nari.types.event import Event
-from nari.types.event.startcast import StartCast
-from nari.types.event.stopcast import StopCast, StopCastType
+from nari.types.event.cast import CastStart, CastStop, CastStopCategory
 
 
 def startcast_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
@@ -40,7 +39,7 @@ def startcast_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     except ValueError:
         pass
     duration = float(params[6])
-    return StartCast(
+    return CastStart(
         timestamp=timestamp,
         source_actor=source_actor,
         ability=ability,
@@ -69,10 +68,10 @@ def stopcast_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     """
     source_actor = Actor(*params[0:2])
     ability = AbilityType(*params[2:4])
-    stop_type = StopCastType.value_from_name(params[4])
-    return StopCast(
+    stop_type = CastStopCategory.value_from_name(params[4])
+    return CastStop(
         timestamp=timestamp,
         source_actor=source_actor,
         ability=ability,
-        cast_type=stop_type,
+        cause=stop_type,
     )

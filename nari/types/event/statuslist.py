@@ -1,4 +1,4 @@
-"""Stuff for the application of statuses"""
+"""Classes for status list updates"""
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.classjoblevel import ClassJobLevel
@@ -7,12 +7,12 @@ from nari.types.status import StatusEffect
 
 
 class StatusList(Event): # pylint: disable=too-few-public-methods
-    """A list of Statuses on an Actor"""
+    """Represents a player Actor status list"""
     def __init__(self, *,
                  timestamp: Timestamp,
                  class_job_level: ClassJobLevel,
                  target_actor: Actor,
-                 status_effects: list[StatusEffect]
+                 status_effects: list[StatusEffect],
                 ):
         super().__init__(timestamp)
         self.class_job_level = class_job_level
@@ -24,11 +24,11 @@ class StatusList(Event): # pylint: disable=too-few-public-methods
 
 
 class StatusListBasic(Event): # pylint: disable=too-few-public-methods
-    """A simplified list of Statuses on an Actor"""
+    """Represents a simplified status list"""
     def __init__(self, *,
                  timestamp: Timestamp,
                  target_actor: Actor,
-                 status_effects: list[StatusEffect]
+                 status_effects: list[StatusEffect],
                 ):
         super().__init__(timestamp)
         self.target_actor = target_actor
