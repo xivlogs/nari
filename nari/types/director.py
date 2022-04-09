@@ -8,7 +8,7 @@ the barrier.
 from enum import IntEnum
 
 # pylint: disable=invalid-name
-class DirectorUpdateType(IntEnum):
+class DirectorUpdateCategory(IntEnum):
     """Relates to the type of content that's being 'directed'"""
     BattleLeve = 0x8001
     """Content is a combat leve duty"""
