@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.2" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>nari.types.event API documentation</title>
-<meta name="description" content="Base for event-related object code" />
+<meta name="description" content="Base event class that all other event types inherit from" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,56 +22,21 @@
 <h1 class="title">Module <code>nari.types.event</code></h1>
 </header>
 <section id="section-intro">
-<p>Base for event-related object code</p>
+<p>Base event class that all other event types inherit from</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;Base for event-related object code&#34;&#34;&#34;
-from enum import IntEnum
+<pre><code class="python">&#34;&#34;&#34;Base event class that all other event types inherit from&#34;&#34;&#34;
+from nari.types import Timestamp
 
-# this should be renamed and moved up a module – perhaps EventType?
-class Type(IntEnum):
-    &#34;&#34;&#34;List of Event types from the ACT network log&#34;&#34;&#34;
-    logline = 0
-    zonechange = 1
-    changeplayer = 2
-    addcombatant = 3
-    removecombatant = 4
-    partylist = 11
-    playerstats = 12
-    networkbegincast = 20
-    networkability = 21
-    networkaoeability = 22
-    networkcancelability = 23
-    networkdot = 24
-    networkdeath = 25
-    networkbuff = 26
-    networktargetheadmarker = 27
-    networktargetmarker = 29
-    networkbuffremove = 30
-    gauge = 31
-    directorupdate = 33
-    networknametoggle = 34
-    networktether = 35
-    limitbreak = 36
-    networkeffectresult = 37
-    networkstatuseffect = 38
-    networkupdatehp = 39
-    config = 249
-    hook = 250
-    debug = 251
-    version = 253
+class Event(): # pylint: disable=too-few-public-methods
+    &#34;&#34;&#34;&#34;Basically just contains the timestamp&#34;&#34;&#34;
+    def __init__(self, timestamp: Timestamp):
+        self.timestamp = timestamp
 
-    @classmethod
-    def has_id(cls, id_: int) -&gt; bool:
-        &#34;&#34;&#34;Returns True if the id is in the enum&#34;&#34;&#34;
-        return id_ in cls.__members__.values()
-
-    @classmethod
-    def has_type(cls, name: str) -&gt; bool:
-        &#34;&#34;&#34;Returns true if the name is in the enum&#34;&#34;&#34;
-        return name in cls.__members__.keys()</code></pre>
+    def __repr__(self):
+        return &#39;&lt;Event&gt;&#39;</code></pre>
 </details>
 </section>
 <section>
@@ -79,127 +44,87 @@ class Type(IntEnum):
 <dl>
 <dt><code class="name"><a title="nari.types.event.ability" href="ability.html">nari.types.event.ability</a></code></dt>
 <dd>
-<div class="desc"><p>Ability represents actions performed by Actors to Actors …</p></div>
+<div class="desc"><p>Class that represents ability usages</p></div>
 </dd>
-<dt><code class="name"><a title="nari.types.event.addcombatant" href="addcombatant.html">nari.types.event.addcombatant</a></code></dt>
+<dt><code class="name"><a title="nari.types.event.actorspawn" href="actorspawn.html">nari.types.event.actorspawn</a></code></dt>
 <dd>
-<div class="desc"><p>Event representing an actor being added to the field</p></div>
+<div class="desc"><p>Class that represents an Actor spawning</p></div>
 </dd>
-<dt><code class="name"><a title="nari.types.event.aoeability" href="aoeability.html">nari.types.event.aoeability</a></code></dt>
+<dt><code class="name"><a title="nari.types.event.cast" href="cast.html">nari.types.event.cast</a></code></dt>
 <dd>
-<div class="desc"><p>Different from a regular damage event, this Event represents an ability that hits multiple targets.</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.base" href="base.html">nari.types.event.base</a></code></dt>
-<dd>
-<div class="desc"><p>The base event type that all the other Events should inherit from</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.changeplayer" href="changeplayer.html">nari.types.event.changeplayer</a></code></dt>
-<dd>
-<div class="desc"><p>ChangePlayer events always occur after a zone transition</p></div>
+<div class="desc"><p>Class for cast bars</p></div>
 </dd>
 <dt><code class="name"><a title="nari.types.event.config" href="config.html">nari.types.event.config</a></code></dt>
 <dd>
-<div class="desc"><p>ACT has it's own special type to represent it's configuration</p></div>
+<div class="desc"><p>Class that represents configuration value(s)</p></div>
 </dd>
-<dt><code class="name"><a title="nari.types.event.debug" href="debug.html">nari.types.event.debug</a></code></dt>
+<dt><code class="name"><a title="nari.types.event.death" href="death.html">nari.types.event.death</a></code></dt>
 <dd>
-<div class="desc"><p>ACT has a special ID (251) for representing debug data</p></div>
+<div class="desc"><p>Class that represents an Actor dying</p></div>
 </dd>
-<dt><code class="name"><a title="nari.types.event.directorupdate" href="directorupdate.html">nari.types.event.directorupdate</a></code></dt>
+<dt><code class="name"><a title="nari.types.event.effectresult" href="effectresult.html">nari.types.event.effectresult</a></code></dt>
 <dd>
-<div class="desc"><p>DirectorUpdate represents changes from the 'Director' to the 'scene' in-game …</p></div>
+<div class="desc"><p>Class that represents effect result data</p></div>
 </dd>
 <dt><code class="name"><a title="nari.types.event.gauge" href="gauge.html">nari.types.event.gauge</a></code></dt>
 <dd>
-<div class="desc"><p>This data is only relevant to the person parsing – Gauge events will only show up that player</p></div>
+<div class="desc"><p>Class that represents gauge events</p></div>
 </dd>
-<dt><code class="name"><a title="nari.types.event.hook" href="hook.html">nari.types.event.hook</a></code></dt>
+<dt><code class="name"><a title="nari.types.event.instance" href="instance.html">nari.types.event.instance</a></code></dt>
 <dd>
-<div class="desc"><p>When ACT successfully 'hooked' into FFXIV, it generates this event.</p></div>
+<div class="desc"><p>Classes that represent director commands to manage instance duty state</p></div>
 </dd>
 <dt><code class="name"><a title="nari.types.event.limitbreak" href="limitbreak.html">nari.types.event.limitbreak</a></code></dt>
 <dd>
-<div class="desc"><p>This event generates at periodic intervals to represent the limit gauge 'growing'</p></div>
+<div class="desc"><p>Class that represents the Limit Break gauge state</p></div>
 </dd>
-<dt><code class="name"><a title="nari.types.event.logline" href="logline.html">nari.types.event.logline</a></code></dt>
+<dt><code class="name"><a title="nari.types.event.markers" href="markers.html">nari.types.event.markers</a></code></dt>
 <dd>
-<div class="desc"><p>Literally lines from the in-game log</p></div>
+<div class="desc"><p>Classes for overhead markers</p></div>
 </dd>
-<dt><code class="name"><a title="nari.types.event.mappings" href="mappings.html">nari.types.event.mappings</a></code></dt>
+<dt><code class="name"><a title="nari.types.event.party" href="party.html">nari.types.event.party</a></code></dt>
 <dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networkbegincast" href="networkbegincast.html">nari.types.event.networkbegincast</a></code></dt>
-<dd>
-<div class="desc"><p>This event represents someone starting to cast</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networkbuff" href="networkbuff.html">nari.types.event.networkbuff</a></code></dt>
-<dd>
-<div class="desc"><p>Represents a buff being applied. Seen also with statuseffect</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networkbuffremove" href="networkbuffremove.html">nari.types.event.networkbuffremove</a></code></dt>
-<dd>
-<div class="desc"><p>Represents a buff being removed</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networkcancelability" href="networkcancelability.html">nari.types.event.networkcancelability</a></code></dt>
-<dd>
-<div class="desc"><p>Represents an ability being cancelled for one reason or another</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networkdeath" href="networkdeath.html">nari.types.event.networkdeath</a></code></dt>
-<dd>
-<div class="desc"><p>This event generates when someone (player or npc) dies</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networkdot" href="networkdot.html">nari.types.event.networkdot</a></code></dt>
-<dd>
-<div class="desc"><p>Despite the name, represents DoT <em>and</em> HoT values</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networkeffectresult" href="networkeffectresult.html">nari.types.event.networkeffectresult</a></code></dt>
-<dd>
-<div class="desc"><p>You'll see this every time an actor is targeted by a hostile action</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networknametoggle" href="networknametoggle.html">nari.types.event.networknametoggle</a></code></dt>
-<dd>
-<div class="desc"><p>This event fires when a nameplate 'toggles' (becomes visible or invisible)</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networkstatuseffect" href="networkstatuseffect.html">nari.types.event.networkstatuseffect</a></code></dt>
-<dd>
-<div class="desc"><p>Status effects applied to actors</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networktargetheadmarker" href="networktargetheadmarker.html">nari.types.event.networktargetheadmarker</a></code></dt>
-<dd>
-<div class="desc"><p>This event triggers an 'effect marker' to appear over an actor's head</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networktargetmarker" href="networktargetmarker.html">nari.types.event.networktargetmarker</a></code></dt>
-<dd>
-<div class="desc"><p>Unsure of this one</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networktether" href="networktether.html">nari.types.event.networktether</a></code></dt>
-<dd>
-<div class="desc"><p>Represents a tether from one actor to another</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.networkupdatehp" href="networkupdatehp.html">nari.types.event.networkupdatehp</a></code></dt>
-<dd>
-<div class="desc"><p>Represents an update to an actor's HP</p></div>
-</dd>
-<dt><code class="name"><a title="nari.types.event.partylist" href="partylist.html">nari.types.event.partylist</a></code></dt>
-<dd>
-<div class="desc"><p>This event fires when the party list changes</p></div>
+<div class="desc"><p>Classes that represent changes to a party</p></div>
 </dd>
 <dt><code class="name"><a title="nari.types.event.playerstats" href="playerstats.html">nari.types.event.playerstats</a></code></dt>
 <dd>
-<div class="desc"><p>Unsure on this one</p></div>
+<div class="desc"><p>Class for player stats</p></div>
 </dd>
-<dt><code class="name"><a title="nari.types.event.removecombatant" href="removecombatant.html">nari.types.event.removecombatant</a></code></dt>
+<dt><code class="name"><a title="nari.types.event.status" href="status.html">nari.types.event.status</a></code></dt>
 <dd>
-<div class="desc"><p>RemoveCombatant fires when an actor is removed</p></div>
+<div class="desc"><p>Classes for status events</p></div>
+</dd>
+<dt><code class="name"><a title="nari.types.event.statuslist" href="statuslist.html">nari.types.event.statuslist</a></code></dt>
+<dd>
+<div class="desc"><p>Classes for status list updates</p></div>
+</dd>
+<dt><code class="name"><a title="nari.types.event.tether" href="tether.html">nari.types.event.tether</a></code></dt>
+<dd>
+<div class="desc"><p>Classes for tethers</p></div>
+</dd>
+<dt><code class="name"><a title="nari.types.event.ticks" href="ticks.html">nari.types.event.ticks</a></code></dt>
+<dd>
+<div class="desc"><p>Class that represents ticks of statuses with periodic effects</p></div>
+</dd>
+<dt><code class="name"><a title="nari.types.event.updatehpmp" href="updatehpmp.html">nari.types.event.updatehpmp</a></code></dt>
+<dd>
+<div class="desc"><p>Class to manage updates to Actor resources</p></div>
 </dd>
 <dt><code class="name"><a title="nari.types.event.version" href="version.html">nari.types.event.version</a></code></dt>
 <dd>
-<div class="desc"><p>The ACT version</p></div>
+<div class="desc"><p>Class that represents version(s)</p></div>
 </dd>
-<dt><code class="name"><a title="nari.types.event.zonechange" href="zonechange.html">nari.types.event.zonechange</a></code></dt>
+<dt><code class="name"><a title="nari.types.event.visibility" href="visibility.html">nari.types.event.visibility</a></code></dt>
 <dd>
-<div class="desc"><p>Fires when the zone is changed</p></div>
+<div class="desc"><p>Classes for visibility state management</p></div>
+</dd>
+<dt><code class="name"><a title="nari.types.event.waymark" href="waymark.html">nari.types.event.waymark</a></code></dt>
+<dd>
+<div class="desc"><p>Classes for waymarks</p></div>
+</dd>
+<dt><code class="name"><a title="nari.types.event.zone" href="zone.html">nari.types.event.zone</a></code></dt>
+<dd>
+<div class="desc"><p>Class that represents zone transitions</p></div>
 </dd>
 </dl>
 </section>
@@ -210,216 +135,58 @@ class Type(IntEnum):
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="nari.types.event.Type"><code class="flex name class">
-<span>class <span class="ident">Type</span></span>
-<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+<dt id="nari.types.event.Event"><code class="flex name class">
+<span>class <span class="ident">Event</span></span>
+<span>(</span><span>timestamp: int)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>List of Event types from the ACT network log</p></div>
+<div class="desc"><p>"Basically just contains the timestamp</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class Type(IntEnum):
-    &#34;&#34;&#34;List of Event types from the ACT network log&#34;&#34;&#34;
-    logline = 0
-    zonechange = 1
-    changeplayer = 2
-    addcombatant = 3
-    removecombatant = 4
-    partylist = 11
-    playerstats = 12
-    networkbegincast = 20
-    networkability = 21
-    networkaoeability = 22
-    networkcancelability = 23
-    networkdot = 24
-    networkdeath = 25
-    networkbuff = 26
-    networktargetheadmarker = 27
-    networktargetmarker = 29
-    networkbuffremove = 30
-    gauge = 31
-    directorupdate = 33
-    networknametoggle = 34
-    networktether = 35
-    limitbreak = 36
-    networkeffectresult = 37
-    networkstatuseffect = 38
-    networkupdatehp = 39
-    config = 249
-    hook = 250
-    debug = 251
-    version = 253
+<pre><code class="python">class Event(): # pylint: disable=too-few-public-methods
+    &#34;&#34;&#34;&#34;Basically just contains the timestamp&#34;&#34;&#34;
+    def __init__(self, timestamp: Timestamp):
+        self.timestamp = timestamp
 
-    @classmethod
-    def has_id(cls, id_: int) -&gt; bool:
-        &#34;&#34;&#34;Returns True if the id is in the enum&#34;&#34;&#34;
-        return id_ in cls.__members__.values()
-
-    @classmethod
-    def has_type(cls, name: str) -&gt; bool:
-        &#34;&#34;&#34;Returns true if the name is in the enum&#34;&#34;&#34;
-        return name in cls.__members__.keys()</code></pre>
+    def __repr__(self):
+        return &#39;&lt;Event&gt;&#39;</code></pre>
 </details>
-<h3>Ancestors</h3>
+<h3>Subclasses</h3>
 <ul class="hlist">
-<li>enum.IntEnum</li>
-<li>builtins.int</li>
-<li>enum.Enum</li>
+<li><a title="nari.types.event.ability.Ability" href="ability.html#nari.types.event.ability.Ability">Ability</a></li>
+<li><a title="nari.types.event.ability.AoeAbility" href="ability.html#nari.types.event.ability.AoeAbility">AoeAbility</a></li>
+<li><a title="nari.types.event.actorspawn.ActorSpawn" href="actorspawn.html#nari.types.event.actorspawn.ActorSpawn">ActorSpawn</a></li>
+<li><a title="nari.types.event.cast.CastStart" href="cast.html#nari.types.event.cast.CastStart">CastStart</a></li>
+<li><a title="nari.types.event.cast.CastStop" href="cast.html#nari.types.event.cast.CastStop">CastStop</a></li>
+<li><a title="nari.types.event.config.Config" href="config.html#nari.types.event.config.Config">Config</a></li>
+<li><a title="nari.types.event.death.Death" href="death.html#nari.types.event.death.Death">Death</a></li>
+<li><a title="nari.types.event.effectresult.EffectResult" href="effectresult.html#nari.types.event.effectresult.EffectResult">EffectResult</a></li>
+<li><a title="nari.types.event.gauge.Gauge" href="gauge.html#nari.types.event.gauge.Gauge">Gauge</a></li>
+<li><a title="nari.types.event.instance.BarrierToggle" href="instance.html#nari.types.event.instance.BarrierToggle">BarrierToggle</a></li>
+<li><a title="nari.types.event.instance.InstanceComplete" href="instance.html#nari.types.event.instance.InstanceComplete">InstanceComplete</a></li>
+<li><a title="nari.types.event.instance.InstanceFade" href="instance.html#nari.types.event.instance.InstanceFade">InstanceFade</a></li>
+<li><a title="nari.types.event.instance.InstanceInit" href="instance.html#nari.types.event.instance.InstanceInit">InstanceInit</a></li>
+<li><a title="nari.types.event.instance.InstanceVote" href="instance.html#nari.types.event.instance.InstanceVote">InstanceVote</a></li>
+<li><a title="nari.types.event.limitbreak.LimitBreak" href="limitbreak.html#nari.types.event.limitbreak.LimitBreak">LimitBreak</a></li>
+<li><a title="nari.types.event.markers.OverheadMarker" href="markers.html#nari.types.event.markers.OverheadMarker">OverheadMarker</a></li>
+<li><a title="nari.types.event.markers.OverheadVFX" href="markers.html#nari.types.event.markers.OverheadVFX">OverheadVFX</a></li>
+<li><a title="nari.types.event.party.PartyList" href="party.html#nari.types.event.party.PartyList">PartyList</a></li>
+<li><a title="nari.types.event.playerstats.PlayerStats" href="playerstats.html#nari.types.event.playerstats.PlayerStats">PlayerStats</a></li>
+<li><a title="nari.types.event.status.StatusApply" href="status.html#nari.types.event.status.StatusApply">StatusApply</a></li>
+<li><a title="nari.types.event.status.StatusRemove" href="status.html#nari.types.event.status.StatusRemove">StatusRemove</a></li>
+<li><a title="nari.types.event.statuslist.StatusList" href="statuslist.html#nari.types.event.statuslist.StatusList">StatusList</a></li>
+<li><a title="nari.types.event.statuslist.StatusListBasic" href="statuslist.html#nari.types.event.statuslist.StatusListBasic">StatusListBasic</a></li>
+<li><a title="nari.types.event.tether.Tether" href="tether.html#nari.types.event.tether.Tether">Tether</a></li>
+<li><a title="nari.types.event.ticks.DamageOverTime" href="ticks.html#nari.types.event.ticks.DamageOverTime">DamageOverTime</a></li>
+<li><a title="nari.types.event.ticks.HealOverTime" href="ticks.html#nari.types.event.ticks.HealOverTime">HealOverTime</a></li>
+<li><a title="nari.types.event.updatehpmp.UpdateHpMp" href="updatehpmp.html#nari.types.event.updatehpmp.UpdateHpMp">UpdateHpMp</a></li>
+<li><a title="nari.types.event.version.Version" href="version.html#nari.types.event.version.Version">Version</a></li>
+<li><a title="nari.types.event.visibility.VisibilityChange" href="visibility.html#nari.types.event.visibility.VisibilityChange">VisibilityChange</a></li>
+<li><a title="nari.types.event.waymark.Waymark" href="waymark.html#nari.types.event.waymark.Waymark">Waymark</a></li>
+<li><a title="nari.types.event.zone.ZoneChange" href="zone.html#nari.types.event.zone.ZoneChange">ZoneChange</a></li>
 </ul>
-<h3>Class variables</h3>
-<dl>
-<dt id="nari.types.event.Type.addcombatant"><code class="name">var <span class="ident">addcombatant</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.changeplayer"><code class="name">var <span class="ident">changeplayer</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.config"><code class="name">var <span class="ident">config</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.debug"><code class="name">var <span class="ident">debug</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.directorupdate"><code class="name">var <span class="ident">directorupdate</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.gauge"><code class="name">var <span class="ident">gauge</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.hook"><code class="name">var <span class="ident">hook</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.limitbreak"><code class="name">var <span class="ident">limitbreak</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.logline"><code class="name">var <span class="ident">logline</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networkability"><code class="name">var <span class="ident">networkability</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networkaoeability"><code class="name">var <span class="ident">networkaoeability</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networkbegincast"><code class="name">var <span class="ident">networkbegincast</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networkbuff"><code class="name">var <span class="ident">networkbuff</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networkbuffremove"><code class="name">var <span class="ident">networkbuffremove</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networkcancelability"><code class="name">var <span class="ident">networkcancelability</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networkdeath"><code class="name">var <span class="ident">networkdeath</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networkdot"><code class="name">var <span class="ident">networkdot</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networkeffectresult"><code class="name">var <span class="ident">networkeffectresult</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networknametoggle"><code class="name">var <span class="ident">networknametoggle</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networkstatuseffect"><code class="name">var <span class="ident">networkstatuseffect</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networktargetheadmarker"><code class="name">var <span class="ident">networktargetheadmarker</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networktargetmarker"><code class="name">var <span class="ident">networktargetmarker</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networktether"><code class="name">var <span class="ident">networktether</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.networkupdatehp"><code class="name">var <span class="ident">networkupdatehp</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.partylist"><code class="name">var <span class="ident">partylist</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.playerstats"><code class="name">var <span class="ident">playerstats</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.removecombatant"><code class="name">var <span class="ident">removecombatant</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.version"><code class="name">var <span class="ident">version</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="nari.types.event.Type.zonechange"><code class="name">var <span class="ident">zonechange</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-</dl>
-<h3>Static methods</h3>
-<dl>
-<dt id="nari.types.event.Type.has_id"><code class="name flex">
-<span>def <span class="ident">has_id</span></span>(<span>id_: int) ‑> bool</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Returns True if the id is in the enum</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def has_id(cls, id_: int) -&gt; bool:
-    &#34;&#34;&#34;Returns True if the id is in the enum&#34;&#34;&#34;
-    return id_ in cls.__members__.values()</code></pre>
-</details>
-</dd>
-<dt id="nari.types.event.Type.has_type"><code class="name flex">
-<span>def <span class="ident">has_type</span></span>(<span>name: str) ‑> bool</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Returns true if the name is in the enum</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def has_type(cls, name: str) -&gt; bool:
-    &#34;&#34;&#34;Returns true if the name is in the enum&#34;&#34;&#34;
-    return name in cls.__members__.keys()</code></pre>
-</details>
-</dd>
-</dl>
 </dd>
 </dl>
 </section>
@@ -438,75 +205,32 @@ def has_type(cls, name: str) -&gt; bool:
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
 <li><code><a title="nari.types.event.ability" href="ability.html">nari.types.event.ability</a></code></li>
-<li><code><a title="nari.types.event.addcombatant" href="addcombatant.html">nari.types.event.addcombatant</a></code></li>
-<li><code><a title="nari.types.event.aoeability" href="aoeability.html">nari.types.event.aoeability</a></code></li>
-<li><code><a title="nari.types.event.base" href="base.html">nari.types.event.base</a></code></li>
-<li><code><a title="nari.types.event.changeplayer" href="changeplayer.html">nari.types.event.changeplayer</a></code></li>
+<li><code><a title="nari.types.event.actorspawn" href="actorspawn.html">nari.types.event.actorspawn</a></code></li>
+<li><code><a title="nari.types.event.cast" href="cast.html">nari.types.event.cast</a></code></li>
 <li><code><a title="nari.types.event.config" href="config.html">nari.types.event.config</a></code></li>
-<li><code><a title="nari.types.event.debug" href="debug.html">nari.types.event.debug</a></code></li>
-<li><code><a title="nari.types.event.directorupdate" href="directorupdate.html">nari.types.event.directorupdate</a></code></li>
+<li><code><a title="nari.types.event.death" href="death.html">nari.types.event.death</a></code></li>
+<li><code><a title="nari.types.event.effectresult" href="effectresult.html">nari.types.event.effectresult</a></code></li>
 <li><code><a title="nari.types.event.gauge" href="gauge.html">nari.types.event.gauge</a></code></li>
-<li><code><a title="nari.types.event.hook" href="hook.html">nari.types.event.hook</a></code></li>
+<li><code><a title="nari.types.event.instance" href="instance.html">nari.types.event.instance</a></code></li>
 <li><code><a title="nari.types.event.limitbreak" href="limitbreak.html">nari.types.event.limitbreak</a></code></li>
-<li><code><a title="nari.types.event.logline" href="logline.html">nari.types.event.logline</a></code></li>
-<li><code><a title="nari.types.event.mappings" href="mappings.html">nari.types.event.mappings</a></code></li>
-<li><code><a title="nari.types.event.networkbegincast" href="networkbegincast.html">nari.types.event.networkbegincast</a></code></li>
-<li><code><a title="nari.types.event.networkbuff" href="networkbuff.html">nari.types.event.networkbuff</a></code></li>
-<li><code><a title="nari.types.event.networkbuffremove" href="networkbuffremove.html">nari.types.event.networkbuffremove</a></code></li>
-<li><code><a title="nari.types.event.networkcancelability" href="networkcancelability.html">nari.types.event.networkcancelability</a></code></li>
-<li><code><a title="nari.types.event.networkdeath" href="networkdeath.html">nari.types.event.networkdeath</a></code></li>
-<li><code><a title="nari.types.event.networkdot" href="networkdot.html">nari.types.event.networkdot</a></code></li>
-<li><code><a title="nari.types.event.networkeffectresult" href="networkeffectresult.html">nari.types.event.networkeffectresult</a></code></li>
-<li><code><a title="nari.types.event.networknametoggle" href="networknametoggle.html">nari.types.event.networknametoggle</a></code></li>
-<li><code><a title="nari.types.event.networkstatuseffect" href="networkstatuseffect.html">nari.types.event.networkstatuseffect</a></code></li>
-<li><code><a title="nari.types.event.networktargetheadmarker" href="networktargetheadmarker.html">nari.types.event.networktargetheadmarker</a></code></li>
-<li><code><a title="nari.types.event.networktargetmarker" href="networktargetmarker.html">nari.types.event.networktargetmarker</a></code></li>
-<li><code><a title="nari.types.event.networktether" href="networktether.html">nari.types.event.networktether</a></code></li>
-<li><code><a title="nari.types.event.networkupdatehp" href="networkupdatehp.html">nari.types.event.networkupdatehp</a></code></li>
-<li><code><a title="nari.types.event.partylist" href="partylist.html">nari.types.event.partylist</a></code></li>
+<li><code><a title="nari.types.event.markers" href="markers.html">nari.types.event.markers</a></code></li>
+<li><code><a title="nari.types.event.party" href="party.html">nari.types.event.party</a></code></li>
 <li><code><a title="nari.types.event.playerstats" href="playerstats.html">nari.types.event.playerstats</a></code></li>
-<li><code><a title="nari.types.event.removecombatant" href="removecombatant.html">nari.types.event.removecombatant</a></code></li>
+<li><code><a title="nari.types.event.status" href="status.html">nari.types.event.status</a></code></li>
+<li><code><a title="nari.types.event.statuslist" href="statuslist.html">nari.types.event.statuslist</a></code></li>
+<li><code><a title="nari.types.event.tether" href="tether.html">nari.types.event.tether</a></code></li>
+<li><code><a title="nari.types.event.ticks" href="ticks.html">nari.types.event.ticks</a></code></li>
+<li><code><a title="nari.types.event.updatehpmp" href="updatehpmp.html">nari.types.event.updatehpmp</a></code></li>
 <li><code><a title="nari.types.event.version" href="version.html">nari.types.event.version</a></code></li>
-<li><code><a title="nari.types.event.zonechange" href="zonechange.html">nari.types.event.zonechange</a></code></li>
+<li><code><a title="nari.types.event.visibility" href="visibility.html">nari.types.event.visibility</a></code></li>
+<li><code><a title="nari.types.event.waymark" href="waymark.html">nari.types.event.waymark</a></code></li>
+<li><code><a title="nari.types.event.zone" href="zone.html">nari.types.event.zone</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="nari.types.event.Type" href="#nari.types.event.Type">Type</a></code></h4>
-<ul class="">
-<li><code><a title="nari.types.event.Type.addcombatant" href="#nari.types.event.Type.addcombatant">addcombatant</a></code></li>
-<li><code><a title="nari.types.event.Type.changeplayer" href="#nari.types.event.Type.changeplayer">changeplayer</a></code></li>
-<li><code><a title="nari.types.event.Type.config" href="#nari.types.event.Type.config">config</a></code></li>
-<li><code><a title="nari.types.event.Type.debug" href="#nari.types.event.Type.debug">debug</a></code></li>
-<li><code><a title="nari.types.event.Type.directorupdate" href="#nari.types.event.Type.directorupdate">directorupdate</a></code></li>
-<li><code><a title="nari.types.event.Type.gauge" href="#nari.types.event.Type.gauge">gauge</a></code></li>
-<li><code><a title="nari.types.event.Type.has_id" href="#nari.types.event.Type.has_id">has_id</a></code></li>
-<li><code><a title="nari.types.event.Type.has_type" href="#nari.types.event.Type.has_type">has_type</a></code></li>
-<li><code><a title="nari.types.event.Type.hook" href="#nari.types.event.Type.hook">hook</a></code></li>
-<li><code><a title="nari.types.event.Type.limitbreak" href="#nari.types.event.Type.limitbreak">limitbreak</a></code></li>
-<li><code><a title="nari.types.event.Type.logline" href="#nari.types.event.Type.logline">logline</a></code></li>
-<li><code><a title="nari.types.event.Type.networkability" href="#nari.types.event.Type.networkability">networkability</a></code></li>
-<li><code><a title="nari.types.event.Type.networkaoeability" href="#nari.types.event.Type.networkaoeability">networkaoeability</a></code></li>
-<li><code><a title="nari.types.event.Type.networkbegincast" href="#nari.types.event.Type.networkbegincast">networkbegincast</a></code></li>
-<li><code><a title="nari.types.event.Type.networkbuff" href="#nari.types.event.Type.networkbuff">networkbuff</a></code></li>
-<li><code><a title="nari.types.event.Type.networkbuffremove" href="#nari.types.event.Type.networkbuffremove">networkbuffremove</a></code></li>
-<li><code><a title="nari.types.event.Type.networkcancelability" href="#nari.types.event.Type.networkcancelability">networkcancelability</a></code></li>
-<li><code><a title="nari.types.event.Type.networkdeath" href="#nari.types.event.Type.networkdeath">networkdeath</a></code></li>
-<li><code><a title="nari.types.event.Type.networkdot" href="#nari.types.event.Type.networkdot">networkdot</a></code></li>
-<li><code><a title="nari.types.event.Type.networkeffectresult" href="#nari.types.event.Type.networkeffectresult">networkeffectresult</a></code></li>
-<li><code><a title="nari.types.event.Type.networknametoggle" href="#nari.types.event.Type.networknametoggle">networknametoggle</a></code></li>
-<li><code><a title="nari.types.event.Type.networkstatuseffect" href="#nari.types.event.Type.networkstatuseffect">networkstatuseffect</a></code></li>
-<li><code><a title="nari.types.event.Type.networktargetheadmarker" href="#nari.types.event.Type.networktargetheadmarker">networktargetheadmarker</a></code></li>
-<li><code><a title="nari.types.event.Type.networktargetmarker" href="#nari.types.event.Type.networktargetmarker">networktargetmarker</a></code></li>
-<li><code><a title="nari.types.event.Type.networktether" href="#nari.types.event.Type.networktether">networktether</a></code></li>
-<li><code><a title="nari.types.event.Type.networkupdatehp" href="#nari.types.event.Type.networkupdatehp">networkupdatehp</a></code></li>
-<li><code><a title="nari.types.event.Type.partylist" href="#nari.types.event.Type.partylist">partylist</a></code></li>
-<li><code><a title="nari.types.event.Type.playerstats" href="#nari.types.event.Type.playerstats">playerstats</a></code></li>
-<li><code><a title="nari.types.event.Type.removecombatant" href="#nari.types.event.Type.removecombatant">removecombatant</a></code></li>
-<li><code><a title="nari.types.event.Type.version" href="#nari.types.event.Type.version">version</a></code></li>
-<li><code><a title="nari.types.event.Type.zonechange" href="#nari.types.event.Type.zonechange">zonechange</a></code></li>
-</ul>
+<h4><code><a title="nari.types.event.Event" href="#nari.types.event.Event">Event</a></code></h4>
 </li>
 </ul>
 </li>
@@ -514,7 +238,7 @@ def has_type(cls, name: str) -&gt; bool:
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.2" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>nari.cli.client API documentation</title>
 <meta name="description" content="Entrypoint into the base nari cli client" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -32,28 +32,59 @@
 
 from argparse import ArgumentParser, Namespace
 from logging import basicConfig, getLogger, Logger, CRITICAL, INFO
-from typing import List
+from typing import TypeVar
 
 from nari.io.reader.actlog import ActLogReader
 from nari.io.reader import Reader
-from nari.cli.fightlist import FightList
+from nari.types.event.instance import InstanceComplete, InstanceFade, InstanceInit
+
 
 DEFAULT_LOG_FORMAT: str = &#39;[%(levelname)s] %(message)s&#39;
 logger: Logger = getLogger(&#39;nari&#39;)
 
+T = TypeVar(&#39;T&#39;) # pylint: disable=invalid-name
+Matrix = list[list[T]]
 
-def print_matrix(matrix: List[List[str]]):
+
+def print_matrix(matrix: Matrix[str]):
     &#34;&#34;&#34;Hacky function to print out an &#39;aligned&#39; set of data&#34;&#34;&#34;
     col_width = max(len(word) for row in matrix for word in row) + 2
     for row in matrix:
         print(&#39;&#39;.join(word.ljust(col_width) for word in row))
 
 
-
-def parse_fights(reader: Reader) -&gt; List[List[str]]:
+def parse_fights(reader: Reader) -&gt; Matrix[str]:
     &#34;&#34;&#34;Takes in a reader object and parses the fight details out of it&#34;&#34;&#34;
-    fight_list = FightList(reader)
-    return fight_list.process_events()
+    column_headers: list[str] = [&#39;date&#39;, &#39;instance id&#39;, &#39;encounters&#39;]
+    matrix = [column_headers]
+    fight_log: list[dict] = []
+    current_fight: dict = {}
+
+    for event in filter(lambda e: isinstance(e, (InstanceInit, InstanceFade, InstanceComplete)), reader):
+        if isinstance(event, InstanceInit):
+            if current_fight:
+                fight_log.append(current_fight)
+            current_fight = {
+                &#39;date&#39;: event.timestamp,
+                &#39;name&#39;: str(event.instance_id),
+            }
+        elif isinstance(event, (InstanceFade, InstanceComplete)):
+            current_fight[&#39;fights&#39;] = current_fight.get(&#39;fights&#39;, 0) + 1
+
+    # wrap up any lingering fights
+    if current_fight:
+        fight_log.append(current_fight)
+
+    for fight in fight_log:
+        num_fights = fight.get(&#39;fights&#39;, 0)
+        amtstr = &#39;fight&#39; if num_fights == 1 else &#39;fights&#39;
+        matrix.append([
+            f&#39;[{fight[&#34;date&#34;]}]&#39;,
+            fight[&#39;name&#39;],
+            f&#39;{num_fights} {amtstr}&#39;
+        ])
+
+    return matrix
 
 
 def create_parser() -&gt; ArgumentParser:
@@ -117,7 +148,7 @@ if __name__ == &#39;__main__&#39;:
 </details>
 </dd>
 <dt id="nari.cli.client.handle_args"><code class="name flex">
-<span>def <span class="ident">handle_args</span></span>(<span>log=None, verbose=False, error=False) ‑> NoneType</span>
+<span>def <span class="ident">handle_args</span></span>(<span>log=None, verbose=False, error=False) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Just runs what we've got</p></div>
@@ -155,7 +186,7 @@ if __name__ == &#39;__main__&#39;:
 </details>
 </dd>
 <dt id="nari.cli.client.parse_fights"><code class="name flex">
-<span>def <span class="ident">parse_fights</span></span>(<span>reader: <a title="nari.io.reader.Reader" href="../io/reader/index.html#nari.io.reader.Reader">Reader</a>) ‑> List[List[str]]</span>
+<span>def <span class="ident">parse_fights</span></span>(<span>reader: <a title="nari.io.reader.Reader" href="../io/reader/index.html#nari.io.reader.Reader">Reader</a>) ‑> list[list[str]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Takes in a reader object and parses the fight details out of it</p></div>
@@ -163,14 +194,42 @@ if __name__ == &#39;__main__&#39;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def parse_fights(reader: Reader) -&gt; List[List[str]]:
+<pre><code class="python">def parse_fights(reader: Reader) -&gt; Matrix[str]:
     &#34;&#34;&#34;Takes in a reader object and parses the fight details out of it&#34;&#34;&#34;
-    fight_list = FightList(reader)
-    return fight_list.process_events()</code></pre>
+    column_headers: list[str] = [&#39;date&#39;, &#39;instance id&#39;, &#39;encounters&#39;]
+    matrix = [column_headers]
+    fight_log: list[dict] = []
+    current_fight: dict = {}
+
+    for event in filter(lambda e: isinstance(e, (InstanceInit, InstanceFade, InstanceComplete)), reader):
+        if isinstance(event, InstanceInit):
+            if current_fight:
+                fight_log.append(current_fight)
+            current_fight = {
+                &#39;date&#39;: event.timestamp,
+                &#39;name&#39;: str(event.instance_id),
+            }
+        elif isinstance(event, (InstanceFade, InstanceComplete)):
+            current_fight[&#39;fights&#39;] = current_fight.get(&#39;fights&#39;, 0) + 1
+
+    # wrap up any lingering fights
+    if current_fight:
+        fight_log.append(current_fight)
+
+    for fight in fight_log:
+        num_fights = fight.get(&#39;fights&#39;, 0)
+        amtstr = &#39;fight&#39; if num_fights == 1 else &#39;fights&#39;
+        matrix.append([
+            f&#39;[{fight[&#34;date&#34;]}]&#39;,
+            fight[&#39;name&#39;],
+            f&#39;{num_fights} {amtstr}&#39;
+        ])
+
+    return matrix</code></pre>
 </details>
 </dd>
 <dt id="nari.cli.client.print_matrix"><code class="name flex">
-<span>def <span class="ident">print_matrix</span></span>(<span>matrix: List[List[str]])</span>
+<span>def <span class="ident">print_matrix</span></span>(<span>matrix: list[list[str]])</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Hacky function to print out an 'aligned' set of data</p></div>
@@ -178,7 +237,7 @@ if __name__ == &#39;__main__&#39;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def print_matrix(matrix: List[List[str]]):
+<pre><code class="python">def print_matrix(matrix: Matrix[str]):
     &#34;&#34;&#34;Hacky function to print out an &#39;aligned&#39; set of data&#34;&#34;&#34;
     col_width = max(len(word) for row in matrix for word in row) + 2
     for row in matrix:
@@ -214,7 +273,7 @@ if __name__ == &#39;__main__&#39;:
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.2" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>nari.types.job API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="Class that maps jobs to jobID
+Reference: https://github.com/xivapi/ffxiv-datamining/blob/master/csv/ClassJob.csv" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,6 +23,102 @@
 <h1 class="title">Module <code>nari.types.job</code></h1>
 </header>
 <section id="section-intro">
+<p>Class that maps jobs to jobID
+Reference: <a href="https://github.com/xivapi/ffxiv-datamining/blob/master/csv/ClassJob.csv">https://github.com/xivapi/ffxiv-datamining/blob/master/csv/ClassJob.csv</a></p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Class that maps jobs to jobID
+Reference: https://github.com/xivapi/ffxiv-datamining/blob/master/csv/ClassJob.csv
+&#34;&#34;&#34;
+
+from enum import IntEnum
+
+
+class Job(IntEnum):
+    &#34;&#34;&#34;
+    Jobs and abbreviations in game.
+    &#34;&#34;&#34;
+    ADV = 0
+    ADVENTURER = 0
+    GLA = 1
+    GLADIATOR = 1
+    PGL = 2
+    PUGILIST = 2
+    MRD = 3
+    MARAUDER = 3
+    LNC = 4
+    LANCER = 4
+    ARC = 5
+    ARCHER = 5
+    CNJ = 6
+    CONJURER = 6
+    THM = 7
+    THAUMATURGE = 7
+    CRP = 8
+    CARPENTER = 8
+    BSM = 9
+    BLACKSMITH = 9
+    ARM = 10
+    ARMORER = 10
+    GSM = 11
+    GOLDSMITH = 11
+    LTW = 12
+    LEATHERWORKER = 12
+    WVR = 13
+    WEAVER = 13
+    ALC = 14
+    ALCHEMIST = 14
+    CUL = 15
+    CULINARIAN = 15
+    MIN = 16
+    MINER = 16
+    BTN = 17
+    BOTANIST = 17
+    FSH = 18
+    FISHER = 18
+    PLD = 19
+    PALADIN = 19
+    MNK = 20
+    MONK = 20
+    WAR = 21
+    WARRIOR = 21
+    DRG = 22
+    DRAGOON = 22
+    BRD = 23
+    BARD = 23
+    WHM = 24
+    WHITE_MAGE = 24
+    BLM = 25
+    BLACK_MAGE = 25
+    ACN = 26
+    ARCANIST = 26
+    SMN = 27
+    SUMMONER = 27
+    SCH = 28
+    SCHOLAR = 28
+    ROG = 29
+    ROGUE = 29
+    NIN = 30
+    NINJA = 30
+    MCH = 31
+    MACHINIST = 31
+    DRK = 32
+    DARK_KNIGHT = 32
+    AST = 33
+    ASTROLOGIAN = 33
+    SAM = 34
+    SAMURAI = 34
+    RDM = 35
+    RED_MAGE = 35
+    BLU = 36
+    BLUE_MAGE = 36
+    GNB = 37
+    GUNBREAKER = 37
+    DNC = 38
+    DANCER = 38</code></pre>
+</details>
 </section>
 <section>
 </section>
@@ -30,6 +127,424 @@
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="nari.types.job.Job"><code class="flex name class">
+<span>class <span class="ident">Job</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Jobs and abbreviations in game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Job(IntEnum):
+    &#34;&#34;&#34;
+    Jobs and abbreviations in game.
+    &#34;&#34;&#34;
+    ADV = 0
+    ADVENTURER = 0
+    GLA = 1
+    GLADIATOR = 1
+    PGL = 2
+    PUGILIST = 2
+    MRD = 3
+    MARAUDER = 3
+    LNC = 4
+    LANCER = 4
+    ARC = 5
+    ARCHER = 5
+    CNJ = 6
+    CONJURER = 6
+    THM = 7
+    THAUMATURGE = 7
+    CRP = 8
+    CARPENTER = 8
+    BSM = 9
+    BLACKSMITH = 9
+    ARM = 10
+    ARMORER = 10
+    GSM = 11
+    GOLDSMITH = 11
+    LTW = 12
+    LEATHERWORKER = 12
+    WVR = 13
+    WEAVER = 13
+    ALC = 14
+    ALCHEMIST = 14
+    CUL = 15
+    CULINARIAN = 15
+    MIN = 16
+    MINER = 16
+    BTN = 17
+    BOTANIST = 17
+    FSH = 18
+    FISHER = 18
+    PLD = 19
+    PALADIN = 19
+    MNK = 20
+    MONK = 20
+    WAR = 21
+    WARRIOR = 21
+    DRG = 22
+    DRAGOON = 22
+    BRD = 23
+    BARD = 23
+    WHM = 24
+    WHITE_MAGE = 24
+    BLM = 25
+    BLACK_MAGE = 25
+    ACN = 26
+    ARCANIST = 26
+    SMN = 27
+    SUMMONER = 27
+    SCH = 28
+    SCHOLAR = 28
+    ROG = 29
+    ROGUE = 29
+    NIN = 30
+    NINJA = 30
+    MCH = 31
+    MACHINIST = 31
+    DRK = 32
+    DARK_KNIGHT = 32
+    AST = 33
+    ASTROLOGIAN = 33
+    SAM = 34
+    SAMURAI = 34
+    RDM = 35
+    RED_MAGE = 35
+    BLU = 36
+    BLUE_MAGE = 36
+    GNB = 37
+    GUNBREAKER = 37
+    DNC = 38
+    DANCER = 38</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.IntEnum</li>
+<li>builtins.int</li>
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="nari.types.job.Job.ACN"><code class="name">var <span class="ident">ACN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.ADV"><code class="name">var <span class="ident">ADV</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.ADVENTURER"><code class="name">var <span class="ident">ADVENTURER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.ALC"><code class="name">var <span class="ident">ALC</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.ALCHEMIST"><code class="name">var <span class="ident">ALCHEMIST</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.ARC"><code class="name">var <span class="ident">ARC</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.ARCANIST"><code class="name">var <span class="ident">ARCANIST</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.ARCHER"><code class="name">var <span class="ident">ARCHER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.ARM"><code class="name">var <span class="ident">ARM</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.ARMORER"><code class="name">var <span class="ident">ARMORER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.AST"><code class="name">var <span class="ident">AST</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.ASTROLOGIAN"><code class="name">var <span class="ident">ASTROLOGIAN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.BARD"><code class="name">var <span class="ident">BARD</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.BLACKSMITH"><code class="name">var <span class="ident">BLACKSMITH</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.BLACK_MAGE"><code class="name">var <span class="ident">BLACK_MAGE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.BLM"><code class="name">var <span class="ident">BLM</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.BLU"><code class="name">var <span class="ident">BLU</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.BLUE_MAGE"><code class="name">var <span class="ident">BLUE_MAGE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.BOTANIST"><code class="name">var <span class="ident">BOTANIST</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.BRD"><code class="name">var <span class="ident">BRD</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.BSM"><code class="name">var <span class="ident">BSM</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.BTN"><code class="name">var <span class="ident">BTN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.CARPENTER"><code class="name">var <span class="ident">CARPENTER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.CNJ"><code class="name">var <span class="ident">CNJ</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.CONJURER"><code class="name">var <span class="ident">CONJURER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.CRP"><code class="name">var <span class="ident">CRP</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.CUL"><code class="name">var <span class="ident">CUL</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.CULINARIAN"><code class="name">var <span class="ident">CULINARIAN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.DANCER"><code class="name">var <span class="ident">DANCER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.DARK_KNIGHT"><code class="name">var <span class="ident">DARK_KNIGHT</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.DNC"><code class="name">var <span class="ident">DNC</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.DRAGOON"><code class="name">var <span class="ident">DRAGOON</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.DRG"><code class="name">var <span class="ident">DRG</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.DRK"><code class="name">var <span class="ident">DRK</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.FISHER"><code class="name">var <span class="ident">FISHER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.FSH"><code class="name">var <span class="ident">FSH</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.GLA"><code class="name">var <span class="ident">GLA</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.GLADIATOR"><code class="name">var <span class="ident">GLADIATOR</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.GNB"><code class="name">var <span class="ident">GNB</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.GOLDSMITH"><code class="name">var <span class="ident">GOLDSMITH</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.GSM"><code class="name">var <span class="ident">GSM</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.GUNBREAKER"><code class="name">var <span class="ident">GUNBREAKER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.LANCER"><code class="name">var <span class="ident">LANCER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.LEATHERWORKER"><code class="name">var <span class="ident">LEATHERWORKER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.LNC"><code class="name">var <span class="ident">LNC</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.LTW"><code class="name">var <span class="ident">LTW</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.MACHINIST"><code class="name">var <span class="ident">MACHINIST</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.MARAUDER"><code class="name">var <span class="ident">MARAUDER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.MCH"><code class="name">var <span class="ident">MCH</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.MIN"><code class="name">var <span class="ident">MIN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.MINER"><code class="name">var <span class="ident">MINER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.MNK"><code class="name">var <span class="ident">MNK</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.MONK"><code class="name">var <span class="ident">MONK</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.MRD"><code class="name">var <span class="ident">MRD</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.NIN"><code class="name">var <span class="ident">NIN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.NINJA"><code class="name">var <span class="ident">NINJA</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.PALADIN"><code class="name">var <span class="ident">PALADIN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.PGL"><code class="name">var <span class="ident">PGL</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.PLD"><code class="name">var <span class="ident">PLD</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.PUGILIST"><code class="name">var <span class="ident">PUGILIST</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.RDM"><code class="name">var <span class="ident">RDM</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.RED_MAGE"><code class="name">var <span class="ident">RED_MAGE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.ROG"><code class="name">var <span class="ident">ROG</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.ROGUE"><code class="name">var <span class="ident">ROGUE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.SAM"><code class="name">var <span class="ident">SAM</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.SAMURAI"><code class="name">var <span class="ident">SAMURAI</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.SCH"><code class="name">var <span class="ident">SCH</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.SCHOLAR"><code class="name">var <span class="ident">SCHOLAR</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.SMN"><code class="name">var <span class="ident">SMN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.SUMMONER"><code class="name">var <span class="ident">SUMMONER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.THAUMATURGE"><code class="name">var <span class="ident">THAUMATURGE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.THM"><code class="name">var <span class="ident">THM</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.WAR"><code class="name">var <span class="ident">WAR</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.WARRIOR"><code class="name">var <span class="ident">WARRIOR</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.WEAVER"><code class="name">var <span class="ident">WEAVER</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.WHITE_MAGE"><code class="name">var <span class="ident">WHITE_MAGE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.WHM"><code class="name">var <span class="ident">WHM</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.job.Job.WVR"><code class="name">var <span class="ident">WVR</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -43,11 +558,98 @@
 <li><code><a title="nari.types" href="index.html">nari.types</a></code></li>
 </ul>
 </li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="nari.types.job.Job" href="#nari.types.job.Job">Job</a></code></h4>
+<ul class="two-column">
+<li><code><a title="nari.types.job.Job.ACN" href="#nari.types.job.Job.ACN">ACN</a></code></li>
+<li><code><a title="nari.types.job.Job.ADV" href="#nari.types.job.Job.ADV">ADV</a></code></li>
+<li><code><a title="nari.types.job.Job.ADVENTURER" href="#nari.types.job.Job.ADVENTURER">ADVENTURER</a></code></li>
+<li><code><a title="nari.types.job.Job.ALC" href="#nari.types.job.Job.ALC">ALC</a></code></li>
+<li><code><a title="nari.types.job.Job.ALCHEMIST" href="#nari.types.job.Job.ALCHEMIST">ALCHEMIST</a></code></li>
+<li><code><a title="nari.types.job.Job.ARC" href="#nari.types.job.Job.ARC">ARC</a></code></li>
+<li><code><a title="nari.types.job.Job.ARCANIST" href="#nari.types.job.Job.ARCANIST">ARCANIST</a></code></li>
+<li><code><a title="nari.types.job.Job.ARCHER" href="#nari.types.job.Job.ARCHER">ARCHER</a></code></li>
+<li><code><a title="nari.types.job.Job.ARM" href="#nari.types.job.Job.ARM">ARM</a></code></li>
+<li><code><a title="nari.types.job.Job.ARMORER" href="#nari.types.job.Job.ARMORER">ARMORER</a></code></li>
+<li><code><a title="nari.types.job.Job.AST" href="#nari.types.job.Job.AST">AST</a></code></li>
+<li><code><a title="nari.types.job.Job.ASTROLOGIAN" href="#nari.types.job.Job.ASTROLOGIAN">ASTROLOGIAN</a></code></li>
+<li><code><a title="nari.types.job.Job.BARD" href="#nari.types.job.Job.BARD">BARD</a></code></li>
+<li><code><a title="nari.types.job.Job.BLACKSMITH" href="#nari.types.job.Job.BLACKSMITH">BLACKSMITH</a></code></li>
+<li><code><a title="nari.types.job.Job.BLACK_MAGE" href="#nari.types.job.Job.BLACK_MAGE">BLACK_MAGE</a></code></li>
+<li><code><a title="nari.types.job.Job.BLM" href="#nari.types.job.Job.BLM">BLM</a></code></li>
+<li><code><a title="nari.types.job.Job.BLU" href="#nari.types.job.Job.BLU">BLU</a></code></li>
+<li><code><a title="nari.types.job.Job.BLUE_MAGE" href="#nari.types.job.Job.BLUE_MAGE">BLUE_MAGE</a></code></li>
+<li><code><a title="nari.types.job.Job.BOTANIST" href="#nari.types.job.Job.BOTANIST">BOTANIST</a></code></li>
+<li><code><a title="nari.types.job.Job.BRD" href="#nari.types.job.Job.BRD">BRD</a></code></li>
+<li><code><a title="nari.types.job.Job.BSM" href="#nari.types.job.Job.BSM">BSM</a></code></li>
+<li><code><a title="nari.types.job.Job.BTN" href="#nari.types.job.Job.BTN">BTN</a></code></li>
+<li><code><a title="nari.types.job.Job.CARPENTER" href="#nari.types.job.Job.CARPENTER">CARPENTER</a></code></li>
+<li><code><a title="nari.types.job.Job.CNJ" href="#nari.types.job.Job.CNJ">CNJ</a></code></li>
+<li><code><a title="nari.types.job.Job.CONJURER" href="#nari.types.job.Job.CONJURER">CONJURER</a></code></li>
+<li><code><a title="nari.types.job.Job.CRP" href="#nari.types.job.Job.CRP">CRP</a></code></li>
+<li><code><a title="nari.types.job.Job.CUL" href="#nari.types.job.Job.CUL">CUL</a></code></li>
+<li><code><a title="nari.types.job.Job.CULINARIAN" href="#nari.types.job.Job.CULINARIAN">CULINARIAN</a></code></li>
+<li><code><a title="nari.types.job.Job.DANCER" href="#nari.types.job.Job.DANCER">DANCER</a></code></li>
+<li><code><a title="nari.types.job.Job.DARK_KNIGHT" href="#nari.types.job.Job.DARK_KNIGHT">DARK_KNIGHT</a></code></li>
+<li><code><a title="nari.types.job.Job.DNC" href="#nari.types.job.Job.DNC">DNC</a></code></li>
+<li><code><a title="nari.types.job.Job.DRAGOON" href="#nari.types.job.Job.DRAGOON">DRAGOON</a></code></li>
+<li><code><a title="nari.types.job.Job.DRG" href="#nari.types.job.Job.DRG">DRG</a></code></li>
+<li><code><a title="nari.types.job.Job.DRK" href="#nari.types.job.Job.DRK">DRK</a></code></li>
+<li><code><a title="nari.types.job.Job.FISHER" href="#nari.types.job.Job.FISHER">FISHER</a></code></li>
+<li><code><a title="nari.types.job.Job.FSH" href="#nari.types.job.Job.FSH">FSH</a></code></li>
+<li><code><a title="nari.types.job.Job.GLA" href="#nari.types.job.Job.GLA">GLA</a></code></li>
+<li><code><a title="nari.types.job.Job.GLADIATOR" href="#nari.types.job.Job.GLADIATOR">GLADIATOR</a></code></li>
+<li><code><a title="nari.types.job.Job.GNB" href="#nari.types.job.Job.GNB">GNB</a></code></li>
+<li><code><a title="nari.types.job.Job.GOLDSMITH" href="#nari.types.job.Job.GOLDSMITH">GOLDSMITH</a></code></li>
+<li><code><a title="nari.types.job.Job.GSM" href="#nari.types.job.Job.GSM">GSM</a></code></li>
+<li><code><a title="nari.types.job.Job.GUNBREAKER" href="#nari.types.job.Job.GUNBREAKER">GUNBREAKER</a></code></li>
+<li><code><a title="nari.types.job.Job.LANCER" href="#nari.types.job.Job.LANCER">LANCER</a></code></li>
+<li><code><a title="nari.types.job.Job.LEATHERWORKER" href="#nari.types.job.Job.LEATHERWORKER">LEATHERWORKER</a></code></li>
+<li><code><a title="nari.types.job.Job.LNC" href="#nari.types.job.Job.LNC">LNC</a></code></li>
+<li><code><a title="nari.types.job.Job.LTW" href="#nari.types.job.Job.LTW">LTW</a></code></li>
+<li><code><a title="nari.types.job.Job.MACHINIST" href="#nari.types.job.Job.MACHINIST">MACHINIST</a></code></li>
+<li><code><a title="nari.types.job.Job.MARAUDER" href="#nari.types.job.Job.MARAUDER">MARAUDER</a></code></li>
+<li><code><a title="nari.types.job.Job.MCH" href="#nari.types.job.Job.MCH">MCH</a></code></li>
+<li><code><a title="nari.types.job.Job.MIN" href="#nari.types.job.Job.MIN">MIN</a></code></li>
+<li><code><a title="nari.types.job.Job.MINER" href="#nari.types.job.Job.MINER">MINER</a></code></li>
+<li><code><a title="nari.types.job.Job.MNK" href="#nari.types.job.Job.MNK">MNK</a></code></li>
+<li><code><a title="nari.types.job.Job.MONK" href="#nari.types.job.Job.MONK">MONK</a></code></li>
+<li><code><a title="nari.types.job.Job.MRD" href="#nari.types.job.Job.MRD">MRD</a></code></li>
+<li><code><a title="nari.types.job.Job.NIN" href="#nari.types.job.Job.NIN">NIN</a></code></li>
+<li><code><a title="nari.types.job.Job.NINJA" href="#nari.types.job.Job.NINJA">NINJA</a></code></li>
+<li><code><a title="nari.types.job.Job.PALADIN" href="#nari.types.job.Job.PALADIN">PALADIN</a></code></li>
+<li><code><a title="nari.types.job.Job.PGL" href="#nari.types.job.Job.PGL">PGL</a></code></li>
+<li><code><a title="nari.types.job.Job.PLD" href="#nari.types.job.Job.PLD">PLD</a></code></li>
+<li><code><a title="nari.types.job.Job.PUGILIST" href="#nari.types.job.Job.PUGILIST">PUGILIST</a></code></li>
+<li><code><a title="nari.types.job.Job.RDM" href="#nari.types.job.Job.RDM">RDM</a></code></li>
+<li><code><a title="nari.types.job.Job.RED_MAGE" href="#nari.types.job.Job.RED_MAGE">RED_MAGE</a></code></li>
+<li><code><a title="nari.types.job.Job.ROG" href="#nari.types.job.Job.ROG">ROG</a></code></li>
+<li><code><a title="nari.types.job.Job.ROGUE" href="#nari.types.job.Job.ROGUE">ROGUE</a></code></li>
+<li><code><a title="nari.types.job.Job.SAM" href="#nari.types.job.Job.SAM">SAM</a></code></li>
+<li><code><a title="nari.types.job.Job.SAMURAI" href="#nari.types.job.Job.SAMURAI">SAMURAI</a></code></li>
+<li><code><a title="nari.types.job.Job.SCH" href="#nari.types.job.Job.SCH">SCH</a></code></li>
+<li><code><a title="nari.types.job.Job.SCHOLAR" href="#nari.types.job.Job.SCHOLAR">SCHOLAR</a></code></li>
+<li><code><a title="nari.types.job.Job.SMN" href="#nari.types.job.Job.SMN">SMN</a></code></li>
+<li><code><a title="nari.types.job.Job.SUMMONER" href="#nari.types.job.Job.SUMMONER">SUMMONER</a></code></li>
+<li><code><a title="nari.types.job.Job.THAUMATURGE" href="#nari.types.job.Job.THAUMATURGE">THAUMATURGE</a></code></li>
+<li><code><a title="nari.types.job.Job.THM" href="#nari.types.job.Job.THM">THM</a></code></li>
+<li><code><a title="nari.types.job.Job.WAR" href="#nari.types.job.Job.WAR">WAR</a></code></li>
+<li><code><a title="nari.types.job.Job.WARRIOR" href="#nari.types.job.Job.WARRIOR">WARRIOR</a></code></li>
+<li><code><a title="nari.types.job.Job.WEAVER" href="#nari.types.job.Job.WEAVER">WEAVER</a></code></li>
+<li><code><a title="nari.types.job.Job.WHITE_MAGE" href="#nari.types.job.Job.WHITE_MAGE">WHITE_MAGE</a></code></li>
+<li><code><a title="nari.types.job.Job.WHM" href="#nari.types.job.Job.WHM">WHM</a></code></li>
+<li><code><a title="nari.types.job.Job.WVR" href="#nari.types.job.Job.WVR">WVR</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

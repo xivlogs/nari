@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.2" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>nari.types API documentation</title>
 <meta name="description" content="Base for the main types nari handles, including helper types for annotation purposes" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -29,9 +29,10 @@
 </summary>
 <pre><code class="python">&#34;&#34;&#34;Base for the main types nari handles, including helper types for annotation purposes&#34;&#34;&#34;
 
-from typing import NewType
-
-HexStr = NewType(&#39;HexStr&#39;, str)</code></pre>
+HexStr = str
+&#34;&#34;&#34;A string that only has hexadecimal values&#34;&#34;&#34;
+Timestamp = int
+&#34;&#34;&#34;Number of milliseconds since the unix epoch&#34;&#34;&#34;</code></pre>
 </details>
 </section>
 <section>
@@ -41,17 +42,39 @@ HexStr = NewType(&#39;HexStr&#39;, str)</code></pre>
 <dd>
 <div class="desc"><p>Ability-related types</p></div>
 </dd>
+<dt><code class="name"><a title="nari.types.actioneffect" href="actioneffect.html">nari.types.actioneffect</a></code></dt>
+<dd>
+<div class="desc"><p>Stores data about ActionEffects</p></div>
+</dd>
 <dt><code class="name"><a title="nari.types.actor" href="actor.html">nari.types.actor</a></code></dt>
 <dd>
 <div class="desc"><p>Actor-related types and utilities</p></div>
 </dd>
+<dt><code class="name"><a title="nari.types.classjoblevel" href="classjoblevel.html">nari.types.classjoblevel</a></code></dt>
+<dd>
+<div class="desc"><p>Information about jobs</p></div>
+</dd>
+<dt><code class="name"><a title="nari.types.director" href="director.html">nari.types.director</a></code></dt>
+<dd>
+<div class="desc"><p>DirectorUpdate represents changes from the 'Director' to the 'scene' in-game …</p></div>
+</dd>
 <dt><code class="name"><a title="nari.types.event" href="event/index.html">nari.types.event</a></code></dt>
 <dd>
-<div class="desc"><p>Base for event-related object code</p></div>
+<div class="desc"><p>Base event class that all other event types inherit from</p></div>
 </dd>
 <dt><code class="name"><a title="nari.types.job" href="job.html">nari.types.job</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Class that maps jobs to jobID
+Reference: <a href="https://github.com/xivapi/ffxiv-datamining/blob/master/csv/ClassJob.csv">https://github.com/xivapi/ffxiv-datamining/blob/master/csv/ClassJob.csv</a></p></div>
+</dd>
+<dt><code class="name"><a title="nari.types.stats" href="stats.html">nari.types.stats</a></code></dt>
+<dd>
+<div class="desc"><p>Class that maps stats to the statID.
+Note: Abbreviations are not official …</p></div>
+</dd>
+<dt><code class="name"><a title="nari.types.status" href="status.html">nari.types.status</a></code></dt>
+<dd>
+<div class="desc"><p>Types revolving around status effects</p></div>
 </dd>
 </dl>
 </section>
@@ -60,6 +83,599 @@ HexStr = NewType(&#39;HexStr&#39;, str)</code></pre>
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="nari.types.int"><code class="flex name class">
+<span>class <span class="ident">Timestamp</span></span>
+<span>(</span><span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>int([x]) -&gt; integer
+int(x, base=10) -&gt; integer</p>
+<p>Convert a number or string to an integer, or return 0 if no arguments
+are given.
+If x is a number, return x.<strong>int</strong>().
+For floating point
+numbers, this truncates towards zero.</p>
+<p>If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base.
+The literal can be preceded by '+' or '-' and be surrounded
+by whitespace.
+The base defaults to 10.
+Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; int('0b100', base=0)
+4
+</code></pre></div>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li>builtins.bool</li>
+<li>enum.IntEnum</li>
+<li>enum.IntFlag</li>
+<li>sre_constants._NamedIntConstant</li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="nari.types.int.denominator"><code class="name">var <span class="ident">denominator</span></code></dt>
+<dd>
+<div class="desc"><p>the denominator of a rational number in lowest terms</p></div>
+</dd>
+<dt id="nari.types.int.imag"><code class="name">var <span class="ident">imag</span></code></dt>
+<dd>
+<div class="desc"><p>the imaginary part of a complex number</p></div>
+</dd>
+<dt id="nari.types.int.numerator"><code class="name">var <span class="ident">numerator</span></code></dt>
+<dd>
+<div class="desc"><p>the numerator of a rational number in lowest terms</p></div>
+</dd>
+<dt id="nari.types.int.real"><code class="name">var <span class="ident">real</span></code></dt>
+<dd>
+<div class="desc"><p>the real part of a complex number</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="nari.types.int.as_integer_ratio"><code class="name flex">
+<span>def <span class="ident">as_integer_ratio</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return integer ratio.</p>
+<p>Return a pair of integers, whose ratio is exactly equal to the original int
+and with a positive denominator.</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; (10).as_integer_ratio()
+(10, 1)
+&gt;&gt;&gt; (-10).as_integer_ratio()
+(-10, 1)
+&gt;&gt;&gt; (0).as_integer_ratio()
+(0, 1)
+</code></pre></div>
+</dd>
+<dt id="nari.types.int.bit_count"><code class="name flex">
+<span>def <span class="ident">bit_count</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Number of ones in the binary representation of the absolute value of self.</p>
+<p>Also known as the population count.</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; bin(13)
+'0b1101'
+&gt;&gt;&gt; (13).bit_count()
+3
+</code></pre></div>
+</dd>
+<dt id="nari.types.int.bit_length"><code class="name flex">
+<span>def <span class="ident">bit_length</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Number of bits necessary to represent self in binary.</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; bin(37)
+'0b100101'
+&gt;&gt;&gt; (37).bit_length()
+6
+</code></pre></div>
+</dd>
+<dt id="nari.types.int.conjugate"><code class="name flex">
+<span>def <span class="ident">conjugate</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns self, the complex conjugate of any int.</p></div>
+</dd>
+<dt id="nari.types.int.from_bytes"><code class="name flex">
+<span>def <span class="ident">from_bytes</span></span>(<span>bytes, byteorder, *, signed=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the integer represented by the given array of bytes.</p>
+<p>bytes
+Holds the array of bytes to convert.
+The argument must either
+support the buffer protocol or be an iterable object producing bytes.
+Bytes and bytearray are examples of built-in objects that support the
+buffer protocol.
+byteorder
+The byte order used to represent the integer.
+If byteorder is 'big',
+the most significant byte is at the beginning of the byte array.
+If
+byteorder is 'little', the most significant byte is at the end of the
+byte array.
+To request the native byte order of the host system, use
+`sys.byteorder' as the byte order value.
+signed
+Indicates whether two's complement is used to represent the integer.</p></div>
+</dd>
+<dt id="nari.types.int.to_bytes"><code class="name flex">
+<span>def <span class="ident">to_bytes</span></span>(<span>self, /, length, byteorder, *, signed=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return an array of bytes representing an integer.</p>
+<p>length
+Length of bytes object to use.
+An OverflowError is raised if the
+integer is not representable with the given number of bytes.
+byteorder
+The byte order used to represent the integer.
+If byteorder is 'big',
+the most significant byte is at the beginning of the byte array.
+If
+byteorder is 'little', the most significant byte is at the end of the
+byte array.
+To request the native byte order of the host system, use
+`sys.byteorder' as the byte order value.
+signed
+Determines whether two's complement is used to represent the integer.
+If signed is False and a negative integer is given, an OverflowError
+is raised.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="nari.types.str"><code class="flex name class">
+<span>class <span class="ident">HexStr</span></span>
+<span>(</span><span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>str(object='') -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.<strong>str</strong>() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.</p></div>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li>importlib.metadata._text.FoldedCase</li>
+<li>markdown.util.AtomicString</li>
+<li>markupsafe.Markup</li>
+<li>pdoc._formatannotation.<locals>.force_repr</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="nari.types.str.maketrans"><code class="name flex">
+<span>def <span class="ident">maketrans</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a translation table usable for str.translate().</p>
+<p>If there is only one argument, it must be a dictionary mapping Unicode
+ordinals (integers) or characters to Unicode ordinals, strings or None.
+Character keys will be then converted to ordinals.
+If there are two arguments, they must be strings of equal length, and
+in the resulting dictionary, each character in x will be mapped to the
+character at the same position in y. If there is a third argument, it
+must be a string, whose characters will be mapped to None in the result.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="nari.types.str.capitalize"><code class="name flex">
+<span>def <span class="ident">capitalize</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a capitalized version of the string.</p>
+<p>More specifically, make the first character have upper case and the rest lower
+case.</p></div>
+</dd>
+<dt id="nari.types.str.casefold"><code class="name flex">
+<span>def <span class="ident">casefold</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a version of the string suitable for caseless comparisons.</p></div>
+</dd>
+<dt id="nari.types.str.center"><code class="name flex">
+<span>def <span class="ident">center</span></span>(<span>self, width, fillchar=' ', /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a centered string of length width.</p>
+<p>Padding is done using the specified fill character (default is a space).</p></div>
+</dd>
+<dt id="nari.types.str.count"><code class="name flex">
+<span>def <span class="ident">count</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>S.count(sub[, start[, end]]) -&gt; int</p>
+<p>Return the number of non-overlapping occurrences of substring sub in
+string S[start:end].
+Optional arguments start and end are
+interpreted as in slice notation.</p></div>
+</dd>
+<dt id="nari.types.str.encode"><code class="name flex">
+<span>def <span class="ident">encode</span></span>(<span>self, /, encoding='utf-8', errors='strict')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Encode the string using the codec registered for encoding.</p>
+<p>encoding
+The encoding in which to encode the string.
+errors
+The error handling scheme to use for encoding errors.
+The default is 'strict' meaning that encoding errors raise a
+UnicodeEncodeError.
+Other possible values are 'ignore', 'replace' and
+'xmlcharrefreplace' as well as any other name registered with
+codecs.register_error that can handle UnicodeEncodeErrors.</p></div>
+</dd>
+<dt id="nari.types.str.endswith"><code class="name flex">
+<span>def <span class="ident">endswith</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>S.endswith(suffix[, start[, end]]) -&gt; bool</p>
+<p>Return True if S ends with the specified suffix, False otherwise.
+With optional start, test S beginning at that position.
+With optional end, stop comparing S at that position.
+suffix can also be a tuple of strings to try.</p></div>
+</dd>
+<dt id="nari.types.str.expandtabs"><code class="name flex">
+<span>def <span class="ident">expandtabs</span></span>(<span>self, /, tabsize=8)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a copy where all tab characters are expanded using spaces.</p>
+<p>If tabsize is not given, a tab size of 8 characters is assumed.</p></div>
+</dd>
+<dt id="nari.types.str.find"><code class="name flex">
+<span>def <span class="ident">find</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>S.find(sub[, start[, end]]) -&gt; int</p>
+<p>Return the lowest index in S where substring sub is found,
+such that sub is contained within S[start:end].
+Optional
+arguments start and end are interpreted as in slice notation.</p>
+<p>Return -1 on failure.</p></div>
+</dd>
+<dt id="nari.types.str.format"><code class="name flex">
+<span>def <span class="ident">format</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>S.format(<em>args, </em>*kwargs) -&gt; str</p>
+<p>Return a formatted version of S, using substitutions from args and kwargs.
+The substitutions are identified by braces ('{' and '}').</p></div>
+</dd>
+<dt id="nari.types.str.format_map"><code class="name flex">
+<span>def <span class="ident">format_map</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>S.format_map(mapping) -&gt; str</p>
+<p>Return a formatted version of S, using substitutions from mapping.
+The substitutions are identified by braces ('{' and '}').</p></div>
+</dd>
+<dt id="nari.types.str.index"><code class="name flex">
+<span>def <span class="ident">index</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>S.index(sub[, start[, end]]) -&gt; int</p>
+<p>Return the lowest index in S where substring sub is found,
+such that sub is contained within S[start:end].
+Optional
+arguments start and end are interpreted as in slice notation.</p>
+<p>Raises ValueError when the substring is not found.</p></div>
+</dd>
+<dt id="nari.types.str.isalnum"><code class="name flex">
+<span>def <span class="ident">isalnum</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return True if the string is an alpha-numeric string, False otherwise.</p>
+<p>A string is alpha-numeric if all characters in the string are alpha-numeric and
+there is at least one character in the string.</p></div>
+</dd>
+<dt id="nari.types.str.isalpha"><code class="name flex">
+<span>def <span class="ident">isalpha</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return True if the string is an alphabetic string, False otherwise.</p>
+<p>A string is alphabetic if all characters in the string are alphabetic and there
+is at least one character in the string.</p></div>
+</dd>
+<dt id="nari.types.str.isascii"><code class="name flex">
+<span>def <span class="ident">isascii</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return True if all characters in the string are ASCII, False otherwise.</p>
+<p>ASCII characters have code points in the range U+0000-U+007F.
+Empty string is ASCII too.</p></div>
+</dd>
+<dt id="nari.types.str.isdecimal"><code class="name flex">
+<span>def <span class="ident">isdecimal</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return True if the string is a decimal string, False otherwise.</p>
+<p>A string is a decimal string if all characters in the string are decimal and
+there is at least one character in the string.</p></div>
+</dd>
+<dt id="nari.types.str.isdigit"><code class="name flex">
+<span>def <span class="ident">isdigit</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return True if the string is a digit string, False otherwise.</p>
+<p>A string is a digit string if all characters in the string are digits and there
+is at least one character in the string.</p></div>
+</dd>
+<dt id="nari.types.str.isidentifier"><code class="name flex">
+<span>def <span class="ident">isidentifier</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return True if the string is a valid Python identifier, False otherwise.</p>
+<p>Call keyword.iskeyword(s) to test whether string s is a reserved identifier,
+such as "def" or "class".</p></div>
+</dd>
+<dt id="nari.types.str.islower"><code class="name flex">
+<span>def <span class="ident">islower</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return True if the string is a lowercase string, False otherwise.</p>
+<p>A string is lowercase if all cased characters in the string are lowercase and
+there is at least one cased character in the string.</p></div>
+</dd>
+<dt id="nari.types.str.isnumeric"><code class="name flex">
+<span>def <span class="ident">isnumeric</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return True if the string is a numeric string, False otherwise.</p>
+<p>A string is numeric if all characters in the string are numeric and there is at
+least one character in the string.</p></div>
+</dd>
+<dt id="nari.types.str.isprintable"><code class="name flex">
+<span>def <span class="ident">isprintable</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return True if the string is printable, False otherwise.</p>
+<p>A string is printable if all of its characters are considered printable in
+repr() or if it is empty.</p></div>
+</dd>
+<dt id="nari.types.str.isspace"><code class="name flex">
+<span>def <span class="ident">isspace</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return True if the string is a whitespace string, False otherwise.</p>
+<p>A string is whitespace if all characters in the string are whitespace and there
+is at least one character in the string.</p></div>
+</dd>
+<dt id="nari.types.str.istitle"><code class="name flex">
+<span>def <span class="ident">istitle</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return True if the string is a title-cased string, False otherwise.</p>
+<p>In a title-cased string, upper- and title-case characters may only
+follow uncased characters and lowercase characters only cased ones.</p></div>
+</dd>
+<dt id="nari.types.str.isupper"><code class="name flex">
+<span>def <span class="ident">isupper</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return True if the string is an uppercase string, False otherwise.</p>
+<p>A string is uppercase if all cased characters in the string are uppercase and
+there is at least one cased character in the string.</p></div>
+</dd>
+<dt id="nari.types.str.join"><code class="name flex">
+<span>def <span class="ident">join</span></span>(<span>self, iterable, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Concatenate any number of strings.</p>
+<p>The string whose method is called is inserted in between each given string.
+The result is returned as a new string.</p>
+<p>Example: '.'.join(['ab', 'pq', 'rs']) -&gt; 'ab.pq.rs'</p></div>
+</dd>
+<dt id="nari.types.str.ljust"><code class="name flex">
+<span>def <span class="ident">ljust</span></span>(<span>self, width, fillchar=' ', /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a left-justified string of length width.</p>
+<p>Padding is done using the specified fill character (default is a space).</p></div>
+</dd>
+<dt id="nari.types.str.lower"><code class="name flex">
+<span>def <span class="ident">lower</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a copy of the string converted to lowercase.</p></div>
+</dd>
+<dt id="nari.types.str.lstrip"><code class="name flex">
+<span>def <span class="ident">lstrip</span></span>(<span>self, chars=None, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a copy of the string with leading whitespace removed.</p>
+<p>If chars is given and not None, remove characters in chars instead.</p></div>
+</dd>
+<dt id="nari.types.str.partition"><code class="name flex">
+<span>def <span class="ident">partition</span></span>(<span>self, sep, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Partition the string into three parts using the given separator.</p>
+<p>This will search for the separator in the string.
+If the separator is found,
+returns a 3-tuple containing the part before the separator, the separator
+itself, and the part after it.</p>
+<p>If the separator is not found, returns a 3-tuple containing the original string
+and two empty strings.</p></div>
+</dd>
+<dt id="nari.types.str.removeprefix"><code class="name flex">
+<span>def <span class="ident">removeprefix</span></span>(<span>self, prefix, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a str with the given prefix string removed if present.</p>
+<p>If the string starts with the prefix string, return string[len(prefix):].
+Otherwise, return a copy of the original string.</p></div>
+</dd>
+<dt id="nari.types.str.removesuffix"><code class="name flex">
+<span>def <span class="ident">removesuffix</span></span>(<span>self, suffix, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a str with the given suffix string removed if present.</p>
+<p>If the string ends with the suffix string and that suffix is not empty,
+return string[:-len(suffix)]. Otherwise, return a copy of the original
+string.</p></div>
+</dd>
+<dt id="nari.types.str.replace"><code class="name flex">
+<span>def <span class="ident">replace</span></span>(<span>self, old, new, count=-1, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a copy with all occurrences of substring old replaced by new.</p>
+<p>count
+Maximum number of occurrences to replace.
+-1 (the default value) means replace all occurrences.</p>
+<p>If the optional argument count is given, only the first count occurrences are
+replaced.</p></div>
+</dd>
+<dt id="nari.types.str.rfind"><code class="name flex">
+<span>def <span class="ident">rfind</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>S.rfind(sub[, start[, end]]) -&gt; int</p>
+<p>Return the highest index in S where substring sub is found,
+such that sub is contained within S[start:end].
+Optional
+arguments start and end are interpreted as in slice notation.</p>
+<p>Return -1 on failure.</p></div>
+</dd>
+<dt id="nari.types.str.rindex"><code class="name flex">
+<span>def <span class="ident">rindex</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>S.rindex(sub[, start[, end]]) -&gt; int</p>
+<p>Return the highest index in S where substring sub is found,
+such that sub is contained within S[start:end].
+Optional
+arguments start and end are interpreted as in slice notation.</p>
+<p>Raises ValueError when the substring is not found.</p></div>
+</dd>
+<dt id="nari.types.str.rjust"><code class="name flex">
+<span>def <span class="ident">rjust</span></span>(<span>self, width, fillchar=' ', /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a right-justified string of length width.</p>
+<p>Padding is done using the specified fill character (default is a space).</p></div>
+</dd>
+<dt id="nari.types.str.rpartition"><code class="name flex">
+<span>def <span class="ident">rpartition</span></span>(<span>self, sep, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Partition the string into three parts using the given separator.</p>
+<p>This will search for the separator in the string, starting at the end. If
+the separator is found, returns a 3-tuple containing the part before the
+separator, the separator itself, and the part after it.</p>
+<p>If the separator is not found, returns a 3-tuple containing two empty strings
+and the original string.</p></div>
+</dd>
+<dt id="nari.types.str.rsplit"><code class="name flex">
+<span>def <span class="ident">rsplit</span></span>(<span>self, /, sep=None, maxsplit=-1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a list of the words in the string, using sep as the delimiter string.</p>
+<p>sep
+The delimiter according which to split the string.
+None (the default value) means split according to any whitespace,
+and discard empty strings from the result.
+maxsplit
+Maximum number of splits to do.
+-1 (the default value) means no limit.</p>
+<p>Splits are done starting at the end of the string and working to the front.</p></div>
+</dd>
+<dt id="nari.types.str.rstrip"><code class="name flex">
+<span>def <span class="ident">rstrip</span></span>(<span>self, chars=None, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a copy of the string with trailing whitespace removed.</p>
+<p>If chars is given and not None, remove characters in chars instead.</p></div>
+</dd>
+<dt id="nari.types.str.split"><code class="name flex">
+<span>def <span class="ident">split</span></span>(<span>self, /, sep=None, maxsplit=-1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a list of the words in the string, using sep as the delimiter string.</p>
+<p>sep
+The delimiter according which to split the string.
+None (the default value) means split according to any whitespace,
+and discard empty strings from the result.
+maxsplit
+Maximum number of splits to do.
+-1 (the default value) means no limit.</p></div>
+</dd>
+<dt id="nari.types.str.splitlines"><code class="name flex">
+<span>def <span class="ident">splitlines</span></span>(<span>self, /, keepends=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a list of the lines in the string, breaking at line boundaries.</p>
+<p>Line breaks are not included in the resulting list unless keepends is given and
+true.</p></div>
+</dd>
+<dt id="nari.types.str.startswith"><code class="name flex">
+<span>def <span class="ident">startswith</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>S.startswith(prefix[, start[, end]]) -&gt; bool</p>
+<p>Return True if S starts with the specified prefix, False otherwise.
+With optional start, test S beginning at that position.
+With optional end, stop comparing S at that position.
+prefix can also be a tuple of strings to try.</p></div>
+</dd>
+<dt id="nari.types.str.strip"><code class="name flex">
+<span>def <span class="ident">strip</span></span>(<span>self, chars=None, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a copy of the string with leading and trailing whitespace removed.</p>
+<p>If chars is given and not None, remove characters in chars instead.</p></div>
+</dd>
+<dt id="nari.types.str.swapcase"><code class="name flex">
+<span>def <span class="ident">swapcase</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Convert uppercase characters to lowercase and lowercase characters to uppercase.</p></div>
+</dd>
+<dt id="nari.types.str.title"><code class="name flex">
+<span>def <span class="ident">title</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a version of the string where each word is titlecased.</p>
+<p>More specifically, words start with uppercased characters and all remaining
+cased characters have lower case.</p></div>
+</dd>
+<dt id="nari.types.str.translate"><code class="name flex">
+<span>def <span class="ident">translate</span></span>(<span>self, table, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Replace each character in the string using the given translation table.</p>
+<p>table
+Translation table, which must be a mapping of Unicode ordinals to
+Unicode ordinals, strings, or None.</p>
+<p>The table must implement lookup/indexing via <strong>getitem</strong>, for instance a
+dictionary or list.
+If this operation raises LookupError, the character is
+left untouched.
+Characters mapped to None are deleted.</p></div>
+</dd>
+<dt id="nari.types.str.upper"><code class="name flex">
+<span>def <span class="ident">upper</span></span>(<span>self, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a copy of the string converted to uppercase.</p></div>
+</dd>
+<dt id="nari.types.str.zfill"><code class="name flex">
+<span>def <span class="ident">zfill</span></span>(<span>self, width, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Pad a numeric string with zeros on the left, to fill a field of the given width.</p>
+<p>The string is never truncated.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -76,16 +692,92 @@ HexStr = NewType(&#39;HexStr&#39;, str)</code></pre>
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
 <li><code><a title="nari.types.ability" href="ability.html">nari.types.ability</a></code></li>
+<li><code><a title="nari.types.actioneffect" href="actioneffect.html">nari.types.actioneffect</a></code></li>
 <li><code><a title="nari.types.actor" href="actor.html">nari.types.actor</a></code></li>
+<li><code><a title="nari.types.classjoblevel" href="classjoblevel.html">nari.types.classjoblevel</a></code></li>
+<li><code><a title="nari.types.director" href="director.html">nari.types.director</a></code></li>
 <li><code><a title="nari.types.event" href="event/index.html">nari.types.event</a></code></li>
 <li><code><a title="nari.types.job" href="job.html">nari.types.job</a></code></li>
+<li><code><a title="nari.types.stats" href="stats.html">nari.types.stats</a></code></li>
+<li><code><a title="nari.types.status" href="status.html">nari.types.status</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="nari.types.int" href="#nari.types.int">int</a></code></h4>
+<ul class="two-column">
+<li><code><a title="nari.types.int.as_integer_ratio" href="#nari.types.int.as_integer_ratio">as_integer_ratio</a></code></li>
+<li><code><a title="nari.types.int.bit_count" href="#nari.types.int.bit_count">bit_count</a></code></li>
+<li><code><a title="nari.types.int.bit_length" href="#nari.types.int.bit_length">bit_length</a></code></li>
+<li><code><a title="nari.types.int.conjugate" href="#nari.types.int.conjugate">conjugate</a></code></li>
+<li><code><a title="nari.types.int.denominator" href="#nari.types.int.denominator">denominator</a></code></li>
+<li><code><a title="nari.types.int.from_bytes" href="#nari.types.int.from_bytes">from_bytes</a></code></li>
+<li><code><a title="nari.types.int.imag" href="#nari.types.int.imag">imag</a></code></li>
+<li><code><a title="nari.types.int.numerator" href="#nari.types.int.numerator">numerator</a></code></li>
+<li><code><a title="nari.types.int.real" href="#nari.types.int.real">real</a></code></li>
+<li><code><a title="nari.types.int.to_bytes" href="#nari.types.int.to_bytes">to_bytes</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nari.types.str" href="#nari.types.str">str</a></code></h4>
+<ul class="two-column">
+<li><code><a title="nari.types.str.capitalize" href="#nari.types.str.capitalize">capitalize</a></code></li>
+<li><code><a title="nari.types.str.casefold" href="#nari.types.str.casefold">casefold</a></code></li>
+<li><code><a title="nari.types.str.center" href="#nari.types.str.center">center</a></code></li>
+<li><code><a title="nari.types.str.count" href="#nari.types.str.count">count</a></code></li>
+<li><code><a title="nari.types.str.encode" href="#nari.types.str.encode">encode</a></code></li>
+<li><code><a title="nari.types.str.endswith" href="#nari.types.str.endswith">endswith</a></code></li>
+<li><code><a title="nari.types.str.expandtabs" href="#nari.types.str.expandtabs">expandtabs</a></code></li>
+<li><code><a title="nari.types.str.find" href="#nari.types.str.find">find</a></code></li>
+<li><code><a title="nari.types.str.format" href="#nari.types.str.format">format</a></code></li>
+<li><code><a title="nari.types.str.format_map" href="#nari.types.str.format_map">format_map</a></code></li>
+<li><code><a title="nari.types.str.index" href="#nari.types.str.index">index</a></code></li>
+<li><code><a title="nari.types.str.isalnum" href="#nari.types.str.isalnum">isalnum</a></code></li>
+<li><code><a title="nari.types.str.isalpha" href="#nari.types.str.isalpha">isalpha</a></code></li>
+<li><code><a title="nari.types.str.isascii" href="#nari.types.str.isascii">isascii</a></code></li>
+<li><code><a title="nari.types.str.isdecimal" href="#nari.types.str.isdecimal">isdecimal</a></code></li>
+<li><code><a title="nari.types.str.isdigit" href="#nari.types.str.isdigit">isdigit</a></code></li>
+<li><code><a title="nari.types.str.isidentifier" href="#nari.types.str.isidentifier">isidentifier</a></code></li>
+<li><code><a title="nari.types.str.islower" href="#nari.types.str.islower">islower</a></code></li>
+<li><code><a title="nari.types.str.isnumeric" href="#nari.types.str.isnumeric">isnumeric</a></code></li>
+<li><code><a title="nari.types.str.isprintable" href="#nari.types.str.isprintable">isprintable</a></code></li>
+<li><code><a title="nari.types.str.isspace" href="#nari.types.str.isspace">isspace</a></code></li>
+<li><code><a title="nari.types.str.istitle" href="#nari.types.str.istitle">istitle</a></code></li>
+<li><code><a title="nari.types.str.isupper" href="#nari.types.str.isupper">isupper</a></code></li>
+<li><code><a title="nari.types.str.join" href="#nari.types.str.join">join</a></code></li>
+<li><code><a title="nari.types.str.ljust" href="#nari.types.str.ljust">ljust</a></code></li>
+<li><code><a title="nari.types.str.lower" href="#nari.types.str.lower">lower</a></code></li>
+<li><code><a title="nari.types.str.lstrip" href="#nari.types.str.lstrip">lstrip</a></code></li>
+<li><code><a title="nari.types.str.maketrans" href="#nari.types.str.maketrans">maketrans</a></code></li>
+<li><code><a title="nari.types.str.partition" href="#nari.types.str.partition">partition</a></code></li>
+<li><code><a title="nari.types.str.removeprefix" href="#nari.types.str.removeprefix">removeprefix</a></code></li>
+<li><code><a title="nari.types.str.removesuffix" href="#nari.types.str.removesuffix">removesuffix</a></code></li>
+<li><code><a title="nari.types.str.replace" href="#nari.types.str.replace">replace</a></code></li>
+<li><code><a title="nari.types.str.rfind" href="#nari.types.str.rfind">rfind</a></code></li>
+<li><code><a title="nari.types.str.rindex" href="#nari.types.str.rindex">rindex</a></code></li>
+<li><code><a title="nari.types.str.rjust" href="#nari.types.str.rjust">rjust</a></code></li>
+<li><code><a title="nari.types.str.rpartition" href="#nari.types.str.rpartition">rpartition</a></code></li>
+<li><code><a title="nari.types.str.rsplit" href="#nari.types.str.rsplit">rsplit</a></code></li>
+<li><code><a title="nari.types.str.rstrip" href="#nari.types.str.rstrip">rstrip</a></code></li>
+<li><code><a title="nari.types.str.split" href="#nari.types.str.split">split</a></code></li>
+<li><code><a title="nari.types.str.splitlines" href="#nari.types.str.splitlines">splitlines</a></code></li>
+<li><code><a title="nari.types.str.startswith" href="#nari.types.str.startswith">startswith</a></code></li>
+<li><code><a title="nari.types.str.strip" href="#nari.types.str.strip">strip</a></code></li>
+<li><code><a title="nari.types.str.swapcase" href="#nari.types.str.swapcase">swapcase</a></code></li>
+<li><code><a title="nari.types.str.title" href="#nari.types.str.title">title</a></code></li>
+<li><code><a title="nari.types.str.translate" href="#nari.types.str.translate">translate</a></code></li>
+<li><code><a title="nari.types.str.upper" href="#nari.types.str.upper">upper</a></code></li>
+<li><code><a title="nari.types.str.zfill" href="#nari.types.str.zfill">zfill</a></code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

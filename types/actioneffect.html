@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>nari.types.actioneffect API documentation</title>
+<meta name="description" content="Stores data about ActionEffects" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>nari.types.actioneffect</code></h1>
+</header>
+<section id="section-intro">
+<p>Stores data about ActionEffects</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Stores data about ActionEffects&#34;&#34;&#34;
+
+from enum import IntEnum, IntFlag
+
+# pylint: disable=invalid-name
+class EffectResultCategory(IntEnum):
+    &#34;&#34;&#34;The different effect types an ability can have&#34;&#34;&#34;
+    Nothing = 0
+    Miss = 1
+    FullResist = 2
+    Damage = 3
+    Heal = 4
+    BlockedDamage = 5
+    ParriedDamage = 6
+    Invulnerable = 7
+    NoEffectText = 8
+    Unknown_0 = 9
+    MpLoss = 10
+    MpGain = 11
+    TpLoss = 12
+    TpGain = 13
+    StatusApply = 14
+    ApplyStatusEffectTarget = 15
+    ApplyStatusEffectSource = 16 # effect entry on target but buff applies to source, like storm&#39;s eye
+    StatusNoEffect = 20
+    RawEnmity = 24
+    &#34;&#34;&#34;Used by Provoke. ActionEffect.value equals the amount of enmity gained.&#34;&#34;&#34;
+    StartActionCombo = 27
+    ComboSucceed = 28
+    Knockback = 33
+    Mount = 40
+    VFX = 59 # links to VFX sheet
+
+
+class EffectResultFlag(IntFlag):
+    &#34;&#34;&#34;Extra bitwise flags that modify the ability&#34;&#34;&#34;
+    NoEffect = 0x0
+    Absorbed = 0x04
+    ExtendedValue = 0x40
+    EffectOnSource = 0x80
+    Reflected = 0xA0
+
+
+class HitSeverity(IntFlag):
+    &#34;&#34;&#34;Determines how hard the ability &#39;hit&#39;&#34;&#34;&#34;
+    NormalDamage = 0
+    NormalHeal = 0
+    CritDamage = 1
+    CritHeal = 1
+    DirectHitDamage = 2
+    CritDirectHitDamage = 3
+# pylint: enable=invalid-name
+
+
+class ActionEffect(): # pylint: disable=too-few-public-methods
+    &#34;&#34;&#34;Properties that modify an ability use&#34;&#34;&#34;
+    def __init__(self, *,
+                 effect_category: EffectResultCategory,
+                 severity: HitSeverity,
+                 flags: int,
+                 value: int,
+                 multiplier: int,
+                 additional_params: list[int]):
+        self.effect_category = effect_category
+        self.severity = severity
+        self.flags = flags
+        self.value = value
+        self.multiplier = multiplier
+        self.additional_params = additional_params
+
+    @property
+    def damage(self):
+        &#34;&#34;&#34;Property that gives the damage of an ActionEffect&#34;&#34;&#34;
+        # Total Damage = 65535 * Multiplier * (Flags &amp; 0x40) + Value
+        is_extended = (self.flags &amp; EffectResultFlag.ExtendedValue) &gt;&gt; 6
+        return 65535 * self.multiplier * is_extended + self.value</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="nari.types.actioneffect.ActionEffect"><code class="flex name class">
+<span>class <span class="ident">ActionEffect</span></span>
+<span>(</span><span>*, effect_category: <a title="nari.types.actioneffect.EffectResultCategory" href="#nari.types.actioneffect.EffectResultCategory">EffectResultCategory</a>, severity: <a title="nari.types.actioneffect.HitSeverity" href="#nari.types.actioneffect.HitSeverity">HitSeverity</a>, flags: int, value: int, multiplier: int, additional_params: list[int])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Properties that modify an ability use</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionEffect(): # pylint: disable=too-few-public-methods
+    &#34;&#34;&#34;Properties that modify an ability use&#34;&#34;&#34;
+    def __init__(self, *,
+                 effect_category: EffectResultCategory,
+                 severity: HitSeverity,
+                 flags: int,
+                 value: int,
+                 multiplier: int,
+                 additional_params: list[int]):
+        self.effect_category = effect_category
+        self.severity = severity
+        self.flags = flags
+        self.value = value
+        self.multiplier = multiplier
+        self.additional_params = additional_params
+
+    @property
+    def damage(self):
+        &#34;&#34;&#34;Property that gives the damage of an ActionEffect&#34;&#34;&#34;
+        # Total Damage = 65535 * Multiplier * (Flags &amp; 0x40) + Value
+        is_extended = (self.flags &amp; EffectResultFlag.ExtendedValue) &gt;&gt; 6
+        return 65535 * self.multiplier * is_extended + self.value</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="nari.types.actioneffect.ActionEffect.damage"><code class="name">var <span class="ident">damage</span></code></dt>
+<dd>
+<div class="desc"><p>Property that gives the damage of an ActionEffect</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def damage(self):
+    &#34;&#34;&#34;Property that gives the damage of an ActionEffect&#34;&#34;&#34;
+    # Total Damage = 65535 * Multiplier * (Flags &amp; 0x40) + Value
+    is_extended = (self.flags &amp; EffectResultFlag.ExtendedValue) &gt;&gt; 6
+    return 65535 * self.multiplier * is_extended + self.value</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory"><code class="flex name class">
+<span>class <span class="ident">EffectResultCategory</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The different effect types an ability can have</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class EffectResultCategory(IntEnum):
+    &#34;&#34;&#34;The different effect types an ability can have&#34;&#34;&#34;
+    Nothing = 0
+    Miss = 1
+    FullResist = 2
+    Damage = 3
+    Heal = 4
+    BlockedDamage = 5
+    ParriedDamage = 6
+    Invulnerable = 7
+    NoEffectText = 8
+    Unknown_0 = 9
+    MpLoss = 10
+    MpGain = 11
+    TpLoss = 12
+    TpGain = 13
+    StatusApply = 14
+    ApplyStatusEffectTarget = 15
+    ApplyStatusEffectSource = 16 # effect entry on target but buff applies to source, like storm&#39;s eye
+    StatusNoEffect = 20
+    RawEnmity = 24
+    &#34;&#34;&#34;Used by Provoke. ActionEffect.value equals the amount of enmity gained.&#34;&#34;&#34;
+    StartActionCombo = 27
+    ComboSucceed = 28
+    Knockback = 33
+    Mount = 40
+    VFX = 59 # links to VFX sheet</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.IntEnum</li>
+<li>builtins.int</li>
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="nari.types.actioneffect.EffectResultCategory.ApplyStatusEffectSource"><code class="name">var <span class="ident">ApplyStatusEffectSource</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.ApplyStatusEffectTarget"><code class="name">var <span class="ident">ApplyStatusEffectTarget</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.BlockedDamage"><code class="name">var <span class="ident">BlockedDamage</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.ComboSucceed"><code class="name">var <span class="ident">ComboSucceed</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.Damage"><code class="name">var <span class="ident">Damage</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.FullResist"><code class="name">var <span class="ident">FullResist</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.Heal"><code class="name">var <span class="ident">Heal</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.Invulnerable"><code class="name">var <span class="ident">Invulnerable</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.Knockback"><code class="name">var <span class="ident">Knockback</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.Miss"><code class="name">var <span class="ident">Miss</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.Mount"><code class="name">var <span class="ident">Mount</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.MpGain"><code class="name">var <span class="ident">MpGain</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.MpLoss"><code class="name">var <span class="ident">MpLoss</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.NoEffectText"><code class="name">var <span class="ident">NoEffectText</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.Nothing"><code class="name">var <span class="ident">Nothing</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.ParriedDamage"><code class="name">var <span class="ident">ParriedDamage</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.RawEnmity"><code class="name">var <span class="ident">RawEnmity</span></code></dt>
+<dd>
+<div class="desc"><p>Used by Provoke. ActionEffect.value equals the amount of enmity gained.</p></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.StartActionCombo"><code class="name">var <span class="ident">StartActionCombo</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.StatusApply"><code class="name">var <span class="ident">StatusApply</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.StatusNoEffect"><code class="name">var <span class="ident">StatusNoEffect</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.TpGain"><code class="name">var <span class="ident">TpGain</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.TpLoss"><code class="name">var <span class="ident">TpLoss</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.Unknown_0"><code class="name">var <span class="ident">Unknown_0</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultCategory.VFX"><code class="name">var <span class="ident">VFX</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultFlag"><code class="flex name class">
+<span>class <span class="ident">EffectResultFlag</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Extra bitwise flags that modify the ability</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class EffectResultFlag(IntFlag):
+    &#34;&#34;&#34;Extra bitwise flags that modify the ability&#34;&#34;&#34;
+    NoEffect = 0x0
+    Absorbed = 0x04
+    ExtendedValue = 0x40
+    EffectOnSource = 0x80
+    Reflected = 0xA0</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.IntFlag</li>
+<li>builtins.int</li>
+<li>enum.Flag</li>
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="nari.types.actioneffect.EffectResultFlag.Absorbed"><code class="name">var <span class="ident">Absorbed</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultFlag.EffectOnSource"><code class="name">var <span class="ident">EffectOnSource</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultFlag.ExtendedValue"><code class="name">var <span class="ident">ExtendedValue</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultFlag.NoEffect"><code class="name">var <span class="ident">NoEffect</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.EffectResultFlag.Reflected"><code class="name">var <span class="ident">Reflected</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="nari.types.actioneffect.HitSeverity"><code class="flex name class">
+<span>class <span class="ident">HitSeverity</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determines how hard the ability 'hit'</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class HitSeverity(IntFlag):
+    &#34;&#34;&#34;Determines how hard the ability &#39;hit&#39;&#34;&#34;&#34;
+    NormalDamage = 0
+    NormalHeal = 0
+    CritDamage = 1
+    CritHeal = 1
+    DirectHitDamage = 2
+    CritDirectHitDamage = 3</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.IntFlag</li>
+<li>builtins.int</li>
+<li>enum.Flag</li>
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="nari.types.actioneffect.HitSeverity.CritDamage"><code class="name">var <span class="ident">CritDamage</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.HitSeverity.CritDirectHitDamage"><code class="name">var <span class="ident">CritDirectHitDamage</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.HitSeverity.CritHeal"><code class="name">var <span class="ident">CritHeal</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.HitSeverity.DirectHitDamage"><code class="name">var <span class="ident">DirectHitDamage</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.HitSeverity.NormalDamage"><code class="name">var <span class="ident">NormalDamage</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.actioneffect.HitSeverity.NormalHeal"><code class="name">var <span class="ident">NormalHeal</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="nari.types" href="index.html">nari.types</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="nari.types.actioneffect.ActionEffect" href="#nari.types.actioneffect.ActionEffect">ActionEffect</a></code></h4>
+<ul class="">
+<li><code><a title="nari.types.actioneffect.ActionEffect.damage" href="#nari.types.actioneffect.ActionEffect.damage">damage</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nari.types.actioneffect.EffectResultCategory" href="#nari.types.actioneffect.EffectResultCategory">EffectResultCategory</a></code></h4>
+<ul class="">
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.ApplyStatusEffectSource" href="#nari.types.actioneffect.EffectResultCategory.ApplyStatusEffectSource">ApplyStatusEffectSource</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.ApplyStatusEffectTarget" href="#nari.types.actioneffect.EffectResultCategory.ApplyStatusEffectTarget">ApplyStatusEffectTarget</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.BlockedDamage" href="#nari.types.actioneffect.EffectResultCategory.BlockedDamage">BlockedDamage</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.ComboSucceed" href="#nari.types.actioneffect.EffectResultCategory.ComboSucceed">ComboSucceed</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.Damage" href="#nari.types.actioneffect.EffectResultCategory.Damage">Damage</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.FullResist" href="#nari.types.actioneffect.EffectResultCategory.FullResist">FullResist</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.Heal" href="#nari.types.actioneffect.EffectResultCategory.Heal">Heal</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.Invulnerable" href="#nari.types.actioneffect.EffectResultCategory.Invulnerable">Invulnerable</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.Knockback" href="#nari.types.actioneffect.EffectResultCategory.Knockback">Knockback</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.Miss" href="#nari.types.actioneffect.EffectResultCategory.Miss">Miss</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.Mount" href="#nari.types.actioneffect.EffectResultCategory.Mount">Mount</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.MpGain" href="#nari.types.actioneffect.EffectResultCategory.MpGain">MpGain</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.MpLoss" href="#nari.types.actioneffect.EffectResultCategory.MpLoss">MpLoss</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.NoEffectText" href="#nari.types.actioneffect.EffectResultCategory.NoEffectText">NoEffectText</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.Nothing" href="#nari.types.actioneffect.EffectResultCategory.Nothing">Nothing</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.ParriedDamage" href="#nari.types.actioneffect.EffectResultCategory.ParriedDamage">ParriedDamage</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.RawEnmity" href="#nari.types.actioneffect.EffectResultCategory.RawEnmity">RawEnmity</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.StartActionCombo" href="#nari.types.actioneffect.EffectResultCategory.StartActionCombo">StartActionCombo</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.StatusApply" href="#nari.types.actioneffect.EffectResultCategory.StatusApply">StatusApply</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.StatusNoEffect" href="#nari.types.actioneffect.EffectResultCategory.StatusNoEffect">StatusNoEffect</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.TpGain" href="#nari.types.actioneffect.EffectResultCategory.TpGain">TpGain</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.TpLoss" href="#nari.types.actioneffect.EffectResultCategory.TpLoss">TpLoss</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.Unknown_0" href="#nari.types.actioneffect.EffectResultCategory.Unknown_0">Unknown_0</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultCategory.VFX" href="#nari.types.actioneffect.EffectResultCategory.VFX">VFX</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nari.types.actioneffect.EffectResultFlag" href="#nari.types.actioneffect.EffectResultFlag">EffectResultFlag</a></code></h4>
+<ul class="">
+<li><code><a title="nari.types.actioneffect.EffectResultFlag.Absorbed" href="#nari.types.actioneffect.EffectResultFlag.Absorbed">Absorbed</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultFlag.EffectOnSource" href="#nari.types.actioneffect.EffectResultFlag.EffectOnSource">EffectOnSource</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultFlag.ExtendedValue" href="#nari.types.actioneffect.EffectResultFlag.ExtendedValue">ExtendedValue</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultFlag.NoEffect" href="#nari.types.actioneffect.EffectResultFlag.NoEffect">NoEffect</a></code></li>
+<li><code><a title="nari.types.actioneffect.EffectResultFlag.Reflected" href="#nari.types.actioneffect.EffectResultFlag.Reflected">Reflected</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nari.types.actioneffect.HitSeverity" href="#nari.types.actioneffect.HitSeverity">HitSeverity</a></code></h4>
+<ul class="two-column">
+<li><code><a title="nari.types.actioneffect.HitSeverity.CritDamage" href="#nari.types.actioneffect.HitSeverity.CritDamage">CritDamage</a></code></li>
+<li><code><a title="nari.types.actioneffect.HitSeverity.CritDirectHitDamage" href="#nari.types.actioneffect.HitSeverity.CritDirectHitDamage">CritDirectHitDamage</a></code></li>
+<li><code><a title="nari.types.actioneffect.HitSeverity.CritHeal" href="#nari.types.actioneffect.HitSeverity.CritHeal">CritHeal</a></code></li>
+<li><code><a title="nari.types.actioneffect.HitSeverity.DirectHitDamage" href="#nari.types.actioneffect.HitSeverity.DirectHitDamage">DirectHitDamage</a></code></li>
+<li><code><a title="nari.types.actioneffect.HitSeverity.NormalDamage" href="#nari.types.actioneffect.HitSeverity.NormalDamage">NormalDamage</a></code></li>
+<li><code><a title="nari.types.actioneffect.HitSeverity.NormalHeal" href="#nari.types.actioneffect.HitSeverity.NormalHeal">NormalHeal</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.2" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>nari.types.event.ability API documentation</title>
-<meta name="description" content="Ability represents actions performed by Actors to Actors …" />
+<meta name="description" content="Class that represents ability usages" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,165 +22,57 @@
 <h1 class="title">Module <code>nari.types.event.ability</code></h1>
 </header>
 <section id="section-intro">
-<p>Ability represents actions performed by Actors to Actors</p>
-<p>Anything that does an action in-game, from ninjitsu use to abilities used by bosses, should
-generate one of these events.</p>
+<p>Class that represents ability usages</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;Ability represents actions performed by Actors to Actors
-
-Anything that does an action in-game, from ninjitsu use to abilities used by bosses, should
-generate one of these events.
-&#34;&#34;&#34;
-from enum import IntEnum
-
-from nari.types.event.base import Event
-from nari.types.event import Type
+<pre><code class="python">&#34;&#34;&#34;Class that represents ability usages&#34;&#34;&#34;
+from nari.types import Timestamp
+from nari.types.event import Event
 from nari.types.actor import Actor
-from nari.types.ability import Ability as AbilityObject
+from nari.types.ability import Ability as AbilityObj
+from nari.types.actioneffect import ActionEffect
 
-class AbilityType(IntEnum):
-    &#34;&#34;&#34;AbilityEffectTypes lists all the different effects that an ability can be marked with&#34;&#34;&#34;
-    none = 0x0
-    &#34;&#34;&#34;Ability has no special effects&#34;&#34;&#34;
-    applieseffect = 0x0E
-    &#34;&#34;&#34;The ability applies a status effect&#34;&#34;&#34;
-
-
-class Ability(Event):
-    &#34;&#34;&#34;Represents an ability use
-
-    The Ability event has 43 parameters, some of which are known:
-
-    1. The source actor ID
-    2. The source actor name
-    3. The ability ID
-    4. The ability name
-    5. The target actor ID
-    6. The target actor name
-    7. effect_data1 (*4 bytes of data, unknown purpose*)
-    8. effect_data1, part 2 (*4 bytes of data, unknown purpose*)
-    9. effect_data2
-
-        effect_data2 has 4 bytes with different characteristics:
-
-        | byte | description                                                                                                   |
-        | :--: | :------------------------------------------------------------------------------------------------------------ |
-        | 1    | Action metadata. For example, Fuma Shuriken&#39;s metadata shows which of Ten/Chi/Jin button was used to cast it. |
-        | 2    | Crit chance. For example, `0xAA` turns into 17% crit chance (value / 10)                                      |
-        | 3    | Low byte of true damage. If this and byte 2 are non-zero, this is likely a dot of some kind                   |
-        | 4    | Action type, see AbilityType for more information                                                             |
-
-    10. effect_data2, part 2 (*4 bytes of data, unknown purpose*)
-    11. effect_data3 (*4 bytes of data, unknown purpose*)
-    12. effect_data3, part 2 (*4 bytes of data, unknown purpose*)
-    13. effect_data4 (*4 bytes of data, unknown purpose*)
-    14. effect_data4, part 2 (*4 bytes of data, unknown purpose*)
-    15. effect_data5 (*4 bytes of data, unknown purpose*)
-    16. effect_data5, part 2 (*4 bytes of data, unknown purpose*)
-    17. effect_data6 (*4 bytes of data, unknown purpose*)
-    18. effect_data6, part 2 (*4 bytes of data, unknown purpose*)
-    19. effect_data7 (*4 bytes of data, unknown purpose*)
-    20. effect_data7, part 2 (*4 bytes of data, unknown purpose*)
-    21. effect_data8 (*4 bytes of data, unknown purpose*)
-    22. effect_data8, part 2 (*4 bytes of data, unknown purpose*)
-    23. Source actor hp
-    24. Source actor max hp
-    25. Source actor mp
-    26. Source actor max mp
-    27. Source actor tp
-    28. Source actor max tp
-    29. Source actor x position
-    30. Source actor y position
-    31. Source actor z position
-    32. Source actor facing
-    33. Target actor hp
-    34. Target actor max hp
-    35. Target actor mp
-    36. Target actor max mp
-    37. Target actor tp
-    38. Target actor max tp
-    39. Target actor x position
-    40. Target actor y position
-    41. Target actor z position
-    42. Target actor facing
-    43. Global sequence – apparently seems to increment on every ability cast
-    &#34;&#34;&#34;
-    __id__: int = Type.networkability.value
-
-    def handle_params(self):
-        # param[0] and param[1] - source Actor ID/name
-        self.source_actor = Actor(self.params[0], self.params[1])
-        # param[2] and param[3] - Ability ID/name
-        self.ability = AbilityObject(self.params[2], self.params[3])
-        # param[4] and param[5] - target Actor ID/name
-        self.target_actor = Actor(self.params[4], self.params[5])
-        # params[6] = effect_data1
-        # params[7] = effect_data1, part 2
-        # params[8] = effect_data2
-        # effect_data2 has 4 bytes with different characteristics:
-        # 1 - action metadata. For example, Fuma Shuriken&#39;s metadata shows which of Ten/Chi/Jin button was used.
-        #     There&#39;s enough data here that documenting it is best left to other documentation.
-        # 2 - crit chance. 0xAA turns into a ~17% crit chance (value / 10)
-        # 3 - low byte of true damage. If this and byte 2 are present, this is likely a dot of some kind
-        # 4 - action type. See the ActionEffectType enum above for documentation
-        ability_info: int = int(self.params[8], 16)
-        self.action_effect = ability_info &amp; 0xFF
-        self.damage_low_byte = (ability_info &gt;&gt; 8) &amp; 0xFF
-        self.crit_low_byte = (ability_info &gt;&gt; 16) &amp; 0xFF
-        self.action_metadata = (ability_info &gt;&gt; 24) &amp; 0xFF
-        # params[9] = effect_data2, part 2
-        # params[10] = effect_data3
-        # params[11] = effect_data3, part 2
-        # params[12] = effect_data4
-        # params[13] = effect_data4, part 2
-        # params[14] = effect_data5
-        # params[15] = effect_data5, part 2
-        # params[16] = effect_data6
-        # params[17] = effect_data6, part 2
-        # params[18] = effect_data7
-        # params[19] = effect_data7, part 2
-        # params[20] = effect_data8
-        # params[21] = effect_data8, part 2
-        #
-        # source actor parameters
-        # params[22] = current hp
-        # params[23] = max hp
-        # params[24] = current mp
-        # params[25] = max mp
-        # params[26] = current tp
-        # params[27] = max tp
-        # params[28] = x position
-        # params[29] = y position
-        # params[30] = z position
-        # params[31] = facing in radians (facing east is 0)
-
-        # sometimes these values are blank... why not provide 0s tho?
-        if &#39;&#39; not in self.params[22:31]:
-            self.source_actor.resources.update(*map(int, self.params[22:28]))
-            self.source_actor.resources.update(*map(float, self.params[28:31]))
-
-        # target actor parameters
-        # params[32] = current hp
-        # params[33] = max hp
-        # params[34] = current mp
-        # params[35] = max mp
-        # params[36] = current tp
-        # params[37] = max tp
-        # params[38] = x position
-        # params[39] = y position
-        # params[40] = z position
-        # params[41] = facing in radians (facing east is 0)
-        if &#39;&#39; not in self.params[32:41]:
-            self.target_actor.resources.update(*map(int, self.params[32:38]))
-            self.target_actor.position.update(*map(float, self.params[38:41]))
-
-        # params[42] = global sequence
+class Ability(Event): # pylint: disable=too-few-public-methods
+    &#34;&#34;&#34;A single target ability&#34;&#34;&#34;
+    def __init__(self, *,
+                 timestamp: Timestamp,
+                 action_effects: list[ActionEffect],
+                 source_actor: Actor,
+                 target_actor: Actor,
+                 ability: AbilityObj,
+                 sequence_id: int,
+                ):
+        super().__init__(timestamp)
+        self.source_actor = source_actor
+        self.target_actor = target_actor
+        self.action_effects = action_effects
+        self.ability = ability
+        self.sequence_id = sequence_id
 
     def __repr__(self):
-        return f&#39;&lt;Ability ({self.ability.name})&gt;&#39;</code></pre>
+        return &#39;&lt;Ability&gt;&#39;
+
+class AoeAbility(Event): # pylint: disable=too-few-public-methods
+    &#34;&#34;&#34;An ability that hits multiple actors&#34;&#34;&#34;
+    def __init__(self, *,
+                 timestamp: Timestamp,
+                 action_effects: list[ActionEffect],
+                 source_actor: Actor,
+                 target_actor: Actor,
+                 ability: AbilityObj,
+                 sequence_id: int,
+                ):
+        super().__init__(timestamp)
+        self.source_actor = source_actor
+        self.target_actor = target_actor
+        self.action_effects = action_effects
+        self.ability = ability
+        self.sequence_id = sequence_id
+
+    def __repr__(self):
+        return &#39;&lt;AoEAbility&gt;&#39;</code></pre>
 </details>
 </section>
 <section>
@@ -194,272 +86,73 @@ class Ability(Event):
 <dl>
 <dt id="nari.types.event.ability.Ability"><code class="flex name class">
 <span>class <span class="ident">Ability</span></span>
-<span>(</span><span>timestamp: Union[datetime.datetime, str], *, params: List[str] = [], index: int = 0, checksum: str = '', id_: int = None)</span>
+<span>(</span><span>*, timestamp: int, action_effects: list[<a title="nari.types.actioneffect.ActionEffect" href="../actioneffect.html#nari.types.actioneffect.ActionEffect">ActionEffect</a>], source_actor: <a title="nari.types.actor.Actor" href="../actor.html#nari.types.actor.Actor">Actor</a>, target_actor: <a title="nari.types.actor.Actor" href="../actor.html#nari.types.actor.Actor">Actor</a>, ability: <a title="nari.types.ability.Ability" href="../ability.html#nari.types.ability.Ability">Ability</a>, sequence_id: int)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Represents an ability use</p>
-<p>The Ability event has 43 parameters, some of which are known:</p>
-<ol>
-<li>The source actor ID</li>
-<li>The source actor name</li>
-<li>The ability ID</li>
-<li>The ability name</li>
-<li>The target actor ID</li>
-<li>The target actor name</li>
-<li>effect_data1 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>effect_data1, part 2 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>
-<p>effect_data2</p>
-<p>effect_data2 has 4 bytes with different characteristics:</p>
-<table>
-<thead>
-<tr>
-<th align="center">byte</th>
-<th align="left">description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">1</td>
-<td align="left">Action metadata. For example, Fuma Shuriken's metadata shows which of Ten/Chi/Jin button was used to cast it.</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="left">Crit chance. For example, <code>0xAA</code> turns into 17% crit chance (value / 10)</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="left">Low byte of true damage. If this and byte 2 are non-zero, this is likely a dot of some kind</td>
-</tr>
-<tr>
-<td align="center">4</td>
-<td align="left">Action type, see AbilityType for more information</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>effect_data2, part 2 (<em>4 bytes of data, unknown purpose</em>)</p>
-</li>
-<li>effect_data3 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>effect_data3, part 2 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>effect_data4 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>effect_data4, part 2 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>effect_data5 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>effect_data5, part 2 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>effect_data6 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>effect_data6, part 2 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>effect_data7 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>effect_data7, part 2 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>effect_data8 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>effect_data8, part 2 (<em>4 bytes of data, unknown purpose</em>)</li>
-<li>Source actor hp</li>
-<li>Source actor max hp</li>
-<li>Source actor mp</li>
-<li>Source actor max mp</li>
-<li>Source actor tp</li>
-<li>Source actor max tp</li>
-<li>Source actor x position</li>
-<li>Source actor y position</li>
-<li>Source actor z position</li>
-<li>Source actor facing</li>
-<li>Target actor hp</li>
-<li>Target actor max hp</li>
-<li>Target actor mp</li>
-<li>Target actor max mp</li>
-<li>Target actor tp</li>
-<li>Target actor max tp</li>
-<li>Target actor x position</li>
-<li>Target actor y position</li>
-<li>Target actor z position</li>
-<li>Target actor facing</li>
-<li>Global sequence – apparently seems to increment on every ability cast</li>
-</ol></div>
+<div class="desc"><p>A single target ability</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class Ability(Event):
-    &#34;&#34;&#34;Represents an ability use
-
-    The Ability event has 43 parameters, some of which are known:
-
-    1. The source actor ID
-    2. The source actor name
-    3. The ability ID
-    4. The ability name
-    5. The target actor ID
-    6. The target actor name
-    7. effect_data1 (*4 bytes of data, unknown purpose*)
-    8. effect_data1, part 2 (*4 bytes of data, unknown purpose*)
-    9. effect_data2
-
-        effect_data2 has 4 bytes with different characteristics:
-
-        | byte | description                                                                                                   |
-        | :--: | :------------------------------------------------------------------------------------------------------------ |
-        | 1    | Action metadata. For example, Fuma Shuriken&#39;s metadata shows which of Ten/Chi/Jin button was used to cast it. |
-        | 2    | Crit chance. For example, `0xAA` turns into 17% crit chance (value / 10)                                      |
-        | 3    | Low byte of true damage. If this and byte 2 are non-zero, this is likely a dot of some kind                   |
-        | 4    | Action type, see AbilityType for more information                                                             |
-
-    10. effect_data2, part 2 (*4 bytes of data, unknown purpose*)
-    11. effect_data3 (*4 bytes of data, unknown purpose*)
-    12. effect_data3, part 2 (*4 bytes of data, unknown purpose*)
-    13. effect_data4 (*4 bytes of data, unknown purpose*)
-    14. effect_data4, part 2 (*4 bytes of data, unknown purpose*)
-    15. effect_data5 (*4 bytes of data, unknown purpose*)
-    16. effect_data5, part 2 (*4 bytes of data, unknown purpose*)
-    17. effect_data6 (*4 bytes of data, unknown purpose*)
-    18. effect_data6, part 2 (*4 bytes of data, unknown purpose*)
-    19. effect_data7 (*4 bytes of data, unknown purpose*)
-    20. effect_data7, part 2 (*4 bytes of data, unknown purpose*)
-    21. effect_data8 (*4 bytes of data, unknown purpose*)
-    22. effect_data8, part 2 (*4 bytes of data, unknown purpose*)
-    23. Source actor hp
-    24. Source actor max hp
-    25. Source actor mp
-    26. Source actor max mp
-    27. Source actor tp
-    28. Source actor max tp
-    29. Source actor x position
-    30. Source actor y position
-    31. Source actor z position
-    32. Source actor facing
-    33. Target actor hp
-    34. Target actor max hp
-    35. Target actor mp
-    36. Target actor max mp
-    37. Target actor tp
-    38. Target actor max tp
-    39. Target actor x position
-    40. Target actor y position
-    41. Target actor z position
-    42. Target actor facing
-    43. Global sequence – apparently seems to increment on every ability cast
-    &#34;&#34;&#34;
-    __id__: int = Type.networkability.value
-
-    def handle_params(self):
-        # param[0] and param[1] - source Actor ID/name
-        self.source_actor = Actor(self.params[0], self.params[1])
-        # param[2] and param[3] - Ability ID/name
-        self.ability = AbilityObject(self.params[2], self.params[3])
-        # param[4] and param[5] - target Actor ID/name
-        self.target_actor = Actor(self.params[4], self.params[5])
-        # params[6] = effect_data1
-        # params[7] = effect_data1, part 2
-        # params[8] = effect_data2
-        # effect_data2 has 4 bytes with different characteristics:
-        # 1 - action metadata. For example, Fuma Shuriken&#39;s metadata shows which of Ten/Chi/Jin button was used.
-        #     There&#39;s enough data here that documenting it is best left to other documentation.
-        # 2 - crit chance. 0xAA turns into a ~17% crit chance (value / 10)
-        # 3 - low byte of true damage. If this and byte 2 are present, this is likely a dot of some kind
-        # 4 - action type. See the ActionEffectType enum above for documentation
-        ability_info: int = int(self.params[8], 16)
-        self.action_effect = ability_info &amp; 0xFF
-        self.damage_low_byte = (ability_info &gt;&gt; 8) &amp; 0xFF
-        self.crit_low_byte = (ability_info &gt;&gt; 16) &amp; 0xFF
-        self.action_metadata = (ability_info &gt;&gt; 24) &amp; 0xFF
-        # params[9] = effect_data2, part 2
-        # params[10] = effect_data3
-        # params[11] = effect_data3, part 2
-        # params[12] = effect_data4
-        # params[13] = effect_data4, part 2
-        # params[14] = effect_data5
-        # params[15] = effect_data5, part 2
-        # params[16] = effect_data6
-        # params[17] = effect_data6, part 2
-        # params[18] = effect_data7
-        # params[19] = effect_data7, part 2
-        # params[20] = effect_data8
-        # params[21] = effect_data8, part 2
-        #
-        # source actor parameters
-        # params[22] = current hp
-        # params[23] = max hp
-        # params[24] = current mp
-        # params[25] = max mp
-        # params[26] = current tp
-        # params[27] = max tp
-        # params[28] = x position
-        # params[29] = y position
-        # params[30] = z position
-        # params[31] = facing in radians (facing east is 0)
-
-        # sometimes these values are blank... why not provide 0s tho?
-        if &#39;&#39; not in self.params[22:31]:
-            self.source_actor.resources.update(*map(int, self.params[22:28]))
-            self.source_actor.resources.update(*map(float, self.params[28:31]))
-
-        # target actor parameters
-        # params[32] = current hp
-        # params[33] = max hp
-        # params[34] = current mp
-        # params[35] = max mp
-        # params[36] = current tp
-        # params[37] = max tp
-        # params[38] = x position
-        # params[39] = y position
-        # params[40] = z position
-        # params[41] = facing in radians (facing east is 0)
-        if &#39;&#39; not in self.params[32:41]:
-            self.target_actor.resources.update(*map(int, self.params[32:38]))
-            self.target_actor.position.update(*map(float, self.params[38:41]))
-
-        # params[42] = global sequence
+<pre><code class="python">class Ability(Event): # pylint: disable=too-few-public-methods
+    &#34;&#34;&#34;A single target ability&#34;&#34;&#34;
+    def __init__(self, *,
+                 timestamp: Timestamp,
+                 action_effects: list[ActionEffect],
+                 source_actor: Actor,
+                 target_actor: Actor,
+                 ability: AbilityObj,
+                 sequence_id: int,
+                ):
+        super().__init__(timestamp)
+        self.source_actor = source_actor
+        self.target_actor = target_actor
+        self.action_effects = action_effects
+        self.ability = ability
+        self.sequence_id = sequence_id
 
     def __repr__(self):
-        return f&#39;&lt;Ability ({self.ability.name})&gt;&#39;</code></pre>
+        return &#39;&lt;Ability&gt;&#39;</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li><a title="nari.types.event.base.Event" href="base.html#nari.types.event.base.Event">Event</a></li>
-</ul>
-<h3>Inherited members</h3>
-<ul class="hlist">
-<li><code><b><a title="nari.types.event.base.Event" href="base.html#nari.types.event.base.Event">Event</a></b></code>:
-<ul class="hlist">
-<li><code><a title="nari.types.event.base.Event.handle_params" href="base.html#nari.types.event.base.Event.handle_params">handle_params</a></code></li>
-<li><code><a title="nari.types.event.base.Event.valid_checksum" href="base.html#nari.types.event.base.Event.valid_checksum">valid_checksum</a></code></li>
-</ul>
-</li>
+<li><a title="nari.types.event.Event" href="index.html#nari.types.event.Event">Event</a></li>
 </ul>
 </dd>
-<dt id="nari.types.event.ability.AbilityType"><code class="flex name class">
-<span>class <span class="ident">AbilityType</span></span>
-<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+<dt id="nari.types.event.ability.AoeAbility"><code class="flex name class">
+<span>class <span class="ident">AoeAbility</span></span>
+<span>(</span><span>*, timestamp: int, action_effects: list[<a title="nari.types.actioneffect.ActionEffect" href="../actioneffect.html#nari.types.actioneffect.ActionEffect">ActionEffect</a>], source_actor: <a title="nari.types.actor.Actor" href="../actor.html#nari.types.actor.Actor">Actor</a>, target_actor: <a title="nari.types.actor.Actor" href="../actor.html#nari.types.actor.Actor">Actor</a>, ability: <a title="nari.types.ability.Ability" href="../ability.html#nari.types.ability.Ability">Ability</a>, sequence_id: int)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>AbilityEffectTypes lists all the different effects that an ability can be marked with</p></div>
+<div class="desc"><p>An ability that hits multiple actors</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class AbilityType(IntEnum):
-    &#34;&#34;&#34;AbilityEffectTypes lists all the different effects that an ability can be marked with&#34;&#34;&#34;
-    none = 0x0
-    &#34;&#34;&#34;Ability has no special effects&#34;&#34;&#34;
-    applieseffect = 0x0E
-    &#34;&#34;&#34;The ability applies a status effect&#34;&#34;&#34;</code></pre>
+<pre><code class="python">class AoeAbility(Event): # pylint: disable=too-few-public-methods
+    &#34;&#34;&#34;An ability that hits multiple actors&#34;&#34;&#34;
+    def __init__(self, *,
+                 timestamp: Timestamp,
+                 action_effects: list[ActionEffect],
+                 source_actor: Actor,
+                 target_actor: Actor,
+                 ability: AbilityObj,
+                 sequence_id: int,
+                ):
+        super().__init__(timestamp)
+        self.source_actor = source_actor
+        self.target_actor = target_actor
+        self.action_effects = action_effects
+        self.ability = ability
+        self.sequence_id = sequence_id
+
+    def __repr__(self):
+        return &#39;&lt;AoEAbility&gt;&#39;</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
-<li>enum.IntEnum</li>
-<li>builtins.int</li>
-<li>enum.Enum</li>
+<li><a title="nari.types.event.Event" href="index.html#nari.types.event.Event">Event</a></li>
 </ul>
-<h3>Class variables</h3>
-<dl>
-<dt id="nari.types.event.ability.AbilityType.applieseffect"><code class="name">var <span class="ident">applieseffect</span></code></dt>
-<dd>
-<div class="desc"><p>The ability applies a status effect</p></div>
-</dd>
-<dt id="nari.types.event.ability.AbilityType.none"><code class="name">var <span class="ident">none</span></code></dt>
-<dd>
-<div class="desc"><p>Ability has no special effects</p></div>
-</dd>
-</dl>
 </dd>
 </dl>
 </section>
@@ -481,11 +174,7 @@ class Ability(Event):
 <h4><code><a title="nari.types.event.ability.Ability" href="#nari.types.event.ability.Ability">Ability</a></code></h4>
 </li>
 <li>
-<h4><code><a title="nari.types.event.ability.AbilityType" href="#nari.types.event.ability.AbilityType">AbilityType</a></code></h4>
-<ul class="">
-<li><code><a title="nari.types.event.ability.AbilityType.applieseffect" href="#nari.types.event.ability.AbilityType.applieseffect">applieseffect</a></code></li>
-<li><code><a title="nari.types.event.ability.AbilityType.none" href="#nari.types.event.ability.AbilityType.none">none</a></code></li>
-</ul>
+<h4><code><a title="nari.types.event.ability.AoeAbility" href="#nari.types.event.ability.AoeAbility">AoeAbility</a></code></h4>
 </li>
 </ul>
 </li>
@@ -493,7 +182,7 @@ class Ability(Event):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

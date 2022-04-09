@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>nari.types.director API documentation</title>
+<meta name="description" content="DirectorUpdate represents changes from the &#39;Director&#39; to the &#39;scene&#39; in-game …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>nari.types.director</code></h1>
+</header>
+<section id="section-intro">
+<p>DirectorUpdate represents changes from the 'Director' to the 'scene' in-game</p>
+<p>When something more global than the actor scope happens, it's likely initiated by the director.
+For example, on a wipe, the director will prompt fade to black, fade back in, and raising/lowering
+the barrier.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;DirectorUpdate represents changes from the &#39;Director&#39; to the &#39;scene&#39; in-game
+
+When something more global than the actor scope happens, it&#39;s likely initiated by the director.
+For example, on a wipe, the director will prompt fade to black, fade back in, and raising/lowering
+the barrier.
+&#34;&#34;&#34;
+
+from enum import IntEnum
+
+# pylint: disable=invalid-name
+class DirectorUpdateCategory(IntEnum):
+    &#34;&#34;&#34;Relates to the type of content that&#39;s being &#39;directed&#39;&#34;&#34;&#34;
+    BattleLeve = 0x8001
+    &#34;&#34;&#34;Content is a combat leve duty&#34;&#34;&#34;
+    GatheringLeve = 0x8002
+    &#34;&#34;&#34;Content is a gathering leve duty&#34;&#34;&#34;
+    InstanceContent = 0x8003
+    &#34;&#34;&#34;Any type of content that is an instance
+
+    Instanced content include:
+
+    * Raid arenas
+    * Dungeons
+    * Alliance areas
+    * Trials
+    &#34;&#34;&#34;
+    PublicContent = 0x8004
+    &#34;&#34;&#34;Not sure what this is. Just regular stuff?&#34;&#34;&#34;
+    QuestBattle = 0x8006
+    &#34;&#34;&#34;Not sure what this is. Perhaps instanced content like job quests?&#34;&#34;&#34;
+    CompanyLeve = 0x8007
+    &#34;&#34;&#34;Need a better description.&#34;&#34;&#34;
+    TreasureHunt = 0x8009
+    &#34;&#34;&#34;Content that involves treasure maps with adds; perhaps also the &#39;dungeon&#39; area afterwards?&#34;&#34;&#34;
+    GoldSaucer = 0x800A
+    &#34;&#34;&#34;Probably related to GATEs&#34;&#34;&#34;
+    CompanyCraftDirector = 0x800B
+    &#34;&#34;&#34;I&#39;m assuming this is the &#39;group craft&#39; actions like when you make an airship&#34;&#34;&#34;
+    DpsChallange = 0x800D
+    &#34;&#34;&#34;Stone, Sea, Sky content&#34;&#34;&#34;
+    Fate = 0x801A
+    &#34;&#34;&#34;FATE-related content&#34;&#34;&#34;
+
+    @classmethod
+    def name_for_value(cls, value):
+        &#34;&#34;&#34;Helper class method to return the name of the enum when you already have the value&#34;&#34;&#34;
+        if value in cls.__members__.values():
+            return cls(value).name
+        return &#39;Unknown&#39;
+
+
+class DirectorUpdateCommand(IntEnum):
+    &#34;&#34;&#34;These are the &#39;command&#39; portion of a director update&#34;&#34;&#34;
+    init = 0x40000001 # params: 3: duty length in seconds, eg 0xE10 is 3600 or 1 hour, 4-6: unused
+    &#34;&#34;&#34;When a piece of content is initialized
+
+    Params that follow the command:
+
+    | Index | Description        |
+    | ----: | -----------------: |
+    | 3     | *unused*           |
+    | 4     | Passed to director |
+    | 5-6   | *unused*           |
+    &#34;&#34;&#34;
+    complete = 0x40000002 # &#34;Duty Complete&#34; flying text
+    &#34;&#34;&#34;When a piece of content ends
+
+    Params that follow the command:
+
+    | Index | Description        |
+    | ----: | -----------------: |
+    | 3     | *unused*           |
+    | 4     | Passed to director |
+    | 5-6   | *unused*           |
+    &#34;&#34;&#34;
+    clear = 0x40000003
+    &#34;&#34;&#34;Emits when a piece of content is &#39;cleared&#39;
+
+    Params that follow the command:
+
+    | Index | Description                                           |
+    | ----: | ----------------------------------------------------: |
+    | 3     | `0x1` if a first-time clear (causes fadeout sequence) |
+    | 4-6   | *unused*                                              |
+    &#34;&#34;&#34;
+    timer = 0x40000004
+    &#34;&#34;&#34;The duty time in seconds
+
+    Params that follow the command:
+
+    | Index | Description            |
+    | ----: | ---------------------: |
+    | 3     | Duty time (in seconds) |
+    | 4-6   | *unused*               |
+    &#34;&#34;&#34;
+    fadeout = 0x40000005
+    &#34;&#34;&#34;Instructs the screen to fade to black&#34;&#34;&#34;
+    barrierdown = 0x40000006
+    &#34;&#34;&#34;Takes the &#39;instance&#39; barrier down&#34;&#34;&#34;
+    noclue = 0x40000007 # params: examples, no clue tho (0x6, 0x0, 0x0, 0x0, 0x0, 0x0), (0x6, 0x1, 0x0, 0x0, 0x0, 0x0)
+    initvote = 0x40000008 # init vote (ie abandon, kick, etc) – params: 3: vote type, 4: vote initiator, 5-6: unknown
+    &#34;&#34;&#34;Promps a vote to be held
+
+    Params that follow the command:
+
+    | Index | Description             |
+    | ----: | ----------------------: |
+    | 3     | Vote type               |
+    | 4     | Vote initiator actor ID |
+    | 5     | *unknown*               |
+    | 6     | *unknown*               |
+    &#34;&#34;&#34;
+    concludevote = 0x40000009 # conclude vote – params: 3: vote type, 4: 1 for succeed/0 for fail, 5: vote initiator, 6: unknown
+    &#34;&#34;&#34;Concludes the vote and shows the result
+
+    Params that follow the command:
+
+    | Index | Description                  |
+    | ----: | ---------------------------: |
+    | 3     | Vote type                    |
+    | 4     | 1 for success; 0 for failure |
+    | 5     | Vote initiator actor ID      |
+    | 6     | *unknown*                    |
+    &#34;&#34;&#34;
+    partyinvite = 0x4000000A # &#34;you invite x to a party&#34; – params: 3: log message id?, 4: log message param?, 5-6: unused
+    &#34;&#34;&#34;Sent when you invite someone to the party
+
+    Params that follow the command:
+
+    | Index | Description        |
+    | ----: | -----------------: |
+    | 3     | Log message id?    |
+    | 4     | Log message param? |
+    | 5-6   | *unused*           |
+    &#34;&#34;&#34;
+    dutygate = 0x4000000C # no idea on params, looks like first one is used only, seems to be either 0x00 or 0x02
+    &#34;&#34;&#34;This command sets the state of artificial walls in duties, such as gates in Doma Castle or water walls in Neverreap&#34;&#34;&#34;
+    newtoduty = 0x4000000D
+    &#34;&#34;&#34;This command comes in when one or more members in the instance are new to the duty&#34;&#34;&#34;
+    levelup = 0x4000000E
+    &#34;&#34;&#34;This command comes in when a player levels up in the duty
+
+    Params that follow the command:
+
+    | Index | Description |
+    | ----: | ----------: |
+    | 3     | Actor ID    |
+    | 4     | Old level   |
+    | 5     | New level   |
+    | 6     | *unused*    |
+    &#34;&#34;&#34;
+    fadein = 0x40000010
+    &#34;&#34;&#34;Causes a fade-in to happen
+
+    Params that follow the command:
+
+    | Index | Description            |
+    | ----: | ---------------------: |
+    | 3     | Time left (in seconds) |
+    | 4-6   | *unused*               |
+    &#34;&#34;&#34;
+    barrierup = 0x40000012
+    &#34;&#34;&#34;Puts an &#39;instance&#39; barrier up&#34;&#34;&#34;
+    partyloot = 0x40000013 # &#34;x of 8 party members are eligible for duty rewards&#34; – params: 3: eligible people, 4: log message param?, 5-6: unused
+    &#34;&#34;&#34;This command lists how many party members are elible for duty rewards. The number of chests dropped in locked content
+    appears to be hardcoded into the client, and as such doesn&#39;t change this packet.
+
+    Params that follow the command:
+
+    | Index | Description       |
+    | ----: | ----------------: |
+    | 3     | Eligibility count |
+    | 4-6   | *unused*          |
+    &#34;&#34;&#34;
+    instancesynctime = 0x80000002
+    &#34;&#34;&#34;A periodic packet sent to indicate the remaining time in an instance
+
+    Params that follow the command:
+
+    | Index | Description            |
+    | ----: | ---------------------: |
+    | 3     | Time left (in seconds) |
+    | 4-6   | *unused*               |
+    &#34;&#34;&#34;
+    @classmethod
+    def name_for_value(cls, value):
+        &#34;&#34;&#34;Helper class method to return the name of the enum when you already have the value&#34;&#34;&#34;
+        if value in cls.__members__.values():
+            return cls(value).name
+        return &#39;Unknown&#39;
+# pylint: enable=invalid-name</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="nari.types.director.DirectorUpdateCategory"><code class="flex name class">
+<span>class <span class="ident">DirectorUpdateCategory</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Relates to the type of content that's being 'directed'</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class DirectorUpdateCategory(IntEnum):
+    &#34;&#34;&#34;Relates to the type of content that&#39;s being &#39;directed&#39;&#34;&#34;&#34;
+    BattleLeve = 0x8001
+    &#34;&#34;&#34;Content is a combat leve duty&#34;&#34;&#34;
+    GatheringLeve = 0x8002
+    &#34;&#34;&#34;Content is a gathering leve duty&#34;&#34;&#34;
+    InstanceContent = 0x8003
+    &#34;&#34;&#34;Any type of content that is an instance
+
+    Instanced content include:
+
+    * Raid arenas
+    * Dungeons
+    * Alliance areas
+    * Trials
+    &#34;&#34;&#34;
+    PublicContent = 0x8004
+    &#34;&#34;&#34;Not sure what this is. Just regular stuff?&#34;&#34;&#34;
+    QuestBattle = 0x8006
+    &#34;&#34;&#34;Not sure what this is. Perhaps instanced content like job quests?&#34;&#34;&#34;
+    CompanyLeve = 0x8007
+    &#34;&#34;&#34;Need a better description.&#34;&#34;&#34;
+    TreasureHunt = 0x8009
+    &#34;&#34;&#34;Content that involves treasure maps with adds; perhaps also the &#39;dungeon&#39; area afterwards?&#34;&#34;&#34;
+    GoldSaucer = 0x800A
+    &#34;&#34;&#34;Probably related to GATEs&#34;&#34;&#34;
+    CompanyCraftDirector = 0x800B
+    &#34;&#34;&#34;I&#39;m assuming this is the &#39;group craft&#39; actions like when you make an airship&#34;&#34;&#34;
+    DpsChallange = 0x800D
+    &#34;&#34;&#34;Stone, Sea, Sky content&#34;&#34;&#34;
+    Fate = 0x801A
+    &#34;&#34;&#34;FATE-related content&#34;&#34;&#34;
+
+    @classmethod
+    def name_for_value(cls, value):
+        &#34;&#34;&#34;Helper class method to return the name of the enum when you already have the value&#34;&#34;&#34;
+        if value in cls.__members__.values():
+            return cls(value).name
+        return &#39;Unknown&#39;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.IntEnum</li>
+<li>builtins.int</li>
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="nari.types.director.DirectorUpdateCategory.BattleLeve"><code class="name">var <span class="ident">BattleLeve</span></code></dt>
+<dd>
+<div class="desc"><p>Content is a combat leve duty</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCategory.CompanyCraftDirector"><code class="name">var <span class="ident">CompanyCraftDirector</span></code></dt>
+<dd>
+<div class="desc"><p>I'm assuming this is the 'group craft' actions like when you make an airship</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCategory.CompanyLeve"><code class="name">var <span class="ident">CompanyLeve</span></code></dt>
+<dd>
+<div class="desc"><p>Need a better description.</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCategory.DpsChallange"><code class="name">var <span class="ident">DpsChallange</span></code></dt>
+<dd>
+<div class="desc"><p>Stone, Sea, Sky content</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCategory.Fate"><code class="name">var <span class="ident">Fate</span></code></dt>
+<dd>
+<div class="desc"><p>FATE-related content</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCategory.GatheringLeve"><code class="name">var <span class="ident">GatheringLeve</span></code></dt>
+<dd>
+<div class="desc"><p>Content is a gathering leve duty</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCategory.GoldSaucer"><code class="name">var <span class="ident">GoldSaucer</span></code></dt>
+<dd>
+<div class="desc"><p>Probably related to GATEs</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCategory.InstanceContent"><code class="name">var <span class="ident">InstanceContent</span></code></dt>
+<dd>
+<div class="desc"><p>Any type of content that is an instance</p>
+<p>Instanced content include:</p>
+<ul>
+<li>Raid arenas</li>
+<li>Dungeons</li>
+<li>Alliance areas</li>
+<li>Trials</li>
+</ul></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCategory.PublicContent"><code class="name">var <span class="ident">PublicContent</span></code></dt>
+<dd>
+<div class="desc"><p>Not sure what this is. Just regular stuff?</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCategory.QuestBattle"><code class="name">var <span class="ident">QuestBattle</span></code></dt>
+<dd>
+<div class="desc"><p>Not sure what this is. Perhaps instanced content like job quests?</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCategory.TreasureHunt"><code class="name">var <span class="ident">TreasureHunt</span></code></dt>
+<dd>
+<div class="desc"><p>Content that involves treasure maps with adds; perhaps also the 'dungeon' area afterwards?</p></div>
+</dd>
+</dl>
+<h3>Static methods</h3>
+<dl>
+<dt id="nari.types.director.DirectorUpdateCategory.name_for_value"><code class="name flex">
+<span>def <span class="ident">name_for_value</span></span>(<span>value)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper class method to return the name of the enum when you already have the value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def name_for_value(cls, value):
+    &#34;&#34;&#34;Helper class method to return the name of the enum when you already have the value&#34;&#34;&#34;
+    if value in cls.__members__.values():
+        return cls(value).name
+    return &#39;Unknown&#39;</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand"><code class="flex name class">
+<span>class <span class="ident">DirectorUpdateCommand</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>These are the 'command' portion of a director update</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class DirectorUpdateCommand(IntEnum):
+    &#34;&#34;&#34;These are the &#39;command&#39; portion of a director update&#34;&#34;&#34;
+    init = 0x40000001 # params: 3: duty length in seconds, eg 0xE10 is 3600 or 1 hour, 4-6: unused
+    &#34;&#34;&#34;When a piece of content is initialized
+
+    Params that follow the command:
+
+    | Index | Description        |
+    | ----: | -----------------: |
+    | 3     | *unused*           |
+    | 4     | Passed to director |
+    | 5-6   | *unused*           |
+    &#34;&#34;&#34;
+    complete = 0x40000002 # &#34;Duty Complete&#34; flying text
+    &#34;&#34;&#34;When a piece of content ends
+
+    Params that follow the command:
+
+    | Index | Description        |
+    | ----: | -----------------: |
+    | 3     | *unused*           |
+    | 4     | Passed to director |
+    | 5-6   | *unused*           |
+    &#34;&#34;&#34;
+    clear = 0x40000003
+    &#34;&#34;&#34;Emits when a piece of content is &#39;cleared&#39;
+
+    Params that follow the command:
+
+    | Index | Description                                           |
+    | ----: | ----------------------------------------------------: |
+    | 3     | `0x1` if a first-time clear (causes fadeout sequence) |
+    | 4-6   | *unused*                                              |
+    &#34;&#34;&#34;
+    timer = 0x40000004
+    &#34;&#34;&#34;The duty time in seconds
+
+    Params that follow the command:
+
+    | Index | Description            |
+    | ----: | ---------------------: |
+    | 3     | Duty time (in seconds) |
+    | 4-6   | *unused*               |
+    &#34;&#34;&#34;
+    fadeout = 0x40000005
+    &#34;&#34;&#34;Instructs the screen to fade to black&#34;&#34;&#34;
+    barrierdown = 0x40000006
+    &#34;&#34;&#34;Takes the &#39;instance&#39; barrier down&#34;&#34;&#34;
+    noclue = 0x40000007 # params: examples, no clue tho (0x6, 0x0, 0x0, 0x0, 0x0, 0x0), (0x6, 0x1, 0x0, 0x0, 0x0, 0x0)
+    initvote = 0x40000008 # init vote (ie abandon, kick, etc) – params: 3: vote type, 4: vote initiator, 5-6: unknown
+    &#34;&#34;&#34;Promps a vote to be held
+
+    Params that follow the command:
+
+    | Index | Description             |
+    | ----: | ----------------------: |
+    | 3     | Vote type               |
+    | 4     | Vote initiator actor ID |
+    | 5     | *unknown*               |
+    | 6     | *unknown*               |
+    &#34;&#34;&#34;
+    concludevote = 0x40000009 # conclude vote – params: 3: vote type, 4: 1 for succeed/0 for fail, 5: vote initiator, 6: unknown
+    &#34;&#34;&#34;Concludes the vote and shows the result
+
+    Params that follow the command:
+
+    | Index | Description                  |
+    | ----: | ---------------------------: |
+    | 3     | Vote type                    |
+    | 4     | 1 for success; 0 for failure |
+    | 5     | Vote initiator actor ID      |
+    | 6     | *unknown*                    |
+    &#34;&#34;&#34;
+    partyinvite = 0x4000000A # &#34;you invite x to a party&#34; – params: 3: log message id?, 4: log message param?, 5-6: unused
+    &#34;&#34;&#34;Sent when you invite someone to the party
+
+    Params that follow the command:
+
+    | Index | Description        |
+    | ----: | -----------------: |
+    | 3     | Log message id?    |
+    | 4     | Log message param? |
+    | 5-6   | *unused*           |
+    &#34;&#34;&#34;
+    dutygate = 0x4000000C # no idea on params, looks like first one is used only, seems to be either 0x00 or 0x02
+    &#34;&#34;&#34;This command sets the state of artificial walls in duties, such as gates in Doma Castle or water walls in Neverreap&#34;&#34;&#34;
+    newtoduty = 0x4000000D
+    &#34;&#34;&#34;This command comes in when one or more members in the instance are new to the duty&#34;&#34;&#34;
+    levelup = 0x4000000E
+    &#34;&#34;&#34;This command comes in when a player levels up in the duty
+
+    Params that follow the command:
+
+    | Index | Description |
+    | ----: | ----------: |
+    | 3     | Actor ID    |
+    | 4     | Old level   |
+    | 5     | New level   |
+    | 6     | *unused*    |
+    &#34;&#34;&#34;
+    fadein = 0x40000010
+    &#34;&#34;&#34;Causes a fade-in to happen
+
+    Params that follow the command:
+
+    | Index | Description            |
+    | ----: | ---------------------: |
+    | 3     | Time left (in seconds) |
+    | 4-6   | *unused*               |
+    &#34;&#34;&#34;
+    barrierup = 0x40000012
+    &#34;&#34;&#34;Puts an &#39;instance&#39; barrier up&#34;&#34;&#34;
+    partyloot = 0x40000013 # &#34;x of 8 party members are eligible for duty rewards&#34; – params: 3: eligible people, 4: log message param?, 5-6: unused
+    &#34;&#34;&#34;This command lists how many party members are elible for duty rewards. The number of chests dropped in locked content
+    appears to be hardcoded into the client, and as such doesn&#39;t change this packet.
+
+    Params that follow the command:
+
+    | Index | Description       |
+    | ----: | ----------------: |
+    | 3     | Eligibility count |
+    | 4-6   | *unused*          |
+    &#34;&#34;&#34;
+    instancesynctime = 0x80000002
+    &#34;&#34;&#34;A periodic packet sent to indicate the remaining time in an instance
+
+    Params that follow the command:
+
+    | Index | Description            |
+    | ----: | ---------------------: |
+    | 3     | Time left (in seconds) |
+    | 4-6   | *unused*               |
+    &#34;&#34;&#34;
+    @classmethod
+    def name_for_value(cls, value):
+        &#34;&#34;&#34;Helper class method to return the name of the enum when you already have the value&#34;&#34;&#34;
+        if value in cls.__members__.values():
+            return cls(value).name
+        return &#39;Unknown&#39;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.IntEnum</li>
+<li>builtins.int</li>
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="nari.types.director.DirectorUpdateCommand.barrierdown"><code class="name">var <span class="ident">barrierdown</span></code></dt>
+<dd>
+<div class="desc"><p>Takes the 'instance' barrier down</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.barrierup"><code class="name">var <span class="ident">barrierup</span></code></dt>
+<dd>
+<div class="desc"><p>Puts an 'instance' barrier up</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.clear"><code class="name">var <span class="ident">clear</span></code></dt>
+<dd>
+<div class="desc"><p>Emits when a piece of content is 'cleared'</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right"><code>0x1</code> if a first-time clear (causes fadeout sequence)</td>
+</tr>
+<tr>
+<td align="right">4-6</td>
+<td align="right"><em>unused</em></td>
+</tr>
+</tbody>
+</table></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.complete"><code class="name">var <span class="ident">complete</span></code></dt>
+<dd>
+<div class="desc"><p>When a piece of content ends</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right"><em>unused</em></td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">Passed to director</td>
+</tr>
+<tr>
+<td align="right">5-6</td>
+<td align="right"><em>unused</em></td>
+</tr>
+</tbody>
+</table></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.concludevote"><code class="name">var <span class="ident">concludevote</span></code></dt>
+<dd>
+<div class="desc"><p>Concludes the vote and shows the result</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right">Vote type</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">1 for success; 0 for failure</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td align="right">Vote initiator actor ID</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td align="right"><em>unknown</em></td>
+</tr>
+</tbody>
+</table></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.dutygate"><code class="name">var <span class="ident">dutygate</span></code></dt>
+<dd>
+<div class="desc"><p>This command sets the state of artificial walls in duties, such as gates in Doma Castle or water walls in Neverreap</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.fadein"><code class="name">var <span class="ident">fadein</span></code></dt>
+<dd>
+<div class="desc"><p>Causes a fade-in to happen</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right">Time left (in seconds)</td>
+</tr>
+<tr>
+<td align="right">4-6</td>
+<td align="right"><em>unused</em></td>
+</tr>
+</tbody>
+</table></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.fadeout"><code class="name">var <span class="ident">fadeout</span></code></dt>
+<dd>
+<div class="desc"><p>Instructs the screen to fade to black</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.init"><code class="name">var <span class="ident">init</span></code></dt>
+<dd>
+<div class="desc"><p>When a piece of content is initialized</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right"><em>unused</em></td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">Passed to director</td>
+</tr>
+<tr>
+<td align="right">5-6</td>
+<td align="right"><em>unused</em></td>
+</tr>
+</tbody>
+</table></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.initvote"><code class="name">var <span class="ident">initvote</span></code></dt>
+<dd>
+<div class="desc"><p>Promps a vote to be held</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right">Vote type</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">Vote initiator actor ID</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td align="right"><em>unknown</em></td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td align="right"><em>unknown</em></td>
+</tr>
+</tbody>
+</table></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.instancesynctime"><code class="name">var <span class="ident">instancesynctime</span></code></dt>
+<dd>
+<div class="desc"><p>A periodic packet sent to indicate the remaining time in an instance</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right">Time left (in seconds)</td>
+</tr>
+<tr>
+<td align="right">4-6</td>
+<td align="right"><em>unused</em></td>
+</tr>
+</tbody>
+</table></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.levelup"><code class="name">var <span class="ident">levelup</span></code></dt>
+<dd>
+<div class="desc"><p>This command comes in when a player levels up in the duty</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right">Actor ID</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">Old level</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td align="right">New level</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td align="right"><em>unused</em></td>
+</tr>
+</tbody>
+</table></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.newtoduty"><code class="name">var <span class="ident">newtoduty</span></code></dt>
+<dd>
+<div class="desc"><p>This command comes in when one or more members in the instance are new to the duty</p></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.noclue"><code class="name">var <span class="ident">noclue</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.partyinvite"><code class="name">var <span class="ident">partyinvite</span></code></dt>
+<dd>
+<div class="desc"><p>Sent when you invite someone to the party</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right">Log message id?</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">Log message param?</td>
+</tr>
+<tr>
+<td align="right">5-6</td>
+<td align="right"><em>unused</em></td>
+</tr>
+</tbody>
+</table></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.partyloot"><code class="name">var <span class="ident">partyloot</span></code></dt>
+<dd>
+<div class="desc"><p>This command lists how many party members are elible for duty rewards. The number of chests dropped in locked content
+appears to be hardcoded into the client, and as such doesn't change this packet.</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right">Eligibility count</td>
+</tr>
+<tr>
+<td align="right">4-6</td>
+<td align="right"><em>unused</em></td>
+</tr>
+</tbody>
+</table></div>
+</dd>
+<dt id="nari.types.director.DirectorUpdateCommand.timer"><code class="name">var <span class="ident">timer</span></code></dt>
+<dd>
+<div class="desc"><p>The duty time in seconds</p>
+<p>Params that follow the command:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Index</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">3</td>
+<td align="right">Duty time (in seconds)</td>
+</tr>
+<tr>
+<td align="right">4-6</td>
+<td align="right"><em>unused</em></td>
+</tr>
+</tbody>
+</table></div>
+</dd>
+</dl>
+<h3>Static methods</h3>
+<dl>
+<dt id="nari.types.director.DirectorUpdateCommand.name_for_value"><code class="name flex">
+<span>def <span class="ident">name_for_value</span></span>(<span>value)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper class method to return the name of the enum when you already have the value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def name_for_value(cls, value):
+    &#34;&#34;&#34;Helper class method to return the name of the enum when you already have the value&#34;&#34;&#34;
+    if value in cls.__members__.values():
+        return cls(value).name
+    return &#39;Unknown&#39;</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="nari.types" href="index.html">nari.types</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="nari.types.director.DirectorUpdateCategory" href="#nari.types.director.DirectorUpdateCategory">DirectorUpdateCategory</a></code></h4>
+<ul class="">
+<li><code><a title="nari.types.director.DirectorUpdateCategory.BattleLeve" href="#nari.types.director.DirectorUpdateCategory.BattleLeve">BattleLeve</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCategory.CompanyCraftDirector" href="#nari.types.director.DirectorUpdateCategory.CompanyCraftDirector">CompanyCraftDirector</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCategory.CompanyLeve" href="#nari.types.director.DirectorUpdateCategory.CompanyLeve">CompanyLeve</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCategory.DpsChallange" href="#nari.types.director.DirectorUpdateCategory.DpsChallange">DpsChallange</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCategory.Fate" href="#nari.types.director.DirectorUpdateCategory.Fate">Fate</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCategory.GatheringLeve" href="#nari.types.director.DirectorUpdateCategory.GatheringLeve">GatheringLeve</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCategory.GoldSaucer" href="#nari.types.director.DirectorUpdateCategory.GoldSaucer">GoldSaucer</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCategory.InstanceContent" href="#nari.types.director.DirectorUpdateCategory.InstanceContent">InstanceContent</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCategory.PublicContent" href="#nari.types.director.DirectorUpdateCategory.PublicContent">PublicContent</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCategory.QuestBattle" href="#nari.types.director.DirectorUpdateCategory.QuestBattle">QuestBattle</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCategory.TreasureHunt" href="#nari.types.director.DirectorUpdateCategory.TreasureHunt">TreasureHunt</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCategory.name_for_value" href="#nari.types.director.DirectorUpdateCategory.name_for_value">name_for_value</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nari.types.director.DirectorUpdateCommand" href="#nari.types.director.DirectorUpdateCommand">DirectorUpdateCommand</a></code></h4>
+<ul class="two-column">
+<li><code><a title="nari.types.director.DirectorUpdateCommand.barrierdown" href="#nari.types.director.DirectorUpdateCommand.barrierdown">barrierdown</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.barrierup" href="#nari.types.director.DirectorUpdateCommand.barrierup">barrierup</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.clear" href="#nari.types.director.DirectorUpdateCommand.clear">clear</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.complete" href="#nari.types.director.DirectorUpdateCommand.complete">complete</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.concludevote" href="#nari.types.director.DirectorUpdateCommand.concludevote">concludevote</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.dutygate" href="#nari.types.director.DirectorUpdateCommand.dutygate">dutygate</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.fadein" href="#nari.types.director.DirectorUpdateCommand.fadein">fadein</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.fadeout" href="#nari.types.director.DirectorUpdateCommand.fadeout">fadeout</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.init" href="#nari.types.director.DirectorUpdateCommand.init">init</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.initvote" href="#nari.types.director.DirectorUpdateCommand.initvote">initvote</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.instancesynctime" href="#nari.types.director.DirectorUpdateCommand.instancesynctime">instancesynctime</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.levelup" href="#nari.types.director.DirectorUpdateCommand.levelup">levelup</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.name_for_value" href="#nari.types.director.DirectorUpdateCommand.name_for_value">name_for_value</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.newtoduty" href="#nari.types.director.DirectorUpdateCommand.newtoduty">newtoduty</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.noclue" href="#nari.types.director.DirectorUpdateCommand.noclue">noclue</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.partyinvite" href="#nari.types.director.DirectorUpdateCommand.partyinvite">partyinvite</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.partyloot" href="#nari.types.director.DirectorUpdateCommand.partyloot">partyloot</a></code></li>
+<li><code><a title="nari.types.director.DirectorUpdateCommand.timer" href="#nari.types.director.DirectorUpdateCommand.timer">timer</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
