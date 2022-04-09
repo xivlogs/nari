@@ -30,7 +30,7 @@ def tick_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
             return DamageOverTime(
                 timestamp=timestamp,
                 actor=actor,
-                effect_id=int(params[3]),
+                effect_id=int(params[3], 16),
                 value=int(params[4])
             )
 
@@ -38,7 +38,7 @@ def tick_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
             return HealOverTime(
                 timestamp=timestamp,
                 actor=actor,
-                effect_id=int(params[3]),
+                effect_id=int(params[3], 16),
                 value=int(params[4])
             )
 
