@@ -35,16 +35,38 @@ def director_events_from_logline(timestamp: Timestamp, params: list[str]) -> Opt
 
     match command:
         case DirectorUpdateCommand.barrierup:
-            return BarrierToggle(**(options | {'state': BarrierState.up}))
+            return BarrierToggle(
+                timestamp=timestamp,
+                instance_id=instance_id,
+                state=BarrierState.up,
+            )
         case DirectorUpdateCommand.barrierdown:
-            return BarrierToggle(**(options | {'state': BarrierState.down}))
+            return BarrierToggle(
+                timestamp=timestamp,
+                instance_id=instance_id,
+                state=BarrierState.down,
+            )
         case DirectorUpdateCommand.complete:
-            return InstanceComplete(**options)
+            return InstanceComplete(
+                timestamp=timestamp,
+                instance_id=instance_id,
+            )
         case DirectorUpdateCommand.fadein:
-            return InstanceFade(**(options | {'state': Fade.In}))
+            return InstanceFade(
+                timestamp=timestamp,
+                instance_id=instance_id,
+                state=Fade.In,
+            )
         case DirectorUpdateCommand.fadeout:
-            return InstanceFade(**(options | {'state': Fade.Out}))
+            return InstanceFade(
+                timestamp=timestamp,
+                instance_id=instance_id,
+                state=Fade.Out,
+            )
         case DirectorUpdateCommand.init:
-            return InstanceInit(**options)
+            return InstanceInit(
+                timestamp=timestamp,
+                instance_id=instance_id,
+            )
         case _:
             return None
