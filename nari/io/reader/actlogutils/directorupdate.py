@@ -28,11 +28,6 @@ def director_events_from_logline(timestamp: Timestamp, params: list[str]) -> Opt
     instance_id = int(params[0][:4], 16)
     command = int(params[1], 16)
 
-    options = {
-        'timestamp': timestamp,
-        'instance_id': instance_id,
-    }
-
     match command:
         case DirectorUpdateCommand.barrierup:
             return BarrierToggle(
