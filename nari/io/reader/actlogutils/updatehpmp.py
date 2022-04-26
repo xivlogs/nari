@@ -4,7 +4,7 @@ from nari.types.event.updatehpmp import UpdateHpMp
 from nari.types.actor import Actor
 
 
-def updatehp_from_logline(timestamp: Timestamp, params: list[str]) -> UpdateHpMp:
+def updatehpmp_from_logline(timestamp: Timestamp, params: list[str]) -> UpdateHpMp:
     """Parses an UpdateHpMp event from an ACT log line
 
     ACT Event ID (decimal): 39
@@ -33,10 +33,15 @@ def updatehp_from_logline(timestamp: Timestamp, params: list[str]) -> UpdateHpMp
     """
     actor = Actor(*params[0:2])
 
+    if params[6] != '':
+        sp = int(params[6])
+    else:
+        sp = 0
+
     return UpdateHpMp(
         timestamp=timestamp,
         actor=actor,
         hp=int(params[2]),
         mp=int(params[4]),
-        sp=int(params[6])
+        sp=sp
     )

@@ -6,7 +6,7 @@ from nari.types.event.markers import PlayerMarker, MarkerOperation, OverheadMark
 from nari.io.reader.actlogutils.exceptions import InvalidMarkerID
 
 
-class TestLineChecksum(unittest.TestCase):
+class TestTargetMarkerFromACTLogLine(unittest.TestCase):
 
     def test_line(self):
         """
