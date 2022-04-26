@@ -44,7 +44,7 @@ from nari.io.reader.actlogutils.limitbreak import limitbreak_from_logline
 from nari.io.reader.actlogutils.ability import ability_from_logline, aoeability_from_logline
 from nari.io.reader.actlogutils.tick import tick_from_logline
 from nari.io.reader.actlogutils.directorupdate import director_events_from_logline
-from nari.io.reader.actlogutils.updatehp import updatehp_from_logline
+from nari.io.reader.actlogutils.updatehpmp import updatehpmp_from_logline
 from nari.io.reader.actlogutils.actorspawn import actor_spawn_from_logline
 from nari.io.reader.actlogutils.gauge import gauge_from_logline
 from nari.io.reader.actlogutils.playerstats import playerstats_from_logline
@@ -89,7 +89,7 @@ class ActEventType(IntEnum):
     networklimitbreak = 36
     networkeffectresult = 37
     networkstatuslist = 38
-    networkupdatehp = 39
+    networkupdatehpmp = 39
     memorychangemap = 40
     memorysystemlogmessage = 41
     networkstatuslist3 = 42
@@ -155,7 +155,7 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.networkgauge: gauge_from_logline,
     ActEventType.networkdeath: noop,
     ActEventType.networknametoggle: visibility_from_logline,
-    ActEventType.networkupdatehp: updatehp_from_logline,
+    ActEventType.networkupdatehpmp: updatehpmp_from_logline,
     ActEventType.networkdirector: director_events_from_logline,
     ActEventType.networkstartscasting: startcast_from_logline,
     ActEventType.networkcancelability: stopcast_from_logline,
@@ -248,7 +248,7 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
 <dd>
 <div class="desc"><p>Parse effect-over-time data from ACT log line</p></div>
 </dd>
-<dt><code class="name"><a title="nari.io.reader.actlogutils.updatehp" href="updatehp.html">nari.io.reader.actlogutils.updatehp</a></code></dt>
+<dt><code class="name"><a title="nari.io.reader.actlogutils.updatehpmp" href="updatehpmp.html">nari.io.reader.actlogutils.updatehpmp</a></code></dt>
 <dd>
 <div class="desc"><p>Parse HP and MP updates from ACT log line</p></div>
 </dd>
@@ -368,7 +368,7 @@ Given some line 1|foo|bar|baz|a823425f532c540667195f641dd3649b, and an index of 
     networklimitbreak = 36
     networkeffectresult = 37
     networkstatuslist = 38
-    networkupdatehp = 39
+    networkupdatehpmp = 39
     memorychangemap = 40
     memorysystemlogmessage = 41
     networkstatuslist3 = 42
@@ -521,7 +521,7 @@ Given some line 1|foo|bar|baz|a823425f532c540667195f641dd3649b, and an index of 
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="nari.io.reader.actlogutils.ActEventType.networkupdatehp"><code class="name">var <span class="ident">networkupdatehp</span></code></dt>
+<dt id="nari.io.reader.actlogutils.ActEventType.networkupdatehpmp"><code class="name">var <span class="ident">networkupdatehpmp</span></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -609,7 +609,7 @@ def has_type(cls, name: str) -&gt; bool:
 <li><code><a title="nari.io.reader.actlogutils.targetmarker" href="targetmarker.html">nari.io.reader.actlogutils.targetmarker</a></code></li>
 <li><code><a title="nari.io.reader.actlogutils.tether" href="tether.html">nari.io.reader.actlogutils.tether</a></code></li>
 <li><code><a title="nari.io.reader.actlogutils.tick" href="tick.html">nari.io.reader.actlogutils.tick</a></code></li>
-<li><code><a title="nari.io.reader.actlogutils.updatehp" href="updatehp.html">nari.io.reader.actlogutils.updatehp</a></code></li>
+<li><code><a title="nari.io.reader.actlogutils.updatehpmp" href="updatehpmp.html">nari.io.reader.actlogutils.updatehpmp</a></code></li>
 <li><code><a title="nari.io.reader.actlogutils.visibility" href="visibility.html">nari.io.reader.actlogutils.visibility</a></code></li>
 <li><code><a title="nari.io.reader.actlogutils.waymark" href="waymark.html">nari.io.reader.actlogutils.waymark</a></code></li>
 <li><code><a title="nari.io.reader.actlogutils.zone" href="zone.html">nari.io.reader.actlogutils.zone</a></code></li>
@@ -660,7 +660,7 @@ def has_type(cls, name: str) -&gt; bool:
 <li><code><a title="nari.io.reader.actlogutils.ActEventType.networkstatusremove" href="#nari.io.reader.actlogutils.ActEventType.networkstatusremove">networkstatusremove</a></code></li>
 <li><code><a title="nari.io.reader.actlogutils.ActEventType.networktargeticon" href="#nari.io.reader.actlogutils.ActEventType.networktargeticon">networktargeticon</a></code></li>
 <li><code><a title="nari.io.reader.actlogutils.ActEventType.networktether" href="#nari.io.reader.actlogutils.ActEventType.networktether">networktether</a></code></li>
-<li><code><a title="nari.io.reader.actlogutils.ActEventType.networkupdatehp" href="#nari.io.reader.actlogutils.ActEventType.networkupdatehp">networkupdatehp</a></code></li>
+<li><code><a title="nari.io.reader.actlogutils.ActEventType.networkupdatehpmp" href="#nari.io.reader.actlogutils.ActEventType.networkupdatehpmp">networkupdatehpmp</a></code></li>
 <li><code><a title="nari.io.reader.actlogutils.ActEventType.networkwaymarkmarker" href="#nari.io.reader.actlogutils.ActEventType.networkwaymarkmarker">networkwaymarkmarker</a></code></li>
 <li><code><a title="nari.io.reader.actlogutils.ActEventType.packetdump" href="#nari.io.reader.actlogutils.ActEventType.packetdump">packetdump</a></code></li>
 <li><code><a title="nari.io.reader.actlogutils.ActEventType.unusedworld" href="#nari.io.reader.actlogutils.ActEventType.unusedworld">unusedworld</a></code></li>
