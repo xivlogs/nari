@@ -60,7 +60,7 @@ class ActEventType(IntEnum):
     networklimitbreak = 36
     networkeffectresult = 37
     networkstatuslist = 38
-    networkupdatehp = 39
+    networkupdatehpmp = 39
     memorychangemap = 40
     memorysystemlogmessage = 41
     networkstatuslist3 = 42
@@ -126,7 +126,7 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.networkgauge: gauge_from_logline,
     ActEventType.networkdeath: noop,
     ActEventType.networknametoggle: visibility_from_logline,
-    ActEventType.networkupdatehp: updatehpmp_from_logline,
+    ActEventType.networkupdatehpmp: updatehpmp_from_logline,
     ActEventType.networkdirector: director_events_from_logline,
     ActEventType.networkstartscasting: startcast_from_logline,
     ActEventType.networkcancelability: stopcast_from_logline,
