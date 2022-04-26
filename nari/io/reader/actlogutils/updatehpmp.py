@@ -33,10 +33,15 @@ def updatehpmp_from_logline(timestamp: Timestamp, params: list[str]) -> UpdateHp
     """
     actor = Actor(*params[0:2])
 
+    if params[6] != '':
+        sp = int(params[6])
+    else:
+        sp = 0
+
     return UpdateHpMp(
         timestamp=timestamp,
         actor=actor,
         hp=int(params[2]),
         mp=int(params[4]),
-        sp=int(params[6])
+        sp=sp
     )
