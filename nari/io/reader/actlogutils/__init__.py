@@ -15,7 +15,7 @@ from nari.io.reader.actlogutils.limitbreak import limitbreak_from_logline
 from nari.io.reader.actlogutils.ability import ability_from_logline, aoeability_from_logline
 from nari.io.reader.actlogutils.tick import tick_from_logline
 from nari.io.reader.actlogutils.directorupdate import director_events_from_logline
-from nari.io.reader.actlogutils.updatehp import updatehp_from_logline
+from nari.io.reader.actlogutils.updatehpmp import updatehpmp_from_logline
 from nari.io.reader.actlogutils.actorspawn import actor_spawn_from_logline
 from nari.io.reader.actlogutils.gauge import gauge_from_logline
 from nari.io.reader.actlogutils.playerstats import playerstats_from_logline
@@ -126,7 +126,7 @@ ID_MAPPINGS: dict[int, ActEventFn] = {
     ActEventType.networkgauge: gauge_from_logline,
     ActEventType.networkdeath: noop,
     ActEventType.networknametoggle: visibility_from_logline,
-    ActEventType.networkupdatehp: updatehp_from_logline,
+    ActEventType.networkupdatehp: updatehpmp_from_logline,
     ActEventType.networkdirector: director_events_from_logline,
     ActEventType.networkstartscasting: startcast_from_logline,
     ActEventType.networkcancelability: stopcast_from_logline,
