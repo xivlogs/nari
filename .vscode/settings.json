@@ -2,6 +2,8 @@
   "files.exclude": {
     ".mypy_cache": true,
     "**/*.egg-info": true,
+    "**/Network_*.log": true,
+    "**/Network_*.txt": true,
     "**/*.pyc": { "when": "$(basename).py" },
     "**/__pycache__": true,
     "**/.venv": true
