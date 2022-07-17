@@ -29,5 +29,5 @@ def targeticon_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
     return OverheadVFX(
         timestamp=timestamp,
         actor=actor,
-        marker_id=int(params[4])
+        marker_id=int(params[4], 16)
     )
