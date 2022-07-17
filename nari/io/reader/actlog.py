@@ -2,7 +2,7 @@
 from typing import Optional
 
 from nari.io.reader import Reader
-from nari.io.reader.actlogutils import ID_MAPPINGS, ActEventType, date_from_act_timestamp, validate_checksum
+from nari.io.reader.actlogutils import ID_MAPPINGS, ActEventType, ActLogChecksumType, date_from_act_timestamp, validate_checksum
 from nari.types.event import Event
 from nari.util.exceptions import EventNotFound
 from nari.io.reader.actlogutils.exceptions import InvalidActChecksum
@@ -16,6 +16,7 @@ class ActLogReader(Reader):
         self.index = 1
         self.raise_on_checksum_failure = raise_on_checksum_failure
         self.raise_on_invalid_id = raise_on_invalid_id
+        self.algo = ActLogChecksumType.sha256
 
     def __del__(self):
         """Handles closing the file when the object undergoes garbage collection"""
@@ -29,17 +30,22 @@ class ActLogReader(Reader):
         if self.raise_on_invalid_id and id_ not in ID_MAPPINGS:
             raise EventNotFound(f"ACT id: {id_}")
 
+        datestr = args[1]
+        timestamp = date_from_act_timestamp(datestr)
+
         if self.raise_on_checksum_failure:
             if id_ in (ActEventType.memoryzonechange, ActEventType.version):
                 self.index = 1
 
-            if validate_checksum(line.strip(), self.index) is False:
-                raise InvalidActChecksum(f'Invalid checksum for line {line.strip()} with index {self.index})')
+            if id_ == ActEventType.version:
+                version = ID_MAPPINGS[id_](timestamp, args[2:-1])
+                if not version.after("2.2.1.6"):
+                    self.algo = ActLogChecksumType.md5
+
+            if validate_checksum(line.strip(), self.index, self.algo.name) is False:
+                    raise InvalidActChecksum(f'Invalid checksum for line {line.strip()} with algo {self.algo.name} and index {self.index})')
 
             self.index += 1
-
-        datestr = args[1]
-        timestamp = date_from_act_timestamp(datestr)
 
         event: Optional[Event] = None
 

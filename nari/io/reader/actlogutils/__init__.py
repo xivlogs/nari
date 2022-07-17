@@ -1,6 +1,6 @@
 """Just a bunch of helper methods to spit out events from the ACT log"""
 from datetime import datetime
-from hashlib import sha256
+from hashlib import md5, sha256
 from typing import Callable, Optional
 from enum import IntEnum
 
@@ -30,6 +30,12 @@ from nari.io.reader.actlogutils.cast import startcast_from_logline, stopcast_fro
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[Timestamp, list[str]], Optional[Event]]
+
+class ActLogChecksumType(IntEnum):
+    """List of hashsum algorithms used by different ACT versions"""
+    md5 = 0
+    sha256 = 1
+
 
 # pylint: disable=invalid-name
 class ActEventType(IntEnum):
@@ -88,7 +94,7 @@ def date_from_act_timestamp(datestr: str) -> Timestamp:
     """
     return int(datetime.strptime(f'{datestr[:26]}{datestr[-6:]}', DEFAULT_DATE_FORMAT).timestamp() * 1000)
 
-def validate_checksum(line: str, index: int) -> bool:
+def validate_checksum(line: str, index: int, algo: str) -> bool:
     """Validates an ACT log line
     Given some line 1|foo|bar|baz|a823425f532c540667195f641dd3649b, and an index of 1, then the md5sum of
     1|foo|bar|baz|1 (where 1 is the index) should be a823425f532c540667195f641dd3649b (which is the checksum value)
@@ -97,7 +103,11 @@ def validate_checksum(line: str, index: int) -> bool:
     check_hash = parts[-1].encode('utf-8')
     to_hash = f'{"|".join(parts[:-1])}|{index}'.encode('utf-8')
 
-    return sha256(to_hash).hexdigest().encode('utf-8')[:16] == check_hash
+    match algo:
+        case "md5":
+            return md5(to_hash).hexdigest() == check_hash
+        case "sha256":
+            return sha256(to_hash).hexdigest()[:16] == check_hash
 
 # pylint: disable=unused-argument
 def noop(timestamp: Timestamp, params: list[str]) -> Event:
