@@ -110,6 +110,8 @@ def validate_checksum(line: str, index: int, algo: str) -> bool:
             return md5(to_hash).hexdigest() == check_hash
         case "sha256":
             return sha256(to_hash).hexdigest()[:16] == check_hash
+        case _:
+            return False
 
 # pylint: disable=unused-argument
 def noop(timestamp: Timestamp, params: list[str]) -> Event:
