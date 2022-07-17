@@ -11,8 +11,6 @@ class Version(Event): # pylint: disable=too-few-public-methods
                 ):
         super().__init__(timestamp)
         self.version = version
-        #(int(x) for x in version.split(' ')[-1].split('.'))
-        #self.major, self.minor, self.patch, self.build, *_ = self.version
 
     def __repr__(self):
         return f'<Version> {self.version}'
