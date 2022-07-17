@@ -43,7 +43,7 @@ class ActLogReader(Reader):
                     self.algo = ActLogChecksumType.md5
 
             if validate_checksum(line.strip(), self.index, self.algo.name) is False:
-                    raise InvalidActChecksum(f'Invalid checksum for line {line.strip()} with algo {self.algo.name} and index {self.index})')
+                raise InvalidActChecksum(f'Invalid checksum for line {line.strip()} with algo {self.algo.name} and index {self.index})')
 
             self.index += 1
 

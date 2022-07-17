@@ -31,10 +31,12 @@ from nari.io.reader.actlogutils.cast import startcast_from_logline, stopcast_fro
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[Timestamp, list[str]], Optional[Event]]
 
+# pylint: disable=invalid-name
 class ActLogChecksumType(IntEnum):
     """List of hashsum algorithms used by different ACT versions"""
     md5 = 0
     sha256 = 1
+# pylint: enable=invalid-name
 
 
 # pylint: disable=invalid-name
