@@ -42,7 +42,7 @@ def waymark_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
 
     position = Position(*[float(x) for x in params[4:7]])
 
-    marker_id = int(params[1]) + 1
+    marker_id = int(params[1]) + 1 # IPC data sends this zero-indexed, adjust since game uses it one-indexed
     if not Waypoint.contains(marker_id):
         raise InvalidMarkerID(marker_id)
 
