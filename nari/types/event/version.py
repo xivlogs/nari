@@ -24,8 +24,8 @@ class Version(Event): # pylint: disable=too-few-public-methods
         version_str: str = version.split(': ')[-1].split(' ')[0]
         try:
             self.version = SemanticVersion(*(int(v) for v in version_str.split('.')))
-        except ValueError:
-            raise CannotParseVersion(f'Could not parse {version_str} as tuple') from None
+        except ValueError as e:
+            raise CannotParseVersion(f'Could not parse {version_str} as tuple') from e
 
     def __repr__(self):
         return f'<Version> {self.version}'
