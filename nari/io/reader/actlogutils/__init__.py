@@ -113,7 +113,6 @@ def validate_checksum(line: str, index: int, algo: ActLogChecksumType) -> bool:
             return sha256(to_hash).hexdigest()[:16] == check_hash
         case _:
             raise ActInvalidChecksumType(f'Unexpected checksum algorithm: {algo}. Expected one of MD5 and SHA256.')
-            return False
 
 # pylint: disable=unused-argument
 def noop(timestamp: Timestamp, params: list[str]) -> Event:
