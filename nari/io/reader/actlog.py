@@ -41,8 +41,8 @@ class ActLogReader(Reader):
                 self.index = 1
 
             if id_ == ActEventType.version:
-                version = ID_MAPPINGS[id_](timestamp, args[2:-1])
-                if version <= LAST_MD5_VERSION:
+                version_event = ID_MAPPINGS[id_](timestamp, args[2:-1])
+                if version_event.version <= LAST_MD5_VERSION:
                     self.algo = ActLogChecksumType.MD5
 
             if validate_checksum(line.strip(), self.index, self.algo) is False:
