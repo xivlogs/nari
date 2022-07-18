@@ -4,8 +4,11 @@ from typing import Optional
 from nari.io.reader import Reader
 from nari.io.reader.actlogutils import ID_MAPPINGS, ActEventType, ActLogChecksumType, date_from_act_timestamp, validate_checksum
 from nari.types.event import Event
+from nari.types.event.version import SemanticVersion
 from nari.util.exceptions import EventNotFound
 from nari.io.reader.actlogutils.exceptions import InvalidActChecksum
+
+LAST_MD5_VERSION = SemanticVersion(2,2,1,6)
 
 
 class ActLogReader(Reader):
@@ -39,7 +42,7 @@ class ActLogReader(Reader):
 
             if id_ == ActEventType.version:
                 version = ID_MAPPINGS[id_](timestamp, args[2:-1])
-                if not version.after("2.2.1.6"):
+                if not version.after(LAST_MD5_VERSION):
                     self.algo = ActLogChecksumType.md5
 
             if validate_checksum(line.strip(), self.index, self.algo.name) is False:
