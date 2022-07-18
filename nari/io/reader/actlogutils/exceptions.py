@@ -4,6 +4,10 @@ class ActLineParsingException(Exception):
     """Raised when an ACT log line cannot be parsed"""
 
 
+class ActInvalidChecksumType(Exception):
+    """Thrown when the checksum of an event doesn't match"""
+
+
 class InvalidActChecksum(Exception):
     """Raised when a checksum is invalid"""
 
