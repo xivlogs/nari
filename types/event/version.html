@@ -31,6 +31,7 @@
 from dataclasses import dataclass
 from nari.types import Timestamp
 from nari.types.event import Event
+from nari.util.exceptions import CannotParseVersion
 
 @dataclass(order=True)
 class SemanticVersion():
@@ -48,7 +49,12 @@ class Version(Event): # pylint: disable=too-few-public-methods
                  version: str,
                 ):
         super().__init__(timestamp)
-        self.version = SemanticVersion(*(int(v) for v in version.split(&#39;.&#39;)))
+        # &#34;FFXIV PLUGIN VERSION: 2.2.1.6&#34;
+        version_str: str = version.split(&#39;: &#39;)[-1].split(&#39; &#39;)[0]
+        try:
+            self.version = SemanticVersion(*(int(v) for v in version_str.split(&#39;.&#39;)))
+        except ValueError as e:
+            raise CannotParseVersion(f&#39;Could not parse {version_str} as tuple&#39;) from e
 
     def __repr__(self):
         return f&#39;&lt;Version&gt; {self.version}&#39;</code></pre>
@@ -118,7 +124,12 @@ class SemanticVersion():
                  version: str,
                 ):
         super().__init__(timestamp)
-        self.version = SemanticVersion(*(int(v) for v in version.split(&#39;.&#39;)))
+        # &#34;FFXIV PLUGIN VERSION: 2.2.1.6&#34;
+        version_str: str = version.split(&#39;: &#39;)[-1].split(&#39; &#39;)[0]
+        try:
+            self.version = SemanticVersion(*(int(v) for v in version_str.split(&#39;.&#39;)))
+        except ValueError as e:
+            raise CannotParseVersion(f&#39;Could not parse {version_str} as tuple&#39;) from e
 
     def __repr__(self):
         return f&#39;&lt;Version&gt; {self.version}&#39;</code></pre>

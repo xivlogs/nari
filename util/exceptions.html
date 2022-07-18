@@ -29,14 +29,21 @@
 </summary>
 <pre><code class="python">&#34;&#34;&#34;Nari-related exceptions&#34;&#34;&#34;
 
+class CannotParseVersion(Exception):
+    &#34;&#34;&#34;Thrown when a version tuple cannot be parsed&#34;&#34;&#34;
+
+
 class EventNotFound(Exception):
     &#34;&#34;&#34;Thrown when events are not found&#34;&#34;&#34;
+
 
 class InvalidChecksum(Exception):
     &#34;&#34;&#34;Thrown when the checksum of an event doesn&#39;t match&#34;&#34;&#34;
 
+
 class JobGaugeNotFound(Exception):
     &#34;&#34;&#34;Thrown when gauge data is not found for job&#34;&#34;&#34;
+
 
 class ActLineReadError(Exception):
     &#34;&#34;&#34;Thrown when error reading a line from ACT log&#34;&#34;&#34;</code></pre>
@@ -63,6 +70,25 @@ class ActLineReadError(Exception):
 </summary>
 <pre><code class="python">class ActLineReadError(Exception):
     &#34;&#34;&#34;Thrown when error reading a line from ACT log&#34;&#34;&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="nari.util.exceptions.CannotParseVersion"><code class="flex name class">
+<span>class <span class="ident">CannotParseVersion</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Thrown when a version tuple cannot be parsed</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CannotParseVersion(Exception):
+    &#34;&#34;&#34;Thrown when a version tuple cannot be parsed&#34;&#34;&#34;</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -145,6 +171,9 @@ class ActLineReadError(Exception):
 <ul>
 <li>
 <h4><code><a title="nari.util.exceptions.ActLineReadError" href="#nari.util.exceptions.ActLineReadError">ActLineReadError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="nari.util.exceptions.CannotParseVersion" href="#nari.util.exceptions.CannotParseVersion">CannotParseVersion</a></code></h4>
 </li>
 <li>
 <h4><code><a title="nari.util.exceptions.EventNotFound" href="#nari.util.exceptions.EventNotFound">EventNotFound</a></code></h4>
