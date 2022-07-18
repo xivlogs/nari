@@ -8,6 +8,8 @@ from nari.types.event.version import SemanticVersion, Version
 from nari.util.exceptions import EventNotFound
 from nari.io.reader.actlogutils.exceptions import InvalidActChecksum
 
+# The last version of ACT to use MD5 checksums
+# We default to SHA256, but if the version is <= 2.2.1.6 we switch to MD5
 LAST_MD5_VERSION = SemanticVersion(2,2,1,6)
 
 
