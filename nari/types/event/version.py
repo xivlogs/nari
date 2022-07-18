@@ -4,7 +4,8 @@ from nari.types import Timestamp
 from nari.types.event import Event
 
 @dataclass(order=True)
-class SemanticVersion(object):
+class SemanticVersion():
+    """Represents a semantic version string that can compare versions"""
     major: int
     minor: int
     patch: int
@@ -18,7 +19,7 @@ class Version(Event): # pylint: disable=too-few-public-methods
                  version: str,
                 ):
         super().__init__(timestamp)
-        self.version = SemanticVersion(*(int(v) for v in params[2].split('.')))
+        self.version = SemanticVersion(*(int(v) for v in version.split('.')))
 
     def __repr__(self):
         return f'<Version> {self.version}'
