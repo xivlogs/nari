@@ -22,7 +22,3 @@ class Version(Event): # pylint: disable=too-few-public-methods
 
     def __repr__(self):
         return f'<Version> {self.version}'
-
-    def after(self, ref: SemanticVersion) -> bool:
-        """Returns true if reference version is less than class version"""
-        return self.version > ref

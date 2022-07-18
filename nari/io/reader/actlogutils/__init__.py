@@ -2,7 +2,7 @@
 from datetime import datetime
 from hashlib import md5, sha256
 from typing import Callable, Optional
-from enum import IntEnum
+from enum import IntEnum, Enum
 
 from nari.types.event import Event
 from nari.types import Timestamp
@@ -32,10 +32,10 @@ DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[Timestamp, list[str]], Optional[Event]]
 
 # pylint: disable=invalid-name
-class ActLogChecksumType(IntEnum):
+class ActLogChecksumType(Enum):
     """List of hashsum algorithms used by different ACT versions"""
-    md5 = 0
-    sha256 = 1
+    MD5 = "md5"
+    SHA256 = "sha256"
 # pylint: enable=invalid-name
 
 

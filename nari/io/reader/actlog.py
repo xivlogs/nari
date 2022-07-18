@@ -19,7 +19,7 @@ class ActLogReader(Reader):
         self.index = 1
         self.raise_on_checksum_failure = raise_on_checksum_failure
         self.raise_on_invalid_id = raise_on_invalid_id
-        self.algo = ActLogChecksumType.sha256
+        self.algo = ActLogChecksumType.SHA256
 
     def __del__(self):
         """Handles closing the file when the object undergoes garbage collection"""
@@ -42,11 +42,11 @@ class ActLogReader(Reader):
 
             if id_ == ActEventType.version:
                 version = ID_MAPPINGS[id_](timestamp, args[2:-1])
-                if not version.after(LAST_MD5_VERSION):
-                    self.algo = ActLogChecksumType.md5
+                if version <= LAST_MD5_VERSION:
+                    self.algo = ActLogChecksumType.MD5
 
-            if validate_checksum(line.strip(), self.index, self.algo.name) is False:
-                raise InvalidActChecksum(f'Invalid checksum for line {line.strip()} with algo {self.algo.name} and index {self.index})')
+            if validate_checksum(line.strip(), self.index, self.algo) is False:
+                raise InvalidActChecksum(f'Invalid checksum for line {line.strip()} with algo {self.algo} and index {self.index})')
 
             self.index += 1
 
