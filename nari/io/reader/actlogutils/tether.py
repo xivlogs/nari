@@ -34,5 +34,5 @@ def tether_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
         timestamp=timestamp,
         source_actor=source_actor,
         target_actor=target_actor,
-        tether_id=int(params[6])
+        tether_id=int(params[6], 16)
     )

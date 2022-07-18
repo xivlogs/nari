@@ -31,7 +31,7 @@ def tick_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
                 timestamp=timestamp,
                 actor=actor,
                 effect_id=int(params[3], 16),
-                value=int(params[4])
+                value=int(params[4], 16)
             )
 
         case 'hot':
@@ -39,7 +39,7 @@ def tick_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
                 timestamp=timestamp,
                 actor=actor,
                 effect_id=int(params[3], 16),
-                value=int(params[4])
+                value=int(params[4], 16)
             )
 
         case _:
