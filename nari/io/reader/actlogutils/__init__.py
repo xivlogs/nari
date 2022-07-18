@@ -27,7 +27,7 @@ from nari.io.reader.actlogutils.waymark import waymark_from_logline
 from nari.io.reader.actlogutils.party import partylist_from_logline
 from nari.io.reader.actlogutils.effectresult import effectresult_from_logline
 from nari.io.reader.actlogutils.cast import startcast_from_logline, stopcast_from_logline
-from nari.io.reader.actlogutils.exceptions import ActInvalidChecksumType
+from nari.io.reader.actlogutils.exceptions import InvalidActChecksumType
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[Timestamp, list[str]], Optional[Event]]
@@ -112,7 +112,7 @@ def validate_checksum(line: str, index: int, algo: ActLogChecksumType = ActLogCh
         case ActLogChecksumType.SHA256:
             return sha256(to_hash).hexdigest()[:16] == check_hash
         case _:
-            raise ActInvalidChecksumType(f'Unexpected checksum algorithm: {algo}. Expected one of MD5 and SHA256.')
+            raise InvalidActChecksumType(f'Unexpected checksum algorithm: {algo}. Expected one of MD5 and SHA256.')
 
 # pylint: disable=unused-argument
 def noop(timestamp: Timestamp, params: list[str]) -> Event:
