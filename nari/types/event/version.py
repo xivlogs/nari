@@ -19,7 +19,8 @@ class Version(Event): # pylint: disable=too-few-public-methods
                  version: str,
                 ):
         super().__init__(timestamp)
-        self.version = SemanticVersion(*(int(v) for v in version.split('.')))
+        # "FFXIV PLUGIN VERSION: 2.2.1.6"
+        self.version = SemanticVersion(*(int(v) for v in version[22:].split('.')))
 
     def __repr__(self):
         return f'<Version> {self.version}'
