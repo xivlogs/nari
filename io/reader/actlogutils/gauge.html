@@ -76,21 +76,21 @@ def gauge_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Gauge:
 <table>
 <thead>
 <tr>
-<th align="right">Index</th>
+<th style="text-align: right;">Index</th>
 <th>Type</th>
-<th align="left">Description</th>
+<th style="text-align: left;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="right">0</td>
+<td style="text-align: right;">0</td>
 <td>int</td>
-<td align="left">Actor ID - The player who is logging.</td>
+<td style="text-align: left;">Actor ID - The player who is logging.</td>
 </tr>
 <tr>
-<td align="right">1-4</td>
+<td style="text-align: right;">1-4</td>
 <td>uint32</td>
-<td align="left">Gauge data is from a C-style union type stored with fields depending on job. ACT represents this as four 32-bit unsigned ints so they're left as bytes for destructuring later.</td>
+<td style="text-align: left;">Gauge data is from a C-style union type stored with fields depending on job. ACT represents this as four 32-bit unsigned ints so they're left as bytes for destructuring later.</td>
 </tr>
 </tbody>
 </table></div>

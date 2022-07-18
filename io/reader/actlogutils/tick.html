@@ -60,7 +60,7 @@ def tick_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Event:
                 timestamp=timestamp,
                 actor=actor,
                 effect_id=int(params[3], 16),
-                value=int(params[4])
+                value=int(params[4], 16)
             )
 
         case &#39;hot&#39;:
@@ -68,7 +68,7 @@ def tick_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Event:
                 timestamp=timestamp,
                 actor=actor,
                 effect_id=int(params[3], 16),
-                value=int(params[4])
+                value=int(params[4], 16)
             )
 
         case _:
@@ -93,36 +93,36 @@ def tick_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Event:
 <table>
 <thead>
 <tr>
-<th align="right">Index</th>
+<th style="text-align: right;">Index</th>
 <th>Type</th>
-<th align="left">Description</th>
+<th style="text-align: left;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="right">0</td>
+<td style="text-align: right;">0</td>
 <td>int</td>
-<td align="left">Actor ID</td>
+<td style="text-align: left;">Actor ID</td>
 </tr>
 <tr>
-<td align="right">1</td>
+<td style="text-align: right;">1</td>
 <td>string</td>
-<td align="left">Actor name</td>
+<td style="text-align: left;">Actor name</td>
 </tr>
 <tr>
-<td align="right">2</td>
+<td style="text-align: right;">2</td>
 <td>str</td>
-<td align="left">DoT or HoT</td>
+<td style="text-align: left;">DoT or HoT</td>
 </tr>
 <tr>
-<td align="right">3</td>
+<td style="text-align: right;">3</td>
 <td>int</td>
-<td align="left">Effect ID, seemingly only applies to ground effects</td>
+<td style="text-align: left;">Effect ID, seemingly only applies to ground effects</td>
 </tr>
 <tr>
-<td align="right">4</td>
+<td style="text-align: right;">4</td>
 <td>int</td>
-<td align="left">Effect Amount</td>
+<td style="text-align: left;">Effect Amount</td>
 </tr>
 </tbody>
 </table></div>
@@ -155,7 +155,7 @@ def tick_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Event:
                 timestamp=timestamp,
                 actor=actor,
                 effect_id=int(params[3], 16),
-                value=int(params[4])
+                value=int(params[4], 16)
             )
 
         case &#39;hot&#39;:
@@ -163,7 +163,7 @@ def tick_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Event:
                 timestamp=timestamp,
                 actor=actor,
                 effect_id=int(params[3], 16),
-                value=int(params[4])
+                value=int(params[4], 16)
             )
 
         case _:

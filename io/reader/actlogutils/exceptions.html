@@ -33,6 +33,10 @@ class ActLineParsingException(Exception):
     &#34;&#34;&#34;Raised when an ACT log line cannot be parsed&#34;&#34;&#34;
 
 
+class InvalidActChecksumAlgorithm(Exception):
+    &#34;&#34;&#34;Raised when the checksum algorithm of an event is not a known value&#34;&#34;&#34;
+
+
 class InvalidActChecksum(Exception):
     &#34;&#34;&#34;Raised when a checksum is invalid&#34;&#34;&#34;
 
@@ -85,6 +89,25 @@ class InvalidMarkerOperation(Exception):
 </summary>
 <pre><code class="python">class InvalidActChecksum(Exception):
     &#34;&#34;&#34;Raised when a checksum is invalid&#34;&#34;&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="nari.io.reader.actlogutils.exceptions.InvalidActChecksumAlgorithm"><code class="flex name class">
+<span>class <span class="ident">InvalidActChecksumAlgorithm</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Raised when the checksum algorithm of an event is not a known value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class InvalidActChecksumAlgorithm(Exception):
+    &#34;&#34;&#34;Raised when the checksum algorithm of an event is not a known value&#34;&#34;&#34;</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -151,6 +174,9 @@ class InvalidMarkerOperation(Exception):
 </li>
 <li>
 <h4><code><a title="nari.io.reader.actlogutils.exceptions.InvalidActChecksum" href="#nari.io.reader.actlogutils.exceptions.InvalidActChecksum">InvalidActChecksum</a></code></h4>
+</li>
+<li>
+<h4><code><a title="nari.io.reader.actlogutils.exceptions.InvalidActChecksumAlgorithm" href="#nari.io.reader.actlogutils.exceptions.InvalidActChecksumAlgorithm">InvalidActChecksumAlgorithm</a></code></h4>
 </li>
 <li>
 <h4><code><a title="nari.io.reader.actlogutils.exceptions.InvalidMarkerID" href="#nari.io.reader.actlogutils.exceptions.InvalidMarkerID">InvalidMarkerID</a></code></h4>

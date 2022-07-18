@@ -29,9 +29,9 @@
 </summary>
 <pre><code class="python">&#34;&#34;&#34;Just a bunch of helper methods to spit out events from the ACT log&#34;&#34;&#34;
 from datetime import datetime
-from hashlib import sha256
+from hashlib import md5, sha256
 from typing import Callable, Optional
-from enum import IntEnum
+from enum import IntEnum, Enum
 
 from nari.types.event import Event
 from nari.types import Timestamp
@@ -56,9 +56,18 @@ from nari.io.reader.actlogutils.waymark import waymark_from_logline
 from nari.io.reader.actlogutils.party import partylist_from_logline
 from nari.io.reader.actlogutils.effectresult import effectresult_from_logline
 from nari.io.reader.actlogutils.cast import startcast_from_logline, stopcast_from_logline
+from nari.io.reader.actlogutils.exceptions import InvalidActChecksumAlgorithm
 
 DEFAULT_DATE_FORMAT: str = &#39;%Y-%m-%dT%H:%M:%S.%f%z&#39;
 ActEventFn = Callable[[Timestamp, list[str]], Optional[Event]]
+
+# pylint: disable=invalid-name
+class ActLogChecksumType(Enum):
+    &#34;&#34;&#34;List of hashsum algorithms used by different ACT versions&#34;&#34;&#34;
+    MD5 = &#34;md5&#34;
+    SHA256 = &#34;sha256&#34;
+# pylint: enable=invalid-name
+
 
 # pylint: disable=invalid-name
 class ActEventType(IntEnum):
@@ -117,16 +126,22 @@ def date_from_act_timestamp(datestr: str) -&gt; Timestamp:
     &#34;&#34;&#34;
     return int(datetime.strptime(f&#39;{datestr[:26]}{datestr[-6:]}&#39;, DEFAULT_DATE_FORMAT).timestamp() * 1000)
 
-def validate_checksum(line: str, index: int) -&gt; bool:
+def validate_checksum(line: str, index: int, algo: ActLogChecksumType = ActLogChecksumType.SHA256) -&gt; bool:
     &#34;&#34;&#34;Validates an ACT log line
     Given some line 1|foo|bar|baz|a823425f532c540667195f641dd3649b, and an index of 1, then the md5sum of
     1|foo|bar|baz|1 (where 1 is the index) should be a823425f532c540667195f641dd3649b (which is the checksum value)
     &#34;&#34;&#34;
     parts = line.split(&#39;|&#39;)
-    check_hash = parts[-1].encode(&#39;utf-8&#39;)
+    check_hash = parts[-1]
     to_hash = f&#39;{&#34;|&#34;.join(parts[:-1])}|{index}&#39;.encode(&#39;utf-8&#39;)
 
-    return sha256(to_hash).hexdigest().encode(&#39;utf-8&#39;)[:16] == check_hash
+    match algo:
+        case ActLogChecksumType.MD5:
+            return md5(to_hash).hexdigest() == check_hash
+        case ActLogChecksumType.SHA256:
+            return sha256(to_hash).hexdigest()[:16] == check_hash
+        case _:
+            raise InvalidActChecksumAlgorithm(f&#39;Unexpected checksum algorithm: {algo}. Expected one of MD5 and SHA256.&#39;)
 
 # pylint: disable=unused-argument
 def noop(timestamp: Timestamp, params: list[str]) -&gt; Event:
@@ -303,7 +318,7 @@ Look, this is dirty. This is wrong. Please someone find a better way to do this.
 </details>
 </dd>
 <dt id="nari.io.reader.actlogutils.validate_checksum"><code class="name flex">
-<span>def <span class="ident">validate_checksum</span></span>(<span>line: str, index: int) ‑> bool</span>
+<span>def <span class="ident">validate_checksum</span></span>(<span>line: str, index: int, algo: <a title="nari.io.reader.actlogutils.ActLogChecksumType" href="#nari.io.reader.actlogutils.ActLogChecksumType">ActLogChecksumType</a> = ActLogChecksumType.SHA256) ‑> bool</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Validates an ACT log line
@@ -313,16 +328,22 @@ Given some line 1|foo|bar|baz|a823425f532c540667195f641dd3649b, and an index of 
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def validate_checksum(line: str, index: int) -&gt; bool:
+<pre><code class="python">def validate_checksum(line: str, index: int, algo: ActLogChecksumType = ActLogChecksumType.SHA256) -&gt; bool:
     &#34;&#34;&#34;Validates an ACT log line
     Given some line 1|foo|bar|baz|a823425f532c540667195f641dd3649b, and an index of 1, then the md5sum of
     1|foo|bar|baz|1 (where 1 is the index) should be a823425f532c540667195f641dd3649b (which is the checksum value)
     &#34;&#34;&#34;
     parts = line.split(&#39;|&#39;)
-    check_hash = parts[-1].encode(&#39;utf-8&#39;)
+    check_hash = parts[-1]
     to_hash = f&#39;{&#34;|&#34;.join(parts[:-1])}|{index}&#39;.encode(&#39;utf-8&#39;)
 
-    return sha256(to_hash).hexdigest().encode(&#39;utf-8&#39;)[:16] == check_hash</code></pre>
+    match algo:
+        case ActLogChecksumType.MD5:
+            return md5(to_hash).hexdigest() == check_hash
+        case ActLogChecksumType.SHA256:
+            return sha256(to_hash).hexdigest()[:16] == check_hash
+        case _:
+            raise InvalidActChecksumAlgorithm(f&#39;Unexpected checksum algorithm: {algo}. Expected one of MD5 and SHA256.&#39;)</code></pre>
 </details>
 </dd>
 </dl>
@@ -576,6 +597,37 @@ def has_type(cls, name: str) -&gt; bool:
 </dd>
 </dl>
 </dd>
+<dt id="nari.io.reader.actlogutils.ActLogChecksumType"><code class="flex name class">
+<span>class <span class="ident">ActLogChecksumType</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>List of hashsum algorithms used by different ACT versions</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActLogChecksumType(Enum):
+    &#34;&#34;&#34;List of hashsum algorithms used by different ACT versions&#34;&#34;&#34;
+    MD5 = &#34;md5&#34;
+    SHA256 = &#34;sha256&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="nari.io.reader.actlogutils.ActLogChecksumType.MD5"><code class="name">var <span class="ident">MD5</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="nari.io.reader.actlogutils.ActLogChecksumType.SHA256"><code class="name">var <span class="ident">SHA256</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
 </dl>
 </section>
 </article>
@@ -665,6 +717,13 @@ def has_type(cls, name: str) -&gt; bool:
 <li><code><a title="nari.io.reader.actlogutils.ActEventType.packetdump" href="#nari.io.reader.actlogutils.ActEventType.packetdump">packetdump</a></code></li>
 <li><code><a title="nari.io.reader.actlogutils.ActEventType.unusedworld" href="#nari.io.reader.actlogutils.ActEventType.unusedworld">unusedworld</a></code></li>
 <li><code><a title="nari.io.reader.actlogutils.ActEventType.version" href="#nari.io.reader.actlogutils.ActEventType.version">version</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="nari.io.reader.actlogutils.ActLogChecksumType" href="#nari.io.reader.actlogutils.ActLogChecksumType">ActLogChecksumType</a></code></h4>
+<ul class="">
+<li><code><a title="nari.io.reader.actlogutils.ActLogChecksumType.MD5" href="#nari.io.reader.actlogutils.ActLogChecksumType.MD5">MD5</a></code></li>
+<li><code><a title="nari.io.reader.actlogutils.ActLogChecksumType.SHA256" href="#nari.io.reader.actlogutils.ActLogChecksumType.SHA256">SHA256</a></code></li>
 </ul>
 </li>
 </ul>

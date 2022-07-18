@@ -58,7 +58,7 @@ def targeticon_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Event
     return OverheadVFX(
         timestamp=timestamp,
         actor=actor,
-        marker_id=int(params[4])
+        marker_id=int(params[4], 16)
     )</code></pre>
 </details>
 </section>
@@ -80,51 +80,51 @@ def targeticon_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Event
 <table>
 <thead>
 <tr>
-<th align="right">Index</th>
+<th style="text-align: right;">Index</th>
 <th>Type</th>
-<th align="left">Description</th>
+<th style="text-align: left;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="right">0</td>
+<td style="text-align: right;">0</td>
 <td>int</td>
-<td align="left">Target actor ID</td>
+<td style="text-align: left;">Target actor ID</td>
 </tr>
 <tr>
-<td align="right">1</td>
+<td style="text-align: right;">1</td>
 <td>string</td>
-<td align="left">Target actor name</td>
+<td style="text-align: left;">Target actor name</td>
 </tr>
 <tr>
-<td align="right">2</td>
+<td style="text-align: right;">2</td>
 <td>int</td>
-<td align="left">padding</td>
+<td style="text-align: left;">padding</td>
 </tr>
 <tr>
-<td align="right">3</td>
+<td style="text-align: right;">3</td>
 <td>int</td>
-<td align="left">padding</td>
+<td style="text-align: left;">padding</td>
 </tr>
 <tr>
-<td align="right">4</td>
+<td style="text-align: right;">4</td>
 <td>int</td>
-<td align="left">Lockon ID</td>
+<td style="text-align: left;">Lockon ID</td>
 </tr>
 <tr>
-<td align="right">5</td>
+<td style="text-align: right;">5</td>
 <td>int</td>
-<td align="left">padding</td>
+<td style="text-align: left;">padding</td>
 </tr>
 <tr>
-<td align="right">6</td>
+<td style="text-align: right;">6</td>
 <td>int</td>
-<td align="left">padding</td>
+<td style="text-align: left;">padding</td>
 </tr>
 <tr>
-<td align="right">7</td>
+<td style="text-align: right;">7</td>
 <td>int</td>
-<td align="left">padding</td>
+<td style="text-align: left;">padding</td>
 </tr>
 </tbody>
 </table></div>
@@ -156,7 +156,7 @@ def targeticon_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Event
     return OverheadVFX(
         timestamp=timestamp,
         actor=actor,
-        marker_id=int(params[4])
+        marker_id=int(params[4], 16)
     )</code></pre>
 </details>
 </dd>

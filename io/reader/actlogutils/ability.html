@@ -190,151 +190,151 @@ def aoeability_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Event
 <table>
 <thead>
 <tr>
-<th align="right">Index</th>
+<th style="text-align: right;">Index</th>
 <th>Type</th>
-<th align="left">Description</th>
+<th style="text-align: left;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="right">0</td>
+<td style="text-align: right;">0</td>
 <td>int</td>
-<td align="left">Source actor ID</td>
+<td style="text-align: left;">Source actor ID</td>
 </tr>
 <tr>
-<td align="right">1</td>
+<td style="text-align: right;">1</td>
 <td>string</td>
-<td align="left">Source actor name</td>
+<td style="text-align: left;">Source actor name</td>
 </tr>
 <tr>
-<td align="right">2</td>
+<td style="text-align: right;">2</td>
 <td>int</td>
-<td align="left">Ability ID</td>
+<td style="text-align: left;">Ability ID</td>
 </tr>
 <tr>
-<td align="right">3</td>
+<td style="text-align: right;">3</td>
 <td>string</td>
-<td align="left">Ability name</td>
+<td style="text-align: left;">Ability name</td>
 </tr>
 <tr>
-<td align="right">4</td>
+<td style="text-align: right;">4</td>
 <td>int</td>
-<td align="left">Target actor ID</td>
+<td style="text-align: left;">Target actor ID</td>
 </tr>
 <tr>
-<td align="right">5</td>
+<td style="text-align: right;">5</td>
 <td>string</td>
-<td align="left">Target actor name</td>
+<td style="text-align: left;">Target actor name</td>
 </tr>
 <tr>
-<td align="right">6-21</td>
+<td style="text-align: right;">6-21</td>
 <td>ActionEffect(s)</td>
-<td align="left">Every two fields make up 1 ActionEffect. See <code><a title="nari.io.reader.actlogutils.ability.action_effect_from_logline" href="#nari.io.reader.actlogutils.ability.action_effect_from_logline">action_effect_from_logline()</a></code> for more info on parsing this.</td>
+<td style="text-align: left;">Every two fields make up 1 ActionEffect. See <code><a title="nari.io.reader.actlogutils.ability.action_effect_from_logline" href="#nari.io.reader.actlogutils.ability.action_effect_from_logline">action_effect_from_logline()</a></code> for more info on parsing this.</td>
 </tr>
 <tr>
-<td align="right">22</td>
+<td style="text-align: right;">22</td>
 <td>int</td>
-<td align="left">Source current HP</td>
+<td style="text-align: left;">Source current HP</td>
 </tr>
 <tr>
-<td align="right">23</td>
+<td style="text-align: right;">23</td>
 <td>int</td>
-<td align="left">Source max HP</td>
+<td style="text-align: left;">Source max HP</td>
 </tr>
 <tr>
-<td align="right">24</td>
+<td style="text-align: right;">24</td>
 <td>int</td>
-<td align="left">Source current MP</td>
+<td style="text-align: left;">Source current MP</td>
 </tr>
 <tr>
-<td align="right">25</td>
+<td style="text-align: right;">25</td>
 <td>int</td>
-<td align="left">Source max MP</td>
+<td style="text-align: left;">Source max MP</td>
 </tr>
 <tr>
-<td align="right">26</td>
+<td style="text-align: right;">26</td>
 <td>int</td>
-<td align="left">Source current TP/others?</td>
+<td style="text-align: left;">Source current TP/others?</td>
 </tr>
 <tr>
-<td align="right">27</td>
+<td style="text-align: right;">27</td>
 <td>int</td>
-<td align="left">Source max TP/others?</td>
+<td style="text-align: left;">Source max TP/others?</td>
 </tr>
 <tr>
-<td align="right">28</td>
+<td style="text-align: right;">28</td>
 <td>float</td>
-<td align="left">Source actor X position</td>
+<td style="text-align: left;">Source actor X position</td>
 </tr>
 <tr>
-<td align="right">29</td>
+<td style="text-align: right;">29</td>
 <td>float</td>
-<td align="left">Source actor Y position</td>
+<td style="text-align: left;">Source actor Y position</td>
 </tr>
 <tr>
-<td align="right">30</td>
+<td style="text-align: right;">30</td>
 <td>float</td>
-<td align="left">Source actor Z position</td>
+<td style="text-align: left;">Source actor Z position</td>
 </tr>
 <tr>
-<td align="right">31</td>
+<td style="text-align: right;">31</td>
 <td>float</td>
-<td align="left">Source actor bearing</td>
+<td style="text-align: left;">Source actor bearing</td>
 </tr>
 <tr>
-<td align="right">32</td>
+<td style="text-align: right;">32</td>
 <td>int</td>
-<td align="left">Target current HP</td>
+<td style="text-align: left;">Target current HP</td>
 </tr>
 <tr>
-<td align="right">33</td>
+<td style="text-align: right;">33</td>
 <td>int</td>
-<td align="left">Target max HP</td>
+<td style="text-align: left;">Target max HP</td>
 </tr>
 <tr>
-<td align="right">34</td>
+<td style="text-align: right;">34</td>
 <td>int</td>
-<td align="left">Target current MP</td>
+<td style="text-align: left;">Target current MP</td>
 </tr>
 <tr>
-<td align="right">35</td>
+<td style="text-align: right;">35</td>
 <td>int</td>
-<td align="left">Target max MP</td>
+<td style="text-align: left;">Target max MP</td>
 </tr>
 <tr>
-<td align="right">36</td>
+<td style="text-align: right;">36</td>
 <td>int</td>
-<td align="left">Target current TP/others?</td>
+<td style="text-align: left;">Target current TP/others?</td>
 </tr>
 <tr>
-<td align="right">37</td>
+<td style="text-align: right;">37</td>
 <td>int</td>
-<td align="left">Target max TP/others?</td>
+<td style="text-align: left;">Target max TP/others?</td>
 </tr>
 <tr>
-<td align="right">38</td>
+<td style="text-align: right;">38</td>
 <td>float</td>
-<td align="left">Target actor X position</td>
+<td style="text-align: left;">Target actor X position</td>
 </tr>
 <tr>
-<td align="right">39</td>
+<td style="text-align: right;">39</td>
 <td>float</td>
-<td align="left">Target actor Y position</td>
+<td style="text-align: left;">Target actor Y position</td>
 </tr>
 <tr>
-<td align="right">40</td>
+<td style="text-align: right;">40</td>
 <td>float</td>
-<td align="left">Target actor Z position</td>
+<td style="text-align: left;">Target actor Z position</td>
 </tr>
 <tr>
-<td align="right">41</td>
+<td style="text-align: right;">41</td>
 <td>float</td>
-<td align="left">Target actor bearing</td>
+<td style="text-align: left;">Target actor bearing</td>
 </tr>
 <tr>
-<td align="right">42</td>
+<td style="text-align: right;">42</td>
 <td>int</td>
-<td align="left">Sequence ID</td>
+<td style="text-align: left;">Sequence ID</td>
 </tr>
 </tbody>
 </table></div>

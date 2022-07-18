@@ -63,7 +63,7 @@ def tether_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Event:
         timestamp=timestamp,
         source_actor=source_actor,
         target_actor=target_actor,
-        tether_id=int(params[6])
+        tether_id=int(params[6], 16)
     )</code></pre>
 </details>
 </section>
@@ -85,61 +85,61 @@ def tether_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Event:
 <table>
 <thead>
 <tr>
-<th align="right">Index</th>
+<th style="text-align: right;">Index</th>
 <th>Type</th>
-<th align="left">Description</th>
+<th style="text-align: left;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="right">0</td>
+<td style="text-align: right;">0</td>
 <td>int</td>
-<td align="left">Source Actor ID</td>
+<td style="text-align: left;">Source Actor ID</td>
 </tr>
 <tr>
-<td align="right">1</td>
+<td style="text-align: right;">1</td>
 <td>str</td>
-<td align="left">Source Actor Name</td>
+<td style="text-align: left;">Source Actor Name</td>
 </tr>
 <tr>
-<td align="right">2</td>
+<td style="text-align: right;">2</td>
 <td>int</td>
-<td align="left">Target Actor ID</td>
+<td style="text-align: left;">Target Actor ID</td>
 </tr>
 <tr>
-<td align="right">3</td>
+<td style="text-align: right;">3</td>
 <td>str</td>
-<td align="left">Target Actor Name</td>
+<td style="text-align: left;">Target Actor Name</td>
 </tr>
 <tr>
-<td align="right">4</td>
+<td style="text-align: right;">4</td>
 <td>int</td>
-<td align="left">padding</td>
+<td style="text-align: left;">padding</td>
 </tr>
 <tr>
-<td align="right">5</td>
+<td style="text-align: right;">5</td>
 <td>int</td>
-<td align="left">padding</td>
+<td style="text-align: left;">padding</td>
 </tr>
 <tr>
-<td align="right">6</td>
+<td style="text-align: right;">6</td>
 <td>int</td>
-<td align="left">Tether ID</td>
+<td style="text-align: left;">Tether ID</td>
 </tr>
 <tr>
-<td align="right">7</td>
+<td style="text-align: right;">7</td>
 <td>int</td>
-<td align="left">padding</td>
+<td style="text-align: left;">padding</td>
 </tr>
 <tr>
-<td align="right">8</td>
+<td style="text-align: right;">8</td>
 <td>int</td>
-<td align="left">padding</td>
+<td style="text-align: left;">padding</td>
 </tr>
 <tr>
-<td align="right">9</td>
+<td style="text-align: right;">9</td>
 <td>int</td>
-<td align="left">padding</td>
+<td style="text-align: left;">padding</td>
 </tr>
 </tbody>
 </table></div>
@@ -176,7 +176,7 @@ def tether_from_logline(timestamp: Timestamp, params: list[str]) -&gt; Event:
         timestamp=timestamp,
         source_actor=source_actor,
         target_actor=target_actor,
-        tether_id=int(params[6])
+        tether_id=int(params[6], 16)
     )</code></pre>
 </details>
 </dd>
