@@ -37,12 +37,13 @@ def hexstr_to_int(string: str, pad: bool = True) -&gt; int:
     return int(string, 16)
 
 
-def hexstr_to_bytes(param: str) -&gt; bytes:
+def hexstr_to_bytes(param: str,  byte_size: int = 4, reverse: bool = False) -&gt; bytes:
     &#34;&#34;&#34;Helper function to convert strings into bytes. Also changes the byte order.&#34;&#34;&#34;
-
-    param_expanded = param.zfill(8)
+    param_expanded = param.zfill(byte_size * 2)
     bytes_arr = bytearray.fromhex(param_expanded)
-    bytes_arr.reverse()  # switch the endianness
+
+    if reverse:
+        bytes_arr.reverse()  # switch the endianness
 
     return bytes(bytes_arr)</code></pre>
 </details>
@@ -55,7 +56,7 @@ def hexstr_to_bytes(param: str) -&gt; bytes:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="nari.util.byte.hexstr_to_bytes"><code class="name flex">
-<span>def <span class="ident">hexstr_to_bytes</span></span>(<span>param: str) ‑> bytes</span>
+<span>def <span class="ident">hexstr_to_bytes</span></span>(<span>param: str, byte_size: int = 4, reverse: bool = False) ‑> bytes</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Helper function to convert strings into bytes. Also changes the byte order.</p></div>
@@ -63,12 +64,13 @@ def hexstr_to_bytes(param: str) -&gt; bytes:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def hexstr_to_bytes(param: str) -&gt; bytes:
+<pre><code class="python">def hexstr_to_bytes(param: str,  byte_size: int = 4, reverse: bool = False) -&gt; bytes:
     &#34;&#34;&#34;Helper function to convert strings into bytes. Also changes the byte order.&#34;&#34;&#34;
-
-    param_expanded = param.zfill(8)
+    param_expanded = param.zfill(byte_size * 2)
     bytes_arr = bytearray.fromhex(param_expanded)
-    bytes_arr.reverse()  # switch the endianness
+
+    if reverse:
+        bytes_arr.reverse()  # switch the endianness
 
     return bytes(bytes_arr)</code></pre>
 </details>
