@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/python,virtualenv,code
 # Edit at https://www.gitignore.io/?templates=python,virtualenv,code
 
@@ -125,3 +124,12 @@ venv.bak/
 pip-selfcheck.json
 
 # End of https://www.gitignore.io/api/python,virtualenv,code
+
+### JetBrains ###
+# JetBrains IDEs
+*.ipr
+*.iws
+*.xcodeproj
+*.xcworkspace
+.idea/
+*.iml
