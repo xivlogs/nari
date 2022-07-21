@@ -3,7 +3,7 @@ from nari.types import Timestamp
 from nari.types.actor import Actor
 from nari.types.event import Event
 from nari.types.event.markers import MarkerOperation, OverheadMarker, PlayerMarker
-from nari.io.reader.actlogutils.exceptions import InvalidMarkerID, InvalidMarkerOperation
+from nari_act.actlogutils.exceptions import InvalidMarkerID, InvalidMarkerOperation
 
 
 def targetmarker_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
