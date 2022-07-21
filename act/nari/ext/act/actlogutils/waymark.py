@@ -4,7 +4,7 @@ from nari.types.actor import Actor
 from nari.types.event import Event
 from nari.types.event.markers import MarkerOperation
 from nari.types.event.waymark import Waymark, Waypoint, Position
-from nari.io.reader.actlogutils.exceptions import InvalidMarkerID, InvalidMarkerOperation
+from nari.ext.act.actlogutils.exceptions import InvalidMarkerID, InvalidMarkerOperation
 
 
 def waymark_from_logline(timestamp: Timestamp, params: list[str]) -> Event:
