@@ -1,9 +1,9 @@
 import unittest
 from typing import Optional
 
-from nari.io.reader.actlogutils.targetmarker import targetmarker_from_logline
 from nari.types.event.markers import PlayerMarker, MarkerOperation, OverheadMarker
-from nari.io.reader.actlogutils.exceptions import InvalidMarkerID
+from nari.ext.act.actlogutils.targetmarker import targetmarker_from_logline
+from nari.ext.act.actlogutils.exceptions import InvalidMarkerID
 
 
 class TestTargetMarkerFromACTLogLine(unittest.TestCase):
