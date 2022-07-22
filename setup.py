@@ -22,11 +22,6 @@ setup(
     long_description_content_type='text/markdown',
     python_requires='>=3.10',
     packages=find_packages(),
-    entry_points={
-        'console_scripts': [
-            'nari=nari.cli.client:main'
-        ]
-    },
     extras_require={
         'dev': dev_requirements,
         'docs': docs_requirements,
