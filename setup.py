@@ -22,6 +22,7 @@ setup(
     long_description_content_type='text/markdown',
     python_requires='>=3.10',
     packages=find_packages(),
+    package_data={'nari': ['py.typed']},
     extras_require={
         'dev': dev_requirements,
         'docs': docs_requirements,

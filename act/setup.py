@@ -22,6 +22,7 @@ setup(
     long_description_content_type='text/markdown',
     python_requires='>=3.10',
     packages=find_namespace_packages(include=['nari.ext.*']),
+    package_data={'nari.ext.act': ['py.typed']},
     extras_require={
         'dev': dev_requirements,
         'docs': docs_requirements,
