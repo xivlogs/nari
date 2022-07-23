@@ -1,11 +1,5 @@
 name: Test
-on:
-  push:
-    paths:
-      - 'nari/**.py'
-  pull_request:
-    paths:
-      - 'nari/**.py'
+on: [push, pull_request]
 jobs:
   lint:
     name: Lint
