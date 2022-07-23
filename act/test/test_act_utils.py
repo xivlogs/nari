@@ -1,7 +1,7 @@
 import unittest
 
-from nari.io.reader.actlogutils import ActLogChecksumType, validate_checksum
-from nari.io.reader.actlogutils.exceptions import InvalidActChecksumAlgorithm
+from nari.ext.act.actlogutils import ActLogChecksumType, validate_checksum
+from nari.ext.act.actlogutils.exceptions import InvalidActChecksumAlgorithm
 
 
 class TestLineChecksum(unittest.TestCase):

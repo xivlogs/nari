@@ -1,7 +1,7 @@
 import unittest
 from typing import Optional
 
-from nari.io.reader.actlogutils.metadata import version_from_logline
+from nari.ext.act.actlogutils.metadata import version_from_logline
 from nari.types.event.version import SemanticVersion, Version
 from nari.util.exceptions import CannotParseVersion
 

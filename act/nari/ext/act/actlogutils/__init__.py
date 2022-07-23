@@ -8,26 +8,26 @@ from nari.types.event import Event
 from nari.types import Timestamp
 from nari.types.event.limitbreak import LimitBreak
 # here we go
-from nari.io.reader.actlogutils.metadata import version_from_logline, config_from_logline
-from nari.io.reader.actlogutils.zone import zonechange_from_logline
-from nari.io.reader.actlogutils.status import statuslist_from_logline, statuslist3_from_logline, statusapply_from_logline
-from nari.io.reader.actlogutils.limitbreak import limitbreak_from_logline
-from nari.io.reader.actlogutils.ability import ability_from_logline, aoeability_from_logline
-from nari.io.reader.actlogutils.tick import tick_from_logline
-from nari.io.reader.actlogutils.directorupdate import director_events_from_logline
-from nari.io.reader.actlogutils.updatehpmp import updatehpmp_from_logline
-from nari.io.reader.actlogutils.actorspawn import actor_spawn_from_logline
-from nari.io.reader.actlogutils.gauge import gauge_from_logline
-from nari.io.reader.actlogutils.playerstats import playerstats_from_logline
-from nari.io.reader.actlogutils.visibility import visibility_from_logline
-from nari.io.reader.actlogutils.targeticon import targeticon_from_logline
-from nari.io.reader.actlogutils.targetmarker import targetmarker_from_logline
-from nari.io.reader.actlogutils.tether import tether_from_logline
-from nari.io.reader.actlogutils.waymark import waymark_from_logline
-from nari.io.reader.actlogutils.party import partylist_from_logline
-from nari.io.reader.actlogutils.effectresult import effectresult_from_logline
-from nari.io.reader.actlogutils.cast import startcast_from_logline, stopcast_from_logline
-from nari.io.reader.actlogutils.exceptions import InvalidActChecksumAlgorithm
+from nari.ext.act.actlogutils.metadata import version_from_logline, config_from_logline
+from nari.ext.act.actlogutils.zone import zonechange_from_logline
+from nari.ext.act.actlogutils.status import statuslist_from_logline, statuslist3_from_logline, statusapply_from_logline
+from nari.ext.act.actlogutils.limitbreak import limitbreak_from_logline
+from nari.ext.act.actlogutils.ability import ability_from_logline, aoeability_from_logline
+from nari.ext.act.actlogutils.tick import tick_from_logline
+from nari.ext.act.actlogutils.directorupdate import director_events_from_logline
+from nari.ext.act.actlogutils.updatehpmp import updatehpmp_from_logline
+from nari.ext.act.actlogutils.actorspawn import actor_spawn_from_logline
+from nari.ext.act.actlogutils.gauge import gauge_from_logline
+from nari.ext.act.actlogutils.playerstats import playerstats_from_logline
+from nari.ext.act.actlogutils.visibility import visibility_from_logline
+from nari.ext.act.actlogutils.targeticon import targeticon_from_logline
+from nari.ext.act.actlogutils.targetmarker import targetmarker_from_logline
+from nari.ext.act.actlogutils.tether import tether_from_logline
+from nari.ext.act.actlogutils.waymark import waymark_from_logline
+from nari.ext.act.actlogutils.party import partylist_from_logline
+from nari.ext.act.actlogutils.effectresult import effectresult_from_logline
+from nari.ext.act.actlogutils.cast import startcast_from_logline, stopcast_from_logline
+from nari.ext.act.actlogutils.exceptions import InvalidActChecksumAlgorithm
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[Timestamp, list[str]], Optional[Event]]

@@ -1,7 +1,7 @@
 import unittest
 
-from nari.io.reader.actlogutils.updatehpmp import updatehpmp_from_logline
 from nari.types.event.updatehpmp import UpdateHpMp
+from nari.ext.act.actlogutils.updatehpmp import updatehpmp_from_logline
 
 
 class TestUpdateHPMPFromACTLogLine(unittest.TestCase):
