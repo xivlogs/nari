@@ -4,7 +4,7 @@ use sha2::Sha256;
 use std::num::ParseIntError;
 
 #[pyfunction]
-pub fn get_time_milliseconds(time_str: &str) -> i64 {
+pub(crate) fn get_time_milliseconds(time_str: &str) -> i64 {
     let str_len = time_str.len();
     let date_time_str = &mut time_str[..str_len - 7].to_owned();
     date_time_str.push_str(&time_str[str_len - 6..]);
@@ -22,7 +22,7 @@ fn decode_hex(s: &str) -> Result<Vec<u8>, ParseIntError> {
 
 /// Gets [to_hash, check] from a line based on algo
 #[pyfunction]
-pub fn validate_checksum(line: &str, index: i32, alg: &str) -> bool {
+pub(crate) fn validate_checksum(line: &str, index: i32, alg: &str) -> bool {
     let (md5, sub) = match alg {
         "md5" => (true, 32),
         _ => (false, 16),
@@ -43,21 +43,21 @@ pub fn validate_checksum(line: &str, index: i32, alg: &str) -> bool {
 
 /// Pads string to 4 length with 0 in front
 #[pyfunction]
-pub fn pad4(str: &str) -> String {
+pub(crate) fn pad4(str: &str) -> String {
     format!("{:0>4}", str)
 }
 
 /// Pads string to 8 length with 0 in front
 #[pyfunction]
-pub fn pad8(str: &str) -> String {
+pub(crate) fn pad8(str: &str) -> String {
     format!("{:0>8}", str)
 }
 
-pub fn parse_float(inp: &str) -> f32 {
+pub(crate) fn parse_float(inp: &str) -> f32 {
     unsafe { std::mem::transmute::<u32, f32>(parse_int(inp)) }
 }
 
-pub fn parse_int(inp: &str) -> u32 {
+pub(crate) fn parse_int(inp: &str) -> u32 {
     let res = u32::from_str_radix(inp, 10);
     if res.is_ok() {
         res.unwrap()
