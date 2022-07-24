@@ -12,4 +12,5 @@ path = "ext/lib.rs"
 [dependencies]
 pyo3 = { version = "0.16.5", features = ["extension-module"] }
 chrono = "0.4"
-
+md-5 = "0.10.1"
+sha2 = "0.10.2"
