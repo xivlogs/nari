@@ -1,4 +1,5 @@
 from setuptools import setup, find_namespace_packages
+from setuptools_rust import Binding, RustExtension
 
 with open('README.md', 'r', encoding='utf-8') as f:
     long_description = f.read()
@@ -23,6 +24,8 @@ setup(
     python_requires='>=3.10',
     packages=find_namespace_packages(include=['nari.ext.*']),
     package_data={'nari.ext.act': ['py.typed']},
+    rust_extensions=[RustExtension("nari-act_ext", debug=False, quiet=True, binding=Binding.PyO3)],
+    zip_safe=False,
     extras_require={
         'dev': dev_requirements,
         'docs': docs_requirements,

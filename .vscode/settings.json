@@ -6,6 +6,8 @@
     "**/Network_*.txt": true,
     "**/*.pyc": { "when": "$(basename).py" },
     "**/__pycache__": true,
-    "**/.venv": true
+    "**.so": true,
+    "**/.venv": true,
+    "target/": true
   },
 }
