@@ -5,6 +5,7 @@ use pyo3::prelude::*;
 
 /// Params to ability
 #[pyfunction]
+#[pyo3(text_signature = "(params: list[str]) -> list[any]")]
 pub(crate) fn ability_from_params(
     inp: Vec<&str>,
 ) -> (
@@ -58,6 +59,7 @@ pub(crate) fn ability_from_params(
 
 /// Params to action_effect
 #[pyfunction]
+#[pyo3(text_signature = "(params: list[str]) -> list[int]")]
 pub(crate) fn action_effect_from_params(inp: Vec<&str>) -> (u8, u8, u8, u8, u16, u8, u8) {
     let num = param_to_struct::params_to_8_byte_int(inp);
     let param0 = (num >> 56) as u8;
@@ -72,6 +74,7 @@ pub(crate) fn action_effect_from_params(inp: Vec<&str>) -> (u8, u8, u8, u8, u16,
 
 /// Params to status_effect
 #[pyfunction]
+#[pyo3(text_signature = "(params: list[str]) -> (int, int, float, int")]
 pub(crate) fn status_effect_from_params(inp: Vec<&str>) -> (u16, u16, f32, u32) {
     let (param0, param1) = param_to_struct::param_to_two_2_byte_int(inp.get(0).unwrap());
     (
@@ -84,6 +87,7 @@ pub(crate) fn status_effect_from_params(inp: Vec<&str>) -> (u16, u16, f32, u32) 
 
 /// Params to statuslist
 #[pyfunction]
+#[pyo3(text_signature = "(params: list[str]) -> list[any]")]
 pub(crate) fn statuslist_from_params(
     inp: Vec<&str>,
 ) -> (

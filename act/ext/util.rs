@@ -4,6 +4,7 @@ use sha2::Sha256;
 use std::num::ParseIntError;
 
 #[pyfunction]
+#[pyo3(text_signature = "(time_str: str) -> int")]
 pub(crate) fn get_time_milliseconds(time_str: &str) -> i64 {
     let str_len = time_str.len();
     let date_time_str = &mut time_str[..str_len - 7].to_owned();
@@ -22,6 +23,7 @@ fn decode_hex(s: &str) -> Result<Vec<u8>, ParseIntError> {
 
 /// Gets [to_hash, check] from a line based on algo
 #[pyfunction]
+#[pyo3(text_signature = "(line: str, index: int, algo: str) -> bool")]
 pub(crate) fn validate_checksum(line: &str, index: i32, alg: &str) -> bool {
     let (md5, sub) = match alg {
         "md5" => (true, 32),
@@ -43,12 +45,14 @@ pub(crate) fn validate_checksum(line: &str, index: i32, alg: &str) -> bool {
 
 /// Pads string to 4 length with 0 in front
 #[pyfunction]
+#[pyo3(text_signature = "(src_str: str) -> str")]
 pub(crate) fn pad4(str: &str) -> String {
     format!("{:0>4}", str)
 }
 
 /// Pads string to 8 length with 0 in front
 #[pyfunction]
+#[pyo3(text_signature = "(src_str: str) -> str")]
 pub(crate) fn pad8(str: &str) -> String {
     format!("{:0>8}", str)
 }
