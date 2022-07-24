@@ -9,9 +9,18 @@ use pyo3::prelude::*;
 fn nari_act_ext(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(actor::parse_actor, m)?)?;
     m.add_function(wrap_pyfunction!(lines_to_params::ability_from_params, m)?)?;
-    m.add_function(wrap_pyfunction!(lines_to_params::action_effect_from_params, m)?)?;
-    m.add_function(wrap_pyfunction!(lines_to_params::status_effect_from_params, m)?)?;
-    m.add_function(wrap_pyfunction!(lines_to_params::statuslist_from_params, m)?)?;
+    m.add_function(wrap_pyfunction!(
+        lines_to_params::action_effect_from_params,
+        m
+    )?)?;
+    m.add_function(wrap_pyfunction!(
+        lines_to_params::status_effect_from_params,
+        m
+    )?)?;
+    m.add_function(wrap_pyfunction!(
+        lines_to_params::statuslist_from_params,
+        m
+    )?)?;
     m.add_function(wrap_pyfunction!(param_to_struct::param_to_2_byte_int, m)?)?;
     m.add_function(wrap_pyfunction!(param_to_struct::param_to_2x2_byte_int, m)?)?;
     m.add_function(wrap_pyfunction!(param_to_struct::param_to_4_byte_float, m)?)?;

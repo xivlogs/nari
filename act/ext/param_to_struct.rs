@@ -1,5 +1,5 @@
-use pyo3::prelude::*;
 use crate::util;
+use pyo3::prelude::*;
 
 /// Param to 2-byte integer
 #[pyfunction]
@@ -19,9 +19,7 @@ pub fn param_to_2x2_byte_int(inp: &str) -> (u16, u16) {
 /// Param to 4-byte float
 #[pyfunction]
 pub fn param_to_4_byte_float(inp: &str) -> f32 {
-    unsafe {
-         std::mem::transmute::<u32, f32>(u32::from_str_radix(inp, 16).unwrap())
-    }
+    unsafe { std::mem::transmute::<u32, f32>(u32::from_str_radix(inp, 16).unwrap()) }
 }
 
 /// Param to 4-byte integer
@@ -44,11 +42,15 @@ pub fn param_to_4x1_byte_int(inp: &str) -> (u8, u8, u8, u8) {
 /// Two params to 8-byte integers
 #[pyfunction]
 pub fn params_to_8_byte_int(inp: Vec<&str>) -> u64 {
-    (u64::from_str_radix(inp.get(0).unwrap(), 16).unwrap() << 32) + u64::from_str_radix(inp.get(1).unwrap(), 16).unwrap()
+    (u64::from_str_radix(inp.get(0).unwrap(), 16).unwrap() << 32)
+        + u64::from_str_radix(inp.get(1).unwrap(), 16).unwrap()
 }
 
 /// Two params to param
 #[pyfunction]
 pub fn params_to_param(inp: Vec<&str>) -> String {
-    inp.iter().map(|x| util::pad8(x)).collect::<Vec<String>>().join("")
+    inp.iter()
+        .map(|x| util::pad8(x))
+        .collect::<Vec<String>>()
+        .join("")
 }

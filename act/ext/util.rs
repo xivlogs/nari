@@ -1,14 +1,15 @@
-use std::num::ParseIntError;
-use md5::{Md5, Digest};
+use md5::{Digest, Md5};
 use pyo3::prelude::*;
-use sha2::{Sha256};
+use sha2::Sha256;
+use std::num::ParseIntError;
 
 #[pyfunction]
 pub fn get_time_milliseconds(time_str: &str) -> i64 {
     let str_len = time_str.len();
     let date_time_str = &mut time_str[..str_len - 7].to_owned();
     date_time_str.push_str(&time_str[str_len - 6..]);
-    let time = chrono::DateTime::parse_from_str(date_time_str.as_str(), "%Y-%m-%dT%H:%M:%S%.f%:z").unwrap();
+    let time = chrono::DateTime::parse_from_str(date_time_str.as_str(), "%Y-%m-%dT%H:%M:%S%.f%:z")
+        .unwrap();
     time.timestamp_millis()
 }
 
@@ -23,28 +24,21 @@ fn decode_hex(s: &str) -> Result<Vec<u8>, ParseIntError> {
 #[pyfunction]
 pub fn validate_checksum(line: &str, index: i32, alg: &str) -> bool {
     let (md5, sub) = match alg {
-        "md5" => (true,32),
-        _ => (false,16)
+        "md5" => (true, 32),
+        _ => (false, 16),
     };
     let last = line.len();
     if md5 {
         let mut hasher = Md5::new();
         hasher.update(&line[..last - sub]);
         hasher.update(&index.to_string());
-        &hasher.finalize()[..] == decode_hex(&line[last-sub..]).unwrap()
-    }
-    else{
+        &hasher.finalize()[..] == decode_hex(&line[last - sub..]).unwrap()
+    } else {
         let mut hasher = Sha256::new();
         hasher.update(&line[..last - sub]);
         hasher.update(&index.to_string());
-        &hasher.finalize()[..] == decode_hex(&line[last-sub..]).unwrap()
+        &hasher.finalize()[..] == decode_hex(&line[last - sub..]).unwrap()
     }
-}
-
-/// Pads string to 8 length with 0 in front
-#[pyfunction]
-pub fn pad8(str: &str) -> String {
-    format!("{:0>8}", str)
 }
 
 /// Pads string to 4 length with 0 in front
@@ -53,18 +47,21 @@ pub fn pad4(str: &str) -> String {
     format!("{:0>4}", str)
 }
 
-pub fn parse_int(inp: &str) -> u32{
-    let res = u32::from_str_radix(inp, 10);
-    if res.is_ok() {
-        res.unwrap()
-    }
-    else {
-        0
-    }
+/// Pads string to 8 length with 0 in front
+#[pyfunction]
+pub fn pad8(str: &str) -> String {
+    format!("{:0>8}", str)
 }
 
 pub fn parse_float(inp: &str) -> f32 {
-    unsafe {
-         std::mem::transmute::<u32, f32>(parse_int(inp))
+    unsafe { std::mem::transmute::<u32, f32>(parse_int(inp)) }
+}
+
+pub fn parse_int(inp: &str) -> u32 {
+    let res = u32::from_str_radix(inp, 10);
+    if res.is_ok() {
+        res.unwrap()
+    } else {
+        0
     }
 }
