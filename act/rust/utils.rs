@@ -1,5 +1,4 @@
 use pyo3::prelude::*;
-use std::num::ParseIntError;
 
 #[pyfunction]
 #[pyo3(text_signature = "(time_str: str) -> int")]
