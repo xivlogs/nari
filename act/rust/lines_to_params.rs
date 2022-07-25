@@ -3,6 +3,29 @@ use crate::parser;
 use crate::utils;
 use pyo3::prelude::*;
 
+type AbilityParams<'a> = (
+    (u32, &'a str),
+    Vec<u32>,
+    Vec<f32>,
+    (u32, &'a str),
+    Vec<u32>,
+    Vec<f32>,
+    Vec<&'a str>,
+    Vec<(u8, u8, u8, u8, u16, u8, u8)>,
+    u32,
+);
+
+type ActionEffectParams = (u8, u8, u8, u8, u16, u8, u8);
+type StatusEffectParams = (u16, u16, f32, u32);
+
+type StatuslistParams<'a> = (
+    (u32, &'a str),
+    &'a str,
+    Vec<u32>,
+    Vec<f32>,
+    Vec<(u16, u16, f32, u32)>,
+);
+
 /// Params to ability
 #[pyfunction]
 #[pyo3(text_signature = "(params: list[str]) -> list[any]")]
