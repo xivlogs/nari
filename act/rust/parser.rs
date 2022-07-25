@@ -1,15 +1,5 @@
 use crate::utils;
-use md5::{Digest, Md5};
 use pyo3::prelude::*;
-use sha2::Sha256;
-use std::num::ParseIntError;
-
-fn decode_hex(s: &str) -> Result<Vec<u8>, ParseIntError> {
-    (0..s.len())
-        .step_by(2)
-        .map(|i| u8::from_str_radix(&s[i..i + 2], 16))
-        .collect()
-}
 
 /// Param to 2-byte integer
 #[pyfunction]
@@ -70,26 +60,4 @@ pub(crate) fn params_to_param(inp: Vec<&str>) -> String {
         .map(|x| utils::pad8(x))
         .collect::<Vec<String>>()
         .join("")
-}
-
-/// Gets [to_hash, check] from a line based on algo
-#[pyfunction]
-#[pyo3(text_signature = "(line: str, index: int, algo: str) -> bool")]
-pub(crate) fn validate_checksum(line: &str, index: i32, alg: &str) -> bool {
-    let (md5, sub) = match alg {
-        "md5" => (true, 32),
-        _ => (false, 16),
-    };
-    let last = line.len();
-    if md5 {
-        let mut hasher = Md5::new();
-        hasher.update(&line[..last - sub]);
-        hasher.update(&index.to_string());
-        &hasher.finalize()[..] == decode_hex(&line[last - sub..]).unwrap()
-    } else {
-        let mut hasher = Sha256::new();
-        hasher.update(&line[..last - sub]);
-        hasher.update(&index.to_string());
-        &hasher.finalize()[..] == decode_hex(&line[last - sub..]).unwrap()
-    }
 }

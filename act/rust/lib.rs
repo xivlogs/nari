@@ -30,13 +30,13 @@ fn nari_act_ext(py: Python, m: &PyModule) -> PyResult<()> {
     parser_module.add_function(wrap_pyfunction!(parser::param_to_4x1_byte_int, m)?)?;
     parser_module.add_function(wrap_pyfunction!(parser::params_to_8_byte_int, m)?)?;
     parser_module.add_function(wrap_pyfunction!(parser::params_to_param, m)?)?;
-    parser_module.add_function(wrap_pyfunction!(parser::validate_checksum, m)?)?;
     m.add_submodule(parser_module)?;
 
     let utils_module = PyModule::new(py, "utils")?;
-    utils_module.add_function(wrap_pyfunction!(utils::get_time_milliseconds, m)?)?;
+    utils_module.add_function(wrap_pyfunction!(utils::date_from_act_timestamp, m)?)?;
     utils_module.add_function(wrap_pyfunction!(utils::pad4, m)?)?;
     utils_module.add_function(wrap_pyfunction!(utils::pad8, m)?)?;
+    utils_module.add_function(wrap_pyfunction!(utils::validate_checksum, m)?)?;
     m.add_submodule(utils_module)?;
 
     // HACK: abuse python imports to make `from rustext.utils import validate_checksum` work
