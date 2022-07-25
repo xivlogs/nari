@@ -36,16 +36,11 @@ pub(crate) fn pad8(str: &str) -> String {
 }
 
 pub(crate) fn parse_float(inp: &str) -> f32 {
-    unsafe { std::mem::transmute::<u32, f32>(parse_int(inp)) }
+    f32::from_bits(parse_int(inp))
 }
 
 pub(crate) fn parse_int(inp: &str) -> u32 {
-    let res = u32::from_str_radix(inp, 10);
-    if res.is_ok() {
-        res.unwrap()
-    } else {
-        0
-    }
+    inp.parse::<u32>().unwrap_or(0)
 }
 
 /// Gets [to_hash, check] from a line based on algo
@@ -57,15 +52,16 @@ pub(crate) fn validate_checksum(line: &str, index: i32, alg: &str) -> bool {
         _ => (false, 16),
     };
     let last = line.len();
+    let hash = decode_hex(&line[last - sub..]).unwrap();
     if md5 {
         let mut hasher = Md5::new();
         hasher.update(&line[..last - sub]);
         hasher.update(&index.to_string());
-        &hasher.finalize()[..] == decode_hex(&line[last - sub..]).unwrap()
+        hasher.finalize()[..] == hash
     } else {
         let mut hasher = Sha256::new();
         hasher.update(&line[..last - sub]);
         hasher.update(&index.to_string());
-        &hasher.finalize()[..] == decode_hex(&line[last - sub..]).unwrap()
+        hasher.finalize()[..] == hash
     }
 }

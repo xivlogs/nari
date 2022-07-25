@@ -22,7 +22,7 @@ pub(crate) fn param_to_2x2_byte_int(inp: &str) -> (u16, u16) {
 #[pyfunction]
 #[pyo3(text_signature = "(params: list[str]) -> float")]
 pub(crate) fn param_to_4_byte_float(inp: &str) -> f32 {
-    unsafe { std::mem::transmute::<u32, f32>(u32::from_str_radix(inp, 16).unwrap()) }
+    f32::from_bits(u32::from_str_radix(inp, 16).unwrap())
 }
 
 /// Param to 4-byte integer
