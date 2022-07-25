@@ -1,43 +1,29 @@
 """Just a bunch of helper methods to spit out events from the ACT log"""
-from datetime import datetime
-from hashlib import md5, sha256
-from typing import Callable, Optional
-from enum import IntEnum, Enum
+from enum import IntEnum
 
 from nari.types.event import Event
 from nari.types import Timestamp
-from nari.types.event.limitbreak import LimitBreak
-# here we go
-from nari.ext.act.actlogutils.metadata import version_from_logline, config_from_logline
-from nari.ext.act.actlogutils.zone import zonechange_from_logline
-from nari.ext.act.actlogutils.status import statuslist_from_logline, statuslist3_from_logline, statusapply_from_logline
-from nari.ext.act.actlogutils.limitbreak import limitbreak_from_logline
-from nari.ext.act.actlogutils.ability import ability_from_logline, aoeability_from_logline
-from nari.ext.act.actlogutils.tick import tick_from_logline
-from nari.ext.act.actlogutils.directorupdate import director_events_from_logline
-from nari.ext.act.actlogutils.updatehpmp import updatehpmp_from_logline
-from nari.ext.act.actlogutils.actorspawn import actor_spawn_from_logline
-from nari.ext.act.actlogutils.gauge import gauge_from_logline
-from nari.ext.act.actlogutils.playerstats import playerstats_from_logline
-from nari.ext.act.actlogutils.visibility import visibility_from_logline
-from nari.ext.act.actlogutils.targeticon import targeticon_from_logline
-from nari.ext.act.actlogutils.targetmarker import targetmarker_from_logline
-from nari.ext.act.actlogutils.tether import tether_from_logline
-from nari.ext.act.actlogutils.waymark import waymark_from_logline
-from nari.ext.act.actlogutils.party import partylist_from_logline
-from nari.ext.act.actlogutils.effectresult import effectresult_from_logline
-from nari.ext.act.actlogutils.cast import startcast_from_logline, stopcast_from_logline
-from nari.ext.act.actlogutils.exceptions import InvalidActChecksumAlgorithm
 
-DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
-ActEventFn = Callable[[Timestamp, list[str]], Optional[Event]]
-
-# pylint: disable=invalid-name
-class ActLogChecksumType(Enum):
-    """List of hashsum algorithms used by different ACT versions"""
-    MD5 = "md5"
-    SHA256 = "sha256"
-# pylint: enable=invalid-name
+from nari.ext.act.parser.metadata import version_from_logline, config_from_logline
+from nari.ext.act.parser.zone import zonechange_from_logline
+from nari.ext.act.parser.status import statuslist_from_logline, statuslist3_from_logline, statusapply_from_logline
+from nari.ext.act.parser.limitbreak import limitbreak_from_logline
+from nari.ext.act.parser.ability import ability_from_logline, aoeability_from_logline
+from nari.ext.act.parser.tick import tick_from_logline
+from nari.ext.act.parser.directorupdate import director_events_from_logline
+from nari.ext.act.parser.updatehpmp import updatehpmp_from_logline
+from nari.ext.act.parser.actorspawn import actor_spawn_from_logline
+from nari.ext.act.parser.gauge import gauge_from_logline
+from nari.ext.act.parser.playerstats import playerstats_from_logline
+from nari.ext.act.parser.visibility import visibility_from_logline
+from nari.ext.act.parser.targeticon import targeticon_from_logline
+from nari.ext.act.parser.targetmarker import targetmarker_from_logline
+from nari.ext.act.parser.tether import tether_from_logline
+from nari.ext.act.parser.waymark import waymark_from_logline
+from nari.ext.act.parser.party import partylist_from_logline
+from nari.ext.act.parser.effectresult import effectresult_from_logline
+from nari.ext.act.parser.cast import startcast_from_logline, stopcast_from_logline
+from nari.ext.act.types import ActIdMapping
 
 
 # pylint: disable=invalid-name
@@ -91,35 +77,12 @@ class ActEventType(IntEnum):
         return name in cls.__members__.keys() # pylint: disable=consider-iterating-dictionary
 # pylint: enable=invalid-name
 
-def date_from_act_timestamp(datestr: str) -> Timestamp:
-    """Parse timestamp from ACT log into a Timestamp
-    Look, this is dirty. This is wrong. Please someone find a better way to do this.
-    """
-    return int(datetime.strptime(f'{datestr[:26]}{datestr[-6:]}', DEFAULT_DATE_FORMAT).timestamp() * 1000)
-
-def validate_checksum(line: str, index: int, algo: ActLogChecksumType = ActLogChecksumType.SHA256) -> bool:
-    """Validates an ACT log line
-    Given some line 1|foo|bar|baz|a823425f532c540667195f641dd3649b, and an index of 1, then the md5sum of
-    1|foo|bar|baz|1 (where 1 is the index) should be a823425f532c540667195f641dd3649b (which is the checksum value)
-    """
-    parts = line.split('|')
-    check_hash = parts[-1]
-    to_hash = f'{"|".join(parts[:-1])}|{index}'.encode('utf-8')
-
-    match algo:
-        case ActLogChecksumType.MD5:
-            return md5(to_hash).hexdigest() == check_hash
-        case ActLogChecksumType.SHA256:
-            return sha256(to_hash).hexdigest()[:16] == check_hash
-        case _:
-            raise InvalidActChecksumAlgorithm(f'Unexpected checksum algorithm: {algo}. Expected one of MD5 and SHA256.')
-
 # pylint: disable=unused-argument
 def noop(timestamp: Timestamp, params: list[str]) -> Event:
     """Straight-up ignores things"""
     # print(f'Ignoring an event with timestamp {timestamp} and params: {"|".join(params)}')
 
-ID_MAPPINGS: dict[int, ActEventFn] = {
+ID_MAPPINGS: ActIdMapping = {
     # Internal events
     ActEventType.config: config_from_logline,
     ActEventType.debug: noop,

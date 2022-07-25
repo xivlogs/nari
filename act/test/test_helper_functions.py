@@ -1,7 +1,7 @@
 import unittest
 
-from nari.ext.act.actlogutils import date_from_act_timestamp
-from nari.ext.act.actlogutils.playerstats import playerstats_from_logline
+from nari.ext.act.utils import date_from_act_timestamp
+from nari.ext.act.parser.playerstats import playerstats_from_logline
 from nari.types.job import Job
 from nari.types.stats import Stats
 from nari.types.event.playerstats import PlayerStats
