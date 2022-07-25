@@ -6,26 +6,26 @@ from enum import IntEnum, Enum
 from nari.types.event import Event
 from nari.types import Timestamp
 from nari.types.event.limitbreak import LimitBreak
-# here we go
-from nari.ext.act.actlogutils.metadata import version_from_logline, config_from_logline
-from nari.ext.act.actlogutils.zone import zonechange_from_logline
-from nari.ext.act.actlogutils.status import statuslist_from_logline, statuslist3_from_logline, statusapply_from_logline
-from nari.ext.act.actlogutils.limitbreak import limitbreak_from_logline
-from nari.ext.act.actlogutils.ability import ability_from_logline, aoeability_from_logline
-from nari.ext.act.actlogutils.tick import tick_from_logline
-from nari.ext.act.actlogutils.directorupdate import director_events_from_logline
-from nari.ext.act.actlogutils.updatehpmp import updatehpmp_from_logline
-from nari.ext.act.actlogutils.actorspawn import actor_spawn_from_logline
-from nari.ext.act.actlogutils.gauge import gauge_from_logline
-from nari.ext.act.actlogutils.playerstats import playerstats_from_logline
-from nari.ext.act.actlogutils.visibility import visibility_from_logline
-from nari.ext.act.actlogutils.targeticon import targeticon_from_logline
-from nari.ext.act.actlogutils.targetmarker import targetmarker_from_logline
-from nari.ext.act.actlogutils.tether import tether_from_logline
-from nari.ext.act.actlogutils.waymark import waymark_from_logline
-from nari.ext.act.actlogutils.party import partylist_from_logline
-from nari.ext.act.actlogutils.effectresult import effectresult_from_logline
-from nari.ext.act.actlogutils.cast import startcast_from_logline, stopcast_from_logline
+
+from nari.ext.act.parser.metadata import version_from_logline, config_from_logline
+from nari.ext.act.parser.zone import zonechange_from_logline
+from nari.ext.act.parser.status import statuslist_from_logline, statuslist3_from_logline, statusapply_from_logline
+from nari.ext.act.parser.limitbreak import limitbreak_from_logline
+from nari.ext.act.parser.ability import ability_from_logline, aoeability_from_logline
+from nari.ext.act.parser.tick import tick_from_logline
+from nari.ext.act.parser.directorupdate import director_events_from_logline
+from nari.ext.act.parser.updatehpmp import updatehpmp_from_logline
+from nari.ext.act.parser.actorspawn import actor_spawn_from_logline
+from nari.ext.act.parser.gauge import gauge_from_logline
+from nari.ext.act.parser.playerstats import playerstats_from_logline
+from nari.ext.act.parser.visibility import visibility_from_logline
+from nari.ext.act.parser.targeticon import targeticon_from_logline
+from nari.ext.act.parser.targetmarker import targetmarker_from_logline
+from nari.ext.act.parser.tether import tether_from_logline
+from nari.ext.act.parser.waymark import waymark_from_logline
+from nari.ext.act.parser.party import partylist_from_logline
+from nari.ext.act.parser.effectresult import effectresult_from_logline
+from nari.ext.act.parser.cast import startcast_from_logline, stopcast_from_logline
 from nari.ext.act.exceptions import InvalidActChecksumAlgorithm
 from nari.ext.act.types import ActIdMapping
 

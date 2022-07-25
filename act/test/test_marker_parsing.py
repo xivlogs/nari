@@ -2,7 +2,7 @@ import unittest
 from typing import Optional
 
 from nari.types.event.markers import PlayerMarker, MarkerOperation, OverheadMarker
-from nari.ext.act.actlogutils.targetmarker import targetmarker_from_logline
+from nari.ext.act.parser.targetmarker import targetmarker_from_logline
 from nari.ext.act.exceptions import InvalidMarkerID
 
 

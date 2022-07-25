@@ -1,6 +1,6 @@
 import unittest
 
-from nari.ext.act.actlogutils import ActLogChecksumType, validate_checksum
+from nari.ext.act.parser import ActLogChecksumType, validate_checksum
 from nari.ext.act.exceptions import InvalidActChecksumAlgorithm
 
 
