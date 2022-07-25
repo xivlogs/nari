@@ -1,6 +1,6 @@
 use crate::actor;
-use crate::param_to_struct;
-use crate::util;
+use crate::parser;
+use crate::utils;
 use pyo3::prelude::*;
 
 /// Params to ability
@@ -28,25 +28,25 @@ pub(crate) fn ability_from_params(
     let source_position = col.drain(..4).collect::<Vec<&str>>();
     let target_resources = col.drain(..6).collect::<Vec<&str>>();
     let target_position = col.drain(..4).collect::<Vec<&str>>();
-    let sequence = param_to_struct::param_to_4_byte_int(col.first().unwrap());
+    let sequence = parser::param_to_4_byte_int(col.first().unwrap());
     (
         actor::parse_actor(source_actor),
         source_resources
             .iter()
-            .map(|x| util::parse_int(x))
+            .map(|x| utils::parse_int(x))
             .collect(),
         source_position
             .iter()
-            .map(|x| util::parse_float(x))
+            .map(|x| utils::parse_float(x))
             .collect(),
         actor::parse_actor(target_actor),
         target_resources
             .iter()
-            .map(|x| util::parse_int(x))
+            .map(|x| utils::parse_int(x))
             .collect(),
         target_position
             .iter()
-            .map(|x| util::parse_float(x))
+            .map(|x| utils::parse_float(x))
             .collect(),
         ability,
         action_effects
@@ -61,7 +61,7 @@ pub(crate) fn ability_from_params(
 #[pyfunction]
 #[pyo3(text_signature = "(params: list[str]) -> list[int]")]
 pub(crate) fn action_effect_from_params(inp: Vec<&str>) -> (u8, u8, u8, u8, u16, u8, u8) {
-    let num = param_to_struct::params_to_8_byte_int(inp);
+    let num = parser::params_to_8_byte_int(inp);
     let param0 = (num >> 56) as u8;
     let param1 = (num >> 48) as u8;
     let param2 = (num >> 40) as u8;
@@ -76,12 +76,12 @@ pub(crate) fn action_effect_from_params(inp: Vec<&str>) -> (u8, u8, u8, u8, u16,
 #[pyfunction]
 #[pyo3(text_signature = "(params: list[str]) -> (int, int, float, int")]
 pub(crate) fn status_effect_from_params(inp: Vec<&str>) -> (u16, u16, f32, u32) {
-    let (param0, param1) = param_to_struct::param_to_two_2_byte_int(inp.get(0).unwrap());
+    let (param0, param1) = parser::param_to_2x2_byte_int(inp.get(0).unwrap());
     (
         param0,
         param1,
-        param_to_struct::param_to_4_byte_float(inp.get(1).unwrap()),
-        param_to_struct::param_to_4_byte_int(inp.get(2).unwrap()),
+        parser::param_to_4_byte_float(inp.get(1).unwrap()),
+        parser::param_to_4_byte_int(inp.get(2).unwrap()),
     )
 }
 
@@ -106,8 +106,8 @@ pub(crate) fn statuslist_from_params(
     (
         actor::parse_actor(actor),
         class.first().unwrap(),
-        resources.iter().map(|x| util::parse_int(x)).collect(),
-        position.iter().map(|x| util::parse_float(x)).collect(),
+        resources.iter().map(|x| utils::parse_int(x)).collect(),
+        position.iter().map(|x| utils::parse_float(x)).collect(),
         status_effects
             .chunks(3)
             .map(|x| status_effect_from_params(x.to_vec()))

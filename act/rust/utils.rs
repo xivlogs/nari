@@ -1,6 +1,4 @@
-use md5::{Digest, Md5};
 use pyo3::prelude::*;
-use sha2::Sha256;
 use std::num::ParseIntError;
 
 #[pyfunction]
@@ -12,35 +10,6 @@ pub(crate) fn get_time_milliseconds(time_str: &str) -> i64 {
     let time = chrono::DateTime::parse_from_str(date_time_str.as_str(), "%Y-%m-%dT%H:%M:%S%.f%:z")
         .unwrap();
     time.timestamp_millis()
-}
-
-fn decode_hex(s: &str) -> Result<Vec<u8>, ParseIntError> {
-    (0..s.len())
-        .step_by(2)
-        .map(|i| u8::from_str_radix(&s[i..i + 2], 16))
-        .collect()
-}
-
-/// Gets [to_hash, check] from a line based on algo
-#[pyfunction]
-#[pyo3(text_signature = "(line: str, index: int, algo: str) -> bool")]
-pub(crate) fn validate_checksum(line: &str, index: i32, alg: &str) -> bool {
-    let (md5, sub) = match alg {
-        "md5" => (true, 32),
-        _ => (false, 16),
-    };
-    let last = line.len();
-    if md5 {
-        let mut hasher = Md5::new();
-        hasher.update(&line[..last - sub]);
-        hasher.update(&index.to_string());
-        &hasher.finalize()[..] == decode_hex(&line[last - sub..]).unwrap()
-    } else {
-        let mut hasher = Sha256::new();
-        hasher.update(&line[..last - sub]);
-        hasher.update(&index.to_string());
-        &hasher.finalize()[..] == decode_hex(&line[last - sub..]).unwrap()
-    }
 }
 
 /// Pads string to 4 length with 0 in front

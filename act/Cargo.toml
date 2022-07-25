@@ -7,7 +7,7 @@ edition = "2021"
 [lib]
 name = "nari_act_ext"
 crate-type = ["cdylib"]
-path = "ext/lib.rs"
+path = "rust/lib.rs"
 
 [dependencies]
 pyo3 = { version = "0.16.5", features = ["extension-module"] }
