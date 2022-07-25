@@ -29,19 +29,7 @@ type StatuslistParams<'a> = (
 /// Params to ability
 #[pyfunction]
 #[pyo3(text_signature = "(params: list[str]) -> list[any]")]
-pub(crate) fn ability_from_params(
-    inp: Vec<&str>,
-) -> (
-    (u32, &str),
-    Vec<u32>,
-    Vec<f32>,
-    (u32, &str),
-    Vec<u32>,
-    Vec<f32>,
-    Vec<&str>,
-    Vec<(u8, u8, u8, u8, u16, u8, u8)>,
-    u32,
-) {
+pub(crate) fn ability_from_params(inp: Vec<&str>) -> AbilityParams {
     let mut col = inp;
     let source_actor = col.drain(..2).collect::<Vec<&str>>();
     let ability = col.drain(..2).collect::<Vec<&str>>();
@@ -83,7 +71,7 @@ pub(crate) fn ability_from_params(
 /// Params to action_effect
 #[pyfunction]
 #[pyo3(text_signature = "(params: list[str]) -> list[int]")]
-pub(crate) fn action_effect_from_params(inp: Vec<&str>) -> (u8, u8, u8, u8, u16, u8, u8) {
+pub(crate) fn action_effect_from_params(inp: Vec<&str>) -> ActionEffectParams {
     let num = parser::params_to_8_byte_int(inp);
     let param0 = (num >> 56) as u8;
     let param1 = (num >> 48) as u8;
@@ -98,7 +86,7 @@ pub(crate) fn action_effect_from_params(inp: Vec<&str>) -> (u8, u8, u8, u8, u16,
 /// Params to status_effect
 #[pyfunction]
 #[pyo3(text_signature = "(params: list[str]) -> (int, int, float, int")]
-pub(crate) fn status_effect_from_params(inp: Vec<&str>) -> (u16, u16, f32, u32) {
+pub(crate) fn status_effect_from_params(inp: Vec<&str>) -> StatusEffectParams {
     let (param0, param1) = parser::param_to_2x2_byte_int(inp.get(0).unwrap());
     (
         param0,
@@ -111,15 +99,7 @@ pub(crate) fn status_effect_from_params(inp: Vec<&str>) -> (u16, u16, f32, u32) 
 /// Params to statuslist
 #[pyfunction]
 #[pyo3(text_signature = "(params: list[str]) -> list[any]")]
-pub(crate) fn statuslist_from_params(
-    inp: Vec<&str>,
-) -> (
-    (u32, &str),
-    &str,
-    Vec<u32>,
-    Vec<f32>,
-    Vec<(u16, u16, f32, u32)>,
-) {
+pub(crate) fn statuslist_from_params(inp: Vec<&str>) -> StatuslistParams {
     let mut col = inp;
     let actor = col.drain(..2).collect::<Vec<&str>>();
     let class = col.drain(..1).collect::<Vec<&str>>();
