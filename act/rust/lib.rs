@@ -41,8 +41,10 @@ fn nari_act_ext(py: Python, m: &PyModule) -> PyResult<()> {
 
     // HACK: abuse python imports to make `from rustext.utils import validate_checksum` work
     let sys: &PyModule = py.import("sys").unwrap();
-    sys.getattr("modules")?.set_item("nari_act_ext.parser", parser_module)?;
-    sys.getattr("modules")?.set_item("nari_act_ext.utils", utils_module)?;
+    sys.getattr("modules")?
+        .set_item("nari_act_ext.parser", parser_module)?;
+    sys.getattr("modules")?
+        .set_item("nari_act_ext.utils", utils_module)?;
 
     Ok(())
 }
