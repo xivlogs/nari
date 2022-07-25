@@ -6,8 +6,9 @@ from nari.types.event import Event
 from nari.types.event.version import SemanticVersion, Version
 from nari.util.exceptions import EventNotFound
 
-from nari.ext.act.parser import ID_MAPPINGS, ActEventType, ActLogChecksumType, date_from_act_timestamp, validate_checksum
+from nari.ext.act.parser import ID_MAPPINGS, ActEventType
 from nari.ext.act.exceptions import InvalidActChecksum
+from nari.ext.act.utils import ActLogChecksumType, date_from_act_timestamp, validate_checksum
 
 # The last version of ACT to use MD5 checksums
 # We default to SHA256, but if the version is <= 2.2.1.6 we switch to MD5
