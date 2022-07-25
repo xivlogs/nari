@@ -1,7 +1,6 @@
 """Just a bunch of helper methods to spit out events from the ACT log"""
 from datetime import datetime
 from hashlib import md5, sha256
-from typing import Callable, Optional
 from enum import IntEnum, Enum
 
 from nari.types.event import Event
@@ -28,9 +27,9 @@ from nari.ext.act.actlogutils.party import partylist_from_logline
 from nari.ext.act.actlogutils.effectresult import effectresult_from_logline
 from nari.ext.act.actlogutils.cast import startcast_from_logline, stopcast_from_logline
 from nari.ext.act.exceptions import InvalidActChecksumAlgorithm
+from nari.ext.act.types import ActIdMapping
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
-ActEventFn = Callable[[Timestamp, list[str]], Optional[Event]]
 
 # pylint: disable=invalid-name
 class ActLogChecksumType(Enum):
@@ -119,7 +118,7 @@ def noop(timestamp: Timestamp, params: list[str]) -> Event:
     """Straight-up ignores things"""
     # print(f'Ignoring an event with timestamp {timestamp} and params: {"|".join(params)}')
 
-ID_MAPPINGS: dict[int, ActEventFn] = {
+ID_MAPPINGS: ActIdMapping = {
     # Internal events
     ActEventType.config: config_from_logline,
     ActEventType.debug: noop,
