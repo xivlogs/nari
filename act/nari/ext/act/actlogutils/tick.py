@@ -3,7 +3,7 @@ from nari.types import Timestamp
 from nari.types.event.ticks import DamageOverTime, HealOverTime
 from nari.types.actor import Actor
 from nari.types.event import Event
-from nari.ext.act.actlogutils.exceptions import ActLineParsingException
+from nari.ext.act.exceptions import ActLineParsingException
 
 
 def tick_from_logline(timestamp: Timestamp, params: list[str]) -> Event:

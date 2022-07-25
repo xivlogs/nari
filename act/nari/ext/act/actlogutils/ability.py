@@ -7,7 +7,7 @@ from nari.types.event.ability import Ability, AoeAbility
 from nari.types.actor import Actor
 from nari.types.ability import Ability as AbilityEvent
 from nari.types.event import Event
-from nari.ext.act.actlogutils.exceptions import ActLineParsingException
+from nari.ext.act.exceptions import ActLineParsingException
 
 
 def action_effect_from_logline(params: list[str]) -> ActionEffect:

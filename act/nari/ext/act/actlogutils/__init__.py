@@ -27,7 +27,7 @@ from nari.ext.act.actlogutils.waymark import waymark_from_logline
 from nari.ext.act.actlogutils.party import partylist_from_logline
 from nari.ext.act.actlogutils.effectresult import effectresult_from_logline
 from nari.ext.act.actlogutils.cast import startcast_from_logline, stopcast_from_logline
-from nari.ext.act.actlogutils.exceptions import InvalidActChecksumAlgorithm
+from nari.ext.act.exceptions import InvalidActChecksumAlgorithm
 
 DEFAULT_DATE_FORMAT: str = '%Y-%m-%dT%H:%M:%S.%f%z'
 ActEventFn = Callable[[Timestamp, list[str]], Optional[Event]]
