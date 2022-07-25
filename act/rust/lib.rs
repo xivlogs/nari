@@ -6,7 +6,7 @@ mod utils;
 use pyo3::prelude::*;
 
 #[pymodule]
-fn nari_act_ext(_py: Python, m: &PyModule) -> PyResult<()> {
+fn nari_act_ext(py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(actor::parse_actor, m)?)?;
     m.add_function(wrap_pyfunction!(lines_to_params::ability_from_params, m)?)?;
     m.add_function(wrap_pyfunction!(
@@ -22,7 +22,7 @@ fn nari_act_ext(_py: Python, m: &PyModule) -> PyResult<()> {
         m
     )?)?;
 
-    let parser_module = PyModule::new(m, "parser")?;
+    let parser_module = PyModule::new(py, "parser")?;
     parser_module.add_function(wrap_pyfunction!(parser::param_to_2_byte_int, m)?)?;
     parser_module.add_function(wrap_pyfunction!(parser::param_to_2x2_byte_int, m)?)?;
     parser_module.add_function(wrap_pyfunction!(parser::param_to_4_byte_float, m)?)?;
@@ -33,7 +33,7 @@ fn nari_act_ext(_py: Python, m: &PyModule) -> PyResult<()> {
     parser_module.add_function(wrap_pyfunction!(parser::validate_checksum, m)?)?;
     m.add_submodule(parser_module)?;
 
-    let utils_module = PyModule::new(m, "utils")?;
+    let utils_module = PyModule::new(py, "utils")?;
     utils_module.add_function(wrap_pyfunction!(utils::get_time_milliseconds, m)?)?;
     utils_module.add_function(wrap_pyfunction!(utils::pad4, m)?)?;
     utils_module.add_function(wrap_pyfunction!(utils::pad8, m)?)?;
