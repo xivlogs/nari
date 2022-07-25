@@ -1,4 +1,4 @@
-"""Helpful utiliites"""
+"""Helpful utilities"""
 from enum import Enum
 from datetime import datetime
 from hashlib import md5, sha256
