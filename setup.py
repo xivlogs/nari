@@ -9,7 +9,7 @@ dev_requirements = [
 ]
 
 docs_requirements = [
-    'pdoc3',
+    'sphinx',
 ]
 
 setup(
