@@ -14,7 +14,7 @@ docs_requirements = [
 
 setup(
     name='nari',
-    version='0.1.0',
+    version='0.2.0',
     author='Nonowazu',
     author_email='oowazu.nonowazu@gmail.com',
     description='A small project to parse FFXIV network event data',
