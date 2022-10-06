@@ -31,8 +31,9 @@ jobs:
 
     - name: pylint
       run: pylint nari
-  tests:
-    name: unit tests
+
+tests:
+    name: Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -61,8 +62,9 @@ jobs:
 
     - name: unittest
       run: python -munittest
-  types:
-    name: check types
+
+types:
+    name: Check Types
     runs-on: ubuntu-latest
 
     steps:
