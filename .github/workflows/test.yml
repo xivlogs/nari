@@ -26,8 +26,8 @@ jobs:
       with:
         path: |
           /opt/hostedtoolcache/Python/3.10.2/x64/lib/python3.10/site-packages
-        key: ${{ hashFiles('setup.py') }}
-        restore-keys: setup.py
+        key: ${{ hashFiles('setup.cfg') }}
+        restore-keys: setup.cfg
 
     - name: pylint
       run: pylint nari
@@ -56,8 +56,8 @@ jobs:
       with:
         path: |
           /opt/hostedtoolcache/Python/3.10.2/x64/lib/python3.10/site-packages
-        key: ${{ hashFiles('setup.py') }}
-        restore-keys: setup.py
+        key: ${{ hashFiles('setup.cfg') }}
+        restore-keys: setup.cfg
 
     - name: unittest
       run: python -munittest
@@ -86,7 +86,7 @@ jobs:
       with:
         path: |
           /opt/hostedtoolcache/Python/3.10.2/x64/lib/python3.10/site-packages
-        key: ${{ hashFiles('setup.py') }}
-        restore-keys: setup.py
+        key: ${{ hashFiles('setup.cfg') }}
+        restore-keys: setup.cfg
     - name: mypy
       run: mypy nari
