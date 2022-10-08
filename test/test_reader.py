@@ -1,6 +1,5 @@
 from typing import Optional
 from unittest import TestCase
-from unittest.mock import patch
 
 from nari.io.reader import Reader
 from nari.types.event import Event
