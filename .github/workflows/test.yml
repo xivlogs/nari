@@ -60,8 +60,11 @@ jobs:
         key: ${{ hashFiles('setup.cfg') }}
         restore-keys: setup.cfg
 
-    - name: unittest
-      run: python -munittest
+    - name: unittest and coverage
+      run: coverage run -munittest
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
 
   types:
     name: Check Types
