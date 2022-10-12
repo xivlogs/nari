@@ -49,7 +49,6 @@ jobs:
 
     - name: Codecov
       uses: codecov/codecov-action@v3
-      run: python -munittest
 
   types:
     name: Check Types
