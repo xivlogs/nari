@@ -10,6 +10,13 @@ class TestHexStr(TestCase):
         result = hexstr_to_int("0F123")
         self.assertEqual(result, 61731)
 
+    # There's no good way to test how padding doesn't apply,
+    #  test exception for unpadded input instead.
+    # '' with padding becomes 0000 but unpadded is invalid.
+    def test_hexstr_to_int_unpadded_exception(self):
+        with self.assertRaises(ValueError) as e:
+            result = hexstr_to_int('', pad=False)
+
     def test_hextstr_to_bytes(self):
         result = hexstr_to_bytes("0F123")
         self.assertEqual(result, b'\x00\x00\xf1#')
