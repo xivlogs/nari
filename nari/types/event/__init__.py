@@ -1,15 +1,19 @@
-"""Base event that all other event types inherit from"""
+"""
+Event
+~~~~~
+
+Base event that all other event types inherit from.
+"""
 from nari.types import Timestamp
 
 class Event(): # pylint: disable=too-few-public-methods
-    """Represents a barebones event in nari.
+    """Initializes a base event with a timestamp
 
-    The only real thing this event records is the timestamp the event occurs at.
+    :param timestamp: Number of milliseconds since the unix epoch
+    :type timestamp: Timestamp
     """
     def __init__(self, timestamp: Timestamp):
-        """Initializes a barebones event with a timestamp
-
-        :param timestamp: Number of milliseconds since the unix epoch
+        """Constructor method
         """
         self.timestamp = timestamp
 

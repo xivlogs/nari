@@ -8,7 +8,7 @@ in and around Final Fantasy XIV. The most basic Event is (appropriately) named
 .. automodule:: nari.types.event
     :members:
 
-.. automodule:: nari.types.event.ability
+.. autoclass:: nari.types.event.ability.Ability
     :members:
 
 .. automodule:: nari.types.event.actorspawn
@@ -59,7 +59,7 @@ in and around Final Fantasy XIV. The most basic Event is (appropriately) named
 .. automodule:: nari.types.event.updatehpmp
     :members:
 
-.. automodule:: nari.types.event.versino
+.. automodule:: nari.types.event.version
     :members:
 
 .. automodule:: nari.types.event.visibility
@@ -70,4 +70,3 @@ in and around Final Fantasy XIV. The most basic Event is (appropriately) named
 
 .. automodule:: nari.types.event.zone
     :members:
-
