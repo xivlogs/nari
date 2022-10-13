@@ -91,7 +91,6 @@ Pipfile
 Pipfile.lock
 
 # Poetry
-PyProject.toml
 poetry.lock
 
 # celery beat schedule file

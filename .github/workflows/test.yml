@@ -1,4 +1,4 @@
-name: Test
+name: CI
 on: [push, pull_request]
 jobs:
   lint:
@@ -6,87 +6,69 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Setup Python 3.10
-      uses: actions/setup-python@v2
+    - name: Setup Python
+      uses: actions/setup-python@v4
       with:
         python-version: '3.10'
+        cache: 'pip'
+        cache-dependency-path: |
+          **/setup.cfg
 
     - name: Install development dependencies
       run: |
-        python -m pip install --upgrade pip
         pip install .[dev]
-
-    - name: Pip list
-      run: pip list -v
-
-    - name: Cache dependencies
-      uses: actions/cache@v2
-      with:
-        path: |
-          /opt/hostedtoolcache/Python/3.10.2/x64/lib/python3.10/site-packages
-        key: ${{ hashFiles('setup.py') }}
-        restore-keys: setup.py
+        pip list -v
 
     - name: pylint
       run: pylint nari
+
   tests:
-    name: unit tests
+    name: Tests
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Setup Python 3.10
-      uses: actions/setup-python@v2
+    - name: Setup Python
+      uses: actions/setup-python@v4
       with:
         python-version: '3.10'
+        cache: 'pip'
+        cache-dependency-path: |
+          **/setup.cfg
 
     - name: Install development dependencies
       run: |
-        python -m pip install --upgrade pip
         pip install .[dev]
-
-    - name: Pip list
-      run: pip list -v
-
-    - name: Cache dependencies
-      uses: actions/cache@v2
-      with:
-        path: |
-          /opt/hostedtoolcache/Python/3.10.2/x64/lib/python3.10/site-packages
-        key: ${{ hashFiles('setup.py') }}
-        restore-keys: setup.py
+        pip list -v
 
     - name: unittest
-      run: python -munittest
+      run: coverage run -m unittest
+
+    - name: Codecov
+      uses: codecov/codecov-action@v3
+
   types:
-    name: check types
+    name: Check Types
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Setup Python 3.10
-      uses: actions/setup-python@v2
+    - name: Setup Python
+      uses: actions/setup-python@v4
       with:
         python-version: '3.10'
+        cache: 'pip'
+        cache-dependency-path: |
+          **/setup.cfg
 
     - name: Install development dependencies
       run: |
-        python -m pip install --upgrade pip
         pip install .[dev]
+        pip list -v
 
-    - name: Pip list
-      run: pip list -v
-
-    - name: Cache dependencies
-      uses: actions/cache@v2
-      with:
-        path: |
-          /opt/hostedtoolcache/Python/3.10.2/x64/lib/python3.10/site-packages
-        key: ${{ hashFiles('setup.py') }}
-        restore-keys: setup.py
     - name: mypy
       run: mypy nari

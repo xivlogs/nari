@@ -1,6 +1,6 @@
 # NARI
 
-![Test](https://github.com/xivlogs/nari/workflows/Test/badge.svg?branch=master)
+[![Tests](https://github.com/xivlogs/nari/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/xivlogs/nari/actions/workflows/test.yml)
 [![Docs](https://github.com/xivlogs/nari/workflows/Docs/badge.svg?branch=master)](https://xivlogs.github.io/nari)
 [![Discord](https://img.shields.io/discord/811093167290056735?color=7289da&label=Discord&logo=discord)](https://discord.gg/bdYYMSTxPg)
 
