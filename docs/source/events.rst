@@ -8,7 +8,7 @@ in and around Final Fantasy XIV. The most basic Event is (appropriately) named
 .. automodule:: nari.types.event
     :members:
 
-.. autoclass:: nari.types.event.ability.Ability
+.. automodule:: nari.types.event.ability
     :members:
 
 .. automodule:: nari.types.event.actorspawn
