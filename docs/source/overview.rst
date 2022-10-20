@@ -18,7 +18,7 @@ any type of action in the game (crafting, gathering, retainer actions, etc)
 Readers
 ~~~~~~~
 
-For a basic example of using readers, look at the act extension:
+For a basic example of using readers, look at the `act extension <https://github.com/xivlogs/nari-act>`_:
 
 .. code-block:: python
 

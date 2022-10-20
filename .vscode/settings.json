@@ -8,4 +8,5 @@
     "**/__pycache__": true,
     "**/.venv": true
   },
+  "esbonio.sphinx.confDir": "docs/source",
 }
