@@ -42,9 +42,7 @@ class EffectResult(Event): # pylint: disable=too-few-public-methods
     :type timestamp: Timestamp
     :param target_actor: The target of the `effect_results` list
     :type target_actor: Actor
-    :param sequence_id: The sequence id that links an action to their final
-    effects - for every `Ability` use, there should be a corresponding
-    `EffectResult`
+    :param sequence_id: The sequence id that links an action to their final effects - for every `Ability` use, there should be a corresponding `EffectResult`
     :type sequence_id: int
     :param shield_percent: The percentage of the actor's health which is a shield
     :type shield_percent: int
