@@ -1,4 +1,8 @@
-"""Classes for waymarks"""
+"""
+Waymarks
+~~~~~~~~
+Classes for waymarks
+"""
 from dataclasses import dataclass
 from enum import IntEnum
 
@@ -36,7 +40,19 @@ class Position(): # pylint: disable=duplicate-code
 
 
 class Waymark(Event): # pylint: disable=too-few-public-methods
-    """Represents a waymark placement"""
+    """Represents a waymark placement
+
+    :param timestamp: The timestamp of the event
+    :type timestamp: Timestamp
+    :param actor: The actor placing the marker
+    :type actor: Actor
+    :param operator: If the marker is being added/removed/moved/etc
+    :type operator: MarkerOperation
+    :param marker: The marker being placed
+    :type marker: Waypoint
+    :param position: The position of the placed marker
+    :type position: Position
+    """
     def __init__(self, *,
                  timestamp: Timestamp,
                  actor: Actor,
