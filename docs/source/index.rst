@@ -15,3 +15,4 @@ generate event data from Final Fantasy FFXIV sources, such as ACT.
     installation
     overview
     events
+    readers
