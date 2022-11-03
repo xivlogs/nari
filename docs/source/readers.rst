@@ -83,3 +83,79 @@ Next, we need to process the events. To do that, you need to write a ``read_next
     The ``read_next`` method should endeavor to return a nari event where possible; if you cannot determine the type of
     event, it's best to generate a dummy ``Event`` with only the timestamp filled in. If you return ``None``, this
     prompts the reader to assume there are no more events to process and stop processing.
+
+.. code-block:: python
+
+    def get_actor_for(self, _id: int) -> Actor:
+        if _id in self.actors:
+            return deepcopy(self.actors[_id])
+        return Actor(id=0xE0000000, name='')
+
+    def read_next(self):
+        # If we're done processing events, return None
+        if self.index == self.events_len:
+            return None
+
+        current_event = self.events[self.index]
+        self.index += 1
+        # every event in this xml has a timestamp, so parse it now:
+        timestamp = current_event.attrib.get('timestamp', 0)
+        match current_event.tag:
+            # even though the names are different, we match them up to
+            # the corresponding nari event
+            case 'BeginCast':
+                # grab source and target actors
+                source_actor_id = get_actor_id(current_event, 'source')
+                source_actor = self.get_actor_for(source_actor_id)
+                target_actor_id = get_actor_id(current_event, 'target')
+                target_actor = self.get_actor_for(target_actor_id)
+                # parse ability and duration, but we don't have a name, so use an empty string instead
+                ability = AbilityObj(current_event.attrib.get('ability_id', '0'), '')
+                duration = float(current_event.attrib.get('duration', '0.00'))
+                return CastStart(
+                    timestamp=timestamp,
+                    source_actor=source_actor,
+                    ability=ability,
+                    target_actor=target_actor,
+                    duration=duration,
+                )
+            case 'Action':
+                # print(current_event.tag, current_event.attrib)
+                # grab source and target actors
+                source_actor_id = get_actor_id(current_event, 'source')
+                source_actor = self.get_actor_for(source_actor_id)
+                target_actor_id = get_actor_id(current_event, 'target')
+                target_actor = self.get_actor_for(target_actor_id)
+                # parse ability and sequence
+                ability = AbilityObj(current_event.attrib.get('ability_id', '0'), '')
+                sequence = int(current_event.attrib.get('sequence', '0'), 16)
+                # parse actioneffects
+                action_effects = [
+                    process_action_effects(e) for e in current_event.findall('ActionEffect')
+                ]
+                return Ability(
+                    timestamp=timestamp,
+                    source_actor=source_actor,
+                    target_actor=target_actor,
+                    ability=ability,
+                    sequence_id=sequence,
+                    action_effects=action_effects,
+                )
+            case _:
+                # fallback - return an event since we don't know how to parse this
+                return Event(timestamp=timestamp)
+
+While this code is messy, it accomplishes the goal. Let's test it out:
+
+.. code-block:: python
+
+    reader = FakeXMLReader('/path/to/log.xml')
+    for event in reader:
+        print('Event:', event, event.timestamp)
+
+And see the results:
+
+.. code-block::
+
+    Event: <CastStart> 1590687335012
+    Event: <Ability> 1590687337512
