@@ -21,7 +21,7 @@ class Reader(metaclass=ABCMeta):
     def read_next(self) -> Optional[Event]:
         """Implementing classes must implement this method to return the next parsed event.
 
-        :return: A nari Event or ``None``; the latter of which will cause the reader to stop iteration.
+        :return: A nari Event or ``None``; the latter of which will cause the reader to stop iterating.
         """
 
     def read_all(self) -> list[Event]:

@@ -2,7 +2,7 @@
 Ability
 ~~~~~~~
 
-Refers to events that emit as abilities are used
+Refers to events emitted when abilities are used
 """
 from nari.types import Timestamp
 from nari.types.event import Event
@@ -34,7 +34,6 @@ class Ability(Event): # pylint: disable=too-few-public-methods
                  ability: AbilityObj,
                  sequence_id: int,
                 ):
-        """Constructor"""
         super().__init__(timestamp)
         self.source_actor = source_actor
         self.target_actor = target_actor
