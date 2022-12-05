@@ -1,4 +1,8 @@
-"""Class for player stats"""
+"""
+Player Stats
+~~~~~~~~~~~~
+"""
+
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.job import Job
@@ -6,7 +10,15 @@ from nari.types.stats import Stats
 
 
 class PlayerStats(Event):  # pylint: disable=too-few-public-methods,too-many-instance-attributes
-    """Represents the event when the player's stats change. Also happens when zone/instance changes."""
+    """Represents the event when the player's stats change. Also happens when zone/instance changes.
+
+    :param timestamp: The timestamp of the event
+    :type timestamp: Timestamp
+    :param job: The job for the player
+    :type job: Job
+    :param stats: A list of all stats for the character
+    :type stats: dict[Stats, int]
+    """
     def __init__(self,
                  timestamp: Timestamp,
                  job: Job,

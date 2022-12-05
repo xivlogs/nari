@@ -1,11 +1,24 @@
-"""Classes for tethers"""
+"""
+Tethers
+~~~~~~~
+"""
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
 
 
 class Tether(Event): # pylint: disable=too-few-public-methods
-    """Represents a tether"""
+    """Represents a tether
+
+    :param timestamp: The timestamp of the event
+    :type timestamp: Timestamp
+    :param source_actor: The actor that initiated the tether
+    :type source_actor: Actor
+    :param target_actor: The target actor of the tether
+    :type target_actor: Actor
+    :param tether_id: The id of the tether
+    :type tether_id: int
+    """
     def __init__(self, *,
                  timestamp: Timestamp,
                  source_actor: Actor,

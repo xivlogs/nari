@@ -1,11 +1,20 @@
-"""Class that represents an Actor spawning"""
+"""
+ActorSpawn
+~~~~~~~~~~
+"""
 from nari.types import Timestamp
 from nari.types.event import Event
 from nari.types.actor import Actor
 
 
 class ActorSpawn(Event): # pylint: disable=too-few-public-methods,duplicate-code
-    """Represents an Actor spawning"""
+    """Represents an actor spawning
+
+    :param timestamp: Timestamp of the event
+    :type timestamp: Timestamp
+    :param actor: The actor that spawned
+    :type actor: Actor
+    """
     def __init__(self, *,
                  timestamp: Timestamp,
                  actor: Actor,

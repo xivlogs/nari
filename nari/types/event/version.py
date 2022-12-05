@@ -1,4 +1,7 @@
-"""Class that represents version(s)"""
+"""
+Version
+~~~~~~~
+"""
 from dataclasses import dataclass
 from nari.types import Timestamp
 from nari.types.event import Event
@@ -14,7 +17,14 @@ class SemanticVersion():
 
 
 class Version(Event): # pylint: disable=too-few-public-methods
-    """Represents a version string found in the events"""
+    """Represent a detected version found in the events
+
+    :param timestamp: The timestamp of the event
+    :type timestamp: Timestamp
+    :param version: The string version
+    :type version: str
+    :raises CannotParseVersion: If the version isn't in a compatible format, this exception is raised
+    """
     def __init__(self, *,
                  timestamp: Timestamp,
                  version: str,
